@@ -269,7 +269,7 @@ export default function MentorshipPage() {
               Ready to Find Your Mentor?
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              We're building connections that will shape the future of women in STEM.
+              We&apos;re building connections that will shape the future of women in STEM.
               Join the waitlist to be first in line!
             </p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-4">

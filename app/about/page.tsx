@@ -61,7 +61,7 @@ export default function AboutPage() {
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              STEM•SPARK is more than a platform—it's a movement to ignite curiosity,
+              STEM•SPARK is more than a platform—it&apos;s a movement to ignite curiosity,
               foster connections, and break down barriers for women in STEM.
             </p>
           </div>
@@ -145,7 +145,7 @@ export default function AboutPage() {
               Building Something Special
             </h2>
             <p className="text-gray-400 text-lg">
-              Here's what we're creating for you
+              Here&apos;s what we&apos;re creating for you
             </p>
           </div>
 
@@ -210,7 +210,7 @@ export default function AboutPage() {
                   Built with 💜 by Prakriti Bista
                 </h2>
                 <p className="text-gray-400 leading-relaxed">
-                  As a woman in tech, I've experienced firsthand the challenges and opportunities
+                  As a woman in tech, I&apos;ve experienced firsthand the challenges and opportunities
                   in STEM. STEM•SPARK was born from a desire to create the platform I wished I
                   had when starting my journey—a place where women can learn, connect, and thrive
                   together.
@@ -320,7 +320,7 @@ export default function AboutPage() {
               Get in Touch
             </h2>
             <p className="text-gray-400 text-lg">
-              Have questions, suggestions, or want to get involved? We'd love to hear from you!
+              Have questions, suggestions, or want to get involved? We&apos;d love to hear from you!
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/community">
