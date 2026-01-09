@@ -2,11 +2,15 @@ import { Container, Card, Button, Badge } from '@/components/ui';
 import { BookOpen, FileText, Video, Newspaper, ExternalLink, Search } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import type { BadgeProps } from '@/components/ui/Badge';
 
 export const metadata = {
   title: 'Resources - STEM•SPARK',
   description: 'Curated collection of tutorials, articles, tools, and career guides for women in STEM',
 };
+
+// Define valid color type to match Badge variants
+type BadgeVariant = NonNullable<BadgeProps['variant']>;
 
 export default function ResourcesPage() {
   const resourceCategories = [
@@ -15,28 +19,28 @@ export default function ResourcesPage() {
       title: 'Tutorials & Guides',
       description: 'Step-by-step tutorials for learning new skills',
       count: '150+ resources',
-      color: 'nebula',
+      color: 'nebula' as BadgeVariant,
     },
     {
       icon: <Newspaper className="w-8 h-8" />,
       title: 'Articles & Blogs',
       description: 'In-depth articles on STEM topics and careers',
       count: '200+ articles',
-      color: 'cosmic',
+      color: 'cosmic' as BadgeVariant,
     },
     {
       icon: <Video className="w-8 h-8" />,
       title: 'Video Content',
       description: 'Educational videos and recorded webinars',
       count: '80+ videos',
-      color: 'aurora',
+      color: 'aurora' as BadgeVariant,
     },
     {
       icon: <FileText className="w-8 h-8" />,
       title: 'Career Resources',
       description: 'Resume templates, interview prep, and career advice',
       count: '50+ resources',
-      color: 'stardust',
+      color: 'stardust' as BadgeVariant,
     },
   ];
 
