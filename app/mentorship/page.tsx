@@ -2,11 +2,15 @@ import { Container, Card, Button, Badge } from '@/components/ui';
 import { Users, MessageCircle, Calendar, Award, Heart, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import type { BadgeProps } from '@/components/ui/Badge';
 
 export const metadata = {
   title: 'Mentorship - STEM•SPARK',
   description: 'Connect with inspiring women leading the way in STEM fields',
 };
+
+// Define valid color type to match Badge variants
+type BadgeVariant = NonNullable<BadgeProps['variant']>;
 
 export default function MentorshipPage() {
   const mentorshipTypes = [
@@ -15,21 +19,21 @@ export default function MentorshipPage() {
       title: '1-on-1 Mentorship',
       description: 'Get personalized guidance from experienced professionals',
       features: ['Regular meetings', 'Career advice', 'Skill development'],
-      color: 'nebula',
+      color: 'nebula' as BadgeVariant,
     },
     {
       icon: <MessageCircle className="w-8 h-8" />,
       title: 'Group Sessions',
       description: 'Learn alongside peers in small group mentoring',
       features: ['Peer learning', 'Shared experiences', 'Network building'],
-      color: 'aurora',
+      color: 'aurora' as BadgeVariant,
     },
     {
       icon: <Award className="w-8 h-8" />,
       title: 'Expert Workshops',
       description: 'Attend workshops led by industry experts',
       features: ['Skill-focused', 'Interactive', 'Q&A sessions'],
-      color: 'cosmic',
+      color: 'cosmic' as BadgeVariant,
     },
   ];
 
