@@ -8,7 +8,7 @@ import { NAV_ITEMS } from '@/lib/constants';
 import Button from '@/components/ui/Button';
 
 /**
- * Header component with navigation and mobile menu
+ * Header component with navigation, mobile menu, and glass morphism styling
  */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -93,13 +93,11 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+            className="md:hidden px-3 py-2 rounded-lg hover:bg-white/10 transition-colors text-sm font-medium"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
-            <span className="text-sm font-medium text-white">
-              {isMobileMenuOpen ? 'Close' : 'Menu'}
-            </span>
+            {isMobileMenuOpen ? 'Close' : 'Menu'}
           </button>
         </div>
       </nav>
