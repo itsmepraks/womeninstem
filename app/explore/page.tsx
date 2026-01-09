@@ -1,10 +1,9 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
-import { Rocket, Sparkles, Target, Zap } from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata = {
   title: 'Explore - STEM•SPARK',
-  description: 'Discover your STEM journey and explore all the opportunities available on STEM•SPARK',
+  description: 'Your dashboard for STEM learning and community',
 };
 
 export default function ExplorePage() {
@@ -15,23 +14,23 @@ export default function ExplorePage() {
         <Container size="lg">
           <div className="text-center space-y-8">
             <Badge variant="nebula" size="lg">
-              🚀 Coming Soon
+              In Development
             </Badge>
             
             <h1 className="font-display text-5xl md:text-7xl font-bold">
-              <span className="gradient-text bg-gradient-nebula">Explore</span> Your{' '}
-              <span className="gradient-text bg-gradient-aurora">Journey</span>
+              <span className="gradient-text bg-gradient-nebula">Your</span>{' '}
+              <span className="gradient-text bg-gradient-aurora">Dashboard</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Your personalized dashboard to discover learning paths, connect with mentors,
-              and explore the vast universe of STEM opportunities.
+              Track your learning progress, access courses, and connect with mentors
+              all in one place.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/learning">
-                <Button variant="primary" size="lg" leftIcon={<Rocket className="w-5 h-5" />}>
-                  Start Learning
+                <Button variant="primary" size="lg">
+                  Browse Courses
                 </Button>
               </Link>
               <Link href="/community">
@@ -48,41 +47,30 @@ export default function ExplorePage() {
       <section className="py-20 px-4">
         <Container size="xl">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-12">
-            What You'll Discover
+            Dashboard Features
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: <Target className="w-8 h-8" />,
-                title: 'Personalized Dashboard',
-                description: 'Track your progress, achievements, and learning goals in one place',
-                color: 'nebula',
+                title: 'Progress Tracking',
+                description: 'Monitor your course completion and learning goals',
               },
               {
-                icon: <Sparkles className="w-8 h-8" />,
-                title: 'Recommended Paths',
-                description: 'Get AI-powered suggestions based on your interests and skill level',
-                color: 'aurora',
+                title: 'Course Access',
+                description: 'Continue where you left off in your learning paths',
               },
               {
-                icon: <Zap className="w-8 h-8" />,
-                title: 'Quick Actions',
-                description: 'Easy access to continue learning, message mentors, or join discussions',
-                color: 'stardust',
+                title: 'Mentor Connections',
+                description: 'Message mentors and schedule sessions',
               },
               {
-                icon: <Rocket className="w-8 h-8" />,
-                title: 'Discover New',
-                description: 'Explore trending topics, popular courses, and featured content',
-                color: 'cosmic',
+                title: 'Community Updates',
+                description: 'See new discussions and community activity',
               },
             ].map((feature, index) => (
               <Card key={index} hover>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-center w-16 h-16 rounded-full glass">
-                    <div className={`text-${feature.color}-400`}>{feature.icon}</div>
-                  </div>
                   <h3 className="font-display text-xl font-semibold">{feature.title}</h3>
                   <p className="text-gray-400 text-sm leading-relaxed">
                     {feature.description}
@@ -100,38 +88,33 @@ export default function ExplorePage() {
           <div className="glass rounded-3xl p-8 md:p-12 space-y-8">
             <div className="text-center space-y-4">
               <h2 className="font-display text-3xl md:text-4xl font-bold">
-                Building Your Launch Pad
+                Building Your Dashboard
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                We're crafting an exceptional experience to help you navigate your STEM journey.
-                Here's what's coming:
+                Features planned for the dashboard:
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 pt-8">
               {[
-                'Personalized learning recommendations',
-                'Progress tracking and analytics',
-                'Achievement showcase',
+                'Course recommendations based on your goals',
+                'Progress tracking and completion statistics',
                 'Quick access to active courses',
-                'Mentor connection hub',
-                'Community highlights',
-                'Upcoming events calendar',
+                'Mentor connection management',
+                'Community discussion highlights',
+                'Upcoming events and webinars',
                 'Resource bookmarks',
+                'Achievement history',
               ].map((item, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-nebula flex items-center justify-center">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
+                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-nebula-400"></div>
                   <span className="text-gray-300">{item}</span>
                 </div>
               ))}
             </div>
 
             <div className="pt-8 text-center">
-              <p className="text-sm text-gray-500 mb-4">Want to be notified when we launch?</p>
+              <p className="text-sm text-gray-500 mb-4">Want to be notified when this is ready?</p>
               <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input
                   type="email"
@@ -150,15 +133,15 @@ export default function ExplorePage() {
         <Container size="md">
           <div className="text-center space-y-6">
             <h2 className="font-display text-3xl md:text-4xl font-bold">
-              Ready to Start Your Journey?
+              Start Learning Now
             </h2>
             <p className="text-gray-400 text-lg">
-              While we're building the Explore hub, you can start learning and connecting with the community.
+              While we build the dashboard, you can browse courses and join the community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/learning">
                 <Button variant="primary" size="lg">
-                  Browse Learning Paths
+                  View Learning Paths
                 </Button>
               </Link>
               <Link href="/mentorship">
