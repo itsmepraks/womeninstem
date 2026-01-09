@@ -1,6 +1,5 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
 import { BookOpen, Code, Cpu, FlaskConical, GraduationCap, LineChart } from 'lucide-react';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import type { BadgeProps } from '@/components/ui/Badge';
 
@@ -187,7 +186,7 @@ export default function LearningPage() {
         <Container size="lg">
           <div className="glass rounded-3xl p-8 md:p-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-12">
-              What's Included in Each Path
+              What&apos;s Included in Each Path
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -223,7 +222,7 @@ export default function LearningPage() {
               Get Ready to Level Up
             </h2>
             <p className="text-gray-400 text-lg">
-              We're creating an amazing learning experience. Be the first to know when we launch!
+              We&apos;re creating an amazing learning experience. Be the first to know when we launch!
             </p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-4">
               <input
