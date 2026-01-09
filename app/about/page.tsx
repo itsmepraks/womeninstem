@@ -1,45 +1,40 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
-import { Target, Heart, Users, Sparkles, Mail, Github, Linkedin, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { SOCIAL_LINKS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
 
 export const metadata = {
   title: 'About - STEM•SPARK',
-  description: 'Learn about our mission to empower girls and women in STEM through interactive learning and community',
+  description: 'Learn about STEM•SPARK and our mission to support women in STEM',
 };
 
 export default function AboutPage() {
   const stats = [
-    { value: '1,000+', label: 'Future Members' },
-    { value: '50+', label: 'Learning Paths' },
-    { value: '100+', label: 'Mentors' },
-    { value: '24/7', label: 'Community Support' },
+    { value: 'Open', label: 'Source Project' },
+    { value: '2026', label: 'Founded' },
+    { value: 'Active', label: 'Development' },
+    { value: 'MIT', label: 'License' },
   ];
 
   const values = [
     {
-      icon: <Heart className="w-8 h-8" />,
-      title: 'Inclusivity',
-      description: 'Creating a welcoming space for all women in STEM, regardless of background or experience level',
+      title: 'Accessibility',
+      description: 'Making STEM education accessible to all women, regardless of background',
       color: 'supernova',
     },
     {
-      icon: <Sparkles className="w-8 h-8" />,
-      title: 'Excellence',
-      description: 'Providing high-quality content and experiences that inspire learning and growth',
+      title: 'Quality',
+      description: 'Providing well-researched, accurate content',
       color: 'stardust',
     },
     {
-      icon: <Users className="w-8 h-8" />,
       title: 'Community',
-      description: 'Building meaningful connections that foster collaboration and support',
+      description: 'Building connections that support learning and growth',
       color: 'aurora',
     },
     {
-      icon: <Target className="w-8 h-8" />,
-      title: 'Empowerment',
-      description: 'Equipping women with skills, confidence, and opportunities to thrive in STEM',
+      title: 'Practical Focus',
+      description: 'Teaching skills that are directly applicable to STEM careers',
       color: 'nebula',
     },
   ];
@@ -51,18 +46,17 @@ export default function AboutPage() {
         <Container size="lg">
           <div className="text-center space-y-8">
             <Badge variant="nebula" size="lg">
-              ✨ Our Story
+              About Us
             </Badge>
             
             <h1 className="font-display text-5xl md:text-7xl font-bold">
-              <span className="gradient-text bg-gradient-nebula">Empowering</span>{' '}
-              <span className="gradient-text bg-gradient-aurora">Women</span>{' '}
-              in STEM
+              <span className="gradient-text bg-gradient-nebula">STEM</span>
+              <span className="text-stardust-400">•</span>
+              <span className="gradient-text bg-gradient-aurora">SPARK</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              STEM•SPARK is more than a platform—it's a movement to ignite curiosity,
-              foster connections, and break down barriers for women in STEM.
+              A platform for women in STEM to learn, connect, and share knowledge.
             </p>
           </div>
         </Container>
@@ -74,28 +68,28 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-8">
             <Card hover className="group">
               <div className="space-y-4">
-                <div className="inline-flex p-4 rounded-xl bg-nebula-500/20 text-nebula-400 group-hover:scale-110 transition-transform">
-                  <Target className="w-10 h-10" />
-                </div>
-                
-                <h2 className="font-display text-3xl font-bold">Our Mission</h2>
+                <h2 className="font-display text-3xl font-bold">What We Do</h2>
                 <p className="text-gray-400 text-lg leading-relaxed">
-                  To create an inclusive, engaging platform that empowers girls and women to
-                  explore, learn, and excel in STEM fields through interactive education,
-                  mentorship, and community support.
+                  STEM•SPARK provides structured courses, mentorship connections, and 
+                  community discussions for women pursuing STEM careers.
+                </p>
+
+                <p className="text-gray-400 leading-relaxed">
+                  The platform focuses on practical skills, real-world applications, 
+                  and creating opportunities for women to connect with others in their field.
                 </p>
 
                 <ul className="space-y-3 pt-4">
                   {[
-                    'Make STEM education accessible and engaging',
-                    'Connect learners with inspiring mentors',
-                    'Build a supportive, inclusive community',
-                    'Provide resources for career success',
+                    'Structured STEM courses',
+                    'Mentorship matching',
+                    'Community forums',
+                    'Career resources',
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-nebula-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-nebula flex items-center justify-center text-xs">
+                        {index + 1}
+                      </div>
                       <span className="text-gray-300">{item}</span>
                     </li>
                   ))}
@@ -105,28 +99,28 @@ export default function AboutPage() {
 
             <Card hover className="group">
               <div className="space-y-4">
-                <div className="inline-flex p-4 rounded-xl bg-aurora-500/20 text-aurora-400 group-hover:scale-110 transition-transform">
-                  <Sparkles className="w-10 h-10" />
-                </div>
-                
-                <h2 className="font-display text-3xl font-bold">Our Vision</h2>
+                <h2 className="font-display text-3xl font-bold">Why It Matters</h2>
                 <p className="text-gray-400 text-lg leading-relaxed">
-                  A world where every woman has the opportunity, confidence, and support to
-                  pursue and thrive in STEM careers, breaking down barriers and inspiring
-                  future generations.
+                  Women remain underrepresented in many STEM fields. This platform aims 
+                  to address that by providing resources and connections.
+                </p>
+
+                <p className="text-gray-400 leading-relaxed">
+                  By creating a space dedicated to women in STEM, we can share experiences, 
+                  learn from each other, and build careers in these fields.
                 </p>
 
                 <ul className="space-y-3 pt-4">
                   {[
-                    'Close the gender gap in STEM fields',
-                    'Inspire the next generation of innovators',
-                    'Create lasting impact through education',
-                    'Build a global network of women in STEM',
+                    'Address gender gaps in STEM',
+                    'Share practical knowledge',
+                    'Build professional networks',
+                    'Support career development',
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-aurora-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gradient-aurora flex items-center justify-center text-xs">
+                        {index + 1}
+                      </div>
                       <span className="text-gray-300">{item}</span>
                     </li>
                   ))}
@@ -142,20 +136,20 @@ export default function AboutPage() {
         <Container size="lg">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              Building Something Special
+              Project Status
             </h2>
             <p className="text-gray-400 text-lg">
-              Here's what we're creating for you
+              Currently in active development
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
               <div key={index} className="text-center space-y-2">
-                <div className="text-4xl md:text-5xl font-bold gradient-text bg-gradient-nebula">
+                <div className="text-3xl md:text-4xl font-bold gradient-text bg-gradient-nebula">
                   {stat.value}
                 </div>
-                <div className="text-gray-400">{stat.label}</div>
+                <div className="text-gray-400 text-sm">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -167,10 +161,10 @@ export default function AboutPage() {
         <Container size="xl">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              Our Core Values
+              Core Principles
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              The principles that guide everything we do
+              The values that guide our development
             </p>
           </div>
 
@@ -178,17 +172,8 @@ export default function AboutPage() {
             {values.map((value, index) => (
               <Card key={index} hover>
                 <div className="space-y-4">
-                  <div className={cn(
-                    'inline-flex p-3 rounded-xl',
-                    {
-                      'bg-nebula-500/20 text-nebula-400': value.color === 'nebula',
-                      'bg-aurora-500/20 text-aurora-400': value.color === 'aurora',
-                      'bg-cosmic-500/20 text-cosmic-400': value.color === 'cosmic',
-                      'bg-stardust-500/20 text-stardust-400': value.color === 'stardust',
-                      'bg-supernova-500/20 text-supernova-400': value.color === 'supernova',
-                    }
-                  )}>
-                    {value.icon}
+                  <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-nebula text-lg font-bold">
+                    {index + 1}
                   </div>
                   <h3 className="font-display text-2xl font-semibold">{value.title}</h3>
                   <p className="text-gray-400 leading-relaxed">{value.description}</p>
@@ -203,54 +188,54 @@ export default function AboutPage() {
       <section className="py-20 px-4 bg-white/5">
         <Container size="lg">
           <div className="glass rounded-3xl p-8 md:p-12">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-8">
               <div className="space-y-6">
-                <Badge variant="nebula">Meet the Creator</Badge>
+                <Badge variant="nebula">Creator</Badge>
                 <h2 className="font-display text-3xl md:text-4xl font-bold">
-                  Built with 💜 by Prakriti Bista
+                  Prakriti Bista
                 </h2>
-                <p className="text-gray-400 leading-relaxed">
-                  As a woman in tech, I've experienced firsthand the challenges and opportunities
-                  in STEM. STEM•SPARK was born from a desire to create the platform I wished I
-                  had when starting my journey—a place where women can learn, connect, and thrive
-                  together.
-                </p>
-                <p className="text-gray-400 leading-relaxed">
-                  This project combines my passion for education, community building, and
-                  empowering the next generation of women in STEM.
-                </p>
+                <div className="space-y-4 text-gray-400 leading-relaxed">
+                  <p>
+                    I'm a developer building this platform to address a real need I've observed 
+                    in the STEM community.
+                  </p>
+                  <p>
+                    Throughout my career, I've seen how valuable it can be to have mentors, 
+                    structured learning resources, and a community of people facing similar challenges.
+                  </p>
+                  <p>
+                    This project is an effort to create those resources in one place, making it 
+                    easier for women entering or advancing in STEM fields.
+                  </p>
+                </div>
 
                 <div className="flex flex-wrap gap-4 pt-4">
                   <a
                     href={SOCIAL_LINKS.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-all"
+                    className="text-gray-400 hover:text-white transition-colors"
                   >
-                    <Globe className="w-5 h-5" />
+                    Website
                   </a>
+                  <span className="text-gray-600">•</span>
                   <a
                     href={SOCIAL_LINKS.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-all"
+                    className="text-gray-400 hover:text-white transition-colors"
                   >
-                    <Github className="w-5 h-5" />
+                    GitHub
                   </a>
+                  <span className="text-gray-600">•</span>
                   <a
                     href={SOCIAL_LINKS.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-all"
+                    className="text-gray-400 hover:text-white transition-colors"
                   >
-                    <Linkedin className="w-5 h-5" />
+                    LinkedIn
                   </a>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div className="aspect-square rounded-3xl bg-gradient-nebula flex items-center justify-center text-9xl">
-                  👩‍💻
                 </div>
               </div>
             </div>
@@ -263,10 +248,10 @@ export default function AboutPage() {
         <Container size="lg">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              Built with Modern Technology
+              Technology Stack
             </h2>
             <p className="text-gray-400 text-lg">
-              Leveraging the best tools for a stellar experience
+              Built with modern web technologies
             </p>
           </div>
 
@@ -275,10 +260,9 @@ export default function AboutPage() {
               { name: 'Next.js 14', desc: 'React Framework' },
               { name: 'TypeScript', desc: 'Type Safety' },
               { name: 'Tailwind CSS', desc: 'Styling' },
-              { name: 'Framer Motion', desc: 'Animations' },
+              { name: 'Vercel', desc: 'Deployment' },
             ].map((tech, index) => (
               <div key={index} className="glass p-6 rounded-xl text-center space-y-2">
-                <div className="text-3xl">⚡</div>
                 <h3 className="font-semibold">{tech.name}</h3>
                 <p className="text-sm text-gray-400">{tech.desc}</p>
               </div>
@@ -291,20 +275,19 @@ export default function AboutPage() {
       <section className="py-20 px-4 bg-white/5">
         <Container size="lg">
           <div className="text-center space-y-6">
-            <Github className="w-16 h-16 mx-auto text-nebula-400" />
             <h2 className="font-display text-3xl md:text-4xl font-bold">
-              Open Source & Community Driven
+              Open Source
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              STEM•SPARK is open source and built in public. We welcome contributions from
-              developers, designers, and content creators who share our mission.
+              STEM•SPARK is open source. Contributions from developers, designers, 
+              and content creators are welcome.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
-                <Button variant="primary">View on GitHub</Button>
+                <Button variant="primary">View Repository</Button>
               </a>
               <a href={`${SOCIAL_LINKS.github}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noopener noreferrer">
-                <Button variant="secondary">Contribution Guide</Button>
+                <Button variant="secondary">Contributing Guide</Button>
               </a>
             </div>
           </div>
@@ -315,12 +298,11 @@ export default function AboutPage() {
       <section className="py-20 px-4">
         <Container size="md">
           <div className="text-center space-y-6">
-            <Mail className="w-16 h-16 mx-auto text-aurora-400" />
             <h2 className="font-display text-3xl md:text-4xl font-bold">
-              Get in Touch
+              Get Involved
             </h2>
             <p className="text-gray-400 text-lg">
-              Have questions, suggestions, or want to get involved? We'd love to hear from you!
+              Questions, suggestions, or want to contribute? Reach out through GitHub.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/community">
