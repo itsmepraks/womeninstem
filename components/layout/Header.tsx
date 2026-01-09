@@ -8,14 +8,13 @@ import { NAV_ITEMS } from '@/lib/constants';
 import Button from '@/components/ui/Button';
 
 /**
- * Header component with navigation, mobile menu, and glass morphism styling
+ * Modern flat header with clean navigation
  */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
@@ -25,12 +24,10 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -40,33 +37,27 @@ export default function Header() {
   }, [isMobileMenuOpen]);
 
   const isActiveRoute = (href: string) => {
-    if (href === '/') {
-      return pathname === '/';
-    }
+    if (href === '/') return pathname === '/';
     return pathname.startsWith(href);
   };
 
   return (
     <header
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        isScrolled ? 'glass shadow-lg' : 'bg-transparent'
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-200',
+        isScrolled
+          ? 'bg-white/95 dark:bg-neutral-950/95 backdrop-blur-sm border-b border-neutral-200 dark:border-neutral-800'
+          : 'bg-transparent'
       )}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2 group">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-nebula blur-lg opacity-50 group-hover:opacity-75 transition-opacity rounded-full" />
-              <div className="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-nebula">
-                <span className="text-2xl">✨</span>
-              </div>
-            </div>
+          <Link href="/" className="flex items-center space-x-2">
             <span className="font-display text-xl md:text-2xl font-bold">
-              <span className="gradient-text bg-gradient-nebula">STEM</span>
-              <span className="text-stardust-400">•</span>
-              <span className="gradient-text bg-gradient-aurora">SPARK</span>
+              <span className="text-primary-600 dark:text-primary-400">STEM</span>
+              <span className="text-neutral-400">•</span>
+              <span className="text-primary-600 dark:text-primary-400">SPARK</span>
             </span>
           </Link>
 
@@ -77,11 +68,10 @@ export default function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200',
-                  'hover:bg-white/10',
+                  'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
                   isActiveRoute(item.href)
-                    ? 'bg-white/10 text-white'
-                    : 'text-gray-300 hover:text-white'
+                    ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300'
+                    : 'text-neutral-600 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                 )}
               >
                 {item.label}
@@ -89,7 +79,7 @@ export default function Header() {
             ))}
           </div>
 
-          {/* Desktop CTA Button */}
+          {/* Desktop CTA */}
           <div className="hidden md:block">
             <Button variant="primary" size="sm">
               Get Started
@@ -99,64 +89,34 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg hover:bg-white/10 transition-colors"
+            className="md:hidden px-3 py-2 rounded-lg text-sm font-medium text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100 dark:hover:bg-neutral-800 transition-colors"
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
-            <svg
-              className="w-6 h-6 text-white"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMobileMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            {isMobileMenuOpen ? 'Close' : 'Menu'}
           </button>
         </div>
       </nav>
 
       {/* Mobile Menu */}
-      <div
-        className={cn(
-          'md:hidden fixed inset-0 top-16 transition-all duration-300 ease-in-out',
-          isMobileMenuOpen
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none'
-        )}
-      >
-        {/* Backdrop */}
-        <div
-          className="absolute inset-0 bg-deep-space/95 backdrop-blur-xl"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-
-        {/* Menu Content */}
-        <div className="relative h-full overflow-y-auto">
-          <div className="px-4 py-6 space-y-4">
+      {isMobileMenuOpen && (
+        <div className="md:hidden fixed inset-0 top-16 bg-white dark:bg-neutral-950 z-40">
+          <div className="px-4 py-6 space-y-2">
             {NAV_ITEMS.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  'block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200',
-                  'hover:bg-white/10',
+                  'block px-4 py-3 rounded-lg text-base font-medium transition-colors',
                   isActiveRoute(item.href)
-                    ? 'bg-gradient-nebula text-white shadow-glow'
-                    : 'text-gray-300 hover:text-white'
+                    ? 'bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300'
+                    : 'text-neutral-600 dark:text-neutral-400 hover:bg-neutral-100 dark:hover:bg-neutral-800'
                 )}
               >
                 {item.label}
               </Link>
             ))}
 
-            {/* Mobile CTA */}
             <div className="pt-4">
               <Button variant="primary" size="md" className="w-full">
                 Get Started
@@ -164,7 +124,7 @@ export default function Header() {
             </div>
           </div>
         </div>
-      </div>
+      )}
     </header>
   );
 }
