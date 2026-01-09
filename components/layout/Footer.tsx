@@ -75,7 +75,7 @@ export default function Footer() {
             {/* Logo */}
             <Link
               href="/"
-              className="inline-flex items-center gap-2 group mb-4 transition-transform hover:scale-105"
+              className="inline-flex items-center gap-2 group mb-4"
             >
               <span className="font-display text-2xl font-bold">
                 <span className="gradient-text bg-gradient-nebula">STEM</span>
@@ -85,8 +85,8 @@ export default function Footer() {
             </Link>
 
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Supporting women in STEM through learning resources, mentorship connections,
-              and community collaboration.
+              A learning platform connecting women in STEM through education, 
+              mentorship, and community.
             </p>
 
             {/* Social Links */}
@@ -157,10 +157,10 @@ export default function Footer() {
           <div className="grid md:grid-cols-2 gap-6 items-center">
             <div>
               <h3 className="font-display text-xl md:text-2xl font-bold mb-2">
-                Stay Connected
+                Stay Updated
               </h3>
               <p className="text-gray-400 text-sm">
-                Get updates on new content, events, and opportunities in STEM.
+                Get notified about new content, events, and opportunities.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
@@ -224,7 +224,7 @@ export default function Footer() {
       {/* Back to Top Button */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 px-4 py-2 glass rounded-full hover:bg-white/10 transition-all duration-300 z-40 text-sm ${
+        className={`fixed bottom-8 right-8 px-4 py-2 glass rounded-lg hover:bg-white/10 transition-all duration-300 z-40 text-sm ${
           showBackToTop
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-4 pointer-events-none'
