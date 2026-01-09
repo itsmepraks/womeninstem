@@ -14,22 +14,21 @@ export default function Home() {
               <span className="gradient-text bg-gradient-aurora">SPARK</span>
             </h1>
             <p className="text-xl md:text-2xl text-gray-300 font-light">
-              A learning platform for women in STEM
+              A learning platform for women in STEM.
             </p>
           </div>
 
           {/* Description */}
           <div className="max-w-2xl mx-auto space-y-6">
             <p className="text-lg text-gray-400 leading-relaxed">
-              Connect with mentors, access learning resources, and contribute to a community
-              focused on supporting women pursuing careers in science, technology, engineering, and mathematics.
+              Connect with other women in STEM through shared learning, mentorship, 
+              and community discussions. Currently under active development.
             </p>
             
             <div className="flex flex-wrap gap-3 justify-center items-center text-sm">
-              <span className="glass px-4 py-2 rounded-full">Learning Paths</span>
+              <span className="glass px-4 py-2 rounded-full">Interactive Learning</span>
               <span className="glass px-4 py-2 rounded-full">Mentorship</span>
               <span className="glass px-4 py-2 rounded-full">Community</span>
-              <span className="glass px-4 py-2 rounded-full">Resources</span>
             </div>
           </div>
 
@@ -56,7 +55,7 @@ export default function Home() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-aurora-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-aurora-500"></span>
               </span>
-              <span className="text-sm font-medium">In Active Development</span>
+              <span className="text-sm font-medium">Under Active Development</span>
             </div>
           </div>
         </div>
@@ -66,39 +65,39 @@ export default function Home() {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-center mb-16">
-            <span className="gradient-text bg-gradient-nebula">What We're Building</span>
+            <span className="gradient-text bg-gradient-nebula">Platform Features</span>
           </h2>
           
           <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 title: 'Learning Paths',
-                description: 'Structured courses and tutorials for different STEM fields',
+                description: 'Structured STEM courses tailored to your interests and goals',
                 href: '/learning',
               },
               {
                 title: 'Mentorship Network',
-                description: 'Connect with experienced women working in STEM careers',
+                description: 'Connect with women working in STEM fields',
                 href: '/mentorship',
               },
               {
                 title: 'Resource Library',
-                description: 'Curated tutorials, articles, and career preparation materials',
+                description: 'Curated tutorials, articles, and career guides',
                 href: '/resources',
               },
               {
                 title: 'Progress Tracking',
-                description: 'Track your learning progress and completed courses',
+                description: 'Track your learning progress and milestones',
                 href: '/explore',
               },
               {
                 title: 'Community Forum',
-                description: 'Discuss topics, ask questions, and share experiences',
+                description: 'Discussions, questions, and peer support',
                 href: '/community',
               },
               {
-                title: 'Career Resources',
-                description: 'Job boards, interview preparation, and industry insights',
+                title: 'Career Exploration',
+                description: 'Explore career paths and opportunities in STEM',
                 href: '/explore',
               },
             ].map((feature, index) => (
