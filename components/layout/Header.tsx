@@ -1,12 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { NAV_ITEMS } from '@/lib/constants';
+import Button from '@/components/ui/Button';
 
+/**
+ * Header component with navigation, mobile menu, and glass morphism styling
+ */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -45,42 +48,26 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'glass border-b border-white/10 backdrop-blur-xl'
-          : 'bg-transparent'
-      }`}
+      className={cn(
+        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        isScrolled ? 'glass shadow-lg' : 'bg-transparent'
+      )}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center space-x-2 group transition-transform hover:scale-105"
-          >
+          <Link href="/" className="flex items-center space-x-2 group">
             <div className="relative">
-              <Sparkles className="w-8 h-8 text-nebula-400 group-hover:text-nebula-300 transition-colors" />
-              <motion.div
-                className="absolute inset-0"
-                animate={{
-                  rotate: 360,
-                }}
-                transition={{
-                  duration: 20,
-                  repeat: Infinity,
-                  ease: 'linear',
-                }}
-              >
-                <Sparkles className="w-8 h-8 text-supernova-400 opacity-50" />
-              </motion.div>
+              <div className="absolute inset-0 bg-gradient-nebula blur-lg opacity-50 group-hover:opacity-75 transition-opacity rounded-full" />
+              <div className="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-nebula">
+                <span className="text-2xl">✨</span>
+              </div>
             </div>
-            <div className="flex items-center">
-              <span className="font-display text-xl md:text-2xl font-bold">
-                <span className="gradient-text bg-gradient-nebula">STEM</span>
-                <span className="text-stardust-400">•</span>
-                <span className="gradient-text bg-gradient-aurora">SPARK</span>
-              </span>
-            </div>
+            <span className="font-display text-xl md:text-2xl font-bold">
+              <span className="gradient-text bg-gradient-nebula">STEM</span>
+              <span className="text-stardust-400">•</span>
+              <span className="gradient-text bg-gradient-aurora">SPARK</span>
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -89,42 +76,24 @@ export default function Header() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                className={cn(
+                  'px-4 py-2 rounded-full text-sm font-medium transition-all duration-200',
+                  'hover:bg-white/10',
                   isActiveRoute(item.href)
-                    ? 'text-white'
+                    ? 'bg-white/10 text-white'
                     : 'text-gray-300 hover:text-white'
-                }`}
+                )}
               >
-                {isActiveRoute(item.href) && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute inset-0 bg-gradient-nebula rounded-full"
-                    initial={false}
-                    transition={{
-                      type: 'spring',
-                      stiffness: 380,
-                      damping: 30,
-                    }}
-                  />
-                )}
-                <span className="relative z-10">{item.label}</span>
-                
-                {/* Hover glow effect */}
-                {!isActiveRoute(item.href) && (
-                  <span className="absolute inset-0 rounded-full bg-white/5 opacity-0 hover:opacity-100 transition-opacity duration-200" />
-                )}
+                {item.label}
               </Link>
             ))}
           </div>
 
-          {/* CTA Button - Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
-            <Link
-              href="/explore"
-              className="px-6 py-2.5 bg-gradient-nebula rounded-full font-semibold text-sm hover:shadow-glow transition-all duration-300 transform hover:scale-105"
-            >
+          {/* Desktop CTA Button */}
+          <div className="hidden md:block">
+            <Button variant="primary" size="sm">
               Get Started
-            </Link>
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -134,95 +103,68 @@ export default function Header() {
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
-            {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            <svg
+              className="w-6 h-6 text-white"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              {isMobileMenuOpen ? (
+                <path d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
           </button>
         </div>
       </nav>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-deep-space/95 backdrop-blur-xl md:hidden"
-              style={{ top: isScrolled ? '64px' : '64px' }}
-              onClick={() => setIsMobileMenuOpen(false)}
-            />
-
-            {/* Menu Content */}
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-              className="fixed left-0 right-0 md:hidden glass border-b border-white/10"
-              style={{ top: isScrolled ? '64px' : '64px' }}
-            >
-              <div className="max-w-7xl mx-auto px-4 py-6 space-y-2">
-                {/* Navigation Links */}
-                {NAV_ITEMS.map((item, index) => (
-                  <motion.div
-                    key={item.href}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                  >
-                    <Link
-                      href={item.href}
-                      className={`block px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 ${
-                        isActiveRoute(item.href)
-                          ? 'bg-gradient-nebula text-white shadow-glow'
-                          : 'text-gray-300 hover:bg-white/5 hover:text-white'
-                      }`}
-                    >
-                      <span className="flex items-center justify-between">
-                        {item.label}
-                        {isActiveRoute(item.href) && (
-                          <Sparkles className="w-4 h-4" />
-                        )}
-                      </span>
-                    </Link>
-                  </motion.div>
-                ))}
-
-                {/* Mobile CTA */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
-                  className="pt-4 border-t border-white/10"
-                >
-                  <Link
-                    href="/explore"
-                    className="block w-full px-4 py-3 bg-gradient-nebula rounded-xl font-semibold text-base text-center hover:shadow-glow transition-all duration-300"
-                  >
-                    Get Started
-                  </Link>
-                </motion.div>
-
-                {/* Mobile Menu Footer */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 }}
-                  className="pt-4 text-center text-sm text-gray-400"
-                >
-                  <p>Empowering women in STEM</p>
-                </motion.div>
-              </div>
-            </motion.div>
-          </>
+      <div
+        className={cn(
+          'md:hidden fixed inset-0 top-16 transition-all duration-300 ease-in-out',
+          isMobileMenuOpen
+            ? 'opacity-100 pointer-events-auto'
+            : 'opacity-0 pointer-events-none'
         )}
-      </AnimatePresence>
+      >
+        {/* Backdrop */}
+        <div
+          className="absolute inset-0 bg-deep-space/95 backdrop-blur-xl"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+
+        {/* Menu Content */}
+        <div className="relative h-full overflow-y-auto">
+          <div className="px-4 py-6 space-y-4">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  'block px-4 py-3 rounded-lg text-base font-medium transition-all duration-200',
+                  'hover:bg-white/10',
+                  isActiveRoute(item.href)
+                    ? 'bg-gradient-nebula text-white shadow-glow'
+                    : 'text-gray-300 hover:text-white'
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+
+            {/* Mobile CTA */}
+            <div className="pt-4">
+              <Button variant="primary" size="md" className="w-full">
+                Get Started
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }
