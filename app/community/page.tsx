@@ -1,6 +1,5 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
 import { MessageSquare, Users, Lightbulb, Trophy, Heart, TrendingUp } from 'lucide-react';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import type { BadgeProps } from '@/components/ui/Badge';
 
