@@ -1,11 +1,16 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
 import { MessageSquare, Users, Lightbulb, Trophy, Heart, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import type { BadgeProps } from '@/components/ui/Badge';
 
 export const metadata = {
   title: 'Community - STEM•SPARK',
   description: 'Join a supportive community of women in STEM. Share, learn, and grow together',
 };
+
+// Define valid color type to match Badge variants
+type BadgeVariant = NonNullable<BadgeProps['variant']>;
 
 export default function CommunityPage() {
   const forumCategories = [
@@ -14,28 +19,28 @@ export default function CommunityPage() {
       title: 'General Discussions',
       description: 'Share experiences, ask questions, and connect with peers',
       topics: 234,
-      color: 'nebula',
+      color: 'nebula' as BadgeVariant,
     },
     {
       icon: <Lightbulb className="w-8 h-8" />,
       title: 'Career Advice',
       description: 'Get guidance on career paths, interviews, and professional growth',
       topics: 156,
-      color: 'stardust',
+      color: 'stardust' as BadgeVariant,
     },
     {
       icon: <TrendingUp className="w-8 h-8" />,
       title: 'Study Groups',
       description: 'Form study groups and collaborate on learning projects',
       topics: 89,
-      color: 'aurora',
+      color: 'aurora' as BadgeVariant,
     },
     {
       icon: <Trophy className="w-8 h-8" />,
       title: 'Achievements',
       description: 'Celebrate wins and milestones with the community',
       topics: 178,
-      color: 'cosmic',
+      color: 'cosmic' as BadgeVariant,
     },
   ];
 
@@ -118,10 +123,19 @@ export default function CommunityPage() {
               <Card key={index} hover className="group">
                 <div className="space-y-4">
                   <div className="flex items-start justify-between">
-                    <div className={`p-3 rounded-xl bg-${category.color}-500/20 text-${category.color}-400 group-hover:scale-110 transition-transform`}>
+                    <div className={cn(
+                      'p-3 rounded-xl group-hover:scale-110 transition-transform',
+                      {
+                        'bg-nebula-500/20 text-nebula-400': category.color === 'nebula',
+                        'bg-aurora-500/20 text-aurora-400': category.color === 'aurora',
+                        'bg-cosmic-500/20 text-cosmic-400': category.color === 'cosmic',
+                        'bg-stardust-500/20 text-stardust-400': category.color === 'stardust',
+                        'bg-supernova-500/20 text-supernova-400': category.color === 'supernova',
+                      }
+                    )}>
                       {category.icon}
                     </div>
-                    <Badge variant={category.color as any} size="sm">
+                    <Badge variant={category.color} size="sm">
                       {category.topics} topics
                     </Badge>
                   </div>

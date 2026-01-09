@@ -2,6 +2,7 @@ import { Container, Card, Button, Badge } from '@/components/ui';
 import { Target, Heart, Users, Sparkles, Mail, Github, Linkedin, Globe } from 'lucide-react';
 import Link from 'next/link';
 import { SOCIAL_LINKS } from '@/lib/constants';
+import { cn } from '@/lib/utils';
 
 export const metadata = {
   title: 'About - STEM•SPARK',
@@ -177,7 +178,16 @@ export default function AboutPage() {
             {values.map((value, index) => (
               <Card key={index} hover>
                 <div className="space-y-4">
-                  <div className={`inline-flex p-3 rounded-xl bg-${value.color}-500/20 text-${value.color}-400`}>
+                  <div className={cn(
+                    'inline-flex p-3 rounded-xl',
+                    {
+                      'bg-nebula-500/20 text-nebula-400': value.color === 'nebula',
+                      'bg-aurora-500/20 text-aurora-400': value.color === 'aurora',
+                      'bg-cosmic-500/20 text-cosmic-400': value.color === 'cosmic',
+                      'bg-stardust-500/20 text-stardust-400': value.color === 'stardust',
+                      'bg-supernova-500/20 text-supernova-400': value.color === 'supernova',
+                    }
+                  )}>
                     {value.icon}
                   </div>
                   <h3 className="font-display text-2xl font-semibold">{value.title}</h3>

@@ -5,6 +5,29 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  safelist: [
+    // Badge component colors - explicit safelist for dynamic classes
+    'bg-nebula-500/20',
+    'text-nebula-300',
+    'border-nebula-500/30',
+    'bg-nebula-400',
+    'bg-aurora-500/20',
+    'text-aurora-300',
+    'border-aurora-500/30',
+    'bg-aurora-400',
+    'bg-stardust-500/20',
+    'text-stardust-300',
+    'border-stardust-500/30',
+    'bg-stardust-400',
+    'bg-cosmic-blue-500/20',
+    'text-cosmic-blue-300',
+    'border-cosmic-blue-500/30',
+    'bg-cosmic-blue-400',
+    'bg-supernova-500/20',
+    'text-supernova-300',
+    'border-supernova-500/30',
+    'bg-supernova-400',
+  ],
   theme: {
     extend: {
       colors: {
