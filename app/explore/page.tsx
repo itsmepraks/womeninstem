@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata = {
   title: 'Explore - STEM•SPARK',
-  description: 'Your dashboard for STEM learning and community',
+  description: 'Browse learning paths and explore STEM opportunities',
 };
 
 export default function ExplorePage() {
@@ -18,13 +18,13 @@ export default function ExplorePage() {
             </Badge>
             
             <h1 className="font-display text-5xl md:text-7xl font-bold">
-              <span className="gradient-text bg-gradient-nebula">Your</span>{' '}
-              <span className="gradient-text bg-gradient-aurora">Dashboard</span>
+              <span className="gradient-text bg-gradient-nebula">Explore</span> STEM{' '}
+              <span className="gradient-text bg-gradient-aurora">Resources</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Track your learning progress, access courses, and connect with mentors
-              all in one place.
+              Browse learning paths, connect with mentors, and find resources 
+              for your STEM journey.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
@@ -47,26 +47,26 @@ export default function ExplorePage() {
       <section className="py-20 px-4">
         <Container size="xl">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-12">
-            Dashboard Features
+            Platform Features
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                title: 'Progress Tracking',
-                description: 'Monitor your course completion and learning goals',
+                title: 'Dashboard',
+                description: 'Track your learning progress and achievements',
               },
               {
-                title: 'Course Access',
-                description: 'Continue where you left off in your learning paths',
+                title: 'Recommendations',
+                description: 'Find courses based on your interests and goals',
               },
               {
-                title: 'Mentor Connections',
-                description: 'Message mentors and schedule sessions',
+                title: 'Quick Access',
+                description: 'Easy navigation to your courses and discussions',
               },
               {
-                title: 'Community Updates',
-                description: 'See new discussions and community activity',
+                title: 'Discovery',
+                description: 'Browse trending topics and popular courses',
               },
             ].map((feature, index) => (
               <Card key={index} hover>
@@ -88,33 +88,35 @@ export default function ExplorePage() {
           <div className="glass rounded-3xl p-8 md:p-12 space-y-8">
             <div className="text-center space-y-4">
               <h2 className="font-display text-3xl md:text-4xl font-bold">
-                Building Your Dashboard
+                Features In Development
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Features planned for the dashboard:
+                We're building tools to help you navigate your STEM learning journey.
               </p>
             </div>
 
             <div className="grid md:grid-cols-2 gap-6 pt-8">
               {[
-                'Course recommendations based on your goals',
-                'Progress tracking and completion statistics',
+                'Course recommendations based on interests',
+                'Progress tracking and analytics',
+                'Achievement and milestone display',
                 'Quick access to active courses',
-                'Mentor connection management',
+                'Mentor connection tools',
                 'Community discussion highlights',
-                'Upcoming events and webinars',
+                'Events calendar',
                 'Resource bookmarks',
-                'Achievement history',
               ].map((item, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-nebula-400"></div>
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-nebula flex items-center justify-center text-sm">
+                    {index + 1}
+                  </div>
                   <span className="text-gray-300">{item}</span>
                 </div>
               ))}
             </div>
 
             <div className="pt-8 text-center">
-              <p className="text-sm text-gray-500 mb-4">Want to be notified when this is ready?</p>
+              <p className="text-sm text-gray-500 mb-4">Get notified when we launch:</p>
               <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input
                   type="email"
@@ -133,15 +135,15 @@ export default function ExplorePage() {
         <Container size="md">
           <div className="text-center space-y-6">
             <h2 className="font-display text-3xl md:text-4xl font-bold">
-              Start Learning Now
+              Start Learning Today
             </h2>
             <p className="text-gray-400 text-lg">
-              While we build the dashboard, you can browse courses and join the community.
+              While we build the explore hub, you can start with courses and community discussions.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/learning">
                 <Button variant="primary" size="lg">
-                  View Learning Paths
+                  Browse Learning Paths
                 </Button>
               </Link>
               <Link href="/mentorship">
