@@ -5,7 +5,7 @@ import type { BadgeProps } from '@/components/ui/Badge';
 
 export const metadata = {
   title: 'Learning Paths - STEM•SPARK',
-  description: 'Browse structured STEM learning paths and courses',
+  description: 'Browse structured STEM courses tailored to your interests',
 };
 
 // Define valid color type to match Badge variants
@@ -15,28 +15,28 @@ export default function LearningPage() {
   const learningPaths = [
     {
       title: 'Programming & Computer Science',
-      description: 'Python fundamentals to advanced algorithms',
+      description: 'From Python basics to advanced algorithms',
       level: 'Beginner to Advanced',
       courses: 12,
       color: 'nebula' as BadgeVariant,
     },
     {
       title: 'Data Science & Analytics',
-      description: 'Data analysis, visualization, and statistics',
+      description: 'Master data analysis and visualization',
       level: 'Intermediate',
       courses: 8,
       color: 'cosmic' as BadgeVariant,
     },
     {
       title: 'Engineering Fundamentals',
-      description: 'Core engineering principles and design',
+      description: 'Learn engineering principles and design',
       level: 'Beginner',
       courses: 10,
       color: 'aurora' as BadgeVariant,
     },
     {
       title: 'Scientific Research',
-      description: 'Research methods and scientific inquiry',
+      description: 'Dive into scientific methods and inquiry',
       level: 'All Levels',
       courses: 6,
       color: 'stardust' as BadgeVariant,
@@ -50,7 +50,7 @@ export default function LearningPage() {
         <Container size="lg">
           <div className="text-center space-y-8">
             <div className="flex justify-center">
-              <Badge variant="nebula" size="lg">
+              <Badge variant="nebula" size="lg" dot>
                 In Development
               </Badge>
             </div>
@@ -60,14 +60,20 @@ export default function LearningPage() {
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Structured courses for different STEM fields. Learn at your own pace
-              and track your progress.
+              Structured STEM courses designed for different skill levels. 
+              Learn at your own pace and track your progress.
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center text-sm">
-              <span className="glass px-4 py-2 rounded-full">50+ Courses</span>
-              <span className="glass px-4 py-2 rounded-full">Self-Paced</span>
-              <span className="glass px-4 py-2 rounded-full">Progress Tracking</span>
+              <span className="glass px-4 py-2 rounded-full">
+                50+ Courses
+              </span>
+              <span className="glass px-4 py-2 rounded-full">
+                Self-Paced Learning
+              </span>
+              <span className="glass px-4 py-2 rounded-full">
+                Progress Tracking
+              </span>
             </div>
           </div>
         </Container>
@@ -78,10 +84,10 @@ export default function LearningPage() {
         <Container size="xl">
           <div className="text-center mb-12">
             <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              Available Paths
+              Available Learning Paths
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Choose a focus area and start learning
+              Choose a path that matches your interests and goals
             </p>
           </div>
 
@@ -108,7 +114,7 @@ export default function LearningPage() {
 
                   <div className="pt-4">
                     <Button variant="ghost" className="w-full">
-                      View Path →
+                      View Courses
                     </Button>
                   </div>
                 </div>
@@ -118,7 +124,7 @@ export default function LearningPage() {
         </Container>
       </section>
 
-      {/* How It Works */}
+      {/* Features */}
       <section className="py-20 px-4 bg-white/5">
         <Container size="lg">
           <div className="text-center mb-12">
@@ -132,17 +138,17 @@ export default function LearningPage() {
               {
                 step: '01',
                 title: 'Choose Your Path',
-                description: 'Select a learning path that matches your goals',
+                description: 'Select a learning path that matches your interests and career goals',
               },
               {
                 step: '02',
-                title: 'Complete Courses',
-                description: 'Work through lessons, projects, and exercises',
+                title: 'Complete Lessons',
+                description: 'Work through lessons, projects, and exercises at your own pace',
               },
               {
                 step: '03',
                 title: 'Track Progress',
-                description: 'Monitor your completion and skill development',
+                description: 'Monitor your progress and build your portfolio',
               },
             ].map((item, index) => (
               <div key={index} className="text-center space-y-4">
@@ -167,15 +173,17 @@ export default function LearningPage() {
 
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                { title: 'Structured Curriculum', desc: 'Step-by-step lessons and materials' },
-                { title: 'Practice Projects', desc: 'Build real applications' },
-                { title: 'Exercises', desc: 'Reinforce concepts through practice' },
-                { title: 'Assessments', desc: 'Test your understanding' },
-                { title: 'Progress Tracking', desc: 'See your completion status' },
-                { title: 'Community Access', desc: 'Connect with other learners' },
+                { title: 'Structured Curriculum', desc: 'Step-by-step lessons organized by topic' },
+                { title: 'Practice Projects', desc: 'Build real applications to reinforce learning' },
+                { title: 'Exercises', desc: 'Interactive challenges to test your knowledge' },
+                { title: 'Assessments', desc: 'Quizzes and tests to track understanding' },
+                { title: 'Progress Tracking', desc: 'Monitor your completion and achievements' },
+                { title: 'Community Support', desc: 'Connect with other learners' },
               ].map((item, index) => (
                 <div key={index} className="flex gap-4">
-                  <div className="flex-shrink-0 w-2 h-2 mt-2 rounded-full bg-nebula-400"></div>
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-nebula flex items-center justify-center text-sm">
+                    {index + 1}
+                  </div>
                   <div>
                     <h3 className="font-semibold text-lg mb-1">{item.title}</h3>
                     <p className="text-gray-400 text-sm">{item.desc}</p>
@@ -191,11 +199,14 @@ export default function LearningPage() {
       <section className="py-20 px-4">
         <Container size="md">
           <div className="text-center space-y-6">
+            <Badge variant="stardust" size="lg">
+              Currently Building
+            </Badge>
             <h2 className="font-display text-3xl md:text-4xl font-bold">
-              Get Notified When We Launch
+              Courses Coming Soon
             </h2>
             <p className="text-gray-400 text-lg">
-              We're creating the course content. Sign up to be notified when it's ready.
+              We're developing course content. Get notified when courses launch.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-4">
               <input
