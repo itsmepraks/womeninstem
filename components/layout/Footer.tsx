@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ArrowUp, Github, Twitter, Linkedin, Globe, Heart, Sparkles } from 'lucide-react';
 import { NAV_ITEMS, SOCIAL_LINKS, SITE_NAME } from '@/lib/constants';
 
 export default function Footer() {
@@ -78,10 +77,6 @@ export default function Footer() {
               href="/"
               className="inline-flex items-center gap-2 group mb-4 transition-transform hover:scale-105"
             >
-              <div className="relative">
-                <Sparkles className="w-8 h-8 text-nebula-400 animate-pulse" />
-                <div className="absolute inset-0 blur-xl bg-nebula-400/30 animate-pulse" />
-              </div>
               <span className="font-display text-2xl font-bold">
                 <span className="gradient-text bg-gradient-nebula">STEM</span>
                 <span className="text-stardust-400">•</span>
@@ -90,47 +85,43 @@ export default function Footer() {
             </Link>
 
             <p className="text-gray-400 mb-6 leading-relaxed">
-              Igniting curiosity and empowering the next generation of women in STEM through
-              interactive learning, mentorship, and community.
+              Supporting women in STEM through learning resources, mentorship connections,
+              and community collaboration.
             </p>
 
             {/* Social Links */}
-            <div className="flex items-center gap-3">
+            <div className="flex flex-col gap-2 text-sm">
               <a
                 href={SOCIAL_LINKS.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 glass rounded-lg hover:bg-white/10 transition-all duration-300 hover:shadow-glow-blue group"
-                aria-label="GitHub"
+                className="text-gray-400 hover:text-white transition-colors"
               >
-                <Github className="w-5 h-5 group-hover:text-cosmic-blue-400 transition-colors" />
+                GitHub
               </a>
               <a
                 href={SOCIAL_LINKS.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 glass rounded-lg hover:bg-white/10 transition-all duration-300 hover:shadow-glow-blue group"
-                aria-label="Twitter"
+                className="text-gray-400 hover:text-white transition-colors"
               >
-                <Twitter className="w-5 h-5 group-hover:text-cosmic-blue-400 transition-colors" />
+                Twitter
               </a>
               <a
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 glass rounded-lg hover:bg-white/10 transition-all duration-300 hover:shadow-glow-blue group"
-                aria-label="LinkedIn"
+                className="text-gray-400 hover:text-white transition-colors"
               >
-                <Linkedin className="w-5 h-5 group-hover:text-cosmic-blue-400 transition-colors" />
+                LinkedIn
               </a>
               <a
                 href={SOCIAL_LINKS.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2.5 glass rounded-lg hover:bg-white/10 transition-all duration-300 hover:shadow-glow-blue group"
-                aria-label="Website"
+                className="text-gray-400 hover:text-white transition-colors"
               >
-                <Globe className="w-5 h-5 group-hover:text-cosmic-blue-400 transition-colors" />
+                Website
               </a>
             </div>
           </div>
@@ -194,7 +185,7 @@ export default function Footer() {
                 © {currentYear} {SITE_NAME}. All rights reserved.
               </p>
               <p className="mt-1">
-                Built with <Heart className="inline w-4 h-4 text-supernova-400 fill-current" /> by{' '}
+                Created by{' '}
                 <a
                   href={SOCIAL_LINKS.website}
                   target="_blank"
@@ -233,15 +224,14 @@ export default function Footer() {
       {/* Back to Top Button */}
       <button
         onClick={scrollToTop}
-        className={`fixed bottom-8 right-8 p-3 glass rounded-full hover:bg-white/10 transition-all duration-300 z-40 ${
+        className={`fixed bottom-8 right-8 px-4 py-2 glass rounded-full hover:bg-white/10 transition-all duration-300 z-40 text-sm ${
           showBackToTop
             ? 'opacity-100 translate-y-0'
             : 'opacity-0 translate-y-4 pointer-events-none'
         }`}
         aria-label="Back to top"
       >
-        <ArrowUp className="w-5 h-5" />
-        <span className="absolute inset-0 rounded-full bg-gradient-nebula opacity-0 hover:opacity-20 transition-opacity duration-300" />
+        Back to top
       </button>
 
       {/* Decorative gradient overlay at top */}
