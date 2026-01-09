@@ -1,337 +1,211 @@
-import { Container, Card, Button, Badge } from '@/components/ui';
-import { Target, Heart, Users, Sparkles, Mail, Github, Linkedin, Globe } from 'lucide-react';
+import { Container } from '@/components/ui';
+import Card from '@/components/ui/Card';
+import Button from '@/components/ui/Button';
+import Badge from '@/components/ui/Badge';
 import Link from 'next/link';
 import { SOCIAL_LINKS } from '@/lib/constants';
-import { cn } from '@/lib/utils';
 
 export const metadata = {
   title: 'About - STEM•SPARK',
-  description: 'Learn about our mission to empower girls and women in STEM through interactive learning and community',
+  description: 'Learn about STEM•SPARK and our mission to support women in STEM',
 };
 
 export default function AboutPage() {
-  const stats = [
-    { value: '1,000+', label: 'Future Members' },
-    { value: '50+', label: 'Learning Paths' },
-    { value: '100+', label: 'Mentors' },
-    { value: '24/7', label: 'Community Support' },
-  ];
-
-  const values = [
-    {
-      icon: <Heart className="w-8 h-8" />,
-      title: 'Inclusivity',
-      description: 'Creating a welcoming space for all women in STEM, regardless of background or experience level',
-      color: 'supernova',
-    },
-    {
-      icon: <Sparkles className="w-8 h-8" />,
-      title: 'Excellence',
-      description: 'Providing high-quality content and experiences that inspire learning and growth',
-      color: 'stardust',
-    },
-    {
-      icon: <Users className="w-8 h-8" />,
-      title: 'Community',
-      description: 'Building meaningful connections that foster collaboration and support',
-      color: 'aurora',
-    },
-    {
-      icon: <Target className="w-8 h-8" />,
-      title: 'Empowerment',
-      description: 'Equipping women with skills, confidence, and opportunities to thrive in STEM',
-      color: 'nebula',
-    },
-  ];
-
   return (
     <div className="relative">
-      {/* Hero Section */}
-      <section className="min-h-[70vh] flex items-center justify-center px-4 py-20">
-        <Container size="lg">
-          <div className="text-center space-y-8">
-            <Badge variant="nebula" size="lg">
-              ✨ Our Story
-            </Badge>
-            
-            <h1 className="font-display text-5xl md:text-7xl font-bold">
-              <span className="gradient-text bg-gradient-nebula">Empowering</span>{' '}
-              <span className="gradient-text bg-gradient-aurora">Women</span>{' '}
-              in STEM
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              STEM•SPARK is more than a platform—it's a movement to ignite curiosity,
-              foster connections, and break down barriers for women in STEM.
-            </p>
-          </div>
-        </Container>
+      {/* Hero */}
+      <section className="py-24 px-4">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <h1 className="text-5xl md:text-6xl font-bold text-gray-900">
+            About STEM•SPARK
+          </h1>
+          <p className="text-xl text-gray-600 leading-relaxed">
+            A platform supporting women pursuing careers in science, technology, 
+            engineering, and mathematics.
+          </p>
+        </div>
       </section>
 
-      {/* Mission & Vision */}
-      <section className="py-20 px-4">
-        <Container size="xl">
+      {/* Mission */}
+      <section className="py-12 px-4 bg-gray-50">
+        <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
-            <Card hover className="group">
+            <Card>
               <div className="space-y-4">
-                <div className="inline-flex p-4 rounded-xl bg-nebula-500/20 text-nebula-400 group-hover:scale-110 transition-transform">
-                  <Target className="w-10 h-10" />
-                </div>
-                
-                <h2 className="font-display text-3xl font-bold">Our Mission</h2>
-                <p className="text-gray-400 text-lg leading-relaxed">
-                  To create an inclusive, engaging platform that empowers girls and women to
-                  explore, learn, and excel in STEM fields through interactive education,
-                  mentorship, and community support.
+                <h2 className="text-2xl font-bold text-gray-900">Our Purpose</h2>
+                <p className="text-gray-600 leading-relaxed">
+                  Women remain underrepresented in many STEM fields. STEM•SPARK provides 
+                  practical resources, mentorship connections, and community support to 
+                  help address this gap.
                 </p>
-
-                <ul className="space-y-3 pt-4">
-                  {[
-                    'Make STEM education accessible and engaging',
-                    'Connect learners with inspiring mentors',
-                    'Build a supportive, inclusive community',
-                    'Provide resources for career success',
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-nebula-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-gray-300">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                <p className="text-gray-600 leading-relaxed">
+                  We focus on creating tools and connections that have real impact on 
+                  women's STEM careers - from learning resources to mentor matching to 
+                  community forums.
+                </p>
               </div>
             </Card>
 
-            <Card hover className="group">
+            <Card>
               <div className="space-y-4">
-                <div className="inline-flex p-4 rounded-xl bg-aurora-500/20 text-aurora-400 group-hover:scale-110 transition-transform">
-                  <Sparkles className="w-10 h-10" />
-                </div>
-                
-                <h2 className="font-display text-3xl font-bold">Our Vision</h2>
-                <p className="text-gray-400 text-lg leading-relaxed">
-                  A world where every woman has the opportunity, confidence, and support to
-                  pursue and thrive in STEM careers, breaking down barriers and inspiring
-                  future generations.
-                </p>
-
-                <ul className="space-y-3 pt-4">
+                <h2 className="text-2xl font-bold text-gray-900">What We Offer</h2>
+                <ul className="space-y-3">
                   {[
-                    'Close the gender gap in STEM fields',
-                    'Inspire the next generation of innovators',
-                    'Create lasting impact through education',
-                    'Build a global network of women in STEM',
+                    'Structured STEM courses and learning paths',
+                    'Mentorship matching with experienced professionals',
+                    'Community forums for discussion and support',
+                    'Career resources and job information',
+                    'Progress tracking and achievement recognition',
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-aurora-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-gray-300">{item}</span>
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary-100 text-primary-700 flex items-center justify-center text-sm font-medium">
+                        {index + 1}
+                      </span>
+                      <span className="text-gray-600">{item}</span>
                     </li>
                   ))}
                 </ul>
               </div>
             </Card>
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* Stats */}
-      <section className="py-20 px-4 bg-white/5">
-        <Container size="lg">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              Building Something Special
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Here's what we're creating for you
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
+      <section className="py-24 px-4">
+        <div className="max-w-5xl mx-auto">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+            Project Information
+          </h2>
+          <div className="grid md:grid-cols-4 gap-8">
+            {[
+              { label: 'Status', value: 'Active Development' },
+              { label: 'License', value: 'MIT (Open Source)' },
+              { label: 'Founded', value: '2026' },
+              { label: 'Focus', value: 'Women in STEM' },
+            ].map((stat, index) => (
               <div key={index} className="text-center space-y-2">
-                <div className="text-4xl md:text-5xl font-bold gradient-text bg-gradient-nebula">
-                  {stat.value}
-                </div>
-                <div className="text-gray-400">{stat.label}</div>
+                <div className="text-lg font-semibold text-primary-600">{stat.value}</div>
+                <div className="text-sm text-gray-600">{stat.label}</div>
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* Values */}
-      <section className="py-20 px-4">
-        <Container size="xl">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              Our Core Values
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              The principles that guide everything we do
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {values.map((value, index) => (
-              <Card key={index} hover>
-                <div className="space-y-4">
-                  <div className={cn(
-                    'inline-flex p-3 rounded-xl',
-                    {
-                      'bg-nebula-500/20 text-nebula-400': value.color === 'nebula',
-                      'bg-aurora-500/20 text-aurora-400': value.color === 'aurora',
-                      'bg-cosmic-500/20 text-cosmic-400': value.color === 'cosmic',
-                      'bg-stardust-500/20 text-stardust-400': value.color === 'stardust',
-                      'bg-supernova-500/20 text-supernova-400': value.color === 'supernova',
-                    }
-                  )}>
-                    {value.icon}
-                  </div>
-                  <h3 className="font-display text-2xl font-semibold">{value.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{value.description}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Creator Section */}
-      <section className="py-20 px-4 bg-white/5">
-        <Container size="lg">
-          <div className="glass rounded-3xl p-8 md:p-12">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-6">
-                <Badge variant="nebula">Meet the Creator</Badge>
-                <h2 className="font-display text-3xl md:text-4xl font-bold">
-                  Built with 💜 by Prakriti Bista
+      {/* Creator */}
+      <section className="py-12 px-4 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <Card>
+            <div className="space-y-6">
+              <div>
+                <Badge variant="primary" size="sm">Creator</Badge>
+                <h2 className="text-3xl font-bold text-gray-900 mt-4 mb-6">
+                  Prakriti Bista
                 </h2>
-                <p className="text-gray-400 leading-relaxed">
-                  As a woman in tech, I've experienced firsthand the challenges and opportunities
-                  in STEM. STEM•SPARK was born from a desire to create the platform I wished I
-                  had when starting my journey—a place where women can learn, connect, and thrive
-                  together.
+              </div>
+              
+              <div className="space-y-4 text-gray-600 leading-relaxed">
+                <p>
+                  I'm a developer building STEM•SPARK to address challenges I've observed in the 
+                  STEM community. Throughout my career, I've seen the value of having access to 
+                  mentors, structured learning, and supportive communities.
                 </p>
-                <p className="text-gray-400 leading-relaxed">
-                  This project combines my passion for education, community building, and
-                  empowering the next generation of women in STEM.
+                <p>
+                  This platform aims to make those resources more accessible to women entering or 
+                  advancing in STEM fields. The project is open source and focused on creating 
+                  practical, useful tools rather than flashy features.
                 </p>
-
-                <div className="flex flex-wrap gap-4 pt-4">
-                  <a
-                    href={SOCIAL_LINKS.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-all"
-                  >
-                    <Globe className="w-5 h-5" />
-                  </a>
-                  <a
-                    href={SOCIAL_LINKS.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-all"
-                  >
-                    <Github className="w-5 h-5" />
-                  </a>
-                  <a
-                    href={SOCIAL_LINKS.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-all"
-                  >
-                    <Linkedin className="w-5 h-5" />
-                  </a>
-                </div>
               </div>
 
-              <div className="space-y-6">
-                <div className="aspect-square rounded-3xl bg-gradient-nebula flex items-center justify-center text-9xl">
-                  👩‍💻
-                </div>
+              <div className="flex flex-wrap gap-6 pt-4">
+                <a
+                  href={SOCIAL_LINKS.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary-600 hover:text-primary-700 font-medium"
+                >
+                  Website
+                </a>
+                <a
+                  href={SOCIAL_LINKS.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary-600 hover:text-primary-700 font-medium"
+                >
+                  GitHub
+                </a>
+                <a
+                  href={SOCIAL_LINKS.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-primary-600 hover:text-primary-700 font-medium"
+                >
+                  LinkedIn
+                </a>
               </div>
             </div>
-          </div>
-        </Container>
+          </Card>
+        </div>
       </section>
 
-      {/* Technology Stack */}
-      <section className="py-20 px-4">
-        <Container size="lg">
+      {/* Tech Stack */}
+      <section className="py-24 px-4">
+        <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              Built with Modern Technology
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">
+              Technology
             </h2>
-            <p className="text-gray-400 text-lg">
-              Leveraging the best tools for a stellar experience
+            <p className="text-gray-600">
+              Built with modern web technologies
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-4 gap-6">
             {[
               { name: 'Next.js 14', desc: 'React Framework' },
               { name: 'TypeScript', desc: 'Type Safety' },
               { name: 'Tailwind CSS', desc: 'Styling' },
-              { name: 'Framer Motion', desc: 'Animations' },
+              { name: 'Vercel', desc: 'Deployment' },
             ].map((tech, index) => (
-              <div key={index} className="glass p-6 rounded-xl text-center space-y-2">
-                <div className="text-3xl">⚡</div>
-                <h3 className="font-semibold">{tech.name}</h3>
-                <p className="text-sm text-gray-400">{tech.desc}</p>
-              </div>
+              <Card key={index}>
+                <div className="text-center space-y-2">
+                  <h3 className="font-semibold text-gray-900">{tech.name}</h3>
+                  <p className="text-sm text-gray-600">{tech.desc}</p>
+                </div>
+              </Card>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* Open Source */}
-      <section className="py-20 px-4 bg-white/5">
-        <Container size="lg">
-          <div className="text-center space-y-6">
-            <Github className="w-16 h-16 mx-auto text-nebula-400" />
-            <h2 className="font-display text-3xl md:text-4xl font-bold">
-              Open Source & Community Driven
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              STEM•SPARK is open source and built in public. We welcome contributions from
-              developers, designers, and content creators who share our mission.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
-                <Button variant="primary">View on GitHub</Button>
-              </a>
-              <a href={`${SOCIAL_LINKS.github}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noopener noreferrer">
-                <Button variant="secondary">Contribution Guide</Button>
-              </a>
+      {/* Open Source CTA */}
+      <section className="py-24 px-4 bg-gray-50">
+        <div className="max-w-4xl mx-auto">
+          <Card>
+            <div className="text-center space-y-6">
+              <h2 className="text-3xl font-bold text-gray-900">
+                Open Source Project
+              </h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                STEM•SPARK is open source. Contributions from developers, designers, 
+                and content creators are welcome.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
+                  <Button variant="primary" size="lg">
+                    View on GitHub
+                  </Button>
+                </a>
+                <Link href="/community">
+                  <Button variant="secondary" size="lg">
+                    Join Community
+                  </Button>
+                </Link>
+              </div>
             </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Contact CTA */}
-      <section className="py-20 px-4">
-        <Container size="md">
-          <div className="text-center space-y-6">
-            <Mail className="w-16 h-16 mx-auto text-aurora-400" />
-            <h2 className="font-display text-3xl md:text-4xl font-bold">
-              Get in Touch
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Have questions, suggestions, or want to get involved? We'd love to hear from you!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link href="/community">
-                <Button variant="primary">Join Community</Button>
-              </Link>
-              <a href={`${SOCIAL_LINKS.github}/issues`} target="_blank" rel="noopener noreferrer">
-                <Button variant="secondary">Report Issue</Button>
-              </a>
-            </div>
-          </div>
-        </Container>
+          </Card>
+        </div>
       </section>
     </div>
   );
