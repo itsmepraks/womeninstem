@@ -1,42 +1,25 @@
 import React from 'react';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   hover?: boolean;
-  clickable?: boolean;
-  href?: string;
   as?: 'div' | 'article' | 'section';
+  href?: string;
+  children: React.ReactNode;
 }
 
-/**
- * Card component with glass morphism effect
- * 
- * @example
- * ```tsx
- * <Card hover>
- *   <CardHeader>Title</CardHeader>
- *   <CardBody>Content goes here</CardBody>
- *   <CardFooter>Footer content</CardFooter>
- * </Card>
- * ```
- */
 export default function Card({
   hover = false,
-  clickable = false,
-  href,
   as: Component = 'div',
+  href,
   className,
   children,
   ...props
 }: CardProps) {
   const cardClasses = cn(
-    'glass rounded-2xl p-6',
-    'transition-all duration-300',
-    {
-      'hover:bg-white/10 hover:shadow-glow-blue hover:scale-105': hover,
-      'cursor-pointer': clickable || href,
-    },
+    'bg-white rounded-xl border border-gray-200 p-6 shadow-soft',
+    hover && 'transition-all duration-200 hover:shadow-medium hover:border-gray-300',
     className
   );
 
@@ -57,47 +40,14 @@ export default function Card({
   );
 }
 
-/**
- * Card Header component
- */
-export function CardHeader({
-  className,
-  children,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div className={cn('mb-4', className)} {...props}>
-      {children}
-    </div>
-  );
+export function CardHeader({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('mb-4', className)} {...props} />;
 }
 
-/**
- * Card Body component
- */
-export function CardBody({
-  className,
-  children,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div className={cn('space-y-4', className)} {...props}>
-      {children}
-    </div>
-  );
+export function CardBody({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('', className)} {...props} />;
 }
 
-/**
- * Card Footer component
- */
-export function CardFooter({
-  className,
-  children,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) {
-  return (
-    <div className={cn('mt-4 pt-4 border-t border-white/10', className)} {...props}>
-      {children}
-    </div>
-  );
+export function CardFooter({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return <div className={cn('mt-4 pt-4 border-t border-gray-200', className)} {...props} />;
 }
