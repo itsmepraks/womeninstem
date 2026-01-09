@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <main className="relative">
+    <div className="relative">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 pt-20">
+      <section className="min-h-screen flex items-center justify-center px-4">
         <div className="max-w-5xl mx-auto text-center space-y-8">
           {/* Logo/Title */}
           <div className="space-y-4">
@@ -75,67 +75,58 @@ export default function Home() {
                 icon: '🎓',
                 title: 'Learning Paths',
                 description: 'Gamified STEM journeys tailored to your interests and goals',
+                href: '/learning',
               },
               {
                 icon: '👥',
                 title: 'Mentorship Network',
                 description: 'Connect with inspiring women leading the way in STEM fields',
+                href: '/mentorship',
               },
               {
                 icon: '📚',
                 title: 'Resource Library',
                 description: 'Curated collection of tutorials, articles, and career guides',
+                href: '/resources',
               },
               {
                 icon: '🏆',
                 title: 'Achievements',
                 description: 'Earn badges and rewards as you reach learning milestones',
+                href: '/explore',
               },
               {
                 icon: '💬',
                 title: 'Community Forum',
                 description: 'Safe space for discussions, questions, and peer support',
+                href: '/community',
               },
               {
                 icon: '🔭',
                 title: 'Career Explorer',
                 description: 'Discover diverse career paths and opportunities in STEM',
+                href: '/explore',
               },
             ].map((feature, index) => (
-              <div
+              <Link
                 key={index}
-                className="glass p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 space-y-4"
+                href={feature.href}
+                className="glass p-6 rounded-2xl hover:bg-white/10 transition-all duration-300 space-y-4 group"
               >
-                <div className="text-4xl">{feature.icon}</div>
-                <h3 className="font-display text-xl font-semibold">{feature.title}</h3>
+                <div className="text-4xl group-hover:scale-110 transition-transform duration-300">
+                  {feature.icon}
+                </div>
+                <h3 className="font-display text-xl font-semibold group-hover:text-nebula-400 transition-colors">
+                  {feature.title}
+                </h3>
                 <p className="text-gray-400 text-sm leading-relaxed">
                   {feature.description}
                 </p>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="py-12 px-4 border-t border-white/10">
-        <div className="max-w-6xl mx-auto text-center space-y-4">
-          <p className="text-gray-400">
-            Built with 💜 by{' '}
-            <a
-              href="https://praks.me"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-nebula-400 hover:text-nebula-300 transition-colors"
-            >
-              Prakriti Bista
-            </a>
-          </p>
-          <p className="text-sm text-gray-500">
-            Empowering the next generation of women in STEM
-          </p>
-        </div>
-      </footer>
-    </main>
+    </div>
   );
 }
