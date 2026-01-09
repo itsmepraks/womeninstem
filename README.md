@@ -1,38 +1,27 @@
-# 🌟 STEM•SPARK
+# STEM•SPARK
 
-> Igniting curiosity, one spark at a time.
+A learning platform for women in STEM.
 
-## About the Project
+## About
 
-STEM•SPARK is an interactive, space-themed web platform designed to inspire and empower girls and women in STEM fields. Our mission is to create an engaging digital experience that makes STEM education accessible, exciting, and relatable through gamification, mentorship, and community-driven content.
+STEM•SPARK provides structured courses, mentorship connections, and community forums for women pursuing careers in science, technology, engineering, and mathematics. The platform focuses on practical resources and genuine connections rather than flashy features.
 
-## ✨ Features
+## Core Features
 
-### 🎯 Core Features
-- **Interactive Learning Paths**: Gamified STEM learning journeys with progress tracking
-- **Mentorship Platform**: Connect with STEM professionals and role models
-- **Resource Library**: Curated collection of articles, tutorials, and educational content
-- **Community Forum**: Safe space for discussions, questions, and peer support
-- **Achievement System**: Badges and rewards for learning milestones
-- **Career Explorer**: Discover diverse STEM career paths and opportunities
+- **Learning Paths**: Self-paced courses covering STEM fundamentals to advanced topics
+- **Mentorship**: Connect with experienced professionals for guidance
+- **Community Forum**: Ask questions and share experiences with peers
+- **Resource Library**: Curated articles, tutorials, and career information
+- **Progress Tracking**: Monitor course completion and learning goals
 
-### 🎨 Design Philosophy
-- **Space-themed UI**: Galaxy-inspired color palette with cosmic animations
-- **Responsive Design**: Seamless experience across all devices
-- **Accessibility First**: WCAG 2.1 AA compliant
-- **Performance Optimized**: Fast load times and smooth interactions
+## Tech Stack
 
-## 🛠️ Tech Stack
-
-- **Framework**: Next.js 14+ (App Router)
+- **Framework**: Next.js 14 (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **UI Components**: Custom component library
-- **State Management**: React Context + Hooks
-- **Package Manager**: npm/yarn
+- **Deployment**: Vercel
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18.x or higher
@@ -41,89 +30,56 @@ STEM•SPARK is an interactive, space-themed web platform designed to inspire an
 ### Installation
 
 ```bash
-# Clone the repository
 git clone https://github.com/itsmepraks/womeninstem.git
 cd womeninstem
-
-# Install dependencies
 npm install
-# or
-yarn install
-
-# Run the development server
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+Open http://localhost:3000 to view the application.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 womeninstem/
-├── app/                    # Next.js App Router pages
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Homepage
-│   └── (routes)/          # App routes
+├── app/                   # Next.js pages
 ├── components/            # React components
-│   ├── ui/               # UI primitives
-│   ├── features/         # Feature-specific components
+│   ├── ui/               # Base UI components
 │   └── layout/           # Layout components
-├── content/              # Content management
-│   ├── articles/         # Article content
-│   ├── tutorials/        # Tutorial content
-│   └── resources/        # Resource files
-├── lib/                  # Utility functions and helpers
-│   ├── utils.ts          # General utilities
-│   └── constants.ts      # App constants
-├── public/               # Static assets
-│   ├── images/          # Image files
-│   └── icons/           # Icon files
-└── styles/              # Global styles
+├── lib/                  # Utilities and constants
+└── public/               # Static assets
 ```
 
-## 🎨 Design System
+## Contributing
 
-### Color Palette (Space Theme)
-- **Deep Space**: `#0a0e27` - Primary background
-- **Nebula Purple**: `#6366f1` - Primary accent
-- **Cosmic Blue**: `#3b82f6` - Secondary accent
-- **Stardust**: `#fbbf24` - Highlights and achievements
-- **Aurora Green**: `#10b981` - Success states
-- **Supernova Pink**: `#ec4899` - Call-to-action
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-## 🤝 Contributing
+### Areas for Contribution
+- Course content development
+- Mentor profile creation
+- Community moderation tools
+- UI/UX improvements
+- Documentation
 
-We welcome contributions from the community! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+## Development Status
 
-## 📝 Development Roadmap
-
-- [x] Project initialization and setup
-- [ ] Core UI component library
-- [ ] Homepage and landing design
-- [ ] Learning paths system
-- [ ] Mentorship platform
+Currently in active development. Core features being implemented:
 - [ ] User authentication
-- [ ] Content management system
+- [ ] Course content management
+- [ ] Mentorship matching system
 - [ ] Community forum
-- [ ] Achievement and gamification system
+- [ ] Progress tracking
 
-## 📄 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) file
 
-## 💫 Acknowledgments
-
-- Built with passion to inspire the next generation of women in STEM
-- Dedicated to all the trailblazing women who paved the way in science, technology, engineering, and mathematics
-
-## 📧 Contact
+## Contact
 
 **Prakriti Bista**
 - GitHub: [@itsmepraks](https://github.com/itsmepraks)
 - Website: [praks.me](https://praks.me)
 
----
+## Acknowledgments
 
-⭐ Star this repository if you believe in empowering women in STEM!
+Built to support women in STEM through practical resources and meaningful connections.
