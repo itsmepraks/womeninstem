@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <main className="relative">
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4">
+      <section className="min-h-screen flex items-center justify-center px-4 pt-20">
         <div className="max-w-5xl mx-auto text-center space-y-8">
           {/* Logo/Title */}
           <div className="space-y-4">
@@ -35,12 +35,18 @@ export default function Home() {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
-            <button className="px-8 py-4 bg-gradient-nebula rounded-full font-semibold text-lg hover:shadow-glow transition-all duration-300 transform hover:scale-105">
+            <Link
+              href="/explore"
+              className="px-8 py-4 bg-gradient-nebula rounded-full font-semibold text-lg hover:shadow-glow transition-all duration-300 transform hover:scale-105"
+            >
               Launch Your Journey
-            </button>
-            <button className="px-8 py-4 glass rounded-full font-semibold text-lg hover:shadow-glow-blue transition-all duration-300">
+            </Link>
+            <Link
+              href="/resources"
+              className="px-8 py-4 glass rounded-full font-semibold text-lg hover:shadow-glow-blue transition-all duration-300"
+            >
               Explore Resources
-            </button>
+            </Link>
           </div>
 
           {/* Status Badge */}
