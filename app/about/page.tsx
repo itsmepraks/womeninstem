@@ -1,127 +1,223 @@
-import { Container } from '@/components/ui';
+import Link from 'next/link';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import Badge from '@/components/ui/Badge';
-import Link from 'next/link';
 import { SOCIAL_LINKS } from '@/lib/constants';
 
 export const metadata = {
   title: 'About - STEM•SPARK',
-  description: 'Learn about STEM•SPARK and how we support women in STEM',
+  description: 'Learn about our mission to support women in STEM fields',
 };
 
 export default function AboutPage() {
   return (
     <div className="relative">
       {/* Hero Section */}
-      <section className="min-h-[70vh] flex items-center justify-center px-4 py-24">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <Badge variant="primary" size="lg">
-            About the Project
-          </Badge>
+      <section className="py-24 px-4">
+        <div className="max-w-4xl mx-auto text-center space-y-6">
+          <Badge variant="primary">About Us</Badge>
           
-          <h1 className="font-display text-5xl md:text-7xl font-bold">
-            <span className="text-primary-600 dark:text-primary-400">STEM</span>
-            <span className="text-neutral-400">•</span>
-            <span className="text-primary-600 dark:text-primary-400">SPARK</span>
+          <h1 className="font-display text-5xl md:text-7xl font-bold text-neutral-900 dark:text-neutral-100">
+            Building Resources for Women in STEM
           </h1>
           
-          <p className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-3xl mx-auto">
-            An open platform supporting women in STEM through practical resources 
-            and meaningful connections.
+          <p className="text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed">
+            STEM•SPARK is an open-source platform providing structured learning paths, 
+            mentorship connections, and community resources for women pursuing STEM careers.
           </p>
         </div>
       </section>
 
       {/* Mission Section */}
-      <section className="py-24 px-4 bg-neutral-50 dark:bg-neutral-900/50">
+      <section className="py-16 px-4 bg-neutral-50 dark:bg-neutral-900/50">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-8">
             <Card>
               <div className="space-y-4">
-                <h2 className="font-display text-3xl font-bold">What We Do</h2>
+                <h2 className="font-display text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+                  What We Do
+                </h2>
                 <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                  STEM•SPARK provides structured courses, facilitates mentorship connections, 
-                  and hosts community discussions for women in science, technology, engineering, 
-                  and mathematics.
+                  We create and curate educational content, facilitate mentorship connections, 
+                  and maintain discussion forums focused on women in science, technology, 
+                  engineering, and mathematics.
                 </p>
                 <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                  The platform focuses on practical skills, real career paths, and creating 
-                  genuine connections between women at different stages of their STEM journeys.
+                  The platform emphasizes practical skills, real-world applications, and creating 
+                  opportunities for women to connect with others in their field.
                 </p>
-                <ul className=\"space-y-3 pt-4\">\n                  {[\n                    'Self-paced STEM courses',\n                    'Mentor-mentee matching',\n                    'Community forum discussions',\n                    'Career path information',\n                  ].map((item, index) => (\n                    <li key={index} className=\"flex items-start gap-3\">\n                      <span className=\"flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary-500 mt-2\"></span>\n                      <span className=\"text-neutral-600 dark:text-neutral-400\">{item}</span>\n                    </li>\n                  ))}\n                </ul>
+                <ul className="space-y-3 pt-4">
+                  {[
+                    'Structured learning paths for STEM subjects',
+                    'Mentorship matching system',
+                    'Community discussion forums',
+                    'Career resources and guidance',
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-400 flex items-center justify-center text-sm font-medium">
+                        {index + 1}
+                      </span>
+                      <span className="text-neutral-700 dark:text-neutral-300">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Card>
 
             <Card>
               <div className="space-y-4">
-                <h2 className="font-display text-3xl font-bold">Why It Matters</h2>
+                <h2 className="font-display text-3xl font-bold text-neutral-900 dark:text-neutral-100">
+                  Why It Matters
+                </h2>
                 <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                  Women remain significantly underrepresented in many STEM fields. This gap 
-                  persists despite decades of awareness and various initiatives.
+                  Women remain significantly underrepresented in many STEM fields. This platform 
+                  addresses that gap by providing resources, connections, and support systems.
                 </p>
                 <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
-                  This platform exists to provide concrete resources—courses, mentors, and 
-                  community—that can help address this imbalance through practical support 
-                  rather than just awareness.
+                  By creating a dedicated space for women in STEM, we can share experiences, 
+                  learn from each other, and build sustainable careers in these fields.
                 </p>
-                <ul className=\"space-y-3 pt-4\">\n                  {[\n                    'Address representation gaps',\n                    'Share practical knowledge',\n                    'Build professional networks',\n                    'Support career transitions',\n                  ].map((item, index) => (\n                    <li key={index} className=\"flex items-start gap-3\">\n                      <span className=\"flex-shrink-0 w-1.5 h-1.5 rounded-full bg-primary-500 mt-2\"></span>\n                      <span className=\"text-neutral-600 dark:text-neutral-400\">{item}</span>\n                    </li>\n                  ))}\n                </ul>
+                <ul className="space-y-3 pt-4">
+                  {[
+                    'Address gender representation gaps',
+                    'Share practical knowledge and experiences',
+                    'Build professional networks',
+                    'Support long-term career development',
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-400 flex items-center justify-center text-sm font-medium">
+                        {index + 1}
+                      </span>
+                      <span className="text-neutral-700 dark:text-neutral-300">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </Card>
           </div>
         </div>
       </section>
 
+      {/* Status Section */}
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center space-y-8">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+              Project Status
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { label: 'License', value: 'MIT' },
+                { label: 'Founded', value: '2026' },
+                { label: 'Status', value: 'Active Development' },
+                { label: 'Type', value: 'Open Source' },
+              ].map((stat, index) => (
+                <div key={index} className="space-y-2">
+                  <div className="text-3xl font-bold text-primary-600 dark:text-primary-400">
+                    {stat.value}
+                  </div>
+                  <div className="text-sm text-neutral-600 dark:text-neutral-400">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Principles Section */}
+      <section className="py-16 px-4 bg-neutral-50 dark:bg-neutral-900/50">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12 space-y-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+              Core Principles
+            </h2>
+            <p className="text-xl text-neutral-600 dark:text-neutral-400">
+              Values guiding our development
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {[
+              {
+                title: 'Accessibility',
+                description: 'Making STEM education accessible to all women regardless of background or experience level',
+              },
+              {
+                title: 'Quality',
+                description: 'Providing accurate, well-researched content that serves practical educational needs',
+              },
+              {
+                title: 'Community',
+                description: 'Building meaningful connections that support learning and professional growth',
+              },
+              {
+                title: 'Transparency',
+                description: 'Open development process with clear communication about goals and progress',
+              },
+            ].map((principle, index) => (
+              <Card key={index}>
+                <div className="space-y-3">
+                  <h3 className="font-display text-2xl font-semibold text-neutral-900 dark:text-neutral-100">
+                    {principle.title}
+                  </h3>
+                  <p className="text-neutral-600 dark:text-neutral-400 leading-relaxed">
+                    {principle.description}
+                  </p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Creator Section */}
-      <section className="py-24 px-4">
+      <section className="py-16 px-4">
         <div className="max-w-4xl mx-auto">
           <Card>
             <div className="space-y-6">
               <div>
                 <Badge variant="primary" className="mb-4">Creator</Badge>
-                <h2 className="font-display text-3xl font-bold mb-4">Prakriti Bista</h2>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100 mb-4">
+                  Prakriti Bista
+                </h2>
               </div>
               
               <div className="space-y-4 text-neutral-600 dark:text-neutral-400 leading-relaxed">
                 <p>
-                  I'm building this platform because I've seen how valuable structured learning, 
-                  mentorship, and community can be for people entering or advancing in STEM fields.
+                  I'm a developer building this platform to address challenges I've observed in 
+                  the STEM community. Throughout my career, I've seen the value of having mentors, 
+                  structured resources, and a supportive community.
                 </p>
                 <p>
-                  Throughout my career, I've benefited from these resources myself and noticed 
-                  how fragmented they often are. This project is an attempt to consolidate them 
-                  in one place, specifically for women in STEM.
-                </p>
-                <p>
-                  The platform is open source. If you're interested in contributing code, content, 
-                  or ideas, I welcome your involvement.
+                  This project creates those resources in one place, making it easier for women 
+                  entering or advancing in STEM fields to find the support they need.
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-4 pt-6 border-t border-neutral-200 dark:border-neutral-800">
+              <div className="flex flex-wrap gap-4 pt-4">
                 <a
                   href={SOCIAL_LINKS.website}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  className="text-primary-600 dark:text-primary-400 hover:underline"
                 >
                   Website
                 </a>
-                <span className="text-neutral-300 dark:text-neutral-700">•</span>
+                <span className="text-neutral-400">•</span>
                 <a
                   href={SOCIAL_LINKS.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  className="text-primary-600 dark:text-primary-400 hover:underline"
                 >
                   GitHub
                 </a>
-                <span className="text-neutral-300 dark:text-neutral-700">•</span>
+                <span className="text-neutral-400">•</span>
                 <a
                   href={SOCIAL_LINKS.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors"
+                  className="text-primary-600 dark:text-primary-400 hover:underline"
                 >
                   LinkedIn
                 </a>
@@ -131,73 +227,58 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Technology */}
-      <section className="py-24 px-4 bg-neutral-50 dark:bg-neutral-900/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
-              Built With
+      {/* Tech Stack Section */}
+      <section className="py-16 px-4 bg-neutral-50 dark:bg-neutral-900/50">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12 space-y-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+              Technology
             </h2>
-            <p className="text-neutral-600 dark:text-neutral-400">
-              Modern web technologies for performance and reliability
+            <p className="text-xl text-neutral-600 dark:text-neutral-400">
+              Built with modern web technologies
             </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { name: 'Next.js 14', desc: 'React Framework' },
-              { name: 'TypeScript', desc: 'Type Safety' },
+              { name: 'Next.js 14', desc: 'Framework' },
+              { name: 'TypeScript', desc: 'Language' },
               { name: 'Tailwind CSS', desc: 'Styling' },
               { name: 'Vercel', desc: 'Deployment' },
             ].map((tech, index) => (
-              <Card key={index} className="text-center">
-                <h3 className="font-semibold mb-1">{tech.name}</h3>
-                <p className="text-sm text-neutral-600 dark:text-neutral-400">{tech.desc}</p>
+              <Card key={index}>
+                <div className="text-center space-y-2">
+                  <h3 className="font-semibold text-neutral-900 dark:text-neutral-100">{tech.name}</h3>
+                  <p className="text-sm text-neutral-600 dark:text-neutral-400">{tech.desc}</p>
+                </div>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Open Source */}
-      <section className="py-24 px-4">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h2 className="font-display text-3xl md:text-4xl font-bold">
-            Open Source Project
-          </h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto leading-relaxed">
-            STEM•SPARK is open source under the MIT license. Contributions from developers, 
-            designers, educators, and content creators are welcome.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
-              <Button variant="primary">View Repository</Button>
-            </a>
-            <a href={`${SOCIAL_LINKS.github}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noopener noreferrer">
-              <Button variant="secondary">Contributing Guide</Button>
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* Get Involved */}
-      <section className="py-24 px-4 bg-neutral-50 dark:bg-neutral-900/50">
-        <div className="max-w-4xl mx-auto text-center space-y-8">
-          <h2 className="font-display text-3xl md:text-4xl font-bold">
-            Get Involved
-          </h2>
-          <p className="text-xl text-neutral-600 dark:text-neutral-400">
-            Questions, suggestions, or interested in contributing? 
-            Open an issue on GitHub or join the community discussions.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <Link href="/community">
-              <Button variant="primary">Join Community</Button>
-            </Link>
-            <a href={`${SOCIAL_LINKS.github}/issues`} target="_blank" rel="noopener noreferrer">
-              <Button variant="secondary">Report Issue</Button>
-            </a>
-          </div>
+      {/* Open Source CTA */}
+      <section className="py-16 px-4">
+        <div className="max-w-4xl mx-auto">
+          <Card>
+            <div className="text-center space-y-6">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-neutral-900 dark:text-neutral-100">
+                Open Source Project
+              </h2>
+              <p className="text-xl text-neutral-600 dark:text-neutral-400">
+                STEM•SPARK is open source. Contributions from developers, designers, 
+                and content creators are welcome.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
+                  <Button variant="primary" size="lg">View Repository</Button>
+                </a>
+                <Link href="/community">
+                  <Button variant="secondary" size="lg">Join Community</Button>
+                </Link>
+              </div>
+            </div>
+          </Card>
         </div>
       </section>
     </div>
