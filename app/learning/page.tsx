@@ -1,11 +1,16 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
 import { BookOpen, Code, Cpu, FlaskConical, GraduationCap, LineChart } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import type { BadgeProps } from '@/components/ui/Badge';
 
 export const metadata = {
   title: 'Learning Paths - STEM•SPARK',
   description: 'Explore gamified STEM learning journeys tailored to your interests and goals',
 };
+
+// Define valid color type to match Badge variants
+type BadgeVariant = NonNullable<BadgeProps['variant']>;
 
 export default function LearningPage() {
   const learningPaths = [
@@ -15,7 +20,7 @@ export default function LearningPage() {
       description: 'From Python basics to advanced algorithms',
       level: 'Beginner to Advanced',
       courses: 12,
-      color: 'nebula',
+      color: 'nebula' as BadgeVariant,
     },
     {
       icon: <LineChart className="w-8 h-8" />,
@@ -23,7 +28,7 @@ export default function LearningPage() {
       description: 'Master data analysis and visualization',
       level: 'Intermediate',
       courses: 8,
-      color: 'cosmic',
+      color: 'cosmic' as BadgeVariant,
     },
     {
       icon: <Cpu className="w-8 h-8" />,
@@ -31,7 +36,7 @@ export default function LearningPage() {
       description: 'Learn engineering principles and design',
       level: 'Beginner',
       courses: 10,
-      color: 'aurora',
+      color: 'aurora' as BadgeVariant,
     },
     {
       icon: <FlaskConical className="w-8 h-8" />,
@@ -39,7 +44,7 @@ export default function LearningPage() {
       description: 'Dive into scientific methods and inquiry',
       level: 'All Levels',
       courses: 6,
-      color: 'stardust',
+      color: 'stardust' as BadgeVariant,
     },
   ];
 
@@ -98,10 +103,19 @@ export default function LearningPage() {
               <Card key={index} hover className="group">
                 <div className="space-y-4">
                   <div className="flex items-start justify-between">
-                    <div className={`p-3 rounded-xl bg-${path.color}-500/20 text-${path.color}-400 group-hover:scale-110 transition-transform`}>
+                    <div className={cn(
+                      'p-3 rounded-xl group-hover:scale-110 transition-transform',
+                      {
+                        'bg-nebula-500/20 text-nebula-400': path.color === 'nebula',
+                        'bg-aurora-500/20 text-aurora-400': path.color === 'aurora',
+                        'bg-cosmic-500/20 text-cosmic-400': path.color === 'cosmic',
+                        'bg-stardust-500/20 text-stardust-400': path.color === 'stardust',
+                        'bg-supernova-500/20 text-supernova-400': path.color === 'supernova',
+                      }
+                    )}>
                       {path.icon}
                     </div>
-                    <Badge variant={path.color as any} size="sm">
+                    <Badge variant={path.color} size="sm">
                       {path.courses} courses
                     </Badge>
                   </div>

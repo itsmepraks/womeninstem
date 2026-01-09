@@ -1,11 +1,16 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
 import { Users, MessageCircle, Calendar, Award, Heart, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import type { BadgeProps } from '@/components/ui/Badge';
 
 export const metadata = {
   title: 'Mentorship - STEM•SPARK',
   description: 'Connect with inspiring women leading the way in STEM fields',
 };
+
+// Define valid color type to match Badge variants
+type BadgeVariant = NonNullable<BadgeProps['variant']>;
 
 export default function MentorshipPage() {
   const mentorshipTypes = [
@@ -14,21 +19,21 @@ export default function MentorshipPage() {
       title: '1-on-1 Mentorship',
       description: 'Get personalized guidance from experienced professionals',
       features: ['Regular meetings', 'Career advice', 'Skill development'],
-      color: 'nebula',
+      color: 'nebula' as BadgeVariant,
     },
     {
       icon: <MessageCircle className="w-8 h-8" />,
       title: 'Group Sessions',
       description: 'Learn alongside peers in small group mentoring',
       features: ['Peer learning', 'Shared experiences', 'Network building'],
-      color: 'aurora',
+      color: 'aurora' as BadgeVariant,
     },
     {
       icon: <Award className="w-8 h-8" />,
       title: 'Expert Workshops',
       description: 'Attend workshops led by industry experts',
       features: ['Skill-focused', 'Interactive', 'Q&A sessions'],
-      color: 'cosmic',
+      color: 'cosmic' as BadgeVariant,
     },
   ];
 
@@ -110,7 +115,16 @@ export default function MentorshipPage() {
             {mentorshipTypes.map((type, index) => (
               <Card key={index} hover>
                 <div className="space-y-6">
-                  <div className={`inline-flex p-4 rounded-xl bg-${type.color}-500/20 text-${type.color}-400`}>
+                  <div className={cn(
+                    'inline-flex p-4 rounded-xl',
+                    {
+                      'bg-nebula-500/20 text-nebula-400': type.color === 'nebula',
+                      'bg-aurora-500/20 text-aurora-400': type.color === 'aurora',
+                      'bg-cosmic-500/20 text-cosmic-400': type.color === 'cosmic',
+                      'bg-stardust-500/20 text-stardust-400': type.color === 'stardust',
+                      'bg-supernova-500/20 text-supernova-400': type.color === 'supernova',
+                    }
+                  )}>
                     {type.icon}
                   </div>
                   

@@ -1,11 +1,16 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
 import { BookOpen, FileText, Video, Newspaper, ExternalLink, Search } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
+import type { BadgeProps } from '@/components/ui/Badge';
 
 export const metadata = {
   title: 'Resources - STEM•SPARK',
   description: 'Curated collection of tutorials, articles, tools, and career guides for women in STEM',
 };
+
+// Define valid color type to match Badge variants
+type BadgeVariant = NonNullable<BadgeProps['variant']>;
 
 export default function ResourcesPage() {
   const resourceCategories = [
@@ -14,28 +19,28 @@ export default function ResourcesPage() {
       title: 'Tutorials & Guides',
       description: 'Step-by-step tutorials for learning new skills',
       count: '150+ resources',
-      color: 'nebula',
+      color: 'nebula' as BadgeVariant,
     },
     {
       icon: <Newspaper className="w-8 h-8" />,
       title: 'Articles & Blogs',
       description: 'In-depth articles on STEM topics and careers',
       count: '200+ articles',
-      color: 'cosmic',
+      color: 'cosmic' as BadgeVariant,
     },
     {
       icon: <Video className="w-8 h-8" />,
       title: 'Video Content',
       description: 'Educational videos and recorded webinars',
       count: '80+ videos',
-      color: 'aurora',
+      color: 'aurora' as BadgeVariant,
     },
     {
       icon: <FileText className="w-8 h-8" />,
       title: 'Career Resources',
       description: 'Resume templates, interview prep, and career advice',
       count: '50+ resources',
-      color: 'stardust',
+      color: 'stardust' as BadgeVariant,
     },
   ];
 
@@ -134,7 +139,16 @@ export default function ResourcesPage() {
             {resourceCategories.map((category, index) => (
               <Card key={index} hover className="group">
                 <div className="space-y-4 text-center">
-                  <div className={`inline-flex p-4 rounded-xl bg-${category.color}-500/20 text-${category.color}-400 group-hover:scale-110 transition-transform`}>
+                  <div className={cn(
+                    'inline-flex p-4 rounded-xl group-hover:scale-110 transition-transform',
+                    {
+                      'bg-nebula-500/20 text-nebula-400': category.color === 'nebula',
+                      'bg-aurora-500/20 text-aurora-400': category.color === 'aurora',
+                      'bg-cosmic-500/20 text-cosmic-400': category.color === 'cosmic',
+                      'bg-stardust-500/20 text-stardust-400': category.color === 'stardust',
+                      'bg-supernova-500/20 text-supernova-400': category.color === 'supernova',
+                    }
+                  )}>
                     {category.icon}
                   </div>
                   
@@ -143,7 +157,7 @@ export default function ResourcesPage() {
                       {category.title}
                     </h3>
                     <p className="text-gray-400 text-sm mb-3">{category.description}</p>
-                    <Badge variant={category.color as any} size="sm">
+                    <Badge variant={category.color} size="sm">
                       {category.count}
                     </Badge>
                   </div>
