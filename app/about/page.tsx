@@ -13,17 +13,26 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <div className="relative">
-      {/* Hero */}
-      <section className="py-24 px-4">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <h1 className="text-5xl md:text-6xl font-bold text-gray-900">
-            About STEM•SPARK
-          </h1>
-          <p className="text-xl text-gray-600 leading-relaxed">
-            A platform supporting women pursuing careers in science, technology, 
-            engineering, and mathematics.
-          </p>
-        </div>
+      {/* Hero Section */}
+      <section className="min-h-[70vh] flex items-center justify-center px-4 py-20">
+        <Container size="lg">
+          <div className="text-center space-y-8">
+            <Badge variant="nebula" size="lg">
+              ✨ Our Story
+            </Badge>
+            
+            <h1 className="font-display text-5xl md:text-7xl font-bold">
+              <span className="gradient-text bg-gradient-nebula">Empowering</span>{' '}
+              <span className="gradient-text bg-gradient-aurora">Women</span>{' '}
+              in STEM
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              STEM•SPARK is more than a platform—it&apos;s a movement to ignite curiosity,
+              foster connections, and break down barriers for women in STEM.
+            </p>
+          </div>
+        </Container>
       </section>
 
       {/* Mission */}
@@ -72,18 +81,19 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-24 px-4">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Project Information
-          </h2>
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { label: 'Status', value: 'Active Development' },
-              { label: 'License', value: 'MIT (Open Source)' },
-              { label: 'Founded', value: '2026' },
-              { label: 'Focus', value: 'Women in STEM' },
-            ].map((stat, index) => (
+      <section className="py-20 px-4 bg-white/5">
+        <Container size="lg">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+              Building Something Special
+            </h2>
+            <p className="text-gray-400 text-lg">
+              Here&apos;s what we&apos;re creating for you
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {stats.map((stat, index) => (
               <div key={index} className="text-center space-y-2">
                 <div className="text-lg font-semibold text-primary-600">{stat.value}</div>
                 <div className="text-sm text-gray-600">{stat.label}</div>
@@ -103,13 +113,11 @@ export default function AboutPage() {
                 <h2 className="text-3xl font-bold text-gray-900 mt-4 mb-6">
                   Prakriti Bista
                 </h2>
-              </div>
-              
-              <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  I'm a developer building STEM•SPARK to address challenges I've observed in the 
-                  STEM community. Throughout my career, I've seen the value of having access to 
-                  mentors, structured learning, and supportive communities.
+                <p className="text-gray-400 leading-relaxed">
+                  As a woman in tech, I&apos;ve experienced firsthand the challenges and opportunities
+                  in STEM. STEM•SPARK was born from a desire to create the platform I wished I
+                  had when starting my journey—a place where women can learn, connect, and thrive
+                  together.
                 </p>
                 <p>
                   This platform aims to make those resources more accessible to women entering or 
@@ -179,30 +187,48 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Open Source CTA */}
-      <section className="py-24 px-4 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <Card>
-            <div className="text-center space-y-6">
-              <h2 className="text-3xl font-bold text-gray-900">
-                Open Source Project
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                STEM•SPARK is open source. Contributions from developers, designers, 
-                and content creators are welcome.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
-                  <Button variant="primary" size="lg">
-                    View on GitHub
-                  </Button>
-                </a>
-                <Link href="/community">
-                  <Button variant="secondary" size="lg">
-                    Join Community
-                  </Button>
-                </Link>
-              </div>
+      {/* Open Source */}
+      <section className="py-20 px-4 bg-white/5">
+        <Container size="lg">
+          <div className="text-center space-y-6">
+            <Github className="w-16 h-16 mx-auto text-nebula-400" />
+            <h2 className="font-display text-3xl md:text-4xl font-bold">
+              Open Source & Community Driven
+            </h2>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              STEM•SPARK is open source and built in public. We welcome contributions from
+              developers, designers, and content creators who share our mission.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
+                <Button variant="primary">View on GitHub</Button>
+              </a>
+              <a href={`${SOCIAL_LINKS.github}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noopener noreferrer">
+                <Button variant="secondary">Contribution Guide</Button>
+              </a>
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="py-20 px-4">
+        <Container size="md">
+          <div className="text-center space-y-6">
+            <Mail className="w-16 h-16 mx-auto text-aurora-400" />
+            <h2 className="font-display text-3xl md:text-4xl font-bold">
+              Get in Touch
+            </h2>
+            <p className="text-gray-400 text-lg">
+              Have questions, suggestions, or want to get involved? We&apos;d love to hear from you!
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+              <Link href="/community">
+                <Button variant="primary">Join Community</Button>
+              </Link>
+              <a href={`${SOCIAL_LINKS.github}/issues`} target="_blank" rel="noopener noreferrer">
+                <Button variant="secondary">Report Issue</Button>
+              </a>
             </div>
           </Card>
         </div>

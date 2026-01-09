@@ -48,7 +48,7 @@ export default function ExplorePage() {
       <section className="py-20 px-4">
         <Container size="xl">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-12">
-            What You'll Discover
+            What You&apos;ll Discover
           </h2>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -103,8 +103,8 @@ export default function ExplorePage() {
                 Building Your Launch Pad
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                We're crafting an exceptional experience to help you navigate your STEM journey.
-                Here's what's coming:
+                We&apos;re crafting an exceptional experience to help you navigate your STEM journey.
+                Here&apos;s what&apos;s coming:
               </p>
             </div>
 
@@ -153,7 +153,7 @@ export default function ExplorePage() {
               Ready to Start Your Journey?
             </h2>
             <p className="text-gray-400 text-lg">
-              While we're building the Explore hub, you can start learning and connecting with the community.
+              While we&apos;re building the Explore hub, you can start learning and connecting with the community.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/learning">
