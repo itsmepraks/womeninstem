@@ -1,85 +1,82 @@
 # STEM•SPARK
 
-A learning platform for women in STEM.
+A learning platform for women in STEM fields.
 
 ## About
 
-STEM•SPARK provides structured courses, mentorship connections, and community forums for women pursuing careers in science, technology, engineering, and mathematics. The platform focuses on practical resources and genuine connections rather than flashy features.
+STEM•SPARK provides structured learning paths, mentorship connections, and community forums for women pursuing careers in science, technology, engineering, and mathematics.
 
-## Core Features
+## Features
 
-- **Learning Paths**: Self-paced courses covering STEM fundamentals to advanced topics
-- **Mentorship**: Connect with experienced professionals for guidance
-- **Community Forum**: Ask questions and share experiences with peers
-- **Resource Library**: Curated articles, tutorials, and career information
-- **Progress Tracking**: Monitor course completion and learning goals
+- **Learning Paths**: Structured courses covering STEM topics from basics to advanced
+- **Mentorship**: Connect with experienced STEM professionals
+- **Community Forum**: Discussions, questions, and peer support
+- **Resource Library**: Curated articles, tutorials, and tools
+- **Progress Tracking**: Monitor learning progress and achievements
+- **Career Resources**: Information about STEM career paths
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Deployment**: Vercel
+- Next.js 14+ (App Router)
+- TypeScript
+- Tailwind CSS
+- React Context + Hooks
 
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js 18.x or higher
 - npm or yarn
 
 ### Installation
 
 ```bash
+# Clone the repository
 git clone https://github.com/itsmepraks/womeninstem.git
 cd womeninstem
+
+# Install dependencies
 npm install
+
+# Run development server
 npm run dev
 ```
 
-Open http://localhost:3000 to view the application.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
 ## Project Structure
 
 ```
 womeninstem/
-├── app/                   # Next.js pages
+├── app/                    # Next.js App Router pages
 ├── components/            # React components
-│   ├── ui/               # Base UI components
+│   ├── ui/               # UI components
 │   └── layout/           # Layout components
-├── lib/                  # Utilities and constants
+├── lib/                  # Utility functions
 └── public/               # Static assets
 ```
 
 ## Contributing
 
-Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-### Areas for Contribution
-- Course content development
-- Mentor profile creation
-- Community moderation tools
-- UI/UX improvements
-- Documentation
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## Development Status
 
-Currently in active development. Core features being implemented:
+- [x] Project setup
+- [x] Core UI components
+- [x] Page structure
+- [ ] Learning system
+- [ ] Mentorship platform
 - [ ] User authentication
-- [ ] Course content management
-- [ ] Mentorship matching system
 - [ ] Community forum
-- [ ] Progress tracking
 
 ## License
 
-MIT License - see [LICENSE](LICENSE) file
+MIT License - see [LICENSE](LICENSE) for details.
 
 ## Contact
 
 **Prakriti Bista**
 - GitHub: [@itsmepraks](https://github.com/itsmepraks)
 - Website: [praks.me](https://praks.me)
-
-## Acknowledgments
-
-Built to support women in STEM through practical resources and meaningful connections.
