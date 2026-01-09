@@ -1,6 +1,7 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
 import { Users, MessageCircle, Calendar, Award, Heart, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 export const metadata = {
   title: 'Mentorship - STEM•SPARK',
@@ -110,7 +111,16 @@ export default function MentorshipPage() {
             {mentorshipTypes.map((type, index) => (
               <Card key={index} hover>
                 <div className="space-y-6">
-                  <div className={`inline-flex p-4 rounded-xl bg-${type.color}-500/20 text-${type.color}-400`}>
+                  <div className={cn(
+                    'inline-flex p-4 rounded-xl',
+                    {
+                      'bg-nebula-500/20 text-nebula-400': type.color === 'nebula',
+                      'bg-aurora-500/20 text-aurora-400': type.color === 'aurora',
+                      'bg-cosmic-500/20 text-cosmic-400': type.color === 'cosmic',
+                      'bg-stardust-500/20 text-stardust-400': type.color === 'stardust',
+                      'bg-supernova-500/20 text-supernova-400': type.color === 'supernova',
+                    }
+                  )}>
                     {type.icon}
                   </div>
                   
