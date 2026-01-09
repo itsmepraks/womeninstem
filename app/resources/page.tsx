@@ -1,6 +1,7 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
 import { BookOpen, FileText, Video, Newspaper, ExternalLink, Search } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 export const metadata = {
   title: 'Resources - STEM•SPARK',
@@ -134,7 +135,16 @@ export default function ResourcesPage() {
             {resourceCategories.map((category, index) => (
               <Card key={index} hover className="group">
                 <div className="space-y-4 text-center">
-                  <div className={`inline-flex p-4 rounded-xl bg-${category.color}-500/20 text-${category.color}-400 group-hover:scale-110 transition-transform`}>
+                  <div className={cn(
+                    'inline-flex p-4 rounded-xl group-hover:scale-110 transition-transform',
+                    {
+                      'bg-nebula-500/20 text-nebula-400': category.color === 'nebula',
+                      'bg-aurora-500/20 text-aurora-400': category.color === 'aurora',
+                      'bg-cosmic-500/20 text-cosmic-400': category.color === 'cosmic',
+                      'bg-stardust-500/20 text-stardust-400': category.color === 'stardust',
+                      'bg-supernova-500/20 text-supernova-400': category.color === 'supernova',
+                    }
+                  )}>
                     {category.icon}
                   </div>
                   
@@ -143,7 +153,7 @@ export default function ResourcesPage() {
                       {category.title}
                     </h3>
                     <p className="text-gray-400 text-sm mb-3">{category.description}</p>
-                    <Badge variant={category.color as any} size="sm">
+                    <Badge variant={category.color} size="sm">
                       {category.count}
                     </Badge>
                   </div>
