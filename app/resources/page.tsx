@@ -1,6 +1,5 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
 import { BookOpen, FileText, Video, Newspaper, ExternalLink, Search } from 'lucide-react';
-import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import type { BadgeProps } from '@/components/ui/Badge';
 
@@ -55,7 +54,7 @@ export default function ResourcesPage() {
     },
     {
       type: 'Article',
-      title: 'Breaking Into the Tech Industry: A Woman\'s Guide',
+      title: 'Breaking Into the Tech Industry: A Woman\\'s Guide',
       description: 'Navigate your tech career with insights from industry leaders',
       author: 'Maria Rodriguez',
       readTime: '10 min read',
