@@ -1,38 +1,36 @@
-# 🌟 STEM•SPARK
+# STEM•SPARK
 
-> Igniting curiosity, one spark at a time.
+> A learning platform for women in STEM.
 
 ## About the Project
 
-STEM•SPARK is an interactive, space-themed web platform designed to inspire and empower girls and women in STEM fields. Our mission is to create an engaging digital experience that makes STEM education accessible, exciting, and relatable through gamification, mentorship, and community-driven content.
+STEM•SPARK is a web platform designed to support women in STEM fields through structured learning, mentorship connections, and community forums.
 
-## ✨ Features
+## Features
 
-### 🎯 Core Features
-- **Interactive Learning Paths**: Gamified STEM learning journeys with progress tracking
-- **Mentorship Platform**: Connect with STEM professionals and role models
-- **Resource Library**: Curated collection of articles, tutorials, and educational content
-- **Community Forum**: Safe space for discussions, questions, and peer support
-- **Achievement System**: Badges and rewards for learning milestones
-- **Career Explorer**: Discover diverse STEM career paths and opportunities
+### Core Features
+- **Learning Paths**: Structured STEM courses with progress tracking
+- **Mentorship Platform**: Connect with STEM professionals
+- **Resource Library**: Curated articles, tutorials, and educational content
+- **Community Forum**: Discussions, questions, and peer support
+- **Progress Tracking**: Monitor learning milestones
+- **Career Resources**: Information about STEM career paths
 
-### 🎨 Design Philosophy
-- **Space-themed UI**: Galaxy-inspired color palette with cosmic animations
-- **Responsive Design**: Seamless experience across all devices
-- **Accessibility First**: WCAG 2.1 AA compliant
-- **Performance Optimized**: Fast load times and smooth interactions
+### Design
+- **Responsive**: Works across all devices
+- **Accessible**: WCAG 2.1 AA compliant
+- **Performance**: Fast load times and smooth interactions
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: Next.js 14+ (App Router)
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
 - **UI Components**: Custom component library
 - **State Management**: React Context + Hooks
 - **Package Manager**: npm/yarn
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18.x or higher
@@ -58,7 +56,7 @@ yarn dev
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 womeninstem/
@@ -83,42 +81,31 @@ womeninstem/
 └── styles/              # Global styles
 ```
 
-## 🎨 Design System
+## Contributing
 
-### Color Palette (Space Theme)
-- **Deep Space**: `#0a0e27` - Primary background
-- **Nebula Purple**: `#6366f1` - Primary accent
-- **Cosmic Blue**: `#3b82f6` - Secondary accent
-- **Stardust**: `#fbbf24` - Highlights and achievements
-- **Aurora Green**: `#10b981` - Success states
-- **Supernova Pink**: `#ec4899` - Call-to-action
+We welcome contributions from the community. Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
 
-## 🤝 Contributing
-
-We welcome contributions from the community! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## 📝 Development Roadmap
+## Development Roadmap
 
 - [x] Project initialization and setup
-- [ ] Core UI component library
-- [ ] Homepage and landing design
+- [x] Core UI component library
+- [x] Homepage and page structure
 - [ ] Learning paths system
 - [ ] Mentorship platform
 - [ ] User authentication
 - [ ] Content management system
 - [ ] Community forum
-- [ ] Achievement and gamification system
+- [ ] Progress tracking system
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 💫 Acknowledgments
+## Acknowledgments
 
-- Built with passion to inspire the next generation of women in STEM
-- Dedicated to all the trailblazing women who paved the way in science, technology, engineering, and mathematics
+Built to support women pursuing careers in science, technology, engineering, and mathematics.
 
-## 📧 Contact
+## Contact
 
 **Prakriti Bista**
 - GitHub: [@itsmepraks](https://github.com/itsmepraks)
@@ -126,4 +113,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-⭐ Star this repository if you believe in empowering women in STEM!
+Star this repository if you find it helpful!
