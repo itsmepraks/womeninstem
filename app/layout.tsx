@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
+import Header from '@/components/layout/Header';
 import './globals.css';
 
 const inter = Inter({
@@ -59,6 +60,9 @@ export default function RootLayout({
             <div className="stars2" />
             <div className="stars3" />
           </div>
+          
+          {/* Header Navigation */}
+          <Header />
           
           {/* Main content */}
           <div className="relative z-10">{children}</div>
