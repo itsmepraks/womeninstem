@@ -1,14 +1,24 @@
 'use client';
 
-import React from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { cn } from '@/lib/utils';
+import { ArrowUp, Github, Twitter, Linkedin, Globe, Heart, Sparkles } from 'lucide-react';
 import { NAV_ITEMS, SOCIAL_LINKS, SITE_NAME } from '@/lib/constants';
 
-/**
- * Footer component with navigation, social links, and back to top functionality
- */
 export default function Footer() {
+  const [showBackToTop, setShowBackToTop] = useState(false);
+
+  // Show back to top button when scrolled down
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowBackToTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Smooth scroll to top
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -18,225 +28,224 @@ export default function Footer() {
 
   const currentYear = new Date().getFullYear();
 
+  // Footer link sections
+  const footerSections = [
+    {
+      title: 'Platform',
+      links: NAV_ITEMS.map((item) => ({
+        label: item.label,
+        href: item.href,
+      })),
+    },
+    {
+      title: 'About',
+      links: [
+        { label: 'Our Mission', href: '/about' },
+        { label: 'Team', href: '/about#team' },
+        { label: 'Careers', href: '/careers' },
+        { label: 'Contact', href: '/contact' },
+      ],
+    },
+    {
+      title: 'Resources',
+      links: [
+        { label: 'Blog', href: '/blog' },
+        { label: 'Events', href: '/events' },
+        { label: 'Scholarships', href: '/scholarships' },
+        { label: 'Help Center', href: '/help' },
+      ],
+    },
+    {
+      title: 'Legal',
+      links: [
+        { label: 'Privacy Policy', href: '/privacy' },
+        { label: 'Terms of Service', href: '/terms' },
+        { label: 'Code of Conduct', href: '/code-of-conduct' },
+        { label: 'Accessibility', href: '/accessibility' },
+      ],
+    },
+  ];
+
   return (
-    <footer className="relative border-t border-white/10 bg-deep-space/50 backdrop-blur-xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main Footer Content */}
-        <div className="py-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Brand Section */}
-          <div className="space-y-4">
-            <Link href="/" className="inline-flex items-center space-x-2 group">
+    <footer className="relative border-t border-white/10 mt-20">
+      {/* Main Footer Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        {/* Top Section - Logo and Description */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12">
+          <div className="lg:col-span-4">
+            {/* Logo */}
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 group mb-4 transition-transform hover:scale-105"
+            >
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-nebula blur-lg opacity-50 group-hover:opacity-75 transition-opacity rounded-full" />
-                <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-gradient-nebula">
-                  <span className="text-xl">✨</span>
-                </div>
+                <Sparkles className="w-8 h-8 text-nebula-400 animate-pulse" />
+                <div className="absolute inset-0 blur-xl bg-nebula-400/30 animate-pulse" />
               </div>
-              <span className="font-display text-lg font-bold">
+              <span className="font-display text-2xl font-bold">
                 <span className="gradient-text bg-gradient-nebula">STEM</span>
                 <span className="text-stardust-400">•</span>
                 <span className="gradient-text bg-gradient-aurora">SPARK</span>
               </span>
             </Link>
-            <p className="text-sm text-gray-400 leading-relaxed">
-              Igniting curiosity, one spark at a time. Empowering girls and women in STEM
-              through interactive learning and community.
+
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              Igniting curiosity and empowering the next generation of women in STEM through
+              interactive learning, mentorship, and community.
             </p>
-          </div>
 
-          {/* Navigation Links */}
-          <div>
-            <h3 className="font-display text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              Explore
-            </h3>
-            <ul className="space-y-3">
-              {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    className="text-sm text-gray-400 hover:text-white transition-colors inline-flex items-center group"
-                  >
-                    <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      →
-                    </span>
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h3 className="font-display text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              Resources
-            </h3>
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/about"
-                  className="text-sm text-gray-400 hover:text-white transition-colors inline-flex items-center group"
-                >
-                  <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    →
-                  </span>
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <a
-                  href={SOCIAL_LINKS.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-gray-400 hover:text-white transition-colors inline-flex items-center group"
-                >
-                  <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    →
-                  </span>
-                  Contribute
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`${SOCIAL_LINKS.github}/blob/main/CONTRIBUTING.md`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-gray-400 hover:text-white transition-colors inline-flex items-center group"
-                >
-                  <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    →
-                  </span>
-                  Guidelines
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`${SOCIAL_LINKS.github}/issues`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-gray-400 hover:text-white transition-colors inline-flex items-center group"
-                >
-                  <span className="mr-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                    →
-                  </span>
-                  Report Issue
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Social & Connect */}
-          <div>
-            <h3 className="font-display text-sm font-semibold text-white uppercase tracking-wider mb-4">
-              Connect
-            </h3>
-            <div className="flex flex-wrap gap-3 mb-6">
+            {/* Social Links */}
+            <div className="flex items-center gap-3">
               <a
                 href={SOCIAL_LINKS.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass p-2.5 rounded-lg hover:bg-white/10 transition-all hover:scale-110"
+                className="p-2.5 glass rounded-lg hover:bg-white/10 transition-all duration-300 hover:shadow-glow-blue group"
                 aria-label="GitHub"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path
-                    fillRule="evenodd"
-                    d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-                    clipRule="evenodd"
-                  />
-                </svg>
+                <Github className="w-5 h-5 group-hover:text-cosmic-blue-400 transition-colors" />
               </a>
               <a
                 href={SOCIAL_LINKS.twitter}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass p-2.5 rounded-lg hover:bg-white/10 transition-all hover:scale-110"
+                className="p-2.5 glass rounded-lg hover:bg-white/10 transition-all duration-300 hover:shadow-glow-blue group"
                 aria-label="Twitter"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
+                <Twitter className="w-5 h-5 group-hover:text-cosmic-blue-400 transition-colors" />
               </a>
               <a
                 href={SOCIAL_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass p-2.5 rounded-lg hover:bg-white/10 transition-all hover:scale-110"
+                className="p-2.5 glass rounded-lg hover:bg-white/10 transition-all duration-300 hover:shadow-glow-blue group"
                 aria-label="LinkedIn"
               >
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
-                </svg>
+                <Linkedin className="w-5 h-5 group-hover:text-cosmic-blue-400 transition-colors" />
               </a>
               <a
                 href={SOCIAL_LINKS.website}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glass p-2.5 rounded-lg hover:bg-white/10 transition-all hover:scale-110"
+                className="p-2.5 glass rounded-lg hover:bg-white/10 transition-all duration-300 hover:shadow-glow-blue group"
                 aria-label="Website"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"
-                  />
-                </svg>
+                <Globe className="w-5 h-5 group-hover:text-cosmic-blue-400 transition-colors" />
               </a>
             </div>
-            <p className="text-xs text-gray-500 leading-relaxed">
-              Follow our journey as we build a platform for the next generation of women in
-              STEM.
-            </p>
+          </div>
+
+          {/* Footer Links Grid */}
+          <div className="lg:col-span-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {footerSections.map((section) => (
+                <div key={section.title}>
+                  <h3 className="font-display font-semibold text-white mb-4">
+                    {section.title}
+                  </h3>
+                  <ul className="space-y-3">
+                    {section.links.map((link) => (
+                      <li key={link.href}>
+                        <Link
+                          href={link.href}
+                          className="text-gray-400 hover:text-white transition-colors duration-300 text-sm"
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="py-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-gray-400">
-            © {currentYear} {SITE_NAME}. Built with{' '}
-            <span className="text-supernova-400">💜</span> by{' '}
-            <a
-              href={SOCIAL_LINKS.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-nebula-400 hover:text-nebula-300 transition-colors"
-            >
-              Prakriti Bista
-            </a>
-          </p>
-
-          {/* Back to Top Button */}
-          <button
-            onClick={scrollToTop}
-            className="group flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
-            aria-label="Back to top"
-          >
-            <span>Back to top</span>
-            <div className="glass p-1.5 rounded-lg group-hover:bg-white/10 transition-all group-hover:-translate-y-1">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M5 10l7-7m0 0l7 7m-7-7v18"
-                />
-              </svg>
+        {/* Newsletter Section */}
+        <div className="glass rounded-2xl p-6 md:p-8 mb-12">
+          <div className="grid md:grid-cols-2 gap-6 items-center">
+            <div>
+              <h3 className="font-display text-xl md:text-2xl font-bold mb-2">
+                Stay Connected
+              </h3>
+              <p className="text-gray-400 text-sm">
+                Get updates on new content, events, and opportunities in STEM.
+              </p>
             </div>
-          </button>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-nebula-400 focus:border-transparent transition-all"
+                aria-label="Email address"
+              />
+              <button className="px-6 py-3 bg-gradient-nebula rounded-lg font-semibold whitespace-nowrap hover:shadow-glow transition-all duration-300 transform hover:scale-105">
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Section - Copyright */}
+        <div className="pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="text-gray-400 text-sm text-center md:text-left">
+              <p>
+                © {currentYear} {SITE_NAME}. All rights reserved.
+              </p>
+              <p className="mt-1">
+                Built with <Heart className="inline w-4 h-4 text-supernova-400 fill-current" /> by{' '}
+                <a
+                  href={SOCIAL_LINKS.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-nebula-400 hover:text-nebula-300 transition-colors"
+                >
+                  Prakriti Bista
+                </a>
+              </p>
+            </div>
+
+            <div className="flex items-center gap-6 text-sm text-gray-400">
+              <Link
+                href="/privacy"
+                className="hover:text-white transition-colors"
+              >
+                Privacy
+              </Link>
+              <Link
+                href="/terms"
+                className="hover:text-white transition-colors"
+              >
+                Terms
+              </Link>
+              <Link
+                href="/accessibility"
+                className="hover:text-white transition-colors"
+              >
+                Accessibility
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
+
+      {/* Back to Top Button */}
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 p-3 glass rounded-full hover:bg-white/10 transition-all duration-300 z-40 ${
+          showBackToTop
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-4 pointer-events-none'
+        }`}
+        aria-label="Back to top"
+      >
+        <ArrowUp className="w-5 h-5" />
+        <span className="absolute inset-0 rounded-full bg-gradient-nebula opacity-0 hover:opacity-20 transition-opacity duration-300" />
+      </button>
+
+      {/* Decorative gradient overlay at top */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-nebula-400/50 to-transparent" />
     </footer>
   );
 }
