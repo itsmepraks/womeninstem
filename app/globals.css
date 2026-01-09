@@ -3,69 +3,91 @@
 @tailwind utilities;
 
 @layer base {
-  * {
-    @apply border-gray-800;
+  :root {
+    --background: 255 255 255;
+    --foreground: 9 9 11;
   }
-  
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --background: 9 9 11;
+      --foreground: 250 250 250;
+    }
+  }
+
+  * {
+    @apply border-neutral-200 dark:border-neutral-800;
+  }
+
   body {
-    @apply overflow-x-hidden;
+    @apply bg-white dark:bg-neutral-950 text-neutral-900 dark:text-neutral-50;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  /* Card component - clean and flat */
+  .card {
+    @apply bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg;
+  }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-md hover:border-neutral-300 dark:hover:border-neutral-700;
+  }
+
+  /* Button variants - modern flat design */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  }
+
+  .btn-secondary {
+    @apply bg-neutral-100 dark:bg-neutral-800 text-neutral-900 dark:text-neutral-100 hover:bg-neutral-200 dark:hover:bg-neutral-700 focus:ring-neutral-500;
+  }
+
+  .btn-accent {
+    @apply bg-accent-500 text-white hover:bg-accent-600 focus:ring-accent-500;
+  }
+
+  /* Badge component - simple and clean */
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-medium;
+  }
+
+  .badge-primary {
+    @apply bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300;
+  }
+
+  .badge-accent {
+    @apply bg-accent-100 dark:bg-accent-900/30 text-accent-700 dark:text-accent-300;
+  }
+
+  /* Section styling - clean spacing */
+  .section {
+    @apply py-16 md:py-24;
+  }
+
+  /* Container - consistent padding */
+  .container-padding {
+    @apply px-4 sm:px-6 lg:px-8;
   }
 }
 
 @layer utilities {
-  /* Star field animations */
-  .stars,
-  .stars2,
-  .stars3 {
-    @apply absolute inset-0;
-    background-repeat: repeat;
-    background-size: 200px 200px;
+  /* Typography utilities */
+  .text-balance {
+    text-wrap: balance;
   }
-  
-  .stars {
-    background-image: radial-gradient(2px 2px at 20px 30px, white, transparent),
-      radial-gradient(2px 2px at 60px 70px, white, transparent),
-      radial-gradient(1px 1px at 50px 50px, white, transparent),
-      radial-gradient(1px 1px at 130px 80px, white, transparent),
-      radial-gradient(2px 2px at 90px 10px, white, transparent);
-    animation: animateStars 50s linear infinite;
-  }
-  
-  .stars2 {
-    background-image: radial-gradient(1px 1px at 40px 60px, white, transparent),
-      radial-gradient(1px 1px at 110px 90px, white, transparent),
-      radial-gradient(1px 1px at 160px 40px, white, transparent);
-    animation: animateStars 100s linear infinite;
-  }
-  
-  .stars3 {
-    background-image: radial-gradient(1px 1px at 75px 25px, white, transparent),
-      radial-gradient(1px 1px at 150px 100px, white, transparent),
-      radial-gradient(1px 1px at 190px 60px, white, transparent);
-    animation: animateStars 150s linear infinite;
-  }
-  
-  @keyframes animateStars {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(-200px);
-    }
-  }
-  
-  /* Glow text effect */
-  .text-glow {
-    text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
-  }
-  
-  /* Glass morphism */
-  .glass {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10;
-  }
-  
-  /* Gradient text */
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
+
+  /* Focus visible utility */
+  .focus-visible {
+    @apply outline-none ring-2 ring-primary-500 ring-offset-2;
   }
 }
