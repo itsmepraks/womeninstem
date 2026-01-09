@@ -8,7 +8,7 @@ import { NAV_ITEMS } from '@/lib/constants';
 import Button from '@/components/ui/Button';
 
 /**
- * Header component with navigation, mobile menu, and glass morphism styling
+ * Header component with navigation and mobile menu
  */
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -57,12 +57,6 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-nebula blur-lg opacity-50 group-hover:opacity-75 transition-opacity rounded-full" />
-              <div className="relative flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-full bg-gradient-nebula">
-                <span className="text-2xl">✨</span>
-              </div>
-            </div>
             <span className="font-display text-xl md:text-2xl font-bold">
               <span className="gradient-text bg-gradient-nebula">STEM</span>
               <span className="text-stardust-400">•</span>
@@ -103,21 +97,9 @@ export default function Header() {
             aria-label="Toggle menu"
             aria-expanded={isMobileMenuOpen}
           >
-            <svg
-              className="w-6 h-6 text-white"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              {isMobileMenuOpen ? (
-                <path d="M6 18L18 6M6 6l12 12" />
-              ) : (
-                <path d="M4 6h16M4 12h16M4 18h16" />
-              )}
-            </svg>
+            <span className="text-sm font-medium text-white">
+              {isMobileMenuOpen ? 'Close' : 'Menu'}
+            </span>
           </button>
         </div>
       </nav>
