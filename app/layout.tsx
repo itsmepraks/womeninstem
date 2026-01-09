@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk } from 'next/font/google';
 import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 import './globals.css';
 
 const inter = Inter({
@@ -52,7 +53,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="font-sans bg-deep-space text-white antialiased">
-        <div className="relative min-h-screen">
+        <div className="relative min-h-screen flex flex-col">
           {/* Background stars effect */}
           <div className="fixed inset-0 overflow-hidden pointer-events-none">
             <div className="absolute inset-0 bg-gradient-cosmic" />
@@ -64,8 +65,13 @@ export default function RootLayout({
           {/* Header Navigation */}
           <Header />
           
-          {/* Main content */}
-          <div className="relative z-10">{children}</div>
+          {/* Main content with top padding for fixed header */}
+          <main className="relative z-10 flex-1 pt-16 md:pt-20">
+            {children}
+          </main>
+
+          {/* Footer */}
+          <Footer />
         </div>
       </body>
     </html>
