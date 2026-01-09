@@ -1,6 +1,7 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
 import { MessageSquare, Users, Lightbulb, Trophy, Heart, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
+import { cn } from '@/lib/utils';
 
 export const metadata = {
   title: 'Community - STEM•SPARK',
@@ -118,10 +119,19 @@ export default function CommunityPage() {
               <Card key={index} hover className="group">
                 <div className="space-y-4">
                   <div className="flex items-start justify-between">
-                    <div className={`p-3 rounded-xl bg-${category.color}-500/20 text-${category.color}-400 group-hover:scale-110 transition-transform`}>
+                    <div className={cn(
+                      'p-3 rounded-xl group-hover:scale-110 transition-transform',
+                      {
+                        'bg-nebula-500/20 text-nebula-400': category.color === 'nebula',
+                        'bg-aurora-500/20 text-aurora-400': category.color === 'aurora',
+                        'bg-cosmic-500/20 text-cosmic-400': category.color === 'cosmic',
+                        'bg-stardust-500/20 text-stardust-400': category.color === 'stardust',
+                        'bg-supernova-500/20 text-supernova-400': category.color === 'supernova',
+                      }
+                    )}>
                       {category.icon}
                     </div>
-                    <Badge variant={category.color as any} size="sm">
+                    <Badge variant={category.color} size="sm">
                       {category.topics} topics
                     </Badge>
                   </div>
