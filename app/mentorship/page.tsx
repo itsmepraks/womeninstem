@@ -4,7 +4,6 @@ import {
   MessageCircle, 
   Calendar, 
   Award, 
-  Heart, 
   Sparkles,
   Target,
   TrendingUp,
