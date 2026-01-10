@@ -1,5 +1,20 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
-import { Target, Heart, Users, Sparkles, Mail, Github, Linkedin, Globe } from 'lucide-react';
+import { 
+  Target, 
+  Heart, 
+  Users, 
+  Sparkles, 
+  Mail, 
+  Github, 
+  Linkedin, 
+  Globe,
+  CheckCircle2,
+  Zap,
+  Code,
+  Palette,
+  Layers,
+  User
+} from 'lucide-react';
 import Link from 'next/link';
 import { SOCIAL_LINKS } from '@/lib/constants';
 import { cn } from '@/lib/utils';
@@ -19,25 +34,25 @@ export default function AboutPage() {
 
   const values = [
     {
-      icon: <Heart className="w-8 h-8" />,
+      icon: <Heart className="w-8 h-8" strokeWidth={2} />,
       title: 'Inclusivity',
       description: 'Creating a welcoming space for all women in STEM, regardless of background or experience level',
       color: 'supernova',
     },
     {
-      icon: <Sparkles className="w-8 h-8" />,
+      icon: <Sparkles className="w-8 h-8" strokeWidth={2} />,
       title: 'Excellence',
       description: 'Providing high-quality content and experiences that inspire learning and growth',
       color: 'stardust',
     },
     {
-      icon: <Users className="w-8 h-8" />,
+      icon: <Users className="w-8 h-8" strokeWidth={2} />,
       title: 'Community',
       description: 'Building meaningful connections that foster collaboration and support',
       color: 'aurora',
     },
     {
-      icon: <Target className="w-8 h-8" />,
+      icon: <Target className="w-8 h-8" strokeWidth={2} />,
       title: 'Empowerment',
       description: 'Equipping women with skills, confidence, and opportunities to thrive in STEM',
       color: 'nebula',
@@ -50,14 +65,15 @@ export default function AboutPage() {
       <section className="min-h-[70vh] flex items-center justify-center px-4 py-20">
         <Container size="lg">
           <div className="text-center space-y-8">
-            <Badge variant="nebula" size="lg">
-              ✨ Our Story
+            <Badge variant="nebula" size="lg" className="inline-flex items-center gap-2">
+              <Sparkles className="w-4 h-4" strokeWidth={2.5} />
+              Our Story
             </Badge>
             
-            <h1 className="font-display text-5xl md:text-7xl font-bold">
-              <span className="gradient-text bg-gradient-nebula">Empowering</span>{' '}
-              <span className="gradient-text bg-gradient-aurora">Women</span>{' '}
-              in STEM
+            <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight">
+              <span className="text-nebula-400">Empowering</span>{' '}
+              <span className="text-aurora-400">Women</span>{' '}
+              <span className="text-white">in STEM</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -74,11 +90,11 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-2 gap-8">
             <Card hover className="group">
               <div className="space-y-4">
-                <div className="inline-flex p-4 rounded-xl bg-nebula-500/20 text-nebula-400 group-hover:scale-110 transition-transform">
-                  <Target className="w-10 h-10" />
+                <div className="inline-flex p-4 rounded-xl bg-nebula-500/20 text-nebula-400 group-hover:scale-110 transition-transform-elegant">
+                  <Target className="w-10 h-10" strokeWidth={2} />
                 </div>
                 
-                <h2 className="font-display text-3xl font-bold">Our Mission</h2>
+                <h2 className="font-display text-3xl font-bold text-white">Our Mission</h2>
                 <p className="text-gray-400 text-lg leading-relaxed">
                   To create an inclusive, engaging platform that empowers girls and women to
                   explore, learn, and excel in STEM fields through interactive education,
@@ -93,9 +109,7 @@ export default function AboutPage() {
                     'Provide resources for career success',
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-nebula-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                      <CheckCircle2 className="w-5 h-5 text-nebula-400 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                       <span className="text-gray-300">{item}</span>
                     </li>
                   ))}
@@ -105,11 +119,11 @@ export default function AboutPage() {
 
             <Card hover className="group">
               <div className="space-y-4">
-                <div className="inline-flex p-4 rounded-xl bg-aurora-500/20 text-aurora-400 group-hover:scale-110 transition-transform">
-                  <Sparkles className="w-10 h-10" />
+                <div className="inline-flex p-4 rounded-xl bg-aurora-500/20 text-aurora-400 group-hover:scale-110 transition-transform-elegant">
+                  <Sparkles className="w-10 h-10" strokeWidth={2} />
                 </div>
                 
-                <h2 className="font-display text-3xl font-bold">Our Vision</h2>
+                <h2 className="font-display text-3xl font-bold text-white">Our Vision</h2>
                 <p className="text-gray-400 text-lg leading-relaxed">
                   A world where every woman has the opportunity, confidence, and support to
                   pursue and thrive in STEM careers, breaking down barriers and inspiring
@@ -124,9 +138,7 @@ export default function AboutPage() {
                     'Build a global network of women in STEM',
                   ].map((item, index) => (
                     <li key={index} className="flex items-start gap-3">
-                      <svg className="w-5 h-5 text-aurora-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
+                      <CheckCircle2 className="w-5 h-5 text-aurora-400 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
                       <span className="text-gray-300">{item}</span>
                     </li>
                   ))}
@@ -138,10 +150,10 @@ export default function AboutPage() {
       </section>
 
       {/* Stats */}
-      <section className="py-20 px-4 bg-white/5">
+      <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="lg">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Building Something Special
             </h2>
             <p className="text-gray-400 text-lg">
@@ -151,8 +163,8 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center space-y-2">
-                <div className="text-4xl md:text-5xl font-bold gradient-text bg-gradient-nebula">
+              <div key={index} className="text-center space-y-2 glass p-6 rounded-premium hover:bg-white/10 transition-elegant">
+                <div className="text-4xl md:text-5xl font-bold text-nebula-400">
                   {stat.value}
                 </div>
                 <div className="text-gray-400">{stat.label}</div>
@@ -166,7 +178,7 @@ export default function AboutPage() {
       <section className="py-20 px-4">
         <Container size="xl">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Our Core Values
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -183,14 +195,14 @@ export default function AboutPage() {
                     {
                       'bg-nebula-500/20 text-nebula-400': value.color === 'nebula',
                       'bg-aurora-500/20 text-aurora-400': value.color === 'aurora',
-                      'bg-cosmic-500/20 text-cosmic-400': value.color === 'cosmic',
+                      'bg-cosmic-blue-500/20 text-cosmic-blue-400': value.color === 'cosmic',
                       'bg-stardust-500/20 text-stardust-400': value.color === 'stardust',
                       'bg-supernova-500/20 text-supernova-400': value.color === 'supernova',
                     }
                   )}>
                     {value.icon}
                   </div>
-                  <h3 className="font-display text-2xl font-semibold">{value.title}</h3>
+                  <h3 className="font-display text-2xl font-semibold text-white">{value.title}</h3>
                   <p className="text-gray-400 leading-relaxed">{value.description}</p>
                 </div>
               </Card>
@@ -200,14 +212,22 @@ export default function AboutPage() {
       </section>
 
       {/* Creator Section */}
-      <section className="py-20 px-4 bg-white/5">
+      <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="lg">
-          <div className="glass rounded-3xl p-8 md:p-12">
+          <div className="glass-strong rounded-premium p-8 md:p-12 shadow-elegant-lg">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="space-y-6">
-                <Badge variant="nebula">Meet the Creator</Badge>
-                <h2 className="font-display text-3xl md:text-4xl font-bold">
-                  Built with 💜 by Prakriti Bista
+                <Badge variant="nebula" className="inline-flex items-center gap-2">
+                  <User className="w-4 h-4" strokeWidth={2.5} />
+                  Meet the Creator
+                </Badge>
+                <h2 className="font-display text-3xl md:text-4xl font-bold text-white inline-flex items-center gap-3 flex-wrap">
+                  Built with
+                  <Heart 
+                    className="inline-block w-8 h-8 text-supernova-400 fill-supernova-400 animate-pulse-subtle" 
+                    strokeWidth={0}
+                  />
+                  by Prakriti Bista
                 </h2>
                 <p className="text-gray-400 leading-relaxed">
                   As a woman in tech, I&apos;ve experienced firsthand the challenges and opportunities
@@ -225,32 +245,50 @@ export default function AboutPage() {
                     href={SOCIAL_LINKS.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-all"
+                    className="glass p-3 rounded-lg hover:bg-white/10 transition-elegant group"
+                    aria-label="Website"
                   >
-                    <Globe className="w-5 h-5" />
+                    <Globe className="w-5 h-5 text-gray-400 group-hover:text-cosmic-blue-400 transition-colors-elegant" />
                   </a>
                   <a
                     href={SOCIAL_LINKS.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-all"
+                    className="glass p-3 rounded-lg hover:bg-white/10 transition-elegant group"
+                    aria-label="GitHub"
                   >
-                    <Github className="w-5 h-5" />
+                    <Github className="w-5 h-5 text-gray-400 group-hover:text-cosmic-blue-400 transition-colors-elegant" />
                   </a>
                   <a
                     href={SOCIAL_LINKS.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-all"
+                    className="glass p-3 rounded-lg hover:bg-white/10 transition-elegant group"
+                    aria-label="LinkedIn"
                   >
-                    <Linkedin className="w-5 h-5" />
+                    <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-cosmic-blue-400 transition-colors-elegant" />
                   </a>
                 </div>
               </div>
 
               <div className="space-y-6">
-                <div className="aspect-square rounded-3xl bg-gradient-nebula flex items-center justify-center text-9xl">
-                  👩‍💻
+                <div className="aspect-square rounded-premium bg-nebula-600 shadow-glow-nebula flex items-center justify-center p-12 relative overflow-hidden group">
+                  {/* Decorative background elements */}
+                  <div className="absolute inset-0 bg-nebula-500/20 opacity-0 group-hover:opacity-100 transition-elegant"></div>
+                  
+                  {/* Icon representation */}
+                  <div className="relative z-10 flex flex-col items-center gap-6">
+                    <div className="w-32 h-32 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border-4 border-white/20 group-hover:scale-110 transition-transform-elegant">
+                      <User className="w-16 h-16 text-white" strokeWidth={1.5} />
+                    </div>
+                    <div className="text-center">
+                      <div className="text-2xl font-bold text-white mb-2">Prakriti Bista</div>
+                      <div className="text-nebula-200 text-sm flex items-center justify-center gap-2">
+                        <Code className="w-4 h-4" strokeWidth={2} />
+                        Developer & Educator
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -262,7 +300,7 @@ export default function AboutPage() {
       <section className="py-20 px-4">
         <Container size="lg">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Built with Modern Technology
             </h2>
             <p className="text-gray-400 text-lg">
@@ -272,14 +310,36 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {[
-              { name: 'Next.js 14', desc: 'React Framework' },
-              { name: 'TypeScript', desc: 'Type Safety' },
-              { name: 'Tailwind CSS', desc: 'Styling' },
-              { name: 'Framer Motion', desc: 'Animations' },
+              { 
+                icon: <Layers className="w-8 h-8" strokeWidth={2} />,
+                name: 'Next.js 14', 
+                desc: 'React Framework',
+                color: 'text-nebula-400'
+              },
+              { 
+                icon: <Code className="w-8 h-8" strokeWidth={2} />,
+                name: 'TypeScript', 
+                desc: 'Type Safety',
+                color: 'text-cosmic-blue-400'
+              },
+              { 
+                icon: <Palette className="w-8 h-8" strokeWidth={2} />,
+                name: 'Tailwind CSS', 
+                desc: 'Styling',
+                color: 'text-aurora-400'
+              },
+              { 
+                icon: <Zap className="w-8 h-8" strokeWidth={2} />,
+                name: 'Framer Motion', 
+                desc: 'Animations',
+                color: 'text-stardust-400'
+              },
             ].map((tech, index) => (
-              <div key={index} className="glass p-6 rounded-xl text-center space-y-2">
-                <div className="text-3xl">⚡</div>
-                <h3 className="font-semibold">{tech.name}</h3>
+              <div key={index} className="glass p-6 rounded-premium text-center space-y-3 hover:bg-white/10 transition-elegant group">
+                <div className={cn('inline-flex p-3 rounded-lg bg-white/5 group-hover:scale-110 transition-transform-elegant', tech.color)}>
+                  {tech.icon}
+                </div>
+                <h3 className="font-semibold text-white">{tech.name}</h3>
                 <p className="text-sm text-gray-400">{tech.desc}</p>
               </div>
             ))}
@@ -288,11 +348,13 @@ export default function AboutPage() {
       </section>
 
       {/* Open Source */}
-      <section className="py-20 px-4 bg-white/5">
+      <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="lg">
           <div className="text-center space-y-6">
-            <Github className="w-16 h-16 mx-auto text-nebula-400" />
-            <h2 className="font-display text-3xl md:text-4xl font-bold">
+            <div className="inline-flex p-4 rounded-full bg-cosmic-blue-500/20 mb-4">
+              <Github className="w-16 h-16 text-cosmic-blue-400" strokeWidth={2} />
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
               Open Source & Community Driven
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -301,10 +363,16 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
-                <Button variant="primary">View on GitHub</Button>
+                <Button variant="primary" className="inline-flex items-center gap-2">
+                  <Github className="w-5 h-5" strokeWidth={2.5} />
+                  View on GitHub
+                </Button>
               </a>
               <a href={`${SOCIAL_LINKS.github}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noopener noreferrer">
-                <Button variant="secondary">Contribution Guide</Button>
+                <Button variant="secondary" className="inline-flex items-center gap-2">
+                  <Users className="w-5 h-5" strokeWidth={2.5} />
+                  Contribution Guide
+                </Button>
               </a>
             </div>
           </div>
@@ -315,8 +383,10 @@ export default function AboutPage() {
       <section className="py-20 px-4">
         <Container size="md">
           <div className="text-center space-y-6">
-            <Mail className="w-16 h-16 mx-auto text-aurora-400" />
-            <h2 className="font-display text-3xl md:text-4xl font-bold">
+            <div className="inline-flex p-4 rounded-full bg-aurora-500/20 mb-4">
+              <Mail className="w-16 h-16 text-aurora-400" strokeWidth={2} />
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
               Get in Touch
             </h2>
             <p className="text-gray-400 text-lg">
@@ -324,10 +394,16 @@ export default function AboutPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/community">
-                <Button variant="primary">Join Community</Button>
+                <Button variant="primary" className="inline-flex items-center gap-2">
+                  <Users className="w-5 h-5" strokeWidth={2.5} />
+                  Join Community
+                </Button>
               </Link>
               <a href={`${SOCIAL_LINKS.github}/issues`} target="_blank" rel="noopener noreferrer">
-                <Button variant="secondary">Report Issue</Button>
+                <Button variant="secondary" className="inline-flex items-center gap-2">
+                  <Github className="w-5 h-5" strokeWidth={2.5} />
+                  Report Issue
+                </Button>
               </a>
             </div>
           </div>
