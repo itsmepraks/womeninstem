@@ -93,10 +93,10 @@ export default function Home() {
       <section className="py-20 px-4">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-center mb-4">
-            <span className="text-nebula-400">What's Coming</span>
+            <span className="text-nebula-400">What&apos;s Coming</span>
           </h2>
           <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-            Explore the powerful features we're building to support your STEM journey
+            Explore the powerful features we&apos;re building to support your STEM journey
           </p>
           
           <div className="grid md:grid-cols-3 gap-8">
