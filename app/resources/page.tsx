@@ -1,5 +1,21 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
-import { BookOpen, FileText, Video, Newspaper, ExternalLink, Search } from 'lucide-react';
+import { 
+  BookOpen, 
+  FileText, 
+  Video, 
+  Newspaper, 
+  ExternalLink, 
+  Search,
+  Sparkles,
+  Github,
+  Code,
+  BarChart3,
+  MessageSquare,
+  GraduationCap,
+  Zap,
+  Users,
+  Mail
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { BadgeProps } from '@/components/ui/Badge';
 
@@ -14,28 +30,28 @@ type BadgeVariant = NonNullable<BadgeProps['variant']>;
 export default function ResourcesPage() {
   const resourceCategories = [
     {
-      icon: <BookOpen className="w-8 h-8" />,
+      icon: <BookOpen className="w-8 h-8" strokeWidth={2} />,
       title: 'Tutorials & Guides',
       description: 'Step-by-step tutorials for learning new skills',
       count: '150+ resources',
       color: 'nebula' as BadgeVariant,
     },
     {
-      icon: <Newspaper className="w-8 h-8" />,
+      icon: <Newspaper className="w-8 h-8" strokeWidth={2} />,
       title: 'Articles & Blogs',
       description: 'In-depth articles on STEM topics and careers',
       count: '200+ articles',
       color: 'cosmic' as BadgeVariant,
     },
     {
-      icon: <Video className="w-8 h-8" />,
+      icon: <Video className="w-8 h-8" strokeWidth={2} />,
       title: 'Video Content',
       description: 'Educational videos and recorded webinars',
       count: '80+ videos',
       color: 'aurora' as BadgeVariant,
     },
     {
-      icon: <FileText className="w-8 h-8" />,
+      icon: <FileText className="w-8 h-8" strokeWidth={2} />,
       title: 'Career Resources',
       description: 'Resume templates, interview prep, and career advice',
       count: '50+ resources',
@@ -54,7 +70,7 @@ export default function ResourcesPage() {
     },
     {
       type: 'Article',
-      title: 'Breaking Into the Tech Industry: A Woman\\'s Guide',
+      title: "Breaking Into the Tech Industry: A Woman's Guide",
       description: 'Navigate your tech career with insights from industry leaders',
       author: 'Maria Rodriguez',
       readTime: '10 min read',
@@ -71,12 +87,12 @@ export default function ResourcesPage() {
   ];
 
   const toolsAndPlatforms = [
-    { name: 'GitHub', desc: 'Version control and collaboration', icon: '💻' },
-    { name: 'Kaggle', desc: 'Data science competitions', icon: '📊' },
-    { name: 'Stack Overflow', desc: 'Q&A for programmers', icon: '💬' },
-    { name: 'Coursera', desc: 'Online courses', icon: '🎓' },
-    { name: 'LeetCode', desc: 'Coding practice', icon: '⚡' },
-    { name: 'Dev.to', desc: 'Developer community', icon: '👥' },
+    { name: 'GitHub', desc: 'Version control and collaboration', icon: <Github className="w-6 h-6" strokeWidth={2} /> },
+    { name: 'Kaggle', desc: 'Data science competitions', icon: <BarChart3 className="w-6 h-6" strokeWidth={2} /> },
+    { name: 'Stack Overflow', desc: 'Q&A for programmers', icon: <MessageSquare className="w-6 h-6" strokeWidth={2} /> },
+    { name: 'Coursera', desc: 'Online courses', icon: <GraduationCap className="w-6 h-6" strokeWidth={2} /> },
+    { name: 'LeetCode', desc: 'Coding practice', icon: <Code className="w-6 h-6" strokeWidth={2} /> },
+    { name: 'Dev.to', desc: 'Developer community', icon: <Users className="w-6 h-6" strokeWidth={2} /> },
   ];
 
   return (
@@ -85,13 +101,15 @@ export default function ResourcesPage() {
       <section className="min-h-[70vh] flex items-center justify-center px-4 py-20">
         <Container size="lg">
           <div className="text-center space-y-8">
-            <Badge variant="cosmic" size="lg" dot>
+            <Badge variant="cosmic" size="lg" dot className="inline-flex items-center gap-2">
+              <Sparkles className="w-4 h-4" strokeWidth={2.5} />
               Coming Soon
             </Badge>
             
-            <h1 className="font-display text-5xl md:text-7xl font-bold">
-              <span className="gradient-text bg-gradient-cosmic">Resource</span>{' '}
-              <span className="gradient-text bg-gradient-nebula">Library</span>
+            <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight">
+              <span className="text-cosmic-blue-400">Resource</span>
+              {' '}
+              <span className="text-nebula-400">Library</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -101,8 +119,8 @@ export default function ResourcesPage() {
 
             {/* Search Bar Preview */}
             <div className="max-w-2xl mx-auto pt-4">
-              <div className="glass rounded-full p-3 flex items-center gap-3">
-                <Search className="w-5 h-5 text-gray-400 ml-2" />
+              <div className="glass-strong rounded-full p-3 flex items-center gap-3 shadow-elegant">
+                <Search className="w-5 h-5 text-gray-400 ml-2" strokeWidth={2} />
                 <input
                   type="text"
                   placeholder="Search resources..."
@@ -114,9 +132,18 @@ export default function ResourcesPage() {
             </div>
 
             <div className="flex flex-wrap gap-4 justify-center text-sm">
-              <span className="glass px-4 py-2 rounded-full">📚 500+ Resources</span>
-              <span className="glass px-4 py-2 rounded-full">🆓 All Free</span>
-              <span className="glass px-4 py-2 rounded-full">✨ Curated Content</span>
+              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+                <BookOpen className="w-4 h-4 text-nebula-400" strokeWidth={2.5} />
+                500+ Resources
+              </span>
+              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+                <Zap className="w-4 h-4 text-stardust-400" strokeWidth={2.5} />
+                All Free
+              </span>
+              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+                <Sparkles className="w-4 h-4 text-aurora-400" strokeWidth={2.5} />
+                Curated Content
+              </span>
             </div>
           </div>
         </Container>
@@ -126,7 +153,7 @@ export default function ResourcesPage() {
       <section className="py-20 px-4">
         <Container size="xl">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Browse by Category
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -139,11 +166,11 @@ export default function ResourcesPage() {
               <Card key={index} hover className="group">
                 <div className="space-y-4 text-center">
                   <div className={cn(
-                    'inline-flex p-4 rounded-xl group-hover:scale-110 transition-transform',
+                    'inline-flex p-4 rounded-xl group-hover:scale-110 transition-transform-elegant',
                     {
                       'bg-nebula-500/20 text-nebula-400': category.color === 'nebula',
                       'bg-aurora-500/20 text-aurora-400': category.color === 'aurora',
-                      'bg-cosmic-500/20 text-cosmic-400': category.color === 'cosmic',
+                      'bg-cosmic-blue-500/20 text-cosmic-blue-400': category.color === 'cosmic',
                       'bg-stardust-500/20 text-stardust-400': category.color === 'stardust',
                       'bg-supernova-500/20 text-supernova-400': category.color === 'supernova',
                     }
@@ -152,7 +179,7 @@ export default function ResourcesPage() {
                   </div>
                   
                   <div>
-                    <h3 className="font-display text-xl font-semibold mb-2">
+                    <h3 className="font-display text-xl font-semibold mb-2 text-white">
                       {category.title}
                     </h3>
                     <p className="text-gray-400 text-sm mb-3">{category.description}</p>
@@ -168,10 +195,10 @@ export default function ResourcesPage() {
       </section>
 
       {/* Featured Resources */}
-      <section className="py-20 px-4 bg-white/5">
+      <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="xl">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Featured Resources
             </h2>
             <p className="text-gray-400 text-lg">
@@ -189,7 +216,7 @@ export default function ResourcesPage() {
                   </div>
 
                   <div>
-                    <h3 className="font-display text-lg font-semibold mb-2 line-clamp-2">
+                    <h3 className="font-display text-lg font-semibold mb-2 line-clamp-2 text-white">
                       {resource.title}
                     </h3>
                     <p className="text-gray-400 text-sm mb-3 line-clamp-2">
@@ -224,7 +251,7 @@ export default function ResourcesPage() {
       <section className="py-20 px-4">
         <Container size="lg">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Essential Tools & Platforms
             </h2>
             <p className="text-gray-400 text-lg">
@@ -234,16 +261,18 @@ export default function ResourcesPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
             {toolsAndPlatforms.map((tool, index) => (
-              <div key={index} className="glass p-4 rounded-xl hover:bg-white/10 transition-all group">
+              <div key={index} className="glass p-4 rounded-premium hover:bg-white/10 transition-elegant group">
                 <div className="flex items-center gap-3">
-                  <span className="text-3xl">{tool.icon}</span>
+                  <div className="text-cosmic-blue-400 group-hover:scale-110 transition-transform-elegant">
+                    {tool.icon}
+                  </div>
                   <div className="flex-1">
-                    <h3 className="font-semibold group-hover:text-nebula-400 transition-colors">
+                    <h3 className="font-semibold group-hover:text-nebula-400 transition-colors-elegant text-white">
                       {tool.name}
                     </h3>
                     <p className="text-sm text-gray-400">{tool.desc}</p>
                   </div>
-                  <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-nebula-400 transition-colors" />
+                  <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-nebula-400 transition-colors-elegant" strokeWidth={2} />
                 </div>
               </div>
             ))}
@@ -252,10 +281,10 @@ export default function ResourcesPage() {
       </section>
 
       {/* Topics */}
-      <section className="py-20 px-4 bg-white/5">
+      <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="lg">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Popular Topics
             </h2>
             <p className="text-gray-400 text-lg">
@@ -271,7 +300,7 @@ export default function ResourcesPage() {
             ].map((topic, index) => (
               <button
                 key={index}
-                className="px-4 py-2 glass rounded-full hover:bg-white/10 transition-all text-sm"
+                className="px-4 py-2 glass rounded-full hover:bg-white/10 transition-elegant text-sm"
               >
                 {topic}
               </button>
@@ -283,9 +312,11 @@ export default function ResourcesPage() {
       {/* Contribution CTA */}
       <section className="py-20 px-4">
         <Container size="md">
-          <div className="glass rounded-3xl p-8 md:p-12 text-center space-y-6">
-            <BookOpen className="w-16 h-16 mx-auto text-cosmic-400" />
-            <h2 className="font-display text-3xl md:text-4xl font-bold">
+          <div className="glass-strong rounded-premium p-8 md:p-12 text-center space-y-6 shadow-elegant-lg">
+            <div className="inline-flex p-4 rounded-full bg-cosmic-blue-500/20 mb-4">
+              <BookOpen className="w-16 h-16 text-cosmic-blue-400" strokeWidth={2} />
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
               Have a Resource to Share?
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -293,8 +324,14 @@ export default function ResourcesPage() {
               helped you in your STEM journey.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button variant="primary">Submit Resource</Button>
-              <Button variant="secondary">View Guidelines</Button>
+              <Button variant="primary" className="inline-flex items-center gap-2">
+                <Sparkles className="w-4 h-4" strokeWidth={2.5} />
+                Submit Resource
+              </Button>
+              <Button variant="secondary" className="inline-flex items-center gap-2">
+                <FileText className="w-4 h-4" strokeWidth={2.5} />
+                View Guidelines
+              </Button>
             </div>
           </div>
         </Container>
@@ -304,7 +341,7 @@ export default function ResourcesPage() {
       <section className="py-20 px-4">
         <Container size="md">
           <div className="text-center space-y-6">
-            <h2 className="font-display text-3xl md:text-4xl font-bold">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
               Get Weekly Resource Roundup
             </h2>
             <p className="text-gray-400 text-lg">
@@ -314,9 +351,12 @@ export default function ResourcesPage() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-cosmic-400"
+                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cosmic-blue-400 focus:border-transparent transition-elegant hover:border-white/20"
               />
-              <Button variant="primary">Subscribe</Button>
+              <Button variant="primary" className="inline-flex items-center gap-2">
+                <Mail className="w-4 h-4" strokeWidth={2.5} />
+                Subscribe
+              </Button>
             </div>
           </div>
         </Container>

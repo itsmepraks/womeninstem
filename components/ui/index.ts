@@ -10,7 +10,7 @@
 export { default as Button } from './Button';
 export type { ButtonProps } from './Button';
 
-export { default as Card, CardHeader, CardBody, CardFooter } from './Card';
+export { default as Card, CardHeader, CardFooter } from './Card';
 export type { CardProps } from './Card';
 
 export { default as Container } from './Container';

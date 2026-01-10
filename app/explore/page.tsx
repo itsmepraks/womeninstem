@@ -1,5 +1,14 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
-import { Rocket, Sparkles, Target, Zap } from 'lucide-react';
+import { 
+  Rocket, 
+  Sparkles, 
+  Target, 
+  Zap, 
+  CheckCircle2, 
+  Mail,
+  TrendingUp,
+  Compass
+} from 'lucide-react';
 import Link from 'next/link';
 
 export const metadata = {
@@ -14,13 +23,17 @@ export default function ExplorePage() {
       <section className="min-h-[70vh] flex items-center justify-center px-4 py-20">
         <Container size="lg">
           <div className="text-center space-y-8">
-            <Badge variant="nebula" size="lg">
-              🚀 Coming Soon
+            <Badge variant="nebula" size="lg" className="inline-flex items-center gap-2">
+              <Rocket className="w-4 h-4" strokeWidth={2.5} />
+              Coming Soon
             </Badge>
             
-            <h1 className="font-display text-5xl md:text-7xl font-bold">
-              <span className="gradient-text bg-gradient-nebula">Explore</span> Your{' '}
-              <span className="gradient-text bg-gradient-aurora">Journey</span>
+            <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight">
+              <span className="text-nebula-400">Explore</span>
+              {' '}
+              <span className="text-white">Your</span>
+              {' '}
+              <span className="text-aurora-400">Journey</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -30,12 +43,12 @@ export default function ExplorePage() {
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/learning">
-                <Button variant="primary" size="lg" leftIcon={<Rocket className="w-5 h-5" />}>
+                <Button variant="primary" size="lg" leftIcon={<Rocket className="w-5 h-5" strokeWidth={2.5} />}>
                   Start Learning
                 </Button>
               </Link>
               <Link href="/community">
-                <Button variant="secondary" size="lg">
+                <Button variant="secondary" size="lg" leftIcon={<Compass className="w-5 h-5" strokeWidth={2.5} />}>
                   Join Community
                 </Button>
               </Link>
@@ -47,32 +60,35 @@ export default function ExplorePage() {
       {/* Features Preview */}
       <section className="py-20 px-4">
         <Container size="xl">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-12">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-4 text-white">
             What You&apos;ll Discover
           </h2>
+          <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+            A personalized experience designed to accelerate your STEM journey
+          </p>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                icon: <Target className="w-8 h-8" />,
+                icon: <Target className="w-8 h-8" strokeWidth={2} />,
                 title: 'Personalized Dashboard',
                 description: 'Track your progress, achievements, and learning goals in one place',
                 color: 'nebula',
               },
               {
-                icon: <Sparkles className="w-8 h-8" />,
+                icon: <Sparkles className="w-8 h-8" strokeWidth={2} />,
                 title: 'Recommended Paths',
                 description: 'Get AI-powered suggestions based on your interests and skill level',
                 color: 'aurora',
               },
               {
-                icon: <Zap className="w-8 h-8" />,
+                icon: <Zap className="w-8 h-8" strokeWidth={2} />,
                 title: 'Quick Actions',
                 description: 'Easy access to continue learning, message mentors, or join discussions',
                 color: 'stardust',
               },
               {
-                icon: <Rocket className="w-8 h-8" />,
+                icon: <TrendingUp className="w-8 h-8" strokeWidth={2} />,
                 title: 'Discover New',
                 description: 'Explore trending topics, popular courses, and featured content',
                 color: 'cosmic',
@@ -80,10 +96,15 @@ export default function ExplorePage() {
             ].map((feature, index) => (
               <Card key={index} hover>
                 <div className="space-y-4">
-                  <div className="flex items-center justify-center w-16 h-16 rounded-full glass">
-                    <div className={`text-${feature.color}-400`}>{feature.icon}</div>
+                  <div className={`inline-flex p-3 rounded-lg ${
+                    feature.color === 'nebula' ? 'bg-nebula-500/20 text-nebula-400' :
+                    feature.color === 'aurora' ? 'bg-aurora-500/20 text-aurora-400' :
+                    feature.color === 'stardust' ? 'bg-stardust-500/20 text-stardust-400' :
+                    'bg-cosmic-blue-500/20 text-cosmic-blue-400'
+                  }`}>
+                    {feature.icon}
                   </div>
-                  <h3 className="font-display text-xl font-semibold">{feature.title}</h3>
+                  <h3 className="font-display text-xl font-semibold text-white">{feature.title}</h3>
                   <p className="text-gray-400 text-sm leading-relaxed">
                     {feature.description}
                   </p>
@@ -95,11 +116,11 @@ export default function ExplorePage() {
       </section>
 
       {/* Coming Soon Details */}
-      <section className="py-20 px-4 bg-white/5">
+      <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="lg">
-          <div className="glass rounded-3xl p-8 md:p-12 space-y-8">
+          <div className="glass-strong rounded-premium p-8 md:p-12 space-y-8 shadow-elegant-lg">
             <div className="text-center space-y-4">
-              <h2 className="font-display text-3xl md:text-4xl font-bold">
+              <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
                 Building Your Launch Pad
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -120,10 +141,8 @@ export default function ExplorePage() {
                 'Resource bookmarks',
               ].map((item, index) => (
                 <div key={index} className="flex items-center gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gradient-nebula flex items-center justify-center">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-nebula-600 flex items-center justify-center shadow-glow-nebula">
+                    <CheckCircle2 className="w-4 h-4 text-white" strokeWidth={2.5} />
                   </div>
                   <span className="text-gray-300">{item}</span>
                 </div>
@@ -136,9 +155,12 @@ export default function ExplorePage() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-nebula-400"
+                  className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-nebula-400 focus:border-transparent transition-elegant hover:border-white/20"
                 />
-                <Button variant="primary">Notify Me</Button>
+                <Button variant="primary" className="inline-flex items-center gap-2">
+                  <Mail className="w-4 h-4" strokeWidth={2.5} />
+                  Notify Me
+                </Button>
               </div>
             </div>
           </div>
@@ -149,7 +171,10 @@ export default function ExplorePage() {
       <section className="py-20 px-4">
         <Container size="md">
           <div className="text-center space-y-6">
-            <h2 className="font-display text-3xl md:text-4xl font-bold">
+            <div className="inline-flex p-4 rounded-full bg-nebula-500/20 mb-4">
+              <Compass className="w-12 h-12 text-nebula-400" strokeWidth={2} />
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
               Ready to Start Your Journey?
             </h2>
             <p className="text-gray-400 text-lg">
@@ -157,12 +182,14 @@ export default function ExplorePage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
               <Link href="/learning">
-                <Button variant="primary" size="lg">
+                <Button variant="primary" size="lg" className="inline-flex items-center gap-2">
+                  <Sparkles className="w-5 h-5" strokeWidth={2.5} />
                   Browse Learning Paths
                 </Button>
               </Link>
               <Link href="/mentorship">
-                <Button variant="secondary" size="lg">
+                <Button variant="secondary" size="lg" className="inline-flex items-center gap-2">
+                  <Target className="w-5 h-5" strokeWidth={2.5} />
                   Find a Mentor
                 </Button>
               </Link>
