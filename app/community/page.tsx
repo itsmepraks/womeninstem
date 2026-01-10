@@ -1,5 +1,21 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
-import { MessageSquare, Users, Lightbulb, Trophy, Heart, TrendingUp } from 'lucide-react';
+import { 
+  MessageSquare, 
+  Users, 
+  Lightbulb, 
+  Trophy, 
+  Heart, 
+  TrendingUp,
+  Sparkles,
+  Shield,
+  BookOpen,
+  Target,
+  Bell,
+  Search,
+  Calendar,
+  Mail,
+  Rocket
+} from 'lucide-react';
 import { cn } from '@/lib/utils';
 import type { BadgeProps } from '@/components/ui/Badge';
 
@@ -14,28 +30,28 @@ type BadgeVariant = NonNullable<BadgeProps['variant']>;
 export default function CommunityPage() {
   const forumCategories = [
     {
-      icon: <MessageSquare className="w-8 h-8" />,
+      icon: <MessageSquare className="w-8 h-8" strokeWidth={2} />,
       title: 'General Discussions',
       description: 'Share experiences, ask questions, and connect with peers',
       topics: 234,
       color: 'nebula' as BadgeVariant,
     },
     {
-      icon: <Lightbulb className="w-8 h-8" />,
+      icon: <Lightbulb className="w-8 h-8" strokeWidth={2} />,
       title: 'Career Advice',
       description: 'Get guidance on career paths, interviews, and professional growth',
       topics: 156,
       color: 'stardust' as BadgeVariant,
     },
     {
-      icon: <TrendingUp className="w-8 h-8" />,
+      icon: <TrendingUp className="w-8 h-8" strokeWidth={2} />,
       title: 'Study Groups',
       description: 'Form study groups and collaborate on learning projects',
       topics: 89,
       color: 'aurora' as BadgeVariant,
     },
     {
-      icon: <Trophy className="w-8 h-8" />,
+      icon: <Trophy className="w-8 h-8" strokeWidth={2} />,
       title: 'Achievements',
       description: 'Celebrate wins and milestones with the community',
       topics: 178,
@@ -59,7 +75,7 @@ export default function CommunityPage() {
       tags: ['python', 'beginners', 'study-group'],
     },
     {
-      title: 'Just got accepted into a CS program! 🎉',
+      title: 'Just got accepted into a CS program!',
       author: 'Alex T.',
       replies: 45,
       category: 'Achievements',
@@ -73,13 +89,15 @@ export default function CommunityPage() {
       <section className="min-h-[70vh] flex items-center justify-center px-4 py-20">
         <Container size="lg">
           <div className="text-center space-y-8">
-            <Badge variant="supernova" size="lg" dot>
+            <Badge variant="supernova" size="lg" dot className="inline-flex items-center gap-2">
+              <Sparkles className="w-4 h-4" strokeWidth={2.5} />
               Coming Soon
             </Badge>
             
-            <h1 className="font-display text-5xl md:text-7xl font-bold">
-              <span className="gradient-text bg-gradient-nebula">Join the</span>{' '}
-              <span className="gradient-text bg-gradient-aurora">Community</span>
+            <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight">
+              <span className="text-nebula-400">Join the</span>
+              {' '}
+              <span className="text-aurora-400">Community</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -88,16 +106,16 @@ export default function CommunityPage() {
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center text-sm">
-              <span className="glass px-4 py-2 rounded-full">
-                <Users className="w-4 h-4 inline mr-2" />
+              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+                <Users className="w-4 h-4 text-nebula-400" strokeWidth={2.5} />
                 1,000+ Members
               </span>
-              <span className="glass px-4 py-2 rounded-full">
-                <MessageSquare className="w-4 h-4 inline mr-2" />
+              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+                <MessageSquare className="w-4 h-4 text-aurora-400" strokeWidth={2.5} />
                 Active Discussions
               </span>
-              <span className="glass px-4 py-2 rounded-full">
-                <Heart className="w-4 h-4 inline mr-2" />
+              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+                <Heart className="w-4 h-4 text-supernova-400" strokeWidth={2.5} />
                 Supportive Environment
               </span>
             </div>
@@ -109,7 +127,7 @@ export default function CommunityPage() {
       <section className="py-20 px-4">
         <Container size="xl">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Explore Forum Categories
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -123,11 +141,11 @@ export default function CommunityPage() {
                 <div className="space-y-4">
                   <div className="flex items-start justify-between">
                     <div className={cn(
-                      'p-3 rounded-xl group-hover:scale-110 transition-transform',
+                      'p-3 rounded-xl group-hover:scale-110 transition-transform-elegant',
                       {
                         'bg-nebula-500/20 text-nebula-400': category.color === 'nebula',
                         'bg-aurora-500/20 text-aurora-400': category.color === 'aurora',
-                        'bg-cosmic-500/20 text-cosmic-400': category.color === 'cosmic',
+                        'bg-cosmic-blue-500/20 text-cosmic-blue-400': category.color === 'cosmic',
                         'bg-stardust-500/20 text-stardust-400': category.color === 'stardust',
                         'bg-supernova-500/20 text-supernova-400': category.color === 'supernova',
                       }
@@ -140,7 +158,7 @@ export default function CommunityPage() {
                   </div>
                   
                   <div>
-                    <h3 className="font-display text-2xl font-semibold mb-2">
+                    <h3 className="font-display text-2xl font-semibold mb-2 text-white">
                       {category.title}
                     </h3>
                     <p className="text-gray-400">{category.description}</p>
@@ -157,10 +175,10 @@ export default function CommunityPage() {
       </section>
 
       {/* Recent Discussions Preview */}
-      <section className="py-20 px-4 bg-white/5">
+      <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="xl">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Trending Discussions
             </h2>
             <p className="text-gray-400 text-lg">
@@ -172,12 +190,12 @@ export default function CommunityPage() {
             {recentDiscussions.map((discussion, index) => (
               <Card key={index} hover className="group">
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-gradient-nebula flex items-center justify-center text-xl">
-                    💬
+                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-nebula-600 shadow-glow-nebula flex items-center justify-center">
+                    <MessageSquare className="w-6 h-6 text-white" strokeWidth={2} />
                   </div>
                   
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-lg mb-2 group-hover:text-nebula-400 transition-colors">
+                    <h3 className="font-semibold text-lg mb-2 group-hover:text-nebula-400 transition-colors-elegant text-white">
                       {discussion.title}
                     </h3>
                     
@@ -187,7 +205,7 @@ export default function CommunityPage() {
                       <Badge variant="cosmic" size="sm">{discussion.category}</Badge>
                       <span>•</span>
                       <span className="flex items-center gap-1">
-                        <MessageSquare className="w-4 h-4" />
+                        <MessageSquare className="w-4 h-4" strokeWidth={2} />
                         {discussion.replies} replies
                       </span>
                     </div>
@@ -215,7 +233,7 @@ export default function CommunityPage() {
       <section className="py-20 px-4">
         <Container size="lg">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Our Community Values
             </h2>
             <p className="text-gray-400 text-lg">
@@ -226,39 +244,53 @@ export default function CommunityPage() {
           <div className="grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: '🤝',
+                icon: <Users className="w-8 h-8" strokeWidth={2} />,
                 title: 'Respect & Inclusion',
                 desc: 'Treat everyone with kindness and respect diverse perspectives',
+                color: 'text-nebula-400',
+                bgColor: 'bg-nebula-500/10'
               },
               {
-                icon: '💡',
+                icon: <Lightbulb className="w-8 h-8" strokeWidth={2} />,
                 title: 'Constructive Support',
                 desc: 'Offer helpful feedback and encouragement to fellow members',
+                color: 'text-stardust-400',
+                bgColor: 'bg-stardust-500/10'
               },
               {
-                icon: '🛡️',
+                icon: <Shield className="w-8 h-8" strokeWidth={2} />,
                 title: 'Safe Space',
                 desc: 'Zero tolerance for harassment, discrimination, or negativity',
+                color: 'text-supernova-400',
+                bgColor: 'bg-supernova-500/10'
               },
               {
-                icon: '📚',
+                icon: <BookOpen className="w-8 h-8" strokeWidth={2} />,
                 title: 'Share Knowledge',
                 desc: 'Help others learn by sharing your experiences and expertise',
+                color: 'text-cosmic-blue-400',
+                bgColor: 'bg-cosmic-blue-500/10'
               },
               {
-                icon: '🎯',
+                icon: <Target className="w-8 h-8" strokeWidth={2} />,
                 title: 'Stay On Topic',
                 desc: 'Keep discussions relevant and add value to conversations',
+                color: 'text-aurora-400',
+                bgColor: 'bg-aurora-500/10'
               },
               {
-                icon: '✨',
+                icon: <Sparkles className="w-8 h-8" strokeWidth={2} />,
                 title: 'Celebrate Success',
                 desc: 'Acknowledge and celebrate the achievements of others',
+                color: 'text-supernova-400',
+                bgColor: 'bg-supernova-500/10'
               },
             ].map((value, index) => (
               <div key={index} className="text-center space-y-3">
-                <div className="text-5xl">{value.icon}</div>
-                <h3 className="font-display text-xl font-semibold">{value.title}</h3>
+                <div className={cn('inline-flex p-4 rounded-xl', value.color, value.bgColor)}>
+                  {value.icon}
+                </div>
+                <h3 className="font-display text-xl font-semibold text-white">{value.title}</h3>
                 <p className="text-gray-400 text-sm">{value.desc}</p>
               </div>
             ))}
@@ -267,26 +299,64 @@ export default function CommunityPage() {
       </section>
 
       {/* Features */}
-      <section className="py-20 px-4 bg-white/5">
+      <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="lg">
-          <div className="glass rounded-3xl p-8 md:p-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-12">
+          <div className="glass-strong rounded-premium p-8 md:p-12 shadow-elegant-lg">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-12 text-white">
               Community Features
             </h2>
 
             <div className="grid md:grid-cols-2 gap-6">
               {[
-                { icon: '💬', title: 'Discussion Forums', desc: 'Topic-based forums for all your STEM questions' },
-                { icon: '👥', title: 'Study Groups', desc: 'Form or join study groups with peers' },
-                { icon: '📅', title: 'Community Events', desc: 'Participate in webinars, workshops, and meetups' },
-                { icon: '🏆', title: 'Reputation System', desc: 'Earn points and badges for helpful contributions' },
-                { icon: '🔔', title: 'Smart Notifications', desc: 'Stay updated on topics and people you follow' },
-                { icon: '🔍', title: 'Advanced Search', desc: 'Find answers quickly with powerful search' },
+                { 
+                  icon: <MessageSquare className="w-6 h-6" strokeWidth={2.5} />, 
+                  title: 'Discussion Forums', 
+                  desc: 'Topic-based forums for all your STEM questions',
+                  color: 'text-nebula-400',
+                  bgColor: 'bg-nebula-500/10'
+                },
+                { 
+                  icon: <Users className="w-6 h-6" strokeWidth={2.5} />, 
+                  title: 'Study Groups', 
+                  desc: 'Form or join study groups with peers',
+                  color: 'text-aurora-400',
+                  bgColor: 'bg-aurora-500/10'
+                },
+                { 
+                  icon: <Calendar className="w-6 h-6" strokeWidth={2.5} />, 
+                  title: 'Community Events', 
+                  desc: 'Participate in webinars, workshops, and meetups',
+                  color: 'text-cosmic-blue-400',
+                  bgColor: 'bg-cosmic-blue-500/10'
+                },
+                { 
+                  icon: <Trophy className="w-6 h-6" strokeWidth={2.5} />, 
+                  title: 'Reputation System', 
+                  desc: 'Earn points and badges for helpful contributions',
+                  color: 'text-stardust-400',
+                  bgColor: 'bg-stardust-500/10'
+                },
+                { 
+                  icon: <Bell className="w-6 h-6" strokeWidth={2.5} />, 
+                  title: 'Smart Notifications', 
+                  desc: 'Stay updated on topics and people you follow',
+                  color: 'text-supernova-400',
+                  bgColor: 'bg-supernova-500/10'
+                },
+                { 
+                  icon: <Search className="w-6 h-6" strokeWidth={2.5} />, 
+                  title: 'Advanced Search', 
+                  desc: 'Find answers quickly with powerful search',
+                  color: 'text-aurora-400',
+                  bgColor: 'bg-aurora-500/10'
+                },
               ].map((feature, index) => (
                 <div key={index} className="flex gap-4">
-                  <div className="text-3xl flex-shrink-0">{feature.icon}</div>
+                  <div className={cn('flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center', feature.color, feature.bgColor)}>
+                    {feature.icon}
+                  </div>
                   <div>
-                    <h3 className="font-semibold text-lg mb-1">{feature.title}</h3>
+                    <h3 className="font-semibold text-lg mb-1 text-white">{feature.title}</h3>
                     <p className="text-gray-400 text-sm">{feature.desc}</p>
                   </div>
                 </div>
@@ -300,11 +370,14 @@ export default function CommunityPage() {
       <section className="py-20 px-4">
         <Container size="md">
           <div className="text-center space-y-6">
-            <Users className="w-16 h-16 mx-auto text-supernova-400" />
-            <Badge variant="supernova" size="lg">
-              🚀 Launching Soon
+            <div className="inline-flex p-4 rounded-full bg-supernova-500/20 mb-4">
+              <Users className="w-16 h-16 text-supernova-400" strokeWidth={2} />
+            </div>
+            <Badge variant="supernova" size="lg" className="inline-flex items-center gap-2">
+              <Rocket className="w-4 h-4" strokeWidth={2.5} />
+              Launching Soon
             </Badge>
-            <h2 className="font-display text-3xl md:text-4xl font-bold">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
               Be Part of Something Special
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -315,9 +388,12 @@ export default function CommunityPage() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-supernova-400"
+                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-supernova-400 focus:border-transparent transition-elegant hover:border-white/20"
               />
-              <Button variant="primary">Join Waitlist</Button>
+              <Button variant="primary" className="inline-flex items-center gap-2">
+                <Mail className="w-4 h-4" strokeWidth={2.5} />
+                Join Waitlist
+              </Button>
             </div>
           </div>
         </Container>

@@ -1,5 +1,19 @@
 import { Container, Card, Button, Badge } from '@/components/ui';
-import { Users, MessageCircle, Calendar, Award, Heart, Sparkles } from 'lucide-react';
+import { 
+  Users, 
+  MessageCircle, 
+  Calendar, 
+  Award, 
+  Heart, 
+  Sparkles,
+  Target,
+  TrendingUp,
+  Lightbulb,
+  CheckCircle2,
+  UserCheck,
+  Mail,
+  Rocket
+} from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import type { BadgeProps } from '@/components/ui/Badge';
@@ -15,21 +29,21 @@ type BadgeVariant = NonNullable<BadgeProps['variant']>;
 export default function MentorshipPage() {
   const mentorshipTypes = [
     {
-      icon: <Users className="w-8 h-8" />,
+      icon: <Users className="w-8 h-8" strokeWidth={2} />,
       title: '1-on-1 Mentorship',
       description: 'Get personalized guidance from experienced professionals',
       features: ['Regular meetings', 'Career advice', 'Skill development'],
       color: 'nebula' as BadgeVariant,
     },
     {
-      icon: <MessageCircle className="w-8 h-8" />,
+      icon: <MessageCircle className="w-8 h-8" strokeWidth={2} />,
       title: 'Group Sessions',
       description: 'Learn alongside peers in small group mentoring',
       features: ['Peer learning', 'Shared experiences', 'Network building'],
       color: 'aurora' as BadgeVariant,
     },
     {
-      icon: <Award className="w-8 h-8" />,
+      icon: <Award className="w-8 h-8" strokeWidth={2} />,
       title: 'Expert Workshops',
       description: 'Attend workshops led by industry experts',
       features: ['Skill-focused', 'Interactive', 'Q&A sessions'],
@@ -67,13 +81,15 @@ export default function MentorshipPage() {
       <section className="min-h-[70vh] flex items-center justify-center px-4 py-20">
         <Container size="lg">
           <div className="text-center space-y-8">
-            <Badge variant="aurora" size="lg" dot>
+            <Badge variant="aurora" size="lg" dot className="inline-flex items-center gap-2">
+              <Sparkles className="w-4 h-4" strokeWidth={2.5} />
               Coming Soon
             </Badge>
             
-            <h1 className="font-display text-5xl md:text-7xl font-bold">
-              <span className="gradient-text bg-gradient-aurora">Find Your</span>{' '}
-              <span className="gradient-text bg-gradient-nebula">Mentor</span>
+            <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight">
+              <span className="text-aurora-400">Find Your</span>
+              {' '}
+              <span className="text-nebula-400">Mentor</span>
             </h1>
             
             <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -82,16 +98,16 @@ export default function MentorshipPage() {
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center text-sm">
-              <span className="glass px-4 py-2 rounded-full">
-                <Users className="w-4 h-4 inline mr-2" />
+              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+                <Users className="w-4 h-4 text-nebula-400" strokeWidth={2.5} />
                 100+ Mentors
               </span>
-              <span className="glass px-4 py-2 rounded-full">
-                <Heart className="w-4 h-4 inline mr-2" />
+              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+                <Target className="w-4 h-4 text-aurora-400" strokeWidth={2.5} />
                 All Industries
               </span>
-              <span className="glass px-4 py-2 rounded-full">
-                <Sparkles className="w-4 h-4 inline mr-2" />
+              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+                <Sparkles className="w-4 h-4 text-stardust-400" strokeWidth={2.5} />
                 Free Platform
               </span>
             </div>
@@ -103,7 +119,7 @@ export default function MentorshipPage() {
       <section className="py-20 px-4">
         <Container size="xl">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               How Mentorship Works
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -120,7 +136,7 @@ export default function MentorshipPage() {
                     {
                       'bg-nebula-500/20 text-nebula-400': type.color === 'nebula',
                       'bg-aurora-500/20 text-aurora-400': type.color === 'aurora',
-                      'bg-cosmic-500/20 text-cosmic-400': type.color === 'cosmic',
+                      'bg-cosmic-blue-500/20 text-cosmic-blue-400': type.color === 'cosmic',
                       'bg-stardust-500/20 text-stardust-400': type.color === 'stardust',
                       'bg-supernova-500/20 text-supernova-400': type.color === 'supernova',
                     }
@@ -129,7 +145,7 @@ export default function MentorshipPage() {
                   </div>
                   
                   <div>
-                    <h3 className="font-display text-2xl font-semibold mb-2">
+                    <h3 className="font-display text-2xl font-semibold mb-2 text-white">
                       {type.title}
                     </h3>
                     <p className="text-gray-400 mb-4">{type.description}</p>
@@ -137,9 +153,7 @@ export default function MentorshipPage() {
                     <ul className="space-y-2">
                       {type.features.map((feature, idx) => (
                         <li key={idx} className="flex items-center gap-2 text-sm text-gray-300">
-                          <svg className="w-4 h-4 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
+                          <CheckCircle2 className="w-4 h-4 text-aurora-400" strokeWidth={2.5} />
                           {feature}
                         </li>
                       ))}
@@ -153,10 +167,10 @@ export default function MentorshipPage() {
       </section>
 
       {/* Featured Mentors Preview */}
-      <section className="py-20 px-4 bg-white/5">
+      <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="xl">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Meet Our Mentors
             </h2>
             <p className="text-gray-400 text-lg">
@@ -168,13 +182,13 @@ export default function MentorshipPage() {
             {mentorProfiles.map((mentor, index) => (
               <Card key={index} hover>
                 <div className="space-y-4">
-                  {/* Avatar Placeholder */}
-                  <div className="w-20 h-20 rounded-full bg-gradient-nebula flex items-center justify-center text-3xl">
-                    👩‍🔬
+                  {/* Avatar with Icon */}
+                  <div className="w-20 h-20 rounded-full bg-nebula-600 shadow-glow-nebula flex items-center justify-center">
+                    <UserCheck className="w-10 h-10 text-white" strokeWidth={2} />
                   </div>
                   
                   <div>
-                    <h3 className="font-display text-xl font-semibold mb-1">
+                    <h3 className="font-display text-xl font-semibold mb-1 text-white">
                       {mentor.name}
                     </h3>
                     <p className="text-gray-400 text-sm mb-1">{mentor.role}</p>
@@ -191,7 +205,7 @@ export default function MentorshipPage() {
 
                   <div className="pt-2">
                     <div className="flex items-center gap-2 text-sm">
-                      <div className="w-2 h-2 rounded-full bg-green-400"></div>
+                      <div className="w-2 h-2 rounded-full bg-aurora-400 animate-pulse-subtle"></div>
                       <span className="text-gray-400">{mentor.availability}</span>
                     </div>
                   </div>
@@ -210,7 +224,7 @@ export default function MentorshipPage() {
       <section className="py-20 px-4">
         <Container size="lg">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
               Why Mentorship Matters
             </h2>
           </div>
@@ -218,40 +232,54 @@ export default function MentorshipPage() {
           <div className="grid md:grid-cols-2 gap-6">
             {[
               {
-                icon: '🎯',
+                icon: <Target className="w-6 h-6" strokeWidth={2.5} />,
                 title: 'Career Guidance',
                 desc: 'Get insights into different career paths and make informed decisions about your future',
+                color: 'text-nebula-400',
+                bgColor: 'bg-nebula-500/10'
               },
               {
-                icon: '💡',
+                icon: <Lightbulb className="w-6 h-6" strokeWidth={2.5} />,
                 title: 'Skill Development',
                 desc: 'Learn practical skills and industry best practices from experienced professionals',
+                color: 'text-stardust-400',
+                bgColor: 'bg-stardust-500/10'
               },
               {
-                icon: '🤝',
+                icon: <Users className="w-6 h-6" strokeWidth={2.5} />,
                 title: 'Network Building',
                 desc: 'Connect with professionals and expand your network in the STEM community',
+                color: 'text-cosmic-blue-400',
+                bgColor: 'bg-cosmic-blue-500/10'
               },
               {
-                icon: '🚀',
+                icon: <Rocket className="w-6 h-6" strokeWidth={2.5} />,
                 title: 'Confidence Boost',
                 desc: 'Gain confidence and motivation from someone who has walked the path before you',
+                color: 'text-aurora-400',
+                bgColor: 'bg-aurora-500/10'
               },
               {
-                icon: '📈',
+                icon: <TrendingUp className="w-6 h-6" strokeWidth={2.5} />,
                 title: 'Personal Growth',
                 desc: 'Develop both professionally and personally with ongoing support and feedback',
+                color: 'text-supernova-400',
+                bgColor: 'bg-supernova-500/10'
               },
               {
-                icon: '🌟',
+                icon: <Sparkles className="w-6 h-6" strokeWidth={2.5} />,
                 title: 'Inspiration',
                 desc: 'Be inspired by successful women breaking barriers in STEM fields',
+                color: 'text-nebula-400',
+                bgColor: 'bg-nebula-500/10'
               },
             ].map((benefit, index) => (
-              <div key={index} className="glass p-6 rounded-xl flex gap-4">
-                <div className="text-4xl flex-shrink-0">{benefit.icon}</div>
+              <div key={index} className="glass p-6 rounded-premium flex gap-4 group hover:bg-white/10 transition-elegant">
+                <div className={cn('flex-shrink-0 w-12 h-12 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform-elegant', benefit.color, benefit.bgColor)}>
+                  {benefit.icon}
+                </div>
                 <div>
-                  <h3 className="font-semibold text-lg mb-2">{benefit.title}</h3>
+                  <h3 className="font-semibold text-lg mb-2 text-white">{benefit.title}</h3>
                   <p className="text-gray-400 text-sm">{benefit.desc}</p>
                 </div>
               </div>
@@ -263,9 +291,11 @@ export default function MentorshipPage() {
       {/* CTA */}
       <section className="py-20 px-4">
         <Container size="md">
-          <div className="glass rounded-3xl p-8 md:p-12 text-center space-y-6">
-            <Calendar className="w-16 h-16 mx-auto text-nebula-400" />
-            <h2 className="font-display text-3xl md:text-4xl font-bold">
+          <div className="glass-strong rounded-premium p-8 md:p-12 text-center space-y-6 shadow-elegant-lg">
+            <div className="inline-flex p-4 rounded-full bg-aurora-500/20 mb-4">
+              <Calendar className="w-16 h-16 text-aurora-400" strokeWidth={2} />
+            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
               Ready to Find Your Mentor?
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -276,16 +306,19 @@ export default function MentorshipPage() {
               <input
                 type="email"
                 placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-aurora-400"
+                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-aurora-400 focus:border-transparent transition-elegant hover:border-white/20"
               />
-              <Button variant="primary">Join Waitlist</Button>
+              <Button variant="primary" className="inline-flex items-center gap-2">
+                <Mail className="w-4 h-4" strokeWidth={2.5} />
+                Join Waitlist
+              </Button>
             </div>
             <p className="text-sm text-gray-500">
               Or{' '}
-              <Link href="/community" className="text-nebula-400 hover:text-nebula-300">
+              <Link href="/community" className="text-nebula-400 hover:text-nebula-300 transition-colors-elegant">
                 join the community
-              </Link>{' '}
-              to connect with peers
+              </Link>
+              {' '}to connect with peers
             </p>
           </div>
         </Container>
