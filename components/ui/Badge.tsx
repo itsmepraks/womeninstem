@@ -204,7 +204,7 @@ export function StatusBadge({
     <Badge
       variant={config.variant}
       dot={config.dot}
-      pulse={config.pulse}
+      pulse={config.pulse ?? false}
       className={className}
       {...props}
     >
