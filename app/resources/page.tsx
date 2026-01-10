@@ -70,7 +70,7 @@ export default function ResourcesPage() {
     },
     {
       type: 'Article',
-      title: 'Breaking Into the Tech Industry: A Woman\\'s Guide',
+      title: "Breaking Into the Tech Industry: A Woman's Guide",
       description: 'Navigate your tech career with insights from industry leaders',
       author: 'Maria Rodriguez',
       readTime: '10 min read',
