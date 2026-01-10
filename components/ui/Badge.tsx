@@ -189,13 +189,16 @@ export function StatusBadge({
   status: 'active' | 'inactive' | 'pending' | 'success' | 'warning' | 'error';
   className?: string;
 } & Omit<BadgeProps, 'variant'>) {
-  const statusConfig = {
-    active: { variant: 'aurora' as BadgeVariant, label: 'Active', dot: true, pulse: true },
-    inactive: { variant: 'default' as BadgeVariant, label: 'Inactive', dot: true },
-    pending: { variant: 'stardust' as BadgeVariant, label: 'Pending', dot: true, pulse: true },
-    success: { variant: 'aurora' as BadgeVariant, label: 'Success', dot: true },
-    warning: { variant: 'stardust' as BadgeVariant, label: 'Warning', dot: true },
-    error: { variant: 'supernova' as BadgeVariant, label: 'Error', dot: true },
+  const statusConfig: Record<
+    typeof status,
+    { variant: BadgeVariant; label: string; dot: boolean; pulse: boolean }
+  > = {
+    active: { variant: 'aurora', label: 'Active', dot: true, pulse: true },
+    inactive: { variant: 'default', label: 'Inactive', dot: true, pulse: false },
+    pending: { variant: 'stardust', label: 'Pending', dot: true, pulse: true },
+    success: { variant: 'aurora', label: 'Success', dot: true, pulse: false },
+    warning: { variant: 'stardust', label: 'Warning', dot: true, pulse: false },
+    error: { variant: 'supernova', label: 'Error', dot: true, pulse: false },
   };
 
   const config = statusConfig[status];
@@ -204,7 +207,7 @@ export function StatusBadge({
     <Badge
       variant={config.variant}
       dot={config.dot}
-      pulse={config.pulse ?? false}
+      pulse={config.pulse}
       className={className}
       {...props}
     >
