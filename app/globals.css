@@ -4,488 +4,312 @@
 
 @layer base {
   * {
-    @apply border-gray-800;
+    @apply border-ink-light/20;
   }
   
   body {
     @apply overflow-x-hidden;
   }
 
-  /* Enhanced Typography */
+  /* Book-inspired Typography */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight;
+    @apply font-serif tracking-title;
   }
 
   h1 {
-    @apply text-5xl md:text-7xl font-bold;
+    @apply text-5xl md:text-7xl font-bold text-ink;
   }
 
   h2 {
-    @apply text-4xl md:text-5xl font-bold;
+    @apply text-4xl md:text-5xl font-bold text-ink;
   }
 
   h3 {
-    @apply text-3xl md:text-4xl font-semibold;
+    @apply text-3xl md:text-4xl font-semibold text-ink;
   }
 
   h4 {
-    @apply text-2xl md:text-3xl font-semibold;
+    @apply text-2xl md:text-3xl font-semibold text-ink;
   }
 
   p {
-    @apply leading-relaxed;
+    @apply leading-relaxed tracking-body font-body text-ink-light;
   }
 }
 
 @layer utilities {
-  /* Refined Starfield Animations - More Subtle */
-  .stars,
-  .stars2,
-  .stars3 {
-    @apply absolute inset-0;
-    background-repeat: repeat;
-    background-size: 300px 300px;
-    opacity: 0.4;
-  }
-  
-  .stars {
+  /* Paper Texture Backgrounds */
+  .paper-texture {
     background-image: 
-      radial-gradient(1.5px 1.5px at 25px 35px, rgba(255, 255, 255, 0.8), transparent),
-      radial-gradient(1.5px 1.5px at 70px 80px, rgba(255, 255, 255, 0.6), transparent),
-      radial-gradient(1px 1px at 60px 60px, rgba(255, 255, 255, 0.7), transparent),
-      radial-gradient(1px 1px at 150px 90px, rgba(255, 255, 255, 0.5), transparent),
-      radial-gradient(1.5px 1.5px at 110px 15px, rgba(255, 255, 255, 0.9), transparent);
-    animation: animateStars 100s linear infinite;
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(45, 37, 32, 0.03) 2px,
+        rgba(45, 37, 32, 0.03) 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 2px,
+        rgba(45, 37, 32, 0.02) 2px,
+        rgba(45, 37, 32, 0.02) 4px
+      );
   }
-  
-  .stars2 {
+
+  .old-paper-texture {
     background-image: 
-      radial-gradient(1px 1px at 50px 70px, rgba(147, 197, 253, 0.6), transparent),
-      radial-gradient(1px 1px at 130px 105px, rgba(167, 243, 208, 0.5), transparent),
-      radial-gradient(1px 1px at 190px 50px, rgba(165, 180, 252, 0.7), transparent),
-      radial-gradient(0.5px 0.5px at 100px 130px, rgba(251, 207, 232, 0.4), transparent);
-    animation: animateStars 150s linear infinite;
-    opacity: 0.3;
+      radial-gradient(circle at 20% 50%, rgba(139, 122, 86, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(139, 122, 86, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 40% 20%, rgba(139, 122, 86, 0.03) 0%, transparent 50%);
   }
-  
-  .stars3 {
-    background-image: 
-      radial-gradient(0.8px 0.8px at 90px 30px, rgba(251, 191, 36, 0.5), transparent),
-      radial-gradient(0.8px 0.8px at 180px 120px, rgba(147, 197, 253, 0.4), transparent),
-      radial-gradient(0.8px 0.8px at 230px 75px, rgba(255, 255, 255, 0.6), transparent);
-    animation: animateStars 200s linear infinite;
-    opacity: 0.2;
+
+  .parchment-bg {
+    @apply bg-parchment-gradient;
+    background-size: 100% 100%;
   }
-  
-  @keyframes animateStars {
-    from {
-      transform: translateY(0);
+
+  /* Typography Utilities for Book Layout */
+  .chapter-heading {
+    @apply font-serif text-4xl md:text-6xl font-bold text-ink tracking-chapter;
+    @apply mb-6 text-center;
+    text-shadow: 2px 2px 4px rgba(45, 37, 32, 0.1);
+  }
+
+  .chapter-number {
+    @apply font-serif text-xl md:text-2xl font-medium text-sepia-600 tracking-wider;
+    @apply uppercase mb-3 text-center;
+  }
+
+  .section-heading {
+    @apply font-serif text-2xl md:text-4xl font-semibold text-ink tracking-title;
+    @apply mb-4 border-b-2 border-sepia-300 pb-2;
+  }
+
+  .book-quote {
+    @apply font-serif text-lg md:text-xl italic text-ink-light;
+    @apply border-l-4 border-gold-500 pl-6 py-4 my-6;
+    @apply relative;
+  }
+
+  .book-quote::before {
+    content: '"';
+    @apply absolute -left-2 -top-2 text-5xl text-gold-500/30 font-serif;
+  }
+
+  .drop-cap::first-letter {
+    @apply font-serif text-6xl md:text-7xl float-left;
+    @apply leading-none mr-2 text-burgundy-600;
+    margin-top: 0.1em;
+  }
+
+  .body-text {
+    @apply font-body text-base md:text-lg leading-relaxed text-ink-light;
+    @apply tracking-body;
+  }
+
+  .book-caption {
+    @apply font-sans text-sm text-ink-light/70 italic text-center;
+  }
+
+  /* Page Turn Animation */
+  .page-turn-enter {
+    animation: page-turn-in 0.6s ease-in-out;
+  }
+
+  .page-turn-exit {
+    animation: page-turn-out 0.6s ease-in-out;
+  }
+
+  @keyframes page-turn-in {
+    0% {
+      transform: perspective(1200px) rotateY(-180deg);
+      opacity: 0;
+      transform-origin: left center;
     }
-    to {
-      transform: translateY(-300px);
+    50% {
+      transform: perspective(1200px) rotateY(-90deg);
+      opacity: 0.5;
+      transform-origin: left center;
+    }
+    100% {
+      transform: perspective(1200px) rotateY(0deg);
+      opacity: 1;
+      transform-origin: left center;
     }
   }
-  
-  /* Premium Glass Morphism */
-  .glass {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10;
-  }
-
-  .glass-strong {
-    @apply bg-white/10 backdrop-blur-2xl border border-white/20;
-  }
-
-  .glass-subtle {
-    @apply bg-white/[0.03] backdrop-blur-lg border border-white/5;
-  }
-
-  .glass-dark {
-    @apply bg-black/20 backdrop-blur-xl border border-white/10;
-  }
-  
-  /* Sophisticated Text Styles - Replacing Gradients */
-  .text-elegant {
-    @apply text-white font-semibold tracking-tight;
-  }
-
-  .text-premium {
-    @apply text-white font-bold tracking-tight;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-  }
-
-  .text-accent-nebula {
-    @apply text-nebula-400 font-semibold;
-  }
-
-  .text-accent-aurora {
-    @apply text-aurora-400 font-semibold;
-  }
-
-  .text-accent-cosmic {
-    @apply text-cosmic-blue-400 font-semibold;
-  }
-
-  .text-accent-stardust {
-    @apply text-stardust-400 font-semibold;
-  }
-
-  .text-accent-supernova {
-    @apply text-supernova-400 font-semibold;
-  }
-
-  /* Refined Text Glow Effects */
-  .text-glow {
-    text-shadow: 0 0 20px currentColor, 0 0 40px currentColor;
-  }
-
-  .text-glow-subtle {
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
-  }
-
-  .text-glow-nebula {
-    text-shadow: 0 0 20px rgba(99, 102, 241, 0.5), 0 0 40px rgba(99, 102, 241, 0.3);
-  }
-
-  .text-glow-aurora {
-    text-shadow: 0 0 20px rgba(16, 185, 129, 0.5), 0 0 40px rgba(16, 185, 129, 0.3);
-  }
-
-  .text-shadow-premium {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-
-  /* Premium Typography Utilities */
-  .heading-display {
-    @apply font-display text-5xl md:text-7xl font-bold tracking-tight leading-none;
-  }
-
-  .heading-xl {
-    @apply font-display text-4xl md:text-6xl font-bold tracking-tight;
-  }
-
-  .heading-lg {
-    @apply font-display text-3xl md:text-5xl font-bold tracking-tight;
-  }
-
-  .heading-md {
-    @apply font-display text-2xl md:text-4xl font-semibold tracking-tight;
-  }
-
-  .heading-sm {
-    @apply font-display text-xl md:text-3xl font-semibold tracking-tight;
-  }
-
-  .body-lg {
-    @apply text-lg md:text-xl leading-relaxed text-gray-300;
-  }
-
-  .body-md {
-    @apply text-base md:text-lg leading-relaxed text-gray-400;
-  }
-
-  .body-sm {
-    @apply text-sm md:text-base leading-relaxed text-gray-400;
-  }
-
-  .label-text {
-    @apply text-xs font-medium uppercase tracking-wider text-gray-400;
-  }
-
-  /* Elegant Transitions */
-  .transition-elegant {
-    @apply transition-all duration-300 ease-in-out;
-  }
-
-  .transition-smooth {
-    @apply transition-all duration-500 ease-out;
-  }
-
-  .transition-fast {
-    @apply transition-all duration-200 ease-in-out;
-  }
-
-  .transition-colors-elegant {
-    @apply transition-colors duration-300 ease-in-out;
-  }
-
-  .transition-transform-elegant {
-    @apply transition-transform duration-300 ease-out;
-  }
-
-  /* Premium Hover Effects */
-  .hover-lift {
-    @apply transition-elegant hover:-translate-y-1;
-  }
-
-  .hover-lift-sm {
-    @apply transition-elegant hover:-translate-y-0.5;
-  }
-
-  .hover-scale {
-    @apply transition-elegant hover:scale-105;
-  }
-
-  .hover-scale-sm {
-    @apply transition-elegant hover:scale-102;
-  }
-
-  .hover-glow {
-    @apply transition-elegant hover:shadow-elegant-lg;
-  }
-
-  .hover-glow-nebula {
-    @apply transition-elegant hover:shadow-glow-nebula;
-  }
-
-  .hover-glow-aurora {
-    @apply transition-elegant hover:shadow-glow-aurora;
-  }
-
-  .hover-brighten {
-    @apply transition-elegant hover:brightness-110;
-  }
-
-  /* Elegant Border Styles */
-  .border-elegant {
-    @apply border border-white/10;
-  }
-
-  .border-elegant-strong {
-    @apply border border-white/20;
-  }
-
-  .border-elegant-subtle {
-    @apply border border-white/5;
-  }
-
-  .border-accent-nebula {
-    @apply border border-nebula-500/30;
-  }
-
-  .border-accent-aurora {
-    @apply border border-aurora-500/30;
-  }
-
-  .border-accent-cosmic {
-    @apply border border-cosmic-blue-500/30;
-  }
-
-  /* Premium Background Styles */
-  .bg-elegant {
-    @apply bg-white/5 backdrop-blur-sm;
-  }
-
-  .bg-elegant-strong {
-    @apply bg-white/10 backdrop-blur-md;
-  }
-
-  .bg-accent-nebula {
-    @apply bg-nebula-600;
-  }
-
-  .bg-accent-nebula-subtle {
-    @apply bg-nebula-500/10;
-  }
-
-  .bg-accent-aurora {
-    @apply bg-aurora-600;
-  }
-
-  .bg-accent-aurora-subtle {
-    @apply bg-aurora-500/10;
-  }
-
-  .bg-accent-cosmic {
-    @apply bg-cosmic-blue-600;
-  }
-
-  .bg-accent-cosmic-subtle {
-    @apply bg-cosmic-blue-500/10;
-  }
-
-  .bg-accent-stardust {
-    @apply bg-stardust-500;
-  }
-
-  .bg-accent-stardust-subtle {
-    @apply bg-stardust-500/10;
-  }
-
-  .bg-accent-supernova {
-    @apply bg-supernova-600;
-  }
 
-  .bg-accent-supernova-subtle {
-    @apply bg-supernova-500/10;
+  @keyframes page-turn-out {
+    0% {
+      transform: perspective(1200px) rotateY(0deg);
+      opacity: 1;
+      transform-origin: left center;
+    }
+    50% {
+      transform: perspective(1200px) rotateY(90deg);
+      opacity: 0.5;
+      transform-origin: left center;
+    }
+    100% {
+      transform: perspective(1200px) rotateY(180deg);
+      opacity: 0;
+      transform-origin: left center;
+    }
   }
 
-  /* Refined Card Styles */
-  .card-elegant {
-    @apply glass rounded-premium p-6 shadow-card transition-elegant;
+  /* Book Layout Utilities */
+  .book-container {
+    @apply relative;
   }
 
-  .card-elegant-hover {
-    @apply card-elegant hover:shadow-card-hover hover:-translate-y-1;
+  .book-page {
+    @apply bg-parchment rounded-page shadow-page;
+    @apply border border-sepia-200/50;
+    @apply p-8 md:p-12 lg:p-16;
   }
 
-  .card-premium {
-    @apply glass-strong rounded-premium p-8 shadow-elegant-lg;
+  .book-spread {
+    @apply grid grid-cols-1 lg:grid-cols-2 gap-8;
   }
 
-  /* Premium Button Base Styles */
-  .btn-base {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full;
-    @apply font-semibold transition-elegant;
-    @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-deep-space;
+  /* Book Card Styles */
+  .book-card {
+    @apply bg-parchment-light rounded-page shadow-book;
+    @apply border border-sepia-200/50;
+    @apply p-6 transition-all duration-300;
+    @apply hover:shadow-book-lg hover:-translate-y-1;
   }
 
-  .btn-primary {
-    @apply btn-base bg-nebula-600 text-white;
-    @apply hover:bg-nebula-500 hover:shadow-glow-nebula hover:scale-105;
-    @apply focus:ring-nebula-500;
+  .book-card-premium {
+    @apply book-card;
+    @apply bg-gradient-to-br from-parchment-light to-cream-100;
   }
 
-  .btn-secondary {
-    @apply btn-base glass text-white;
-    @apply hover:bg-white/10 hover:shadow-elegant-lg;
-    @apply focus:ring-white/20;
+  /* Decorative Elements */
+  .ornamental-divider {
+    @apply h-px bg-gradient-to-r from-transparent via-sepia-400 to-transparent;
+    @apply my-8;
   }
 
-  .btn-accent-aurora {
-    @apply btn-base bg-aurora-600 text-white;
-    @apply hover:bg-aurora-500 hover:shadow-glow-aurora hover:scale-105;
-    @apply focus:ring-aurora-500;
+  .chapter-ornament {
+    @apply text-center text-3xl text-sepia-500;
+    @apply my-6;
   }
 
-  /* Status Indicators */
-  .status-dot {
-    @apply relative inline-flex h-3 w-3 rounded-full;
+  .chapter-ornament::before {
+    content: '❦';
   }
 
-  .status-dot-pulse {
-    @apply status-dot;
+  /* Vintage Button Styles */
+  .btn-book {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3;
+    @apply font-serif font-semibold text-base;
+    @apply bg-sepia-600 text-parchment rounded-book;
+    @apply border-2 border-sepia-700;
+    @apply shadow-book transition-all duration-300;
+    @apply hover:bg-sepia-700 hover:shadow-book-lg hover:-translate-y-0.5;
+    @apply focus:outline-none focus:ring-2 focus:ring-sepia-500 focus:ring-offset-2;
   }
 
-  .status-dot-pulse::before {
-    content: '';
-    @apply absolute inline-flex h-full w-full rounded-full;
-    @apply animate-ping opacity-75;
+  .btn-book-secondary {
+    @apply btn-book;
+    @apply bg-parchment text-ink border-ink-light;
+    @apply hover:bg-parchment-dark;
   }
 
-  /* Premium Dividers */
-  .divider-elegant {
-    @apply border-t border-white/10;
+  .btn-book-accent {
+    @apply btn-book;
+    @apply bg-burgundy-600 border-burgundy-700;
+    @apply hover:bg-burgundy-700;
   }
 
-  .divider-elegant-strong {
-    @apply border-t border-white/20;
+  /* Text Shadows for Book Aesthetic */
+  .text-shadow-book {
+    text-shadow: 1px 1px 2px rgba(45, 37, 32, 0.1);
   }
 
-  .divider-glow {
-    @apply h-px bg-gradient-to-r from-transparent via-nebula-400/50 to-transparent;
+  .text-shadow-vintage {
+    text-shadow: 2px 2px 4px rgba(139, 122, 86, 0.3);
   }
 
-  /* Refined Badge Styles */
-  .badge-base {
+  /* Badge Styles for Book Theme */
+  .badge-book {
     @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full;
-    @apply text-sm font-medium transition-elegant;
+    @apply text-sm font-medium border;
+    @apply bg-sepia-100 text-sepia-800 border-sepia-300;
   }
 
-  .badge-elegant {
-    @apply badge-base glass;
+  .badge-burgundy {
+    @apply badge-book;
+    @apply bg-burgundy-100 text-burgundy-800 border-burgundy-300;
   }
 
-  .badge-nebula {
-    @apply badge-base bg-nebula-500/20 text-nebula-300 border border-nebula-500/30;
+  .badge-gold {
+    @apply badge-book;
+    @apply bg-gold-100 text-gold-800 border-gold-300;
   }
 
-  .badge-aurora {
-    @apply badge-base bg-aurora-500/20 text-aurora-300 border border-aurora-500/30;
+  .badge-forest {
+    @apply badge-book;
+    @apply bg-forest-100 text-forest-800 border-forest-300;
   }
 
-  .badge-cosmic {
-    @apply badge-base bg-cosmic-blue-500/20 text-cosmic-blue-300 border border-cosmic-blue-500/30;
+  /* Scrollbar Styling for Book Theme */
+  .scrollbar-book::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
   }
 
-  /* Scrollbar Styling */
-  .scrollbar-elegant::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+  .scrollbar-book::-webkit-scrollbar-track {
+    @apply bg-parchment-dark rounded-full;
   }
 
-  .scrollbar-elegant::-webkit-scrollbar-track {
-    @apply bg-white/5 rounded-full;
-  }
-
-  .scrollbar-elegant::-webkit-scrollbar-thumb {
-    @apply bg-white/20 rounded-full;
-    @apply hover:bg-white/30;
-  }
-
-  /* Focus Styles */
-  .focus-elegant {
-    @apply focus:outline-none focus:ring-2 focus:ring-nebula-500 focus:ring-offset-2 focus:ring-offset-deep-space;
-  }
-
-  .focus-elegant-aurora {
-    @apply focus:outline-none focus:ring-2 focus:ring-aurora-500 focus:ring-offset-2 focus:ring-offset-deep-space;
+  .scrollbar-book::-webkit-scrollbar-thumb {
+    @apply bg-sepia-400 rounded-full;
+    @apply hover:bg-sepia-500;
   }
 
   /* Selection Styles */
   ::selection {
-    @apply bg-nebula-500/30 text-white;
+    @apply bg-gold-200 text-ink;
   }
 
   ::-moz-selection {
-    @apply bg-nebula-500/30 text-white;
+    @apply bg-gold-200 text-ink;
   }
 
-  /* Skeleton Loading */
-  .skeleton {
-    @apply bg-white/5 animate-pulse rounded;
+  /* Transitions */
+  .transition-book {
+    @apply transition-all duration-300 ease-in-out;
   }
 
-  .skeleton-text {
-    @apply skeleton h-4 w-full;
+  /* Hover Effects */
+  .hover-lift-book {
+    @apply transition-book hover:-translate-y-1 hover:shadow-book-lg;
   }
 
-  /* Premium Overlay */
-  .overlay-elegant {
-    @apply fixed inset-0 bg-deep-space/80 backdrop-blur-md;
+  /* Input Styles for Book Theme */
+  .input-book {
+    @apply w-full px-4 py-3 bg-parchment-light;
+    @apply border-2 border-sepia-300 rounded-book;
+    @apply text-ink placeholder:text-ink-light/50;
+    @apply focus:outline-none focus:ring-2 focus:ring-sepia-500 focus:border-transparent;
+    @apply transition-book;
   }
 
-  .overlay-premium {
-    @apply fixed inset-0 bg-deep-space/90 backdrop-blur-lg;
+  .input-book:hover {
+    @apply border-sepia-400;
   }
 
-  /* Refined Input Styles */
-  .input-elegant {
-    @apply w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg;
-    @apply text-white placeholder:text-gray-500;
-    @apply focus:outline-none focus:ring-2 focus:ring-nebula-400 focus:border-transparent;
-    @apply transition-elegant;
+  /* Page Number Styles */
+  .page-number {
+    @apply font-serif text-sm text-ink-light/60 text-center;
   }
 
-  .input-elegant:hover {
-    @apply border-white/20;
-  }
-
-  /* Utility for hiding scrollbar while keeping functionality */
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
-  }
-
-  /* Print Optimization */
-  @media print {
-    .stars,
-    .stars2,
-    .stars3 {
-      display: none;
-    }
+  /* Bookmark Indicator */
+  .bookmark {
+    @apply absolute top-0 right-8 w-12 h-16;
+    @apply bg-burgundy-600 shadow-book;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
   }
 }
