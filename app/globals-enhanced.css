@@ -1,0 +1,305 @@
+/**
+ * Enhanced CSS for book-specific animations and interactive effects
+ */
+
+@layer utilities {
+  /* Smooth Slide-in Animation for Panels */
+  @keyframes slide-in-right {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in-right {
+    animation: slide-in-right 0.3s ease-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.2s ease-out;
+  }
+
+  /* 3D Page Turn Effects */
+  @keyframes page-turn-3d {
+    0% {
+      transform: perspective(2000px) rotateY(0deg);
+      transform-origin: left center;
+    }
+    50% {
+      transform: perspective(2000px) rotateY(-90deg);
+      transform-origin: left center;
+      box-shadow: -20px 0 50px rgba(0, 0, 0, 0.3);
+    }
+    100% {
+      transform: perspective(2000px) rotateY(-180deg);
+      transform-origin: left center;
+    }
+  }
+
+  .animate-page-turn-3d {
+    animation: page-turn-3d 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  /* Page Curl Hover Effect */
+  .page-curl-hover {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-curl-hover::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 60px 60px;
+    border-color: transparent transparent rgba(139, 122, 86, 0.2) transparent;
+    transition: all 0.3s ease;
+    pointer-events: none;
+  }
+
+  .page-curl-hover:hover::after {
+    border-width: 0 0 80px 80px;
+  }
+
+  /* Book Spine 3D Effect */
+  .book-spine-3d {
+    background: linear-gradient(
+      to right,
+      rgba(139, 122, 86, 0.8) 0%,
+      rgba(107, 93, 63, 0.9) 25%,
+      rgba(107, 93, 63, 1) 50%,
+      rgba(107, 93, 63, 0.9) 75%,
+      rgba(139, 122, 86, 0.8) 100%
+    );
+    box-shadow: 
+      inset 2px 0 4px rgba(0, 0, 0, 0.3),
+      inset -2px 0 4px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Page Flip Shadow */
+  .page-flip-shadow {
+    box-shadow: 
+      2px 2px 8px rgba(45, 37, 32, 0.15),
+      4px 4px 16px rgba(45, 37, 32, 0.1),
+      8px 8px 32px rgba(45, 37, 32, 0.05);
+  }
+
+  .page-flip-shadow-active {
+    box-shadow: 
+      -2px 0 8px rgba(45, 37, 32, 0.2),
+      -4px 0 16px rgba(45, 37, 32, 0.15),
+      -8px 0 32px rgba(45, 37, 32, 0.1);
+  }
+
+  /* Interactive Page Corner */
+  .page-corner-interactive {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    overflow: hidden;
+    pointer-events: auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .page-corner-interactive::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 0 80px 80px;
+    border-color: transparent transparent rgba(221, 214, 193, 0.9) transparent;
+    transition: all 0.3s ease;
+  }
+
+  .page-corner-interactive:hover::before {
+    border-width: 0 0 100px 100px;
+    border-color: transparent transparent rgba(232, 227, 211, 1) transparent;
+  }
+
+  /* Ornamental Chapter Divider */
+  .chapter-divider-ornate {
+    position: relative;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      rgba(192, 141, 90, 0.3) 20%,
+      rgba(192, 141, 90, 0.8) 50%,
+      rgba(192, 141, 90, 0.3) 80%,
+      transparent 100%
+    );
+    margin: 2rem 0;
+  }
+
+  .chapter-divider-ornate::before {
+    content: '❦';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #f4f1e8;
+    padding: 0 1rem;
+    color: rgba(192, 141, 90, 0.6);
+    font-size: 1.5rem;
+  }
+
+  /* Book Opening Animation */
+  @keyframes book-open {
+    0% {
+      transform: perspective(2000px) rotateY(-30deg) scale(0.9);
+      opacity: 0;
+    }
+    100% {
+      transform: perspective(2000px) rotateY(0deg) scale(1);
+      opacity: 1;
+    }
+  }
+
+  .animate-book-open {
+    animation: book-open 0.8s ease-out;
+  }
+
+  /* Text Reveal Animation */
+  @keyframes text-reveal {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-text-reveal {
+    animation: text-reveal 0.6s ease-out;
+  }
+
+  /* Stagger Children Animations */
+  .stagger-children > * {
+    animation: text-reveal 0.6s ease-out;
+  }
+
+  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+
+  /* Glow Effect on Hover */
+  .glow-on-hover {
+    transition: all 0.3s ease;
+  }
+
+  .glow-on-hover:hover {
+    box-shadow: 0 0 20px rgba(192, 141, 90, 0.4);
+  }
+
+  /* Paper Grain Animation */
+  @keyframes paper-grain {
+    0%, 100% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.4;
+    }
+  }
+
+  .animate-paper-grain {
+    animation: paper-grain 4s ease-in-out infinite;
+  }
+
+  /* Book Loading Spinner */
+  @keyframes book-loading {
+    0% {
+      transform: perspective(1000px) rotateY(0deg);
+    }
+    50% {
+      transform: perspective(1000px) rotateY(180deg);
+    }
+    100% {
+      transform: perspective(1000px) rotateY(360deg);
+    }
+  }
+
+  .animate-book-loading {
+    animation: book-loading 2s ease-in-out infinite;
+  }
+
+  /* Bookmark Ribbon Effect */
+  .bookmark-ribbon {
+    position: relative;
+    background: linear-gradient(135deg, #c92e54 0%, #a82145 100%);
+    box-shadow: 2px 2px 8px rgba(201, 46, 84, 0.3);
+  }
+
+  .bookmark-ribbon::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 0;
+    height: 0;
+    border-left: 24px solid transparent;
+    border-right: 24px solid transparent;
+    border-top: 10px solid #a82145;
+  }
+
+  /* Page Number with Ornaments */
+  .page-number-ornate {
+    position: relative;
+    font-family: var(--font-playfair);
+    font-size: 0.875rem;
+    color: rgba(45, 37, 32, 0.4);
+    text-align: center;
+    padding: 0.5rem 0;
+  }
+
+  .page-number-ornate::before,
+  .page-number-ornate::after {
+    content: '❦';
+    position: relative;
+    padding: 0 0.75rem;
+    opacity: 0.3;
+  }
+
+  /* Smooth Book Transitions */
+  .transition-book-smooth {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Perspective Container */
+  .perspective-container {
+    perspective: 1500px;
+    perspective-origin: center;
+  }
+
+  /* Vintage Text Shadow */
+  .text-shadow-vintage {
+    text-shadow: 2px 2px 4px rgba(139, 122, 86, 0.3);
+  }
+}
