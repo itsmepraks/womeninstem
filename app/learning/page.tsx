@@ -105,7 +105,7 @@ export default function LearningPage() {
       <section className="py-20 px-4">
         <Container size="xl">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-ink">
               Explore Learning Paths
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -137,7 +137,7 @@ export default function LearningPage() {
                   </div>
                   
                   <div>
-                    <h3 className="font-display text-2xl font-semibold mb-2 text-white">
+                    <h3 className="font-display text-2xl font-semibold mb-2 text-ink">
                       {path.title}
                     </h3>
                     <p className="text-gray-400 mb-3">{path.description}</p>
@@ -165,7 +165,7 @@ export default function LearningPage() {
       <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="lg">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-ink">
               How It Works
             </h2>
           </div>
@@ -281,7 +281,7 @@ export default function LearningPage() {
       <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="lg">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-ink">
               Why Choose Our Learning Paths
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -321,7 +321,7 @@ export default function LearningPage() {
                 )}>
                   {benefit.icon}
                 </div>
-                <h3 className="font-display text-xl font-semibold mb-2 text-white">
+                <h3 className="font-display text-xl font-semibold mb-2 text-ink">
                   {benefit.title}
                 </h3>
                 <p className="text-gray-400 text-sm">
@@ -341,7 +341,7 @@ export default function LearningPage() {
               <Rocket className="w-4 h-4" strokeWidth={2.5} />
               Launching Soon
             </Badge>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-ink">
               Get Ready to Level Up
             </h2>
             <p className="text-gray-400 text-lg">

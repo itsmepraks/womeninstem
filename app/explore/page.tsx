@@ -60,7 +60,7 @@ export default function ExplorePage() {
       {/* Features Preview */}
       <section className="py-20 px-4">
         <Container size="xl">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-4 text-white">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-4 text-ink">
             What You&apos;ll Discover
           </h2>
           <p className="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
@@ -104,7 +104,7 @@ export default function ExplorePage() {
                   }`}>
                     {feature.icon}
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-white">{feature.title}</h3>
+                  <h3 className="font-display text-xl font-semibold text-ink">{feature.title}</h3>
                   <p className="text-gray-400 text-sm leading-relaxed">
                     {feature.description}
                   </p>
@@ -174,7 +174,7 @@ export default function ExplorePage() {
             <div className="inline-flex p-4 rounded-full bg-nebula-500/20 mb-4">
               <Compass className="w-12 h-12 text-nebula-400" strokeWidth={2} />
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-ink">
               Ready to Start Your Journey?
             </h2>
             <p className="text-gray-400 text-lg">

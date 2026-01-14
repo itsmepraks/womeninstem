@@ -153,7 +153,7 @@ export default function ResourcesPage() {
       <section className="py-20 px-4">
         <Container size="xl">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-ink">
               Browse by Category
             </h2>
             <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -198,7 +198,7 @@ export default function ResourcesPage() {
       <section className="py-20 px-4 bg-white/[0.02]">
         <Container size="xl">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-ink">
               Featured Resources
             </h2>
             <p className="text-gray-400 text-lg">
@@ -251,7 +251,7 @@ export default function ResourcesPage() {
       <section className="py-20 px-4">
         <Container size="lg">
           <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-ink">
               Essential Tools & Platforms
             </h2>
             <p className="text-gray-400 text-lg">

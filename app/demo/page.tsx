@@ -177,7 +177,7 @@ export default function DemoPage() {
 
       <div className="text-center space-y-2 max-w-md">
         <p className="text-lg text-ink-light font-serif">
-          You've reached the end of this demo.
+          You&apos;ve reached the end of this demo.
         </p>
         <p className="text-sm text-ink-light/70">
           The page-flipping technology is fully functional and ready for your content.
@@ -193,13 +193,13 @@ export default function DemoPage() {
   ];
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen py-8 bg-parchment">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-ink mb-4">
             Book Reader Demo
           </h1>
-          <p className="text-gray-400">
+          <p className="text-ink-light">
             Experience our interactive page-flipping technology
           </p>
         </div>
