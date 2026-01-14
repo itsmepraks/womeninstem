@@ -1,167 +1,172 @@
 'use client';
 
-import React from 'react';
-import { useBookStore } from '@/lib/store/bookStore';
-import { usePageTurn } from '@/hooks/usePageTurn';
+import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
-import { X, BookMarked } from 'lucide-react';
-import type { Chapter } from '@/types/book';
+import { Book, ChevronDown, ChevronRight } from 'lucide-react';
 
-interface TableOfContentsProps {
+export interface Chapter {
+  id: string;
+  number?: number;
+  title: string;
+  pageNumber: number;
+  subsections?: {
+    id: string;
+    title: string;
+    pageNumber: number;
+  }[];
+}
+
+export interface TableOfContentsProps {
   chapters: Chapter[];
+  currentPage: number;
+  onNavigate: (pageNumber: number) => void;
   className?: string;
 }
 
 /**
- * TableOfContents - Drawer/modal component showing all chapters and allowing quick navigation
+ * TableOfContents component - Interactive table of contents with chapter navigation
+ * 
+ * @example
+ * ```tsx
+ * <TableOfContents 
+ *   chapters={chapters}
+ *   currentPage={5}
+ *   onNavigate={(page) => goToPage(page)}
+ * />
+ * ```
  */
-export default function TableOfContents({ chapters, className }: TableOfContentsProps) {
-  const { showTableOfContents, setShowTableOfContents } = useBookStore();
-  const { navigateToPage, currentPage } = usePageTurn();
+export default function TableOfContents({
+  chapters,
+  currentPage,
+  onNavigate,
+  className,
+}: TableOfContentsProps) {
+  const [expandedChapters, setExpandedChapters] = useState<Set<string>>(new Set());
 
-  const handleChapterClick = (startPage: number) => {
-    navigateToPage(startPage);
-    setShowTableOfContents(false);
+  const toggleChapter = (chapterId: string) => {
+    setExpandedChapters((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(chapterId)) {
+        newSet.delete(chapterId);
+      } else {
+        newSet.add(chapterId);
+      }
+      return newSet;
+    });
   };
 
-  if (!showTableOfContents) return null;
+  const getCurrentChapter = () => {
+    return chapters.find(
+      (chapter) => 
+        currentPage >= chapter.pageNumber && 
+        (chapters[chapters.indexOf(chapter) + 1]?.pageNumber > currentPage || 
+         chapters.indexOf(chapter) === chapters.length - 1)
+    );
+  };
+
+  const currentChapter = getCurrentChapter();
 
   return (
-    <>
-      {/* Overlay */}
-      <div
-        className="fixed inset-0 bg-ink/60 backdrop-blur-sm z-40 animate-fade-in"
-        onClick={() => setShowTableOfContents(false)}
-        aria-hidden="true"
-      />
+    <div className={cn('table-of-contents book-card p-6', className)}>
+      {/* Header */}
+      <div className="flex items-center gap-3 mb-6 pb-4 border-b-2 border-sepia-300">
+        <Book className="w-6 h-6 text-sepia-600" />
+        <h3 className="font-serif text-2xl font-bold text-ink">Table of Contents</h3>
+      </div>
 
-      {/* Table of Contents Panel */}
-      <aside
-        className={cn(
-          'fixed right-0 top-0 bottom-0 w-full sm:w-96',
-          'bg-parchment shadow-book-xl z-50',
-          'animate-slide-in-right overflow-hidden',
-          className
-        )}
-        role="dialog"
-        aria-label="Table of contents"
-      >
-        <div className="h-full flex flex-col">
-          {/* Header */}
-          <div className="px-6 py-5 border-b-2 border-sepia-300 bg-parchment-light">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <BookMarked className="w-6 h-6 text-burgundy-600" />
-                <h2 className="text-2xl font-serif font-bold text-ink">
-                  Table of Contents
-                </h2>
-              </div>
+      {/* Chapters List */}
+      <nav className="space-y-3">
+        {chapters.map((chapter) => {
+          const isExpanded = expandedChapters.has(chapter.id);
+          const isCurrentChapter = currentChapter?.id === chapter.id;
+          const hasSubsections = chapter.subsections && chapter.subsections.length > 0;
+
+          return (
+            <div key={chapter.id} className="chapter-item">
+              {/* Main Chapter */}
               <button
-                onClick={() => setShowTableOfContents(false)}
+                onClick={() => {
+                  if (hasSubsections) {
+                    toggleChapter(chapter.id);
+                  } else {
+                    onNavigate(chapter.pageNumber);
+                  }
+                }}
                 className={cn(
-                  'p-2 rounded-full hover:bg-sepia-100',
-                  'transition-book focus:outline-none focus:ring-2 focus:ring-sepia-500'
+                  'w-full flex items-start gap-3 p-3 rounded-book text-left',
+                  'transition-all duration-300 group',
+                  {
+                    'bg-sepia-100 border-2 border-sepia-400': isCurrentChapter,
+                    'hover:bg-sepia-50 border-2 border-transparent': !isCurrentChapter,
+                  }
                 )}
-                aria-label="Close table of contents"
               >
-                <X className="w-5 h-5 text-ink" />
-              </button>
-            </div>
-          </div>
-
-          {/* Chapters List */}
-          <nav className="flex-1 overflow-y-auto scrollbar-book px-6 py-4">
-            <ul className="space-y-2">
-              {chapters.map((chapter, index) => {
-                const isActive = currentPage >= chapter.pageRange[0] && currentPage <= chapter.pageRange[1];
+                {hasSubsections && (
+                  <span className="mt-1">
+                    {isExpanded ? (
+                      <ChevronDown className="w-4 h-4 text-sepia-600" />
+                    ) : (
+                      <ChevronRight className="w-4 h-4 text-sepia-600" />
+                    )}
+                  </span>
+                )}
                 
-                return (
-                  <li key={chapter.id}>
+                <div className="flex-1">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <div>
+                      {chapter.number && (
+                        <span className="text-sm font-medium text-sepia-600 uppercase tracking-wider">
+                          Chapter {chapter.number}
+                        </span>
+                      )}
+                      <h4 className="font-serif text-lg font-semibold text-ink group-hover:text-sepia-700">
+                        {chapter.title}
+                      </h4>
+                    </div>
+                    <span className="text-sm font-serif text-ink-light/60 whitespace-nowrap">
+                      {chapter.pageNumber}
+                    </span>
+                  </div>
+                </div>
+              </button>
+
+              {/* Subsections */}
+              {hasSubsections && isExpanded && (
+                <div className="ml-8 mt-2 space-y-2">
+                  {chapter.subsections!.map((subsection) => (
                     <button
-                      onClick={() => handleChapterClick(chapter.pageRange[0])}
+                      key={subsection.id}
+                      onClick={() => onNavigate(subsection.pageNumber)}
                       className={cn(
-                        'w-full text-left p-4 rounded-book transition-book',
-                        'border-2 hover:shadow-book',
-                        isActive
-                          ? 'bg-burgundy-50 border-burgundy-400 shadow-book'
-                          : 'bg-parchment-light border-sepia-200 hover:border-sepia-400',
-                        'focus:outline-none focus:ring-2 focus:ring-sepia-500'
+                        'w-full flex items-baseline justify-between gap-2 p-2 rounded-book text-left',
+                        'transition-all duration-300',
+                        'hover:bg-sepia-50',
+                        {
+                          'bg-sepia-50': currentPage === subsection.pageNumber,
+                        }
                       )}
                     >
-                      <div className="flex items-start gap-3">
-                        {/* Chapter Number */}
-                        <div
-                          className={cn(
-                            'flex-shrink-0 w-10 h-10 rounded-full',
-                            'flex items-center justify-center',
-                            'font-serif font-bold text-sm',
-                            isActive
-                              ? 'bg-burgundy-600 text-parchment'
-                              : 'bg-sepia-200 text-ink'
-                          )}
-                        >
-                          {index + 1}
-                        </div>
-
-                        {/* Chapter Info */}
-                        <div className="flex-1 min-w-0">
-                          <h3
-                            className={cn(
-                              'font-serif font-semibold text-lg mb-1',
-                              isActive ? 'text-burgundy-900' : 'text-ink'
-                            )}
-                          >
-                            {chapter.title}
-                          </h3>
-                          {chapter.subtitle && (
-                            <p className="text-sm text-ink-light/70 italic">
-                              {chapter.subtitle}
-                            </p>
-                          )}
-                          <p className="text-xs text-ink-light/50 mt-2 font-serif">
-                            Pages {chapter.pageRange[0] + 1} - {chapter.pageRange[1] + 1}
-                          </p>
-                        </div>
-                      </div>
+                      <span className="font-body text-base text-ink-light hover:text-ink">
+                        {subsection.title}
+                      </span>
+                      <span className="text-sm font-serif text-ink-light/60">
+                        {subsection.pageNumber}
+                      </span>
                     </button>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </nav>
 
-          {/* Footer */}
-          <div className="px-6 py-4 border-t-2 border-sepia-300 bg-parchment-light">
-            <p className="text-sm text-center text-ink-light font-serif italic">
-              Use keyboard arrows or swipe to navigate pages
-            </p>
-          </div>
-        </div>
-      </aside>
-    </>
-  );
-}
-
-/**
- * TOC Toggle Button - Floatingbutton to open the table of contents
- */
-export function TOCToggleButton({ className }: { className?: string }) {
-  const { toggleTableOfContents } = useBookStore();
-
-  return (
-    <button
-      onClick={toggleTableOfContents}
-      className={cn(
-        'fixed top-24 right-8 z-30',
-        'p-4 bg-burgundy-600 text-parchment rounded-full shadow-book-lg',
-        'hover:bg-burgundy-700 hover:shadow-book-xl hover:scale-105',
-        'transition-book focus:outline-none focus:ring-2 focus:ring-burgundy-500',
-        className
-      )}
-      aria-label="Open table of contents"
-      title="Table of Contents"
-    >
-      <BookMarked className="w-6 h-6" />
-    </button>
+      {/* Footer Note */}
+      <div className="mt-6 pt-4 border-t border-sepia-200">
+        <p className="text-sm text-ink-light/70 italic text-center font-body">
+          Use arrow keys to navigate pages
+        </p>
+      </div>
+    </div>
   );
 }

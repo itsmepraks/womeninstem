@@ -112,13 +112,21 @@
     @apply font-sans text-sm text-ink-light/70 italic text-center;
   }
 
-  /* Page Turn Animation */
+  /* Enhanced Page Turn Animations */
   .page-turn-enter {
     animation: page-turn-in 0.6s ease-in-out;
   }
 
   .page-turn-exit {
     animation: page-turn-out 0.6s ease-in-out;
+  }
+
+  .page-turn-exit-right {
+    animation: page-turn-exit-right 0.6s ease-in-out forwards;
+  }
+
+  .page-turn-exit-left {
+    animation: page-turn-exit-left 0.6s ease-in-out forwards;
   }
 
   @keyframes page-turn-in {
@@ -155,6 +163,45 @@
       opacity: 0;
       transform-origin: left center;
     }
+  }
+
+  @keyframes page-turn-exit-right {
+    0% {
+      transform: perspective(1200px) rotateY(0deg) translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: perspective(1200px) rotateY(180deg) translateX(50%);
+      opacity: 0;
+    }
+  }
+
+  @keyframes page-turn-exit-left {
+    0% {
+      transform: perspective(1200px) rotateY(0deg) translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: perspective(1200px) rotateY(-180deg) translateX(-50%);
+      opacity: 0;
+    }
+  }
+
+  /* Page Curl Effect */
+  .page-curl-overlay {
+    background: linear-gradient(
+      135deg,
+      transparent 0%,
+      rgba(139, 122, 86, 0.1) 50%,
+      rgba(139, 122, 86, 0.2) 100%
+    );
+    clip-path: polygon(100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Perspective Container for 3D Effects */
+  .perspective-container {
+    perspective: 1500px;
+    perspective-origin: center;
   }
 
   /* Book Layout Utilities */
@@ -311,5 +358,19 @@
     @apply absolute top-0 right-8 w-12 h-16;
     @apply bg-burgundy-600 shadow-book;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+  }
+
+  /* Book Reader Specific Styles */
+  .book-reader-container {
+    @apply px-4 py-8;
+  }
+
+  .book-page-container {
+    @apply w-full;
+  }
+
+  /* Smooth transitions */
+  .duration-600 {
+    transition-duration: 600ms;
   }
 }
