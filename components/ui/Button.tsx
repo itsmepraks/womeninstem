@@ -10,11 +10,11 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 /**
- * Sophisticated Button component with premium styling and elegant interactions
+ * Book-inspired Button component with vintage styling and elegant interactions
  * 
  * @example
  * ```tsx
- * <Button variant="primary" size="md">Launch Journey</Button>
+ * <Button variant="primary" size="md">Begin Reading</Button>
  * <Button variant="accent" leftIcon={<Icon />}>Get Started</Button>
  * <Button variant="outline">Learn More</Button>
  * ```
@@ -33,41 +33,41 @@ export default function Button({
   return (
     <button
       className={cn(
-        // Base styles
+        // Base styles - Book aesthetic
         'relative inline-flex items-center justify-center gap-2',
-        'font-semibold transition-elegant',
-        'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-deep-space',
+        'font-serif font-semibold transition-book',
+        'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-parchment',
         'disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none',
         'disabled:hover:shadow-none disabled:hover:scale-100',
         
         // Variant styles
         {
-          // Primary - Nebula purple with elegant glow
-          'bg-nebula-600 text-white shadow-elegant hover:bg-nebula-500 hover:shadow-glow-nebula hover:scale-105 focus:ring-nebula-500':
+          // Primary - Warm sepia brown with book shadow
+          'bg-sepia-600 text-parchment border-2 border-sepia-700 shadow-book hover:bg-sepia-700 hover:shadow-book-lg hover:-translate-y-0.5 focus:ring-sepia-500':
             variant === 'primary',
           
-          // Secondary - Premium glass effect
-          'glass text-white hover:bg-white/10 hover:shadow-elegant-lg focus:ring-white/20':
+          // Secondary - Parchment background with ink text
+          'bg-parchment text-ink border-2 border-ink-light shadow-book hover:bg-parchment-dark hover:shadow-book-lg hover:-translate-y-0.5 focus:ring-ink-light':
             variant === 'secondary',
           
           // Ghost - Minimal with subtle hover
-          'text-gray-300 hover:bg-white/5 hover:text-white focus:ring-white/20':
+          'text-ink-light hover:bg-sepia-100 hover:text-ink focus:ring-ink-light':
             variant === 'ghost',
           
-          // Accent - Aurora green for special actions
-          'bg-aurora-600 text-white shadow-elegant hover:bg-aurora-500 hover:shadow-glow-aurora hover:scale-105 focus:ring-aurora-500':
+          // Accent - Burgundy for special actions
+          'bg-burgundy-600 text-parchment border-2 border-burgundy-700 shadow-book hover:bg-burgundy-700 hover:shadow-book-lg hover:-translate-y-0.5 focus:ring-burgundy-500':
             variant === 'accent',
           
-          // Outline - Elegant border with refined hover
-          'bg-transparent border-2 border-nebula-500/50 text-nebula-300 hover:bg-nebula-500/10 hover:border-nebula-400 hover:text-nebula-200 hover:shadow-glow-nebula focus:ring-nebula-500':
+          // Outline - Vintage border style
+          'bg-transparent border-2 border-sepia-500 text-sepia-700 hover:bg-sepia-50 hover:border-sepia-600 hover:text-sepia-800 hover:shadow-book focus:ring-sepia-500':
             variant === 'outline',
         },
         
         // Size styles
         {
-          'px-4 py-2 text-sm rounded-full': size === 'sm',
-          'px-6 py-3 text-base rounded-full': size === 'md',
-          'px-8 py-4 text-lg rounded-full': size === 'lg',
+          'px-4 py-2 text-sm rounded-book': size === 'sm',
+          'px-6 py-3 text-base rounded-book': size === 'md',
+          'px-8 py-4 text-lg rounded-book': size === 'lg',
         },
         
         className
@@ -102,7 +102,7 @@ export default function Button({
       
       {/* Left Icon */}
       {!isLoading && leftIcon && (
-        <span className="inline-flex transition-transform-elegant group-hover:translate-x-0.5">
+        <span className="inline-flex transition-transform-book group-hover:translate-x-0.5">
           {leftIcon}
         </span>
       )}
@@ -112,21 +112,21 @@ export default function Button({
       
       {/* Right Icon */}
       {!isLoading && rightIcon && (
-        <span className="inline-flex transition-transform-elegant group-hover:translate-x-0.5">
+        <span className="inline-flex transition-transform-book group-hover:translate-x-0.5">
           {rightIcon}
         </span>
       )}
       
-      {/* Premium Shine Effect on Hover (Primary & Accent only) */}
+      {/* Vintage paper texture overlay on hover */}
       {(variant === 'primary' || variant === 'accent') && !disabled && (
-        <span className="absolute inset-0 rounded-full opacity-0 hover:opacity-10 transition-opacity duration-500 bg-white pointer-events-none" />
+        <span className="absolute inset-0 rounded-book opacity-0 hover:opacity-5 transition-opacity duration-300 bg-parchment pointer-events-none" />
       )}
     </button>
   );
 }
 
 /**
- * Icon Button - Circular button for icon-only actions
+ * Icon Button - Circular button for icon-only actions with book styling
  */
 export function IconButton({
   className,
@@ -138,10 +138,10 @@ export function IconButton({
       className={cn(
         'inline-flex items-center justify-center',
         'w-10 h-10 rounded-full',
-        'glass text-white',
-        'hover:bg-white/10 hover:shadow-elegant',
-        'focus:outline-none focus:ring-2 focus:ring-nebula-500 focus:ring-offset-2 focus:ring-offset-deep-space',
-        'transition-elegant',
+        'bg-parchment text-ink border-2 border-sepia-300',
+        'hover:bg-parchment-dark hover:shadow-book',
+        'focus:outline-none focus:ring-2 focus:ring-sepia-500 focus:ring-offset-2 focus:ring-offset-parchment',
+        'transition-book',
         'disabled:opacity-50 disabled:cursor-not-allowed',
         className
       )}
