@@ -7,6 +7,15 @@
 @tailwind utilities;
 
 @layer utilities {
+  /* Glass Effect Utilities */
+  .glass-strong {
+    @apply bg-black/20 backdrop-blur-2xl border border-white/10;
+  }
+
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+  }
+
   /* Smooth Slide-in Animation for Panels */
   @keyframes slide-in-right {
     from {
