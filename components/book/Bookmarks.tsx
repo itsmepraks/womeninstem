@@ -208,7 +208,7 @@ export default function Bookmarks({ className }: BookmarksProps) {
                               </p>
                               {bookmark.note && (
                                 <p className="text-sm text-ink-light italic mt-2">
-                                  "{bookmark.note}"
+                                  &ldquo;{bookmark.note}&rdquo;
                                 </p>
                               )}
                             </button>

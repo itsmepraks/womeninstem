@@ -21,13 +21,13 @@ export default function WelcomePage() {
         <div className="body-text space-y-6">
           <p className="drop-cap">
             Welcome to STEM•SPARK, where curiosity meets opportunity and dreams
-            take flight. This is more than a platform—it's a community, a
+            take flight. This is more than a platform—it&apos;s a community, a
             resource, and a celebration of women making their mark in Science,
             Technology, Engineering, and Mathematics.
           </p>
 
           <p>
-            Within these digital pages, you'll discover stories of resilience,
+            Within these digital pages, you&apos;ll discover stories of resilience,
             find resources to fuel your growth, and connect with a vibrant
             community of like-minded individuals who believe in the power of
             STEM to change the world.

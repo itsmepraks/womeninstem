@@ -16,8 +16,8 @@ export default function AboutPage() {
           <p className="drop-cap">
             STEM•SPARK was created with a vision: to ignite curiosity and empower
             women to pursue their passions in Science, Technology, Engineering,
-            and Mathematics. We believe that diversity in STEM isn't just
-            important—it's essential for innovation and progress.
+            and Mathematics. We believe that diversity in STEM isn&apos;t just
+            important—it&apos;s essential for innovation and progress.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6 my-8">
@@ -49,7 +49,7 @@ export default function AboutPage() {
 
           <p>
             Through interactive learning experiences, mentorship opportunities,
-            and a vibrant community, we're breaking down barriers and building
+            and a vibrant community, we&apos;re breaking down barriers and building
             pathways to success in STEM careers.
           </p>
         </div>
