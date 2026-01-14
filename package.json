@@ -2,7 +2,7 @@
   "name": "stem-spark",
   "version": "0.1.0",
   "private": true,
-  "description": "Space-themed STEM resource hub empowering girls and women in STEM fields",
+  "description": "Interactive book-themed STEM resource hub empowering girls and women in STEM fields",
   "author": "Prakriti Bista <hello@praks.me>",
   "license": "MIT",
   "scripts": {
@@ -23,7 +23,9 @@
     "zustand": "^4.5.0",
     "react-hook-form": "^7.50.0",
     "zod": "^3.22.0",
-    "@hookform/resolvers": "^3.3.0"
+    "@hookform/resolvers": "^3.3.0",
+    "react-pageflip": "^2.0.3",
+    "react-use-sound": "^2.0.1"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",

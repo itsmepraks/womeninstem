@@ -3,6 +3,7 @@ import { Inter, Space_Grotesk, Playfair_Display, Lora } from 'next/font/google';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import './globals.css';
+import './globals-enhanced.css';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -33,8 +34,8 @@ const lora = Lora({
 export const metadata: Metadata = {
   title: 'STEM•SPARK - Igniting Curiosity in STEM',
   description:
-    'Book-inspired platform empowering girls and women in STEM through interactive learning, mentorship, and community.',
-  keywords: ['STEM', 'women in STEM', 'education', 'mentorship', 'learning platform'],
+    'Interactive book-themed platform empowering girls and women in STEM through immersive learning, mentorship, and community.',
+  keywords: ['STEM', 'women in STEM', 'education', 'mentorship', 'learning platform', 'interactive book'],
   authors: [{ name: 'Prakriti Bista', url: 'https://praks.me' }],
   creator: 'Prakriti Bista',
   openGraph: {
@@ -43,14 +44,14 @@ export const metadata: Metadata = {
     url: 'https://stemspark.dev',
     title: 'STEM•SPARK - Igniting Curiosity in STEM',
     description:
-      'Book-inspired platform empowering girls and women in STEM through interactive learning, mentorship, and community.',
+      'Interactive book-themed platform empowering girls and women in STEM through immersive learning, mentorship, and community.',
     siteName: 'STEM•SPARK',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'STEM•SPARK - Igniting Curiosity in STEM',
     description:
-      'Book-inspired platform empowering girls and women in STEM through interactive learning, mentorship, and community.',
+      'Interactive book-themed platform empowering girls and women in STEM through immersive learning, mentorship, and community.',
     creator: '@itsmepraks',
   },
   robots: {
