@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { cn } from '@/lib/utils';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -298,10 +299,12 @@ export function ImageCard({
       {...props}
     >
       <div className="aspect-video w-full overflow-hidden bg-white/5">
-        <img
+        <Image
           src={image}
           alt={imageAlt}
-          className="w-full h-full object-cover transition-transform-elegant group-hover:scale-105"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover transition-transform-elegant group-hover:scale-105"
         />
       </div>
       <div className="p-6">

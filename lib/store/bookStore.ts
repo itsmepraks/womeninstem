@@ -43,7 +43,7 @@ const initialSettings: BookSettings = {
   theme: 'light',
 };
 
-export const useBookStore = create<BookStore>()(n  persist(
+export const useBookStore = create<BookStore>()(persist(
     (set, get) => ({
       // Initial state
       currentPage: 0,

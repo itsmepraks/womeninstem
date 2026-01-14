@@ -24,8 +24,7 @@
     "react-hook-form": "^7.50.0",
     "zod": "^3.22.0",
     "@hookform/resolvers": "^3.3.0",
-    "react-pageflip": "^2.0.3",
-    "react-use-sound": "^2.0.1"
+    "react-pageflip": "^2.0.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
