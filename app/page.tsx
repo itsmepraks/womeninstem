@@ -15,9 +15,16 @@ import {
 
 export default function Home() {
   return (
-    <div className="relative">
+    <div className="relative min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-indigo-950">
+      {/* Animated background */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute top-0 -left-4 w-72 h-72 bg-nebula-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
+        <div className="absolute top-0 -right-4 w-72 h-72 bg-aurora-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-cosmic-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-4000"></div>
+      </div>
+
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4">
+      <section className="relative min-h-screen flex items-center justify-center px-4">
         <div className="max-w-5xl mx-auto text-center space-y-8">
           {/* Logo/Title */}
           <div className="space-y-4">
@@ -26,34 +33,34 @@ export default function Home() {
               <span className="text-stardust-400">•</span>
               <span className="text-aurora-400">SPARK</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 font-light">
+            <p className="text-xl md:text-2xl text-slate-300 font-light">
               Igniting curiosity, one spark at a time.
             </p>
           </div>
 
           {/* Description */}
           <div className="max-w-2xl mx-auto space-y-6">
-            <p className="text-lg text-gray-400 leading-relaxed">
+            <p className="text-lg text-slate-400 leading-relaxed">
               A space-themed platform empowering girls and women in STEM through
               interactive learning, mentorship, and community-driven experiences.
             </p>
-            
+
             <div className="flex flex-wrap gap-3 justify-center items-center text-sm">
-              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+              <span className="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/20 transition-all duration-300 hover:scale-105">
                 <Rocket className="w-4 h-4 text-nebula-400" strokeWidth={2.5} />
-                <span>Interactive Learning</span>
+                <span className="text-slate-200">Interactive Learning</span>
               </span>
-              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+              <span className="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/20 transition-all duration-300 hover:scale-105">
                 <Sparkles className="w-4 h-4 text-aurora-400" strokeWidth={2.5} />
-                <span>Mentorship</span>
+                <span className="text-slate-200">Mentorship</span>
               </span>
-              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+              <span className="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/20 transition-all duration-300 hover:scale-105">
                 <Users className="w-4 h-4 text-cosmic-blue-400" strokeWidth={2.5} />
-                <span>Community</span>
+                <span className="text-slate-200">Community</span>
               </span>
-              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
+              <span className="bg-white/10 backdrop-blur-sm border border-white/20 px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/20 transition-all duration-300 hover:scale-105">
                 <Target className="w-4 h-4 text-supernova-400" strokeWidth={2.5} />
-                <span>Gamification</span>
+                <span className="text-slate-200">Gamification</span>
               </span>
             </div>
           </div>
@@ -62,14 +69,14 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-8">
             <Link
               href="/explore"
-              className="px-8 py-4 bg-nebula-600 text-white rounded-full font-semibold text-lg hover:bg-nebula-500 hover:shadow-glow-nebula transition-elegant transform hover:scale-105 inline-flex items-center gap-2"
+              className="px-8 py-4 bg-gradient-to-r from-nebula-600 to-nebula-500 text-white rounded-full font-semibold text-lg hover:from-nebula-500 hover:to-nebula-400 shadow-lg hover:shadow-nebula-glow transition-all duration-300 transform hover:scale-105 inline-flex items-center gap-2"
             >
               <Rocket className="w-5 h-5" strokeWidth={2.5} />
               Launch Your Journey
             </Link>
             <Link
               href="/resources"
-              className="px-8 py-4 glass rounded-full font-semibold text-lg hover:bg-white/10 hover:shadow-elegant transition-elegant inline-flex items-center gap-2"
+              className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-slate-200 rounded-full font-semibold text-lg hover:bg-white/20 hover:border-white/30 transition-all duration-300 inline-flex items-center gap-2"
             >
               <BookOpen className="w-5 h-5" strokeWidth={2.5} />
               Explore Resources
@@ -78,24 +85,24 @@ export default function Home() {
 
           {/* Status Badge */}
           <div className="pt-12">
-            <div className="inline-flex items-center gap-3 glass px-6 py-3 rounded-full shadow-elegant">
+            <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-full">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-aurora-400 opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-3 w-3 bg-aurora-500"></span>
               </span>
-              <span className="text-sm font-medium">Under Active Development</span>
+              <span className="text-sm font-medium text-slate-200">Under Active Development</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Features Preview Section */}
-      <section className="py-20 px-4">
+      <section className="py-20 px-4 bg-slate-900/50">
         <div className="max-w-6xl mx-auto">
           <h2 className="font-display text-4xl md:text-5xl font-bold text-center mb-4">
             <span className="text-nebula-400">What&apos;s Coming</span>
           </h2>
-          <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
+          <p className="text-center text-slate-400 mb-16 max-w-2xl mx-auto">
             Explore the powerful features we&apos;re building to support your STEM journey
           </p>
           
@@ -153,17 +160,17 @@ export default function Home() {
               <Link
                 key={index}
                 href={feature.href}
-                className="glass p-6 rounded-premium hover:bg-white/10 transition-elegant space-y-4 group hover:shadow-card-hover hover:-translate-y-1"
+                className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl hover:bg-white/10 hover:border-white/20 transition-all duration-300 space-y-4 group hover:shadow-xl hover:-translate-y-1"
               >
-                <div className={`inline-flex p-3 rounded-lg ${feature.bgColor} group-hover:scale-110 transition-transform-elegant`}>
+                <div className={`inline-flex p-3 rounded-lg ${feature.bgColor} border border-white/20 group-hover:scale-110 transition-transform-elegant`}>
                   <div className={feature.iconColor}>
                     {feature.icon}
                   </div>
                 </div>
-                <h3 className="font-display text-xl font-semibold group-hover:text-nebula-400 transition-colors-elegant">
+                <h3 className="font-display text-xl font-semibold text-slate-200 group-hover:text-white transition-colors duration-300">
                   {feature.title}
                 </h3>
-                <p className="text-gray-400 text-sm leading-relaxed">
+                <p className="text-slate-400 text-sm leading-relaxed">
                   {feature.description}
                 </p>
               </Link>
