@@ -1,33 +1,72 @@
 # Contributing to STEM•SPARK
 
-Thank you for your interest in contributing to STEM•SPARK! 🌟 We're excited to have you join our mission to empower girls and women in STEM through interactive learning and community building.
+Thank you for your interest in contributing to STEM•SPARK! 🌟 We're building an interactive platform to inspire and empower girls and women in STEM fields, and we welcome contributions from everyone who shares this mission.
 
-This document provides guidelines and instructions for contributing to the project. Please take a moment to review these guidelines to make the contribution process smooth and effective for everyone involved.
+## 🎯 Our Mission
+
+STEM•SPARK aims to make STEM education accessible, engaging, and inclusive through interactive learning experiences, mentorship opportunities, and a supportive community. Every contribution, no matter how small, helps us achieve this goal.
 
 ## 📋 Table of Contents
 
 - [Code of Conduct](#code-of-conduct)
+- [How Can I Contribute?](#how-can-i-contribute)
 - [Getting Started](#getting-started)
 - [Development Setup](#development-setup)
-- [How to Contribute](#how-to-contribute)
+- [Project Structure](#project-structure)
+- [Coding Guidelines](#coding-guidelines)
 - [Pull Request Process](#pull-request-process)
-- [Code Style Guidelines](#code-style-guidelines)
 - [Commit Message Guidelines](#commit-message-guidelines)
-- [Testing](#testing)
+- [Component Development](#component-development)
+- [Testing Guidelines](#testing-guidelines)
 - [Documentation](#documentation)
 - [Community](#community)
 
-## 🤝 Code of Conduct
+## 📜 Code of Conduct
 
-By participating in this project, you agree to abide by our Code of Conduct. We are committed to providing a welcoming and inclusive environment for all contributors, regardless of background or identity.
+This project adheres to a Code of Conduct that all contributors are expected to follow. By participating, you are expected to uphold this code. Please report unacceptable behavior to [hello@praks.me](mailto:hello@praks.me).
 
-### Our Standards
+**Core Principles:**
+- Be respectful and inclusive
+- Welcome newcomers and help them learn
+- Focus on what's best for the community
+- Show empathy towards other community members
+- Provide constructive feedback
 
-- **Be respectful and inclusive** in all interactions
-- **Be collaborative** and open to feedback
-- **Be constructive** when giving feedback
-- **Focus on what is best** for the community and project
-- **Show empathy** towards other community members
+## 🤝 How Can I Contribute?
+
+### Reporting Bugs
+
+Before creating bug reports, please check the existing issues to avoid duplicates. When creating a bug report, include:
+
+- **Clear title and description**
+- **Steps to reproduce** the behavior
+- **Expected behavior** vs actual behavior
+- **Screenshots** if applicable
+- **Environment details** (OS, browser, Node version)
+- **Additional context** that might be relevant
+
+### Suggesting Enhancements
+
+Enhancement suggestions are tracked as GitHub issues. When creating an enhancement suggestion, include:
+
+- **Clear title and description** of the feature
+- **Use cases** - why would this be useful?
+- **Possible implementation** approach (if you have ideas)
+- **Mockups or examples** if applicable
+- **Alternatives considered**
+
+### Your First Code Contribution
+
+Unsure where to begin? Look for issues labeled:
+- `good first issue` - Good for newcomers
+- `help wanted` - Extra attention needed
+- `documentation` - Documentation improvements
+- `bug` - Something isn't working
+- `enhancement` - New feature or request
+
+### Pull Requests
+
+We actively welcome your pull requests! See the [Pull Request Process](#pull-request-process) section for details.
 
 ## 🚀 Getting Started
 
@@ -36,237 +75,236 @@ By participating in this project, you agree to abide by our Code of Conduct. We 
 Before you begin, ensure you have the following installed:
 
 - **Node.js** 18.17.0 or higher
-- **npm** 9.0.0 or higher (or **pnpm** if preferred)
+- **pnpm** 9.0.0 or higher (recommended) or npm
 - **Git** for version control
-- A code editor (we recommend **VS Code** with the following extensions):
-  - ESLint
-  - Prettier
-  - Tailwind CSS IntelliSense
-  - TypeScript and JavaScript Language Features
+- A code editor (we recommend **VS Code** with extensions listed below)
 
-### First-Time Setup
+### Recommended VS Code Extensions
 
-1. **Fork the repository** on GitHub
-2. **Clone your fork** locally:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/womeninstem.git
-   cd womeninstem
-   ```
-
-3. **Add the upstream repository**:
-   ```bash
-   git remote add upstream https://github.com/itsmepraks/womeninstem.git
-   ```
-
-4. **Install dependencies**:
-   ```bash
-   npm install
-   # or
-   pnpm install
-   ```
-
-5. **Create a branch** for your work:
-   ```bash
-   git checkout -b feature/your-feature-name
-   # or
-   git checkout -b fix/your-bug-fix
-   ```
+- ESLint
+- Prettier - Code formatter
+- Tailwind CSS IntelliSense
+- TypeScript and JavaScript Language Features
+- GitLens
 
 ## 💻 Development Setup
 
-### Running the Development Server
+### 1. Fork and Clone the Repository
 
 ```bash
+# Fork the repository on GitHub, then clone your fork
+git clone https://github.com/YOUR_USERNAME/womeninstem.git
+cd womeninstem
+
+# Add upstream remote
+git remote add upstream https://github.com/itsmepraks/womeninstem.git
+```
+
+### 2. Install Dependencies
+
+```bash
+# Using pnpm (recommended)
+pnpm install
+
+# Or using npm
+npm install
+```
+
+### 3. Set Up Environment Variables
+
+```bash
+# Copy the example environment file
+cp .env.example .env.local
+
+# Edit .env.local with your local configuration
+```
+
+### 4. Start Development Server
+
+```bash
+# Using pnpm
+pnpm dev
+
+# Or using npm
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see your changes in real-time.
+Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
 
-### Available Scripts
+### 5. Create a Branch
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run start` - Start production server
-- `npm run lint` - Run ESLint
-- `npm run type-check` - Run TypeScript type checking
+```bash
+# Create a new branch for your feature or fix
+git checkout -b feature/your-feature-name
 
-### Project Structure
+# Or for bug fixes
+git checkout -b fix/bug-description
+```
+
+## 📁 Project Structure
+
+Understanding the project structure will help you navigate the codebase:
 
 ```
 womeninstem/
-├── app/                    # Next.js App Router pages and layouts
+├── app/                    # Next.js App Router pages and routes
+│   ├── (routes)/          # Route groups
+│   ├── layout.tsx         # Root layout
+│   ├── page.tsx           # Homepage
+│   └── globals.css        # Global styles
 ├── components/            # React components
 │   ├── ui/               # Reusable UI components
-│   ├── layout/           # Layout components
-│   └── book/             # Book-specific components
-├── content/              # Content files (MDX, JSON)
-├── data/                 # Static data files
+│   ├── layout/           # Layout components (Header, Footer)
+│   ├── book/             # Book-specific components
+│   └── README.md         # Component documentation
+├── content/              # Content management (articles, tutorials)
+├── data/                 # Static data and content
 ├── hooks/                # Custom React hooks
 ├── lib/                  # Utility functions and helpers
-├── public/               # Static assets
+│   ├── utils.ts          # General utilities
+│   ├── constants.ts      # App constants
+│   └── store/            # State management
+├── public/               # Static assets (images, icons)
 ├── types/                # TypeScript type definitions
-└── styles/               # Global styles (if needed)
+└── styles/               # Additional styles (if needed)
 ```
 
-## 🎯 How to Contribute
+## 🎨 Coding Guidelines
 
-### Types of Contributions
+### TypeScript
 
-We welcome various types of contributions:
+- **Always use TypeScript** for new files
+- Define proper interfaces and types
+- Avoid using `any` - use `unknown` if type is truly unknown
+- Use type inference where possible
+- Document complex types with comments
 
-1. **🐛 Bug Fixes** - Fix issues and improve stability
-2. **✨ New Features** - Add new functionality
-3. **📝 Documentation** - Improve or add documentation
-4. **🎨 Design** - Enhance UI/UX
-5. **♿ Accessibility** - Improve accessibility features
-6. **⚡ Performance** - Optimize performance
-7. **🧪 Tests** - Add or improve tests
-8. **🌐 Translations** - Add internationalization support
+```typescript
+// Good
+interface ButtonProps {
+  variant: 'primary' | 'secondary' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  onClick?: () => void;
+  children: React.ReactNode;
+}
 
-### Finding Issues to Work On
+// Avoid
+const props: any = { ... };
+```
 
-- Check the [Issues](https://github.com/itsmepraks/womeninstem/issues) page
-- Look for issues labeled `good first issue` or `help wanted`
-- Comment on the issue to let others know you're working on it
-- Ask questions if anything is unclear
+### React Best Practices
 
-### Proposing New Features
+- **Use functional components** with hooks
+- **Keep components focused** - single responsibility principle
+- **Extract reusable logic** into custom hooks
+- **Use proper prop destructuring**
+- **Memoize expensive computations** with `useMemo` and `useCallback`
 
-Before working on a new feature:
+```typescript
+// Good
+export function Button({ variant = 'primary', children, ...props }: ButtonProps) {
+  return <button className={cn(baseStyles, variantStyles[variant])} {...props}>{children}</button>;
+}
+```
 
-1. **Open an issue** to discuss the feature
-2. **Wait for feedback** from maintainers
-3. **Get approval** before starting significant work
-4. **Reference the issue** in your pull request
+### Styling Guidelines
+
+- **Use Tailwind CSS** utility classes
+- Follow the **space-themed design system** (colors defined in `tailwind.config.js`)
+- Use the `cn()` utility from `lib/utils.ts` for conditional classes
+- Keep custom CSS minimal - prefer Tailwind utilities
+- Use CSS variables for theme values
+
+```typescript
+// Good
+<div className={cn(
+  'rounded-lg bg-deep-space p-4',
+  isActive && 'ring-2 ring-nebula',
+  className
+)}>
+```
+
+### File Naming Conventions
+
+- **Components**: PascalCase (`Button.tsx`, `Header.tsx`)
+- **Utilities**: camelCase (`utils.ts`, `formatDate.ts`)
+- **Types**: camelCase (`types/user.ts`)
+- **Constants**: UPPER_SNAKE_CASE in files, camelCase filenames
+- **Hooks**: camelCase starting with `use` (`useBookmark.ts`)
+
+### Code Formatting
+
+We use Prettier and ESLint to maintain consistent code style:
+
+```bash
+# Format code
+pnpm format
+
+# Lint code
+pnpm lint
+
+# Type check
+pnpm type-check
+```
+
+**Important**: Ensure your code passes all checks before submitting a PR.
 
 ## 🔄 Pull Request Process
 
 ### Before Submitting
 
-1. **Sync with upstream** to avoid conflicts:
+1. **Update documentation** if you've changed functionality
+2. **Run linting and type checking**
    ```bash
-   git fetch upstream
-   git rebase upstream/main
+   pnpm lint
+   pnpm type-check
    ```
+3. **Test your changes** thoroughly
+4. **Update the README.md** if needed
+5. **Follow commit message guidelines**
 
-2. **Test your changes** thoroughly:
-   ```bash
-   npm run lint
-   npm run type-check
-   npm run build
-   ```
+### Submitting Your PR
 
-3. **Update documentation** if needed
-
-4. **Add tests** for new features
-
-### Submitting a Pull Request
-
-1. **Push to your fork**:
+1. **Push your branch** to your fork
    ```bash
    git push origin feature/your-feature-name
    ```
 
-2. **Create a Pull Request** on GitHub with:
-   - **Clear title** describing the change
-   - **Detailed description** of what and why
-   - **Reference to related issues** (e.g., "Fixes #123")
-   - **Screenshots** for UI changes
-   - **Testing instructions** for reviewers
+2. **Open a Pull Request** on GitHub
+   - Use a clear, descriptive title
+   - Fill out the PR template completely
+   - Link related issues using keywords (e.g., "Fixes #123")
+   - Add screenshots for UI changes
+   - Describe what you changed and why
 
-3. **Wait for review** and address feedback promptly
+3. **Respond to feedback**
+   - Be open to suggestions
+   - Make requested changes promptly
+   - Push additional commits to your branch
 
-4. **Keep your PR updated** with the main branch
+4. **Wait for review**
+   - At least one maintainer approval is required
+   - CI checks must pass
+   - Conflicts must be resolved
 
-### PR Requirements
+### PR Title Format
 
-- ✅ All tests pass
-- ✅ No ESLint errors
-- ✅ TypeScript type check passes
-- ✅ Code follows style guidelines
-- ✅ Documentation is updated
-- ✅ Commit messages follow conventions
-- ✅ PR description is complete
-
-## 📐 Code Style Guidelines
-
-### TypeScript
-
-- **Use TypeScript** for all new code
-- **Define types** for all props, functions, and complex data
-- **Avoid `any` type** - use proper types or `unknown`
-- **Use interfaces** for object types
-- **Export types** when they might be reused
-
-```typescript
-// Good ✅
-interface ButtonProps {
-  variant: 'primary' | 'secondary';
-  onClick: () => void;
-  children: React.ReactNode;
-}
-
-// Avoid ❌
-const Button = (props: any) => { ... }
 ```
+<type>: <short description>
 
-### React Components
-
-- **Use functional components** with hooks
-- **Use TypeScript** for prop types
-- **Keep components focused** - single responsibility
-- **Extract reusable logic** into custom hooks
-- **Use proper naming** - PascalCase for components
-
-```typescript
-// Good ✅
-export function Button({ variant, onClick, children }: ButtonProps) {
-  return (
-    <button className={cn('btn', `btn-${variant}`)} onClick={onClick}>
-      {children}
-    </button>
-  );
-}
+Examples:
+feat: Add interactive book page flipping animation
+fix: Resolve mobile navigation menu closing issue
+docs: Update component usage examples in README
+style: Improve button hover effects
+refactor: Simplify bookmark state management
+test: Add unit tests for utility functions
+chore: Update dependencies
 ```
-
-### Styling
-
-- **Use Tailwind CSS** for styling
-- **Follow mobile-first** approach
-- **Use the `cn()` utility** for conditional classes
-- **Follow the design system** - use defined colors and spacing
-- **Avoid inline styles** unless absolutely necessary
-
-```typescript
-// Good ✅
-<div className={cn(
-  'rounded-lg p-4',
-  isActive && 'bg-nebula',
-  'hover:shadow-glow'
-)} />
-
-// Avoid ❌
-<div style={{ padding: '16px', borderRadius: '8px' }} />
-```
-
-### File Organization
-
-- **One component per file** (except for small related components)
-- **Export from index.ts** for better imports
-- **Group related files** in folders
-- **Keep files under 300 lines** when possible
-
-### Naming Conventions
-
-- **Components**: PascalCase (e.g., `Button.tsx`, `UserProfile.tsx`)
-- **Utilities**: camelCase (e.g., `formatDate`, `calculateScore`)
-- **Constants**: UPPER_SNAKE_CASE (e.g., `API_BASE_URL`, `MAX_RETRIES`)
-- **Types/Interfaces**: PascalCase (e.g., `UserData`, `ApiResponse`)
-- **Files**: kebab-case for non-components (e.g., `use-user-data.ts`)
 
 ## 📝 Commit Message Guidelines
 
-We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification.
+We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
 ### Format
 
@@ -280,148 +318,184 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 
 ### Types
 
-- `feat`: New feature
-- `fix`: Bug fix
-- `docs`: Documentation changes
-- `style`: Code style changes (formatting, etc.)
-- `refactor`: Code refactoring
-- `perf`: Performance improvements
-- `test`: Adding or updating tests
-- `chore`: Maintenance tasks
-- `ci`: CI/CD changes
+- **feat**: New feature
+- **fix**: Bug fix
+- **docs**: Documentation changes
+- **style**: Code style changes (formatting, missing semicolons, etc.)
+- **refactor**: Code refactoring
+- **perf**: Performance improvements
+- **test**: Adding or updating tests
+- **chore**: Maintenance tasks (dependencies, configs)
+- **ci**: CI/CD changes
 
 ### Examples
 
-```bash
-feat(learning): add interactive quiz component
+```
+feat(components): Add interactive book page component
 
-Implement quiz component with multiple choice questions,
-progress tracking, and instant feedback for learning paths.
+Implement a new BookPage component with page-flipping animations
+using Framer Motion. Includes touch and keyboard navigation support.
 
-Closes #123
-
----
-
-fix(ui): resolve button hover state on mobile
-
-The hover effect was incorrectly triggering on mobile devices.
-Changed to use active state for touch interactions.
+Closes #45
 
 ---
 
-docs(readme): update installation instructions
+fix(layout): Correct mobile header spacing issue
 
-Added troubleshooting section and clarified Node.js version requirements.
+The header was overlapping content on mobile devices. Adjusted
+z-index and padding to resolve the issue.
+
+Fixes #67
+
+---
+
+docs(readme): Add deployment instructions
+
+Added step-by-step guide for deploying to Vercel and Netlify
+with environment variable configuration examples.
 ```
 
-### Best Practices
+## 🧩 Component Development
 
-- **Use imperative mood** - "add" not "added"
-- **Capitalize first letter** of subject
-- **No period** at the end of subject
-- **Keep subject under 50 characters**
-- **Wrap body at 72 characters**
-- **Reference issues** in footer
+### Creating New Components
 
-## 🧪 Testing
+1. **Choose the right location**:
+   - `components/ui/` - Reusable UI primitives
+   - `components/layout/` - Layout components
+   - `components/book/` - Book-specific features
 
-While we're in early development, we encourage:
+2. **Use TypeScript interfaces**:
+   ```typescript
+   interface ComponentProps {
+     // Define all props with proper types
+   }
+   ```
 
-- **Manual testing** of all changes
-- **Cross-browser testing** (Chrome, Firefox, Safari)
-- **Responsive testing** on multiple screen sizes
-- **Accessibility testing** with screen readers when relevant
+3. **Add proper documentation**:
+   ```typescript
+   /**
+    * Button component with multiple variants and sizes
+    * 
+    * @example
+    * ```tsx
+    * <Button variant="primary" size="lg">Click me</Button>
+    * ```
+    */
+   export function Button({ variant, size, children, ...props }: ButtonProps) {
+     // Implementation
+   }
+   ```
 
-### Future Testing Requirements
+4. **Follow the design system**:
+   - Use defined color variants (nebula, aurora, stardust, cosmic, supernova)
+   - Follow spacing and sizing conventions
+   - Ensure responsive design (mobile-first)
+   - Include accessibility features (ARIA labels, keyboard navigation)
 
-As the project matures, we plan to require:
+5. **Export from index file**:
+   ```typescript
+   // components/ui/index.ts
+   export { Button } from './Button';
+   export { Card } from './Card';
+   ```
 
-- Unit tests for utilities and helpers
-- Component tests for UI components
-- Integration tests for features
-- E2E tests for critical user flows
+### Accessibility Checklist
+
+- [ ] Keyboard navigation support
+- [ ] ARIA labels where appropriate
+- [ ] Focus states visible
+- [ ] Color contrast meets WCAG 2.1 AA
+- [ ] Screen reader friendly
+- [ ] Semantic HTML elements
+
+## 🧪 Testing Guidelines
+
+### Writing Tests
+
+While we're still setting up our testing infrastructure, here are guidelines for when you write tests:
+
+```typescript
+// Example test structure
+describe('Button Component', () => {
+  it('renders with correct variant styles', () => {
+    // Test implementation
+  });
+
+  it('handles click events', () => {
+    // Test implementation
+  });
+
+  it('is accessible', () => {
+    // Test accessibility
+  });
+});
+```
+
+### Test Coverage
+
+- **Unit tests** for utility functions
+- **Component tests** for UI components
+- **Integration tests** for user flows
+- **Accessibility tests** using jest-axe
 
 ## 📚 Documentation
 
-Good documentation is essential. When contributing:
+Good documentation is crucial for the project's success:
 
 ### Code Documentation
 
-- **Add JSDoc comments** for functions and complex logic
-- **Document props** for components
-- **Explain "why"** not just "what"
-- **Include examples** when helpful
+- Add **JSDoc comments** to functions and components
+- Include **usage examples** in comments
+- Document **complex logic** with inline comments
+- Keep the **components/README.md** updated
 
-```typescript
-/**
- * Formats a date string into a human-readable format
- * 
- * @param date - Date string or Date object to format
- * @returns Formatted date string (e.g., "January 15, 2026")
- * 
- * @example
- * ```typescript
- * formatDate('2026-01-15') // "January 15, 2026"
- * formatDate(new Date()) // "January 16, 2026"
- * ```
- */
-export function formatDate(date: string | Date): string {
-  // implementation
-}
-```
+### User Documentation
 
-### README Updates
-
-- Update README.md when adding major features
-- Add to the roadmap checklist when completing items
-- Update tech stack if adding new dependencies
-
-### Component Documentation
-
-- Update `components/README.md` when adding new components
-- Include usage examples
-- Document all props and variants
+- Update **README.md** for major changes
+- Add **inline code comments** for complex logic
+- Create **example usage** in component files
+- Document **breaking changes** in CHANGELOG.md
 
 ## 🌟 Community
 
 ### Getting Help
 
-- **GitHub Discussions** - Ask questions and share ideas
-- **Issues** - Report bugs and request features
-- **Pull Requests** - Get feedback on your code
+- **GitHub Discussions**: Ask questions and share ideas
+- **Issues**: Report bugs and request features
+- **Email**: hello@praks.me for private inquiries
 
 ### Recognition
 
-All contributors will be recognized in our README and release notes. We appreciate every contribution, no matter how small!
+Contributors are recognized in several ways:
+- Listed in README.md contributors section
+- Mentioned in release notes for significant contributions
+- Highlighted in project announcements
 
 ### Staying Updated
 
-- **Watch the repository** for updates
-- **Read release notes** for changes
-- **Follow project discussions** for roadmap updates
+- Watch the repository for notifications
+- Check open issues and discussions regularly
+- Follow the project roadmap in README.md
 
-## 💡 Tips for Success
+## 🎉 Thank You!
 
-1. **Start small** - Begin with small contributions to understand the codebase
-2. **Ask questions** - Don't hesitate to ask for help or clarification
-3. **Be patient** - Reviews take time, especially for large changes
-4. **Be responsive** - Address feedback promptly
-5. **Stay consistent** - Follow existing patterns in the codebase
-6. **Test thoroughly** - Ensure your changes work as expected
-7. **Document well** - Help others understand your code
+Thank you for contributing to STEM•SPARK! Your efforts help create a more inclusive and empowering STEM education experience for girls and women worldwide.
 
-## 📞 Contact
+Every contribution counts - whether it's:
+- 🐛 Fixing a bug
+- ✨ Adding a feature
+- 📝 Improving documentation
+- 🎨 Enhancing design
+- 💡 Sharing ideas
+- 🤝 Helping others
 
-- **Maintainer**: Prakriti Bista ([@itsmepraks](https://github.com/itsmepraks))
-- **Website**: [praks.me](https://praks.me)
-- **Email**: hello@praks.me
-
-## 🙏 Thank You!
-
-Thank you for contributing to STEM•SPARK! Your efforts help us create a better learning experience for girls and women in STEM fields worldwide.
-
-Together, we're igniting curiosity, one spark at a time. ✨
+Together, we're igniting curiosity and sparking change in STEM! ⚡
 
 ---
 
-**Happy Coding!** 🚀
+**Questions?** Feel free to reach out:
+- GitHub: [@itsmepraks](https://github.com/itsmepraks)
+- Website: [praks.me](https://praks.me)
+- Email: hello@praks.me
+
+*Let's build something amazing together!* 🚀
