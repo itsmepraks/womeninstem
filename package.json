@@ -5,12 +5,32 @@
   "description": "Interactive book-themed STEM resource hub empowering girls and women in STEM fields",
   "author": "Prakriti Bista <hello@praks.me>",
   "license": "MIT",
+  "keywords": [
+    "next.js",
+    "typescript",
+    "stem",
+    "women-in-tech",
+    "education",
+    "space-themed"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/itsmepraks/womeninstem.git"
+  },
+  "bugs": {
+    "url": "https://github.com/itsmepraks/womeninstem/issues"
+  },
+  "homepage": "https://github.com/itsmepraks/womeninstem#readme",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "type-check": "tsc --noEmit"
+    "lint:fix": "next lint --fix",
+    "type-check": "tsc --noEmit",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "clean": "rm -rf .next && rm -rf node_modules/.cache"
   },
   "dependencies": {
     "next": "^14.2.0",
