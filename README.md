@@ -1,5 +1,9 @@
 # 🌟 STEM•SPARK
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-14.2-black.svg)](https://nextjs.org/)
+
 > Igniting curiosity, one spark at a time.
 
 ## About the Project
@@ -29,14 +33,19 @@ STEM•SPARK is an interactive, space-themed web platform designed to inspire an
 - **Styling**: Tailwind CSS
 - **Animations**: Framer Motion
 - **UI Components**: Custom component library
-- **State Management**: React Context + Hooks
-- **Package Manager**: npm/yarn
+- **State Management**: Zustand
+- **Form Handling**: React Hook Form + Zod
+- **Package Manager**: pnpm
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18.x or higher
-- npm or yarn
+
+Before you begin, ensure you have the following installed:
+- **Node.js**: Version 18.17.0 or higher
+- **pnpm**: Version 9.0.0 or higher (recommended package manager)
+  - Install pnpm globally: `npm install -g pnpm`
+- **Git**: For cloning the repository
 
 ### Installation
 
@@ -45,18 +54,49 @@ STEM•SPARK is an interactive, space-themed web platform designed to inspire an
 git clone https://github.com/itsmepraks/womeninstem.git
 cd womeninstem
 
-# Install dependencies
-npm install
-# or
-yarn install
+# Install dependencies using pnpm
+pnpm install
 
 # Run the development server
-npm run dev
-# or
-yarn dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to view the application.
+
+### Available Scripts
+
+```bash
+# Development
+pnpm dev          # Start development server on localhost:3000
+
+# Building
+pnpm build        # Create production build
+pnpm start        # Start production server
+
+# Code Quality
+pnpm lint         # Run ESLint to check code quality
+pnpm type-check   # Run TypeScript compiler checks without emitting files
+```
+
+## 🔧 Environment Variables
+
+Create a `.env.local` file in the root directory for local development:
+
+```env
+# API Configuration
+NEXT_PUBLIC_API_URL=http://localhost:3000/api
+
+# Site Configuration
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+
+# Optional: Analytics
+# NEXT_PUBLIC_GA_ID=your-google-analytics-id
+
+# Optional: Feature Flags
+# NEXT_PUBLIC_ENABLE_BETA_FEATURES=false
+```
+
+**Note:** Environment variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.
 
 ## 📁 Project Structure
 
@@ -100,6 +140,8 @@ We welcome contributions from the community! Please read our [CONTRIBUTING.md](C
 ## 📝 Development Roadmap
 
 - [x] Project initialization and setup
+- [x] Core configuration and tooling
+- [x] Interactive book system implementation
 - [ ] Core UI component library
 - [ ] Homepage and landing design
 - [ ] Learning paths system
@@ -108,6 +150,52 @@ We welcome contributions from the community! Please read our [CONTRIBUTING.md](C
 - [ ] Content management system
 - [ ] Community forum
 - [ ] Achievement and gamification system
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**Issue: Module not found errors after installation**
+```bash
+# Solution: Clear cache and reinstall dependencies
+rm -rf node_modules .next
+pnpm install
+```
+
+**Issue: Port 3000 already in use**
+```bash
+# Solution: Run on a different port
+pnpm dev -- -p 3001
+```
+
+**Issue: TypeScript errors in IDE**
+```bash
+# Solution: Restart TypeScript server in your IDE or run type-check
+pnpm type-check
+```
+
+**Issue: pnpm not found**
+```bash
+# Solution: Install pnpm globally
+npm install -g pnpm
+# Or use corepack (Node.js 16.13+)
+corepack enable
+corepack prepare pnpm@latest --activate
+```
+
+**Issue: Styles not applying correctly**
+```bash
+# Solution: Clear Next.js cache and rebuild
+rm -rf .next
+pnpm dev
+```
+
+### Getting Help
+
+If you encounter issues not covered here:
+1. Check existing [GitHub Issues](https://github.com/itsmepraks/womeninstem/issues)
+2. Review the [CONTRIBUTING.md](CONTRIBUTING.md) guide
+3. Open a new issue with detailed information about the problem
 
 ## 📄 License
 
