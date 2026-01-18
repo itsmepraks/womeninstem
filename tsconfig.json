@@ -27,9 +27,13 @@
       "@/public/*": ["./public/*"]
     },
     "forceConsistentCasingInFileNames": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true
+    
+    // Stricter type checking options for better code quality
+    "noUnusedLocals": true,             // Report errors on unused local variables
+    "noUnusedParameters": true,         // Report errors on unused function parameters
+    "noImplicitReturns": true,          // Ensure all code paths in a function return a value
+    "noUncheckedIndexedAccess": true,   // Add undefined to type when accessing array/object with index
+    "noFallthroughCasesInSwitch": true  // Report errors for fallthrough cases in switch statements
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
