@@ -1,51 +1,118 @@
-/**
- * Get Involved Chapter Page 2 - Page 25
- * STEM Competitions
- */
 import React from 'react';
-import { Trophy } from 'lucide-react';
+import { Trophy, Zap, Code, Rocket, Award, Star } from 'lucide-react';
 
-export default function GetInvolved2() {
+const GetInvolved2: React.FC = () => {
   return (
-    <div className="h-full space-y-6">
-      <div className="border-b-2 border-sepia-300 pb-4">
-        <h2 className="section-heading">STEM Competitions</h2>
-      </div>
-      <p className="body-text">Competitions provide incredible opportunities to test your skills and showcase your talents.</p>
-      <div className="space-y-4">
-        <div className="flex gap-4 p-5 bg-burgundy-50 rounded-page border-2 border-burgundy-200">
-          <Trophy className="w-10 h-10 text-burgundy-600 flex-shrink-0" />
-          <div>
-            <h3 className="font-serif text-lg font-semibold text-ink mb-2">Science Fairs</h3>
-            <p className="text-sm text-ink-light mb-2">Design and conduct original research, then present your findings.</p>
-            <ul className="text-sm text-ink-light space-y-1">
-              <li>• Regeneron ISEF - International Science Fair</li>
-              <li>• Google Science Fair</li>
-              <li>• Local and state science fairs</li>
-            </ul>
+    <div className="h-full w-full bg-gradient-to-br from-amber-50 via-orange-50 to-rose-50 p-8 overflow-y-auto">
+      <div className="max-w-2xl mx-auto">
+        {/* Chapter Header */}
+        <div className="text-center mb-6">
+          <div className="inline-block bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-3">
+            Chapter 5: Get Involved
+          </div>
+          <h1 className="text-3xl font-serif font-bold text-gray-800 mb-3">
+            STEM Competitions
+          </h1>
+          <div className="flex items-center justify-center gap-2 text-purple-600">
+            <div className="h-px w-12 bg-purple-600"></div>
+            <Trophy className="w-5 h-5" />
+            <div className="h-px w-12 bg-purple-600"></div>
           </div>
         </div>
-        <div className="flex gap-4 p-5 bg-forest-50 rounded-page border-2 border-forest-200">
-          <Trophy className="w-10 h-10 text-forest-600 flex-shrink-0" />
-          <div>
-            <h3 className="font-serif text-lg font-semibold text-ink mb-2">Coding Competitions</h3>
-            <ul className="text-sm text-ink-light space-y-1">
-              <li>• Girls Who Code Competitions</li>
-              <li>• Technovation Challenge</li>
-              <li>• Congressional App Challenge</li>
-            </ul>
+
+        {/* Main Content */}
+        <div className="bg-white/80 backdrop-blur rounded-lg shadow-lg p-6 mb-6 border border-purple-200">
+          <div className="mb-6">
+            <div className="flex items-center gap-2 mb-4">
+              <Zap className="w-6 h-6 text-yellow-600" />
+              <h2 className="text-2xl font-serif font-bold text-gray-800">
+                Challenge Yourself
+              </h2>
+            </div>
+            <p className="text-gray-700 leading-relaxed mb-4">
+              Competitions are an excellent way to test your skills, learn from others, and 
+              gain recognition for your talents. Here are top opportunities for young women in STEM:
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-4 rounded-lg border-l-4 border-blue-500">
+              <div className="flex items-start gap-3">
+                <Code className="w-5 h-5 text-blue-600 mt-1" />
+                <div className="flex-1">
+                  <h3 className="font-bold text-gray-800 mb-2">Hackathons</h3>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• <strong>MLH Hackathons:</strong> Major League Hacking events worldwide</li>
+                    <li>• <strong>Google Code Jam:</strong> Annual coding competition</li>
+                    <li>• <strong>TechTogether:</strong> Hackathons for women and non-binary individuals</li>
+                    <li>• <strong>Athena Hacks:</strong> USC's women-focused hackathon</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg border-l-4 border-purple-500">
+              <div className="flex items-start gap-3">
+                <Rocket className="w-5 h-5 text-purple-600 mt-1" />
+                <div className="flex-1">
+                  <h3 className="font-bold text-gray-800 mb-2">Coding Competitions</h3>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• <strong>USACO:</strong> USA Computing Olympiad</li>
+                    <li>• <strong>Technovation Girls:</strong> App development challenge</li>
+                    <li>• <strong>Congressional App Challenge:</strong> Create apps for your district</li>
+                    <li>• <strong>CyberPatriot:</strong> National cybersecurity competition</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-orange-50 to-rose-50 p-4 rounded-lg border-l-4 border-orange-500">
+              <div className="flex items-start gap-3">
+                <Award className="w-5 h-5 text-orange-600 mt-1" />
+                <div className="flex-1">
+                  <h3 className="font-bold text-gray-800 mb-2">Science & Engineering Fairs</h3>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• <strong>ISEF:</strong> International Science and Engineering Fair</li>
+                    <li>• <strong>Google Science Fair:</strong> Online competition for ages 13-18</li>
+                    <li>• <strong>FIRST Robotics:</strong> Design and build robots</li>
+                    <li>• <strong>Science Olympiad:</strong> Team-based STEM competition</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-gradient-to-r from-green-50 to-teal-50 p-4 rounded-lg border-l-4 border-green-500">
+              <div className="flex items-start gap-3">
+                <Star className="w-5 h-5 text-green-600 mt-1" />
+                <div className="flex-1">
+                  <h3 className="font-bold text-gray-800 mb-2">Women-Specific Programs</h3>
+                  <ul className="text-sm text-gray-700 space-y-1">
+                    <li>• <strong>Girls Who Code:</strong> Summer immersion programs</li>
+                    <li>• <strong>NCWIT Award:</strong> Aspirations in Computing</li>
+                    <li>• <strong>WiSTEM Challenge:</strong> Women in STEM competition</li>
+                    <li>• <strong>Kode With Klossy:</strong> Free coding camps for girls</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+            <p className="text-sm text-gray-700">
+              <strong className="text-yellow-800">💡 Pro Tip:</strong> Start with local competitions 
+              to build confidence, then work your way up to national and international events. 
+              Don't be afraid to compete—every experience is a learning opportunity!
+            </p>
           </div>
         </div>
+
+        {/* Page Number */}
+        <div className="text-center text-gray-500 text-sm font-serif">
+          Page 25
+        </div>
       </div>
-      <div className="bg-sepia-50 p-5 rounded-page border-2 border-sepia-200">
-        <h3 className="font-serif text-lg font-semibold text-ink mb-3">Tips for Success</h3>
-        <ul className="space-y-2 text-sm text-ink-light">
-          <li>✓ Start early with plenty of preparation time</li>
-          <li>✓ Focus on learning, not just winning</li>
-          <li>✓ Network with participants and mentors</li>
-        </ul>
-      </div>
-      <div className="text-center mt-4"><p className="page-number-ornate">25</p></div>
     </div>
   );
-}
+};
+
+export default GetInvolved2;
