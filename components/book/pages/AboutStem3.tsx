@@ -1,71 +1,41 @@
 /**
- * About STEM•SPARK Page 3 - Page 6
- * Our Vision
+ * About STEM•SPARK - Page 3: Values
  */
 import React from 'react';
-import { Telescope, Globe, Sparkles } from 'lucide-react';
+import { Heart, Users, Trophy } from 'lucide-react';
 
 export default function AboutStem3() {
   return (
-    <div className="h-full space-y-6">
-      {/* Page Header */}
-      <div className="border-b-2 border-sepia-300 pb-4">
-        <h2 className="section-heading">Our Vision</h2>
-      </div>
+    <div className="h-full w-full p-8 md:p-12 overflow-y-auto scrollbar-book">
+      <div className="max-w-2xl mx-auto space-y-8">
+        <h2 className="chapter-heading">Our Core Values</h2>
+        <div className="ornamental-divider" />
 
-      {/* Vision Statement */}
-      <div className="space-y-4">
-        <p className="body-text">
-          We envision a world where women are not just participants in STEM fields, but 
-          leaders, innovators, and changemakers. A world where every girl grows up knowing 
-          that her ideas matter, her contributions are valued, and her potential is limitless.
-        </p>
-
-        <div className="grid md:grid-cols-2 gap-4 my-6">
-          <div className="bg-gradient-to-br from-burgundy-50 to-burgundy-100 p-5 rounded-page border border-burgundy-200">
-            <Telescope className="w-10 h-10 text-burgundy-600 mb-3" />
-            <h3 className="font-serif text-lg font-semibold text-ink mb-2">
-              Looking Forward
-            </h3>
-            <p className="text-sm text-ink-light">
-              By 2030, we aim to have empowered 100,000 women and girls to pursue and 
-              excel in STEM careers through our platform.
-            </p>
-          </div>
-
-          <div className="bg-gradient-to-br from-forest-50 to-forest-100 p-5 rounded-page border border-forest-200">
-            <Globe className="w-10 h-10 text-forest-600 mb-3" />
-            <h3 className="font-serif text-lg font-semibold text-ink mb-2">
-              Global Impact
-            </h3>
-            <p className="text-sm text-ink-light">
-              We're building a worldwide community that transcends borders, connecting 
-              women across continents through shared passion for STEM.
-            </p>
+        <div className="body-text space-y-6">
+          <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center p-4">
+              <Heart className="w-12 h-12 text-burgundy-600 mx-auto mb-3" />
+              <h3 className="font-serif font-semibold text-lg mb-2">Inclusion</h3>
+              <p className="text-sm text-ink-light">
+                Creating welcoming spaces for women of all backgrounds in STEM.
+              </p>
+            </div>
+            <div className="text-center p-4">
+              <Users className="w-12 h-12 text-sepia-600 mx-auto mb-3" />
+              <h3 className="font-serif font-semibold text-lg mb-2">Community</h3>
+              <p className="text-sm text-ink-light">
+                Building supportive networks that foster growth and collaboration.
+              </p>
+            </div>
+            <div className="text-center p-4">
+              <Trophy className="w-12 h-12 text-gold-600 mx-auto mb-3" />
+              <h3 className="font-serif font-semibold text-lg mb-2">Excellence</h3>
+              <p className="text-sm text-ink-light">
+                Promoting high-quality education and professional development.
+              </p>
+            </div>
           </div>
         </div>
-
-        <p className="body-text">
-          Through this interactive book and our comprehensive platform, we're not just 
-          teaching STEM concepts—we're nurturing confidence, building networks, and 
-          creating opportunities that will shape the future of technology and innovation.
-        </p>
-
-        {/* Aspirational Quote */}
-        <div className="bg-gold-50 p-6 rounded-page border-2 border-gold-200 mt-6">
-          <div className="flex items-start gap-3">
-            <Sparkles className="w-6 h-6 text-gold-600 flex-shrink-0 mt-1" />
-            <p className="font-serif text-lg italic text-ink leading-relaxed">
-              "Our vision is bold, our mission is clear, and our commitment is unwavering. 
-              Together, we're writing a new chapter in the story of women in STEM."
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Page Number */}
-      <div className="text-center mt-6 pt-4 border-t border-sepia-200">
-        <p className="page-number-ornate">6</p>
       </div>
     </div>
   );
