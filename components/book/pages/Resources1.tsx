@@ -1,82 +1,33 @@
 /**
- * Resources Chapter Page 1 - Page 10
- * Educational Platforms Overview
+ * Learning Resources - Page 1: Overview
  */
 import React from 'react';
-import { GraduationCap, Monitor, Code, FlaskConical } from 'lucide-react';
+import { BookOpen } from 'lucide-react';
 
 export default function Resources1() {
   return (
-    <div className="h-full space-y-6">
-      {/* Chapter Divider */}
-      <div className="chapter-divider-ornate" />
+    <div className="h-full w-full p-8 md:p-12 overflow-y-auto scrollbar-book">
+      <div className="max-w-2xl mx-auto space-y-8">
+        <div className="chapter-number">Chapter 3</div>
+        <h2 className="chapter-heading">Learning Resources</h2>
+        <div className="ornamental-divider" />
 
-      {/* Chapter Header */}
-      <div className="text-center mb-8">
-        <p className="chapter-number">Chapter Three</p>
-        <h1 className="chapter-heading">Learning Resources</h1>
-        <p className="text-lg font-serif italic text-ink-light mt-2">
-          Tools for Growth
-        </p>
-      </div>
-
-      {/* Introduction */}
-      <p className="body-text">
-        The journey to STEM excellence is paved with quality resources. This chapter brings 
-        together the best educational platforms, courses, and opportunities designed to 
-        support women in their STEM pursuits.
-      </p>
-
-      {/* Platform Categories */}
-      <div className="grid md:grid-cols-2 gap-4 mt-6">
-        <div className="bg-burgundy-50 p-5 rounded-page border-2 border-burgundy-200">
-          <Monitor className="w-8 h-8 text-burgundy-600 mb-3" />
-          <h3 className="font-serif text-lg font-semibold text-ink mb-2">
-            Online Learning Platforms
-          </h3>
-          <p className="text-sm text-ink-light">
-            From massive open online courses to specialized bootcamps, discover platforms 
-            offering flexible, high-quality STEM education.
+        <div className="body-text space-y-6">
+          <p className="drop-cap">
+            Access a comprehensive collection of resources designed to support
+            your STEM journey. From beginner tutorials to advanced concepts,
+            we've curated content to help you succeed.
           </p>
-        </div>
 
-        <div className="bg-forest-50 p-5 rounded-page border-2 border-forest-200">
-          <FlaskConical className="w-8 h-8 text-forest-600 mb-3" />
-          <h3 className="font-serif text-lg font-semibold text-ink mb-2">
-            Research Opportunities
-          </h3>
-          <p className="text-sm text-ink-light">
-            Connect with research labs, participate in citizen science, and contribute to 
-            real-world scientific discovery.
-          </p>
+          <div className="text-center p-6 bg-forest-50 rounded-book border-2 border-forest-200">
+            <BookOpen className="w-16 h-16 text-forest-600 mx-auto mb-4" />
+            <h3 className="font-serif font-bold text-xl mb-3 text-forest-900">Start Learning</h3>
+            <p className="text-ink-light">
+              Browse through tutorials, courses, workshops, and learning paths
+              designed specifically for women in STEM.
+            </p>
+          </div>
         </div>
-
-        <div className="bg-gold-50 p-5 rounded-page border-2 border-gold-200">
-          <GraduationCap className="w-8 h-8 text-gold-600 mb-3" />
-          <h3 className="font-serif text-lg font-semibold text-ink mb-2">
-            Scholarships & Funding
-          </h3>
-          <p className="text-sm text-ink-light">
-            Financial support specifically for women in STEM, from undergraduate to 
-            doctoral programs and beyond.
-          </p>
-        </div>
-
-        <div className="bg-sepia-50 p-5 rounded-page border-2 border-sepia-200">
-          <Code className="w-8 h-8 text-sepia-600 mb-3" />
-          <h3 className="font-serif text-lg font-semibold text-ink mb-2">
-            Professional Development
-          </h3>
-          <p className="text-sm text-ink-light">
-            Conferences, workshops, and networking events designed to advance women's 
-            careers in STEM fields.
-          </p>
-        </div>
-      </div>
-
-      {/* Page Number */}
-      <div className="text-center mt-6">
-        <p className="page-number-ornate">10</p>
       </div>
     </div>
   );
