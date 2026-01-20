@@ -4,6 +4,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import './globals.css';
 import './globals-enhanced.css';
+import './globals-3d-animations.css';
 
 const inter = Inter({
   subsets: ['latin'],
