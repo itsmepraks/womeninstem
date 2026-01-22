@@ -1,58 +1,68 @@
 /**
- * Complete chapter structure and content for the STEM•SPARK book
+ * Chapter structure for the STEM•SPARK book
+ * Each nav item = 1 chapter
  */
 import type { Chapter } from '@/types/book';
 
 export const chapters: Chapter[] = [
   {
-    id: 'home',
-    title: 'Welcome',
-    subtitle: 'Begin Your Journey',
-    icon: '🏠',
-    pageRange: [0, 3],
-    color: 'burgundy',
+    id: 'cover',
+    title: 'STEM•SPARK',
+    subtitle: 'Your Journey Starts Here',
+    icon: '✨',
+    pageRange: [0, 0],
+    color: 'white',
   },
   {
-    id: 'about',
-    title: 'About STEM•SPARK',
-    subtitle: 'Our Mission & Vision',
-    icon: '✨',
-    pageRange: [4, 9],
-    color: 'sepia',
+    id: 'explore',
+    title: 'Explore',
+    subtitle: 'Discover the Platform',
+    icon: '🔍',
+    pageRange: [1, 1],
+    color: 'white',
+  },
+  {
+    id: 'learning',
+    title: 'Learning Paths',
+    subtitle: 'Resources & Courses',
+    icon: '📚',
+    pageRange: [2, 2],
+    color: 'white',
+  },
+  {
+    id: 'mentorship',
+    title: 'Mentorship',
+    subtitle: 'Connect with Mentors',
+    icon: '👥',
+    pageRange: [3, 3],
+    color: 'white',
+  },
+  {
+    id: 'community',
+    title: 'Community',
+    subtitle: 'Network & Collaborate',
+    icon: '🤝',
+    pageRange: [4, 4],
+    color: 'white',
   },
   {
     id: 'resources',
-    title: 'Learning Resources',
-    subtitle: 'Tools for Growth',
-    icon: '📚',
-    pageRange: [10, 17],
-    color: 'forest',
-  },
-  {
-    id: 'stories',
-    title: 'Success Stories',
-    subtitle: 'Inspiration & Impact',
-    icon: '🌟',
-    pageRange: [18, 23],
-    color: 'gold',
-  },
-  {
-    id: 'get-involved',
-    title: 'Get Involved',
-    subtitle: 'Join the Community',
-    icon: '🤝',
-    pageRange: [24, 29],
-    color: 'burgundy',
-  },
-  {
-    id: 'contact',
-    title: 'Connect With Us',
-    subtitle: 'Reach Out',
-    icon: '📧',
-    pageRange: [30, 31],
-    color: 'sepia',
+    title: 'Resources',
+    subtitle: 'Companies, Events & More',
+    icon: '🗺️',
+    pageRange: [5, 5],
+    color: 'white',
   },
 ];
+
+// Map nav items to chapter pages
+export const NAV_TO_CHAPTER: Record<string, number> = {
+  'explore': 1,
+  'learning': 2,
+  'mentorship': 3,
+  'community': 4,
+  'resources': 5,
+};
 
 /**
  * Get chapter by page number
@@ -77,24 +87,5 @@ export function getChapterById(id: string): Chapter | null {
  * Get total number of pages
  */
 export function getTotalPages(): number {
-  const lastChapter = chapters[chapters.length - 1];
-  return lastChapter ? lastChapter.pageRange[1] + 1 : 0;
-}
-
-/**
- * Get next chapter
- */
-export function getNextChapter(currentChapterId: string): Chapter | null {
-  const currentIndex = chapters.findIndex((c) => c.id === currentChapterId);
-  if (currentIndex === -1 || currentIndex === chapters.length - 1) return null;
-  return chapters[currentIndex + 1];
-}
-
-/**
- * Get previous chapter
- */
-export function getPreviousChapter(currentChapterId: string): Chapter | null {
-  const currentIndex = chapters.findIndex((c) => c.id === currentChapterId);
-  if (currentIndex <= 0) return null;
-  return chapters[currentIndex - 1];
+  return chapters.length;
 }

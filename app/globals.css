@@ -2,314 +2,428 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ========================================
+   GLASSMORPHIC BOOK DESIGN SYSTEM
+   Black/White theme with glass effects
+   ======================================== */
+
 @layer base {
   * {
-    @apply border-ink-light/20;
+    @apply border-white/10;
+  }
+  
+  :root {
+    --book-perspective: 2000px;
+    --page-flip-duration: 0.6s;
+    --glass-blur: 20px;
   }
   
   body {
-    @apply overflow-x-hidden;
+    @apply bg-obsidian text-white antialiased overflow-x-hidden;
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+    min-height: 100vh;
   }
 
-  /* Book-inspired Typography */
+  /* Elegant Typography */
   h1, h2, h3, h4, h5, h6 {
-    @apply font-serif tracking-title;
+    @apply font-display tracking-tight text-white;
   }
 
   h1 {
-    @apply text-5xl md:text-7xl font-bold text-ink;
+    @apply text-5xl md:text-7xl font-bold;
   }
 
   h2 {
-    @apply text-4xl md:text-5xl font-bold text-ink;
+    @apply text-4xl md:text-5xl font-bold;
   }
 
   h3 {
-    @apply text-3xl md:text-4xl font-semibold text-ink;
+    @apply text-2xl md:text-3xl font-semibold;
   }
 
   h4 {
-    @apply text-2xl md:text-3xl font-semibold text-ink;
+    @apply text-xl md:text-2xl font-semibold;
   }
 
   p {
-    @apply leading-relaxed tracking-body font-body text-ink-light;
+    @apply leading-relaxed text-white/80;
+  }
+
+  /* Selection */
+  ::selection {
+    @apply bg-white/20 text-white;
+  }
+}
+
+@layer components {
+  /* ========================================
+     GLASSMORPHISM COMPONENTS
+     ======================================== */
+  
+  .glass {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+  
+  .glass-strong {
+    @apply bg-white/10 backdrop-blur-2xl border border-white/20;
+    box-shadow: 
+      0 16px 48px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+  
+  .glass-dark {
+    @apply bg-black/40 backdrop-blur-xl border border-white/5;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+
+  .glass-card {
+    @apply glass rounded-2xl p-6 transition-all duration-300;
+  }
+
+  .glass-card:hover {
+    @apply bg-white/10 border-white/20;
+    transform: translateY(-2px);
+    box-shadow: 
+      0 20px 60px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  }
+
+  /* ========================================
+     3D BOOK SYSTEM
+     ======================================== */
+  
+  .book-container {
+    perspective: var(--book-perspective);
+    perspective-origin: center center;
+  }
+
+  .book {
+    @apply relative mx-auto;
+    transform-style: preserve-3d;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  .book-wrapper {
+    @apply relative;
+    transform-style: preserve-3d;
+    box-shadow: 
+      0 30px 60px rgba(0, 0, 0, 0.5),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
+    border-radius: 0 0.5rem 0.5rem 0;
+  }
+
+  /* Book Spine */
+  .book-spine {
+    @apply absolute left-0 top-0 bottom-0 w-8;
+    background: linear-gradient(90deg, 
+      #1a1a1a 0%, 
+      #2a2a2a 30%,
+      #1a1a1a 100%);
+    border-radius: 0.5rem 0 0 0.5rem;
+    transform: rotateY(-90deg) translateX(-16px);
+    transform-origin: right center;
+  }
+
+  /* Book Pages Container */
+  .book-pages {
+    @apply relative bg-obsidian-900 overflow-hidden;
+    border-radius: 0 0.5rem 0.5rem 0;
+    min-height: 500px;
+  }
+
+  /* Individual Page */
+  .book-page {
+    @apply absolute inset-0 bg-gradient-to-br from-obsidian-800 via-obsidian-900 to-obsidian;
+    @apply p-8 md:p-12 lg:p-16;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    border-radius: 0 0.5rem 0.5rem 0;
+    border-left: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .book-page::before {
+    content: '';
+    @apply absolute left-0 top-0 bottom-0 w-8;
+    background: linear-gradient(90deg, rgba(0,0,0,0.15) 0%, transparent 100%);
+    pointer-events: none;
+  }
+
+  /* Page Flip Animation Classes */
+  .page-flipping-forward {
+    animation: pageFlipForward var(--page-flip-duration) ease-in-out forwards;
+  }
+
+  .page-flipping-backward {
+    animation: pageFlipBackward var(--page-flip-duration) ease-in-out forwards;
+  }
+
+  .page-hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .page-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Page shadows during flip */
+  .page-shadow {
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(0,0,0,0.1) 50%, 
+      transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .page-flipping-forward .page-shadow,
+  .page-flipping-backward .page-shadow {
+    opacity: 1;
+  }
+
+  /* ========================================
+     NAVIGATION CONTROLS
+     ======================================== */
+  
+  .nav-button {
+    @apply flex items-center justify-center w-12 h-12 md:w-14 md:h-14;
+    @apply glass rounded-full;
+    @apply text-white/70 hover:text-white;
+    @apply transition-all duration-300;
+    @apply focus:outline-none focus:ring-2 focus:ring-white/20;
+  }
+
+  .nav-button:hover {
+    @apply bg-white/15 shadow-glow;
+    transform: scale(1.05);
+  }
+
+  .nav-button:disabled {
+    @apply opacity-30 cursor-not-allowed;
+    transform: none;
+  }
+
+  .nav-button:disabled:hover {
+    @apply bg-white/5;
+  }
+
+  /* ========================================
+     BUTTONS
+     ======================================== */
+  
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply px-6 py-3 rounded-full;
+    @apply bg-white text-black font-semibold;
+    @apply transition-all duration-300;
+    @apply hover:bg-white/90 hover:shadow-glow;
+    @apply focus:outline-none focus:ring-2 focus:ring-white/50 focus:ring-offset-2 focus:ring-offset-obsidian;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2;
+    @apply px-6 py-3 rounded-full;
+    @apply glass font-semibold text-white;
+    @apply transition-all duration-300;
+    @apply hover:bg-white/15;
+    @apply focus:outline-none focus:ring-2 focus:ring-white/30;
+  }
+
+  .btn-secondary:hover {
+    transform: translateY(-2px);
+  }
+
+  /* ========================================
+     PROGRESS BAR
+     ======================================== */
+  
+  .progress-bar {
+    @apply h-1 bg-white/10 rounded-full overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply h-full bg-white/50 rounded-full transition-all duration-500;
+  }
+
+  /* ========================================
+     BADGES
+     ======================================== */
+  
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full;
+    @apply text-sm font-medium;
+    @apply bg-white/10 text-white/80 border border-white/10;
+  }
+
+  /* ========================================
+     HEADER
+     ======================================== */
+  
+  .header-glass {
+    @apply fixed top-0 left-0 right-0 z-50;
+    @apply transition-all duration-300;
+  }
+
+  .header-glass.scrolled {
+    @apply glass-strong;
+  }
+
+  /* ========================================
+     SCROLLBAR
+     ======================================== */
+  
+  .scrollbar-minimal::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar-track {
+    @apply bg-white/5 rounded-full;
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar-thumb {
+    @apply bg-white/20 rounded-full;
+  }
+
+  .scrollbar-minimal::-webkit-scrollbar-thumb:hover {
+    @apply bg-white/30;
   }
 }
 
 @layer utilities {
-  /* Paper Texture Backgrounds */
-  .paper-texture {
-    background-image: 
-      repeating-linear-gradient(
-        0deg,
-        transparent,
-        transparent 2px,
-        rgba(45, 37, 32, 0.03) 2px,
-        rgba(45, 37, 32, 0.03) 4px
-      ),
-      repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 2px,
-        rgba(45, 37, 32, 0.02) 2px,
-        rgba(45, 37, 32, 0.02) 4px
-      );
+  /* ========================================
+     UTILITY CLASSES
+     ======================================== */
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
   }
 
-  .old-paper-texture {
-    background-image: 
-      radial-gradient(circle at 20% 50%, rgba(139, 122, 86, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 80% 80%, rgba(139, 122, 86, 0.05) 0%, transparent 50%),
-      radial-gradient(circle at 40% 20%, rgba(139, 122, 86, 0.03) 0%, transparent 50%);
+  .glow-text {
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
   }
 
-  .parchment-bg {
-    @apply bg-parchment-gradient;
-    background-size: 100% 100%;
+  .transition-elegant {
+    @apply transition-all duration-300 ease-out;
   }
 
-  /* Typography Utilities for Book Layout */
-  .chapter-heading {
-    @apply font-serif text-4xl md:text-6xl font-bold text-ink tracking-chapter;
-    @apply mb-6 text-center;
-    text-shadow: 2px 2px 4px rgba(45, 37, 32, 0.1);
+  .hover-lift {
+    @apply transition-transform duration-300;
   }
 
-  .chapter-number {
-    @apply font-serif text-xl md:text-2xl font-medium text-sepia-600 tracking-wider;
-    @apply uppercase mb-3 text-center;
+  .hover-lift:hover {
+    transform: translateY(-4px);
   }
 
-  .section-heading {
-    @apply font-serif text-2xl md:text-4xl font-semibold text-ink tracking-title;
-    @apply mb-4 border-b-2 border-sepia-300 pb-2;
+  /* Ornamental divider */
+  .divider-elegant {
+    @apply h-px bg-gradient-to-r from-transparent via-white/20 to-transparent;
   }
 
-  .book-quote {
-    @apply font-serif text-lg md:text-xl italic text-ink-light;
-    @apply border-l-4 border-gold-500 pl-6 py-4 my-6;
-    @apply relative;
-  }
-
-  .book-quote::before {
-    content: '"';
-    @apply absolute -left-2 -top-2 text-5xl text-gold-500/30 font-serif;
-  }
-
-  .drop-cap::first-letter {
-    @apply font-serif text-6xl md:text-7xl float-left;
-    @apply leading-none mr-2 text-burgundy-600;
-    margin-top: 0.1em;
-  }
-
-  .body-text {
-    @apply font-body text-base md:text-lg leading-relaxed text-ink-light;
-    @apply tracking-body;
-  }
-
-  .book-caption {
-    @apply font-sans text-sm text-ink-light/70 italic text-center;
-  }
-
-  /* Page Turn Animation */
-  .page-turn-enter {
-    animation: page-turn-in 0.6s ease-in-out;
-  }
-
-  .page-turn-exit {
-    animation: page-turn-out 0.6s ease-in-out;
-  }
-
-  @keyframes page-turn-in {
-    0% {
-      transform: perspective(1200px) rotateY(-180deg);
-      opacity: 0;
-      transform-origin: left center;
-    }
-    50% {
-      transform: perspective(1200px) rotateY(-90deg);
-      opacity: 0.5;
-      transform-origin: left center;
-    }
-    100% {
-      transform: perspective(1200px) rotateY(0deg);
-      opacity: 1;
-      transform-origin: left center;
-    }
-  }
-
-  @keyframes page-turn-out {
-    0% {
-      transform: perspective(1200px) rotateY(0deg);
-      opacity: 1;
-      transform-origin: left center;
-    }
-    50% {
-      transform: perspective(1200px) rotateY(90deg);
-      opacity: 0.5;
-      transform-origin: left center;
-    }
-    100% {
-      transform: perspective(1200px) rotateY(180deg);
-      opacity: 0;
-      transform-origin: left center;
-    }
-  }
-
-  /* Book Layout Utilities */
-  .book-container {
-    @apply relative;
-  }
-
-  .book-page {
-    @apply bg-parchment rounded-page shadow-page;
-    @apply border border-sepia-200/50;
-    @apply p-8 md:p-12 lg:p-16;
-  }
-
-  .book-spread {
-    @apply grid grid-cols-1 lg:grid-cols-2 gap-8;
-  }
-
-  /* Book Card Styles */
-  .book-card {
-    @apply bg-parchment-light rounded-page shadow-book;
-    @apply border border-sepia-200/50;
-    @apply p-6 transition-all duration-300;
-    @apply hover:shadow-book-lg hover:-translate-y-1;
-  }
-
-  .book-card-premium {
-    @apply book-card;
-    @apply bg-gradient-to-br from-parchment-light to-cream-100;
-  }
-
-  /* Decorative Elements */
-  .ornamental-divider {
-    @apply h-px bg-gradient-to-r from-transparent via-sepia-400 to-transparent;
-    @apply my-8;
-  }
-
-  .chapter-ornament {
-    @apply text-center text-3xl text-sepia-500;
-    @apply my-6;
-  }
-
-  .chapter-ornament::before {
-    content: '❦';
-  }
-
-  /* Vintage Button Styles */
-  .btn-book {
-    @apply inline-flex items-center justify-center gap-2 px-6 py-3;
-    @apply font-serif font-semibold text-base;
-    @apply bg-sepia-600 text-parchment rounded-book;
-    @apply border-2 border-sepia-700;
-    @apply shadow-book transition-all duration-300;
-    @apply hover:bg-sepia-700 hover:shadow-book-lg hover:-translate-y-0.5;
-    @apply focus:outline-none focus:ring-2 focus:ring-sepia-500 focus:ring-offset-2;
-  }
-
-  .btn-book-secondary {
-    @apply btn-book;
-    @apply bg-parchment text-ink border-ink-light;
-    @apply hover:bg-parchment-dark;
-  }
-
-  .btn-book-accent {
-    @apply btn-book;
-    @apply bg-burgundy-600 border-burgundy-700;
-    @apply hover:bg-burgundy-700;
-  }
-
-  /* Text Shadows for Book Aesthetic */
-  .text-shadow-book {
-    text-shadow: 1px 1px 2px rgba(45, 37, 32, 0.1);
-  }
-
-  .text-shadow-vintage {
-    text-shadow: 2px 2px 4px rgba(139, 122, 86, 0.3);
-  }
-
-  /* Badge Styles for Book Theme */
-  .badge-book {
-    @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full;
-    @apply text-sm font-medium border;
-    @apply bg-sepia-100 text-sepia-800 border-sepia-300;
-  }
-
-  .badge-burgundy {
-    @apply badge-book;
-    @apply bg-burgundy-100 text-burgundy-800 border-burgundy-300;
-  }
-
-  .badge-gold {
-    @apply badge-book;
-    @apply bg-gold-100 text-gold-800 border-gold-300;
-  }
-
-  .badge-forest {
-    @apply badge-book;
-    @apply bg-forest-100 text-forest-800 border-forest-300;
-  }
-
-  /* Scrollbar Styling for Book Theme */
-  .scrollbar-book::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-
-  .scrollbar-book::-webkit-scrollbar-track {
-    @apply bg-parchment-dark rounded-full;
-  }
-
-  .scrollbar-book::-webkit-scrollbar-thumb {
-    @apply bg-sepia-400 rounded-full;
-    @apply hover:bg-sepia-500;
-  }
-
-  /* Selection Styles */
-  ::selection {
-    @apply bg-gold-200 text-ink;
-  }
-
-  ::-moz-selection {
-    @apply bg-gold-200 text-ink;
-  }
-
-  /* Transitions */
-  .transition-book {
-    @apply transition-all duration-300 ease-in-out;
-  }
-
-  /* Hover Effects */
-  .hover-lift-book {
-    @apply transition-book hover:-translate-y-1 hover:shadow-book-lg;
-  }
-
-  /* Input Styles for Book Theme */
-  .input-book {
-    @apply w-full px-4 py-3 bg-parchment-light;
-    @apply border-2 border-sepia-300 rounded-book;
-    @apply text-ink placeholder:text-ink-light/50;
-    @apply focus:outline-none focus:ring-2 focus:ring-sepia-500 focus:border-transparent;
-    @apply transition-book;
-  }
-
-  .input-book:hover {
-    @apply border-sepia-400;
-  }
-
-  /* Page Number Styles */
+  /* Page number styling */
   .page-number {
-    @apply font-serif text-sm text-ink-light/60 text-center;
+    @apply text-sm text-white/40 font-serif;
   }
 
-  /* Bookmark Indicator */
-  .bookmark {
-    @apply absolute top-0 right-8 w-12 h-16;
-    @apply bg-burgundy-600 shadow-book;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 85%, 0 100%);
+  /* Chapter heading */
+  .chapter-heading {
+    @apply font-display text-4xl md:text-5xl font-bold text-white mb-6;
   }
+
+  /* Body text */
+  .body-text {
+    @apply text-white/70 leading-relaxed text-lg;
+  }
+
+  /* Hide scrollbar but keep functionality */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ========================================
+   KEYFRAME ANIMATIONS
+   ======================================== */
+
+@keyframes pageFlipForward {
+  0% {
+    transform: perspective(2000px) rotateY(0deg);
+    transform-origin: left center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    transform: perspective(2000px) rotateY(-90deg);
+    transform-origin: left center;
+    box-shadow: 20px 0 40px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    transform: perspective(2000px) rotateY(-180deg);
+    transform-origin: left center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes pageFlipBackward {
+  0% {
+    transform: perspective(2000px) rotateY(-180deg);
+    transform-origin: left center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+  50% {
+    transform: perspective(2000px) rotateY(-90deg);
+    transform-origin: left center;
+    box-shadow: 20px 0 40px rgba(0, 0, 0, 0.5);
+  }
+  100% {
+    transform: perspective(2000px) rotateY(0deg);
+    transform-origin: left center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes pulseSoft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }

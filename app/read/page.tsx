@@ -1,5 +1,4 @@
 import BookReader from '@/components/book/BookReader';
-import BookNavigation from '@/components/book/BookNavigation';
 import TableOfContents, { TOCToggleButton } from '@/components/book/TableOfContents';
 import { chapters } from '@/data/chapters';
 
@@ -48,8 +47,7 @@ import Contact1 from '@/components/book/pages/Contact1';
 import Contact2 from '@/components/book/pages/Contact2';
 
 /**
- * Main book reading experience
- * All 32 pages organized by chapters matching chapters.ts structure
+ * Main book reading experience with glassmorphic design
  */
 export default function ReadPage() {
   const bookPages = [
@@ -99,20 +97,15 @@ export default function ReadPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-parchment py-8 relative">
-      {/* Book page texture background */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none opacity-30">
-        <div className="absolute inset-0 paper-texture" />
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-8 relative">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Book Title */}
-        <div className="text-center mb-8">
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-burgundy-700 mb-2 text-shadow-vintage">
-            STEM•SPARK Interactive Book
+        <div className="text-center mb-10">
+          <h1 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">
+            STEM•SPARK
           </h1>
-          <p className="text-ink-light font-serif italic">
-            Your journey through STEM education and empowerment
+          <p className="text-white/40 font-serif text-sm">
+            Interactive Book Experience
           </p>
         </div>
 
@@ -123,17 +116,6 @@ export default function ReadPage() {
           showProgress={true}
           className="mb-8"
         />
-
-        {/* Book Navigation Controls */}
-        <BookNavigation className="mb-8" />
-
-        {/* Keyboard Shortcuts Info */}
-        <div className="text-center text-sm text-ink-light font-serif">
-          <p>
-            Use arrow keys (← →) or click the navigation buttons to turn pages.
-            Press Home to return to the beginning.
-          </p>
-        </div>
       </div>
 
       {/* Table of Contents */}
