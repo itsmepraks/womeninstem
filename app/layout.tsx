@@ -4,6 +4,7 @@ import Header from '@/components/layout/Header';
 import 'leaflet/dist/leaflet.css';
 import './globals.css';
 import './globals-enhanced.css';
+import './globals-3d-animations.css';
 
 const inter = Inter({
   subsets: ['latin'],
