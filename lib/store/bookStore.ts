@@ -1,167 +1,241 @@
 /**
- * Complete Zustand store for managing book state with persistence
+ * Book Store - Zustand state management for book reading experience
+ * 
+ * Manages:
+ * - Current page and navigation
+ * - Animation state
+ * - Bookmarks with persistence
+ * - Reading settings
+ * - Page history
  */
+
+'use client';
+
 import { create } from 'zustand';
 import { persist, createJSONStorage } from 'zustand/middleware';
-import type { BookState, Bookmark, BookSettings } from '@/types/book';
 
-interface BookStore extends BookState {
-  // Page navigation
-  setCurrentPage: (page: number) => void;
-  setTotalPages: (total: number) => void;
+export type AnimationDirection = 'forward' | 'backward' | null;
+export type AnimationSpeed = 'slow' | 'normal' | 'fast';
+
+interface BookSettings {
+  soundEnabled: boolean;
+  animationSpeed: AnimationSpeed;
+  showPageNumbers: boolean;
+}
+
+interface BookState {
+  // Page state
+  currentPage: number;
+  totalPages: number;
+  isAnimating: boolean;
+  animationDirection: AnimationDirection;
+  
+  // Navigation history
+  pageHistory: number[];
+  
+  // Bookmarks
+  bookmarks: number[];
+  
+  // Table of contents
+  showTableOfContents: boolean;
+  
+  // Settings
+  settings: BookSettings;
+  
+  // Actions
   nextPage: () => void;
   previousPage: () => void;
   goToPage: (page: number) => void;
+  setTotalPages: (total: number) => void;
   
-  // Flipping state
-  setIsFlipping: (flipping: boolean) => void;
+  // Animation control
+  setAnimating: (animating: boolean, direction?: AnimationDirection) => void;
+  
+  // Bookmarks
+  toggleBookmark: (page: number) => void;
+  isBookmarked: (page: number) => boolean;
   
   // Table of contents
   toggleTableOfContents: () => void;
   setShowTableOfContents: (show: boolean) => void;
   
-  // Bookmarks
-  addBookmark: (bookmark: Omit<Bookmark, 'id' | 'createdAt'>) => void;
-  removeBookmark: (id: string) => void;
-  clearBookmarks: () => void;
-  
   // Settings
   updateSettings: (settings: Partial<BookSettings>) => void;
   
-  // History
-  addToHistory: (page: number) => void;
-  goBack: () => void;
-  
-  // Reset
-  resetBook: () => void;
+  // Utility
+  canNavigateNext: () => boolean;
+  canNavigatePrevious: () => boolean;
+  getProgress: () => number;
 }
 
-const initialSettings: BookSettings = {
-  soundEnabled: false,
-  autoPlay: false,
-  animationSpeed: 'normal',
-  theme: 'light',
-};
-
-export const useBookStore = create<BookStore>()(persist(
+export const useBookStore = create<BookState>()(
+  persist(
     (set, get) => ({
       // Initial state
       currentPage: 0,
       totalPages: 0,
-      isFlipping: false,
-      showTableOfContents: false,
+      isAnimating: false,
+      animationDirection: null,
+      pageHistory: [0],
       bookmarks: [],
-      settings: initialSettings,
-      history: [],
-
-      // Set total pages
-      setTotalPages: (total) => set({ totalPages: total }),
-
-      // Page navigation
-      setCurrentPage: (page) => {
-        const { totalPages, addToHistory } = get();
-        if (page >= 0 && page < totalPages) {
-          addToHistory(get().currentPage);
-          set({ currentPage: page });
-        }
+      showTableOfContents: false,
+      settings: {
+        soundEnabled: true,
+        animationSpeed: 'normal',
+        showPageNumbers: true,
       },
 
+      // Navigation actions
       nextPage: () => {
-        const { currentPage, totalPages } = get();
-        if (currentPage < totalPages - 1) {
-          get().setCurrentPage(currentPage + 1);
-        }
+        const { currentPage, totalPages, isAnimating } = get();
+        if (isAnimating || currentPage >= totalPages - 1) return;
+
+        set({
+          isAnimating: true,
+          animationDirection: 'forward',
+        });
+
+        // Animation duration based on speed
+        const duration = {
+          slow: 1000,
+          normal: 800,
+          fast: 600,
+        }[get().settings.animationSpeed];
+
+        setTimeout(() => {
+          set(state => ({
+            currentPage: state.currentPage + 1,
+            pageHistory: [...state.pageHistory, state.currentPage + 1],
+            isAnimating: false,
+            animationDirection: null,
+          }));
+        }, duration);
       },
 
       previousPage: () => {
-        const { currentPage } = get();
-        if (currentPage > 0) {
-          get().setCurrentPage(currentPage - 1);
+        const { currentPage, isAnimating } = get();
+        if (isAnimating || currentPage <= 0) return;
+
+        set({
+          isAnimating: true,
+          animationDirection: 'backward',
+        });
+
+        const duration = {
+          slow: 1000,
+          normal: 800,
+          fast: 600,
+        }[get().settings.animationSpeed];
+
+        setTimeout(() => {
+          set(state => ({
+            currentPage: state.currentPage - 1,
+            pageHistory: [...state.pageHistory, state.currentPage - 1],
+            isAnimating: false,
+            animationDirection: null,
+          }));
+        }, duration);
+      },
+
+      goToPage: (page: number) => {
+        const { currentPage, totalPages, isAnimating } = get();
+        
+        if (
+          isAnimating || 
+          page < 0 || 
+          page >= totalPages || 
+          page === currentPage
+        ) {
+          return;
         }
+
+        const direction = page > currentPage ? 'forward' : 'backward';
+
+        set({
+          isAnimating: true,
+          animationDirection: direction,
+        });
+
+        const duration = {
+          slow: 1000,
+          normal: 800,
+          fast: 600,
+        }[get().settings.animationSpeed];
+
+        setTimeout(() => {
+          set(state => ({
+            currentPage: page,
+            pageHistory: [...state.pageHistory, page],
+            isAnimating: false,
+            animationDirection: null,
+          }));
+        }, duration);
       },
 
-      goToPage: (page) => {
-        get().setCurrentPage(page);
+      setTotalPages: (total: number) => {
+        set({ totalPages: total });
       },
 
-      // Flipping state
-      setIsFlipping: (flipping) => set({ isFlipping: flipping }),
-
-      // Table of contents
-      toggleTableOfContents: () =>
-        set((state) => ({ showTableOfContents: !state.showTableOfContents })),
-
-      setShowTableOfContents: (show) => set({ showTableOfContents: show }),
+      // Animation control
+      setAnimating: (animating: boolean, direction: AnimationDirection = null) => {
+        set({ isAnimating: animating, animationDirection: direction });
+      },
 
       // Bookmarks
-      addBookmark: (bookmark) =>
-        set((state) => ({
-          bookmarks: [
-            ...state.bookmarks,
-            {
-              ...bookmark,
-              id: `bookmark-${Date.now()}`,
-              createdAt: new Date(),
-            },
-          ],
-        })),
-
-      removeBookmark: (id) =>
-        set((state) => ({
-          bookmarks: state.bookmarks.filter((b) => b.id !== id),
-        })),
-
-      clearBookmarks: () => set({ bookmarks: [] }),
-
-      // Settings
-      updateSettings: (settings) =>
-        set((state) => ({
-          settings: { ...state.settings, ...settings },
-        })),
-
-      // History
-      addToHistory: (page) =>
-        set((state) => ({
-          history: [...state.history.slice(-10), page],
-        })),
-
-      goBack: () => {
-        const { history } = get();
-        if (history.length > 0) {
-          const previousPage = history[history.length - 1];
-          set({
-            currentPage: previousPage,
-            history: history.slice(0, -1),
-          });
-        }
+      toggleBookmark: (page: number) => {
+        set(state => ({
+          bookmarks: state.bookmarks.includes(page)
+            ? state.bookmarks.filter(p => p !== page)
+            : [...state.bookmarks, page].sort((a, b) => a - b),
+        }));
       },
 
-      // Reset
-      resetBook: () =>
-        set({
-          currentPage: 0,
-          isFlipping: false,
-          showTableOfContents: false,
-          history: [],
-        }),
+      isBookmarked: (page: number) => {
+        return get().bookmarks.includes(page);
+      },
+
+      // Table of contents
+      toggleTableOfContents: () => {
+        set(state => ({ showTableOfContents: !state.showTableOfContents }));
+      },
+
+      setShowTableOfContents: (show: boolean) => {
+        set({ showTableOfContents: show });
+      },
+
+      // Settings
+      updateSettings: (newSettings: Partial<BookSettings>) => {
+        set(state => ({
+          settings: { ...state.settings, ...newSettings },
+        }));
+      },
+
+      // Utility functions
+      canNavigateNext: () => {
+        const { currentPage, totalPages, isAnimating } = get();
+        return currentPage < totalPages - 1 && !isAnimating;
+      },
+
+      canNavigatePrevious: () => {
+        const { currentPage, isAnimating } = get();
+        return currentPage > 0 && !isAnimating;
+      },
+
+      getProgress: () => {
+        const { currentPage, totalPages } = get();
+        if (totalPages === 0) return 0;
+        return Math.round(((currentPage + 1) / totalPages) * 100);
+      },
     }),
     {
-      name: 'book-storage',
-      storage: createJSONStorage(() => {
-        if (typeof window !== 'undefined') {
-          return localStorage;
-        }
-        // Fallback for SSR
-        return {
-          getItem: () => null,
-          setItem: () => {},
-          removeItem: () => {},
-        };
-      }),
+      name: 'stem-spark-book-storage',
+      storage: createJSONStorage(() => localStorage),
+      // Only persist certain fields
       partialize: (state) => ({
         currentPage: state.currentPage,
         bookmarks: state.bookmarks,
         settings: state.settings,
+        pageHistory: state.pageHistory.slice(-10), // Keep last 10 pages only
       }),
     }
   )

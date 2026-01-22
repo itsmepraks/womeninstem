@@ -5,6 +5,7 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -61,21 +62,21 @@ module.exports = {
       },
       keyframes: {
         pageFlipForward: {
-          '0%': { 
+          '0%': {
             transform: 'perspective(2000px) rotateY(0deg)',
             transformOrigin: 'left center',
           },
-          '100%': { 
+          '100%': {
             transform: 'perspective(2000px) rotateY(-180deg)',
             transformOrigin: 'left center',
           },
         },
         pageFlipBackward: {
-          '0%': { 
+          '0%': {
             transform: 'perspective(2000px) rotateY(-180deg)',
             transformOrigin: 'left center',
           },
-          '100%': { 
+          '100%': {
             transform: 'perspective(2000px) rotateY(0deg)',
             transformOrigin: 'left center',
           },

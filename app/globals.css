@@ -8,16 +8,12 @@
    ======================================== */
 
 @layer base {
-  * {
-    @apply border-white/10;
-  }
-  
   :root {
     --book-perspective: 2000px;
     --page-flip-duration: 0.6s;
     --glass-blur: 20px;
   }
-  
+
   body {
     @apply bg-obsidian text-white antialiased overflow-x-hidden;
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
@@ -25,7 +21,12 @@
   }
 
   /* Elegant Typography */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-display tracking-tight text-white;
   }
 
@@ -59,21 +60,21 @@
   /* ========================================
      GLASSMORPHISM COMPONENTS
      ======================================== */
-  
+
   .glass {
     @apply bg-white/5 backdrop-blur-xl border border-white/10;
-    box-shadow: 
+    box-shadow:
       0 8px 32px rgba(0, 0, 0, 0.3),
       inset 0 1px 0 rgba(255, 255, 255, 0.1);
   }
-  
+
   .glass-strong {
     @apply bg-white/10 backdrop-blur-2xl border border-white/20;
-    box-shadow: 
+    box-shadow:
       0 16px 48px rgba(0, 0, 0, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.15);
   }
-  
+
   .glass-dark {
     @apply bg-black/40 backdrop-blur-xl border border-white/5;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
@@ -86,7 +87,7 @@
   .glass-card:hover {
     @apply bg-white/10 border-white/20;
     transform: translateY(-2px);
-    box-shadow: 
+    box-shadow:
       0 20px 60px rgba(0, 0, 0, 0.4),
       inset 0 1px 0 rgba(255, 255, 255, 0.2);
   }
@@ -94,7 +95,7 @@
   /* ========================================
      3D BOOK SYSTEM
      ======================================== */
-  
+
   .book-container {
     perspective: var(--book-perspective);
     perspective-origin: center center;
@@ -110,7 +111,7 @@
   .book-wrapper {
     @apply relative;
     transform-style: preserve-3d;
-    box-shadow: 
+    box-shadow:
       0 30px 60px rgba(0, 0, 0, 0.5),
       0 0 0 1px rgba(255, 255, 255, 0.05);
     border-radius: 0 0.5rem 0.5rem 0;
@@ -119,10 +120,10 @@
   /* Book Spine */
   .book-spine {
     @apply absolute left-0 top-0 bottom-0 w-8;
-    background: linear-gradient(90deg, 
-      #1a1a1a 0%, 
-      #2a2a2a 30%,
-      #1a1a1a 100%);
+    background: linear-gradient(90deg,
+        #1a1a1a 0%,
+        #2a2a2a 30%,
+        #1a1a1a 100%);
     border-radius: 0.5rem 0 0 0.5rem;
     transform: rotateY(-90deg) translateX(-16px);
     transform-origin: right center;
@@ -148,7 +149,7 @@
   .book-page::before {
     content: '';
     @apply absolute left-0 top-0 bottom-0 w-8;
-    background: linear-gradient(90deg, rgba(0,0,0,0.15) 0%, transparent 100%);
+    background: linear-gradient(90deg, rgba(0, 0, 0, 0.15) 0%, transparent 100%);
     pointer-events: none;
   }
 
@@ -174,10 +175,10 @@
   /* Page shadows during flip */
   .page-shadow {
     @apply absolute inset-0 pointer-events-none;
-    background: linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(0,0,0,0.1) 50%, 
-      transparent 100%);
+    background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(0, 0, 0, 0.1) 50%,
+        transparent 100%);
     opacity: 0;
     transition: opacity 0.3s ease;
   }
@@ -190,7 +191,7 @@
   /* ========================================
      NAVIGATION CONTROLS
      ======================================== */
-  
+
   .nav-button {
     @apply flex items-center justify-center w-12 h-12 md:w-14 md:h-14;
     @apply glass rounded-full;
@@ -216,7 +217,7 @@
   /* ========================================
      BUTTONS
      ======================================== */
-  
+
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2;
     @apply px-6 py-3 rounded-full;
@@ -246,7 +247,7 @@
   /* ========================================
      PROGRESS BAR
      ======================================== */
-  
+
   .progress-bar {
     @apply h-1 bg-white/10 rounded-full overflow-hidden;
   }
@@ -258,7 +259,7 @@
   /* ========================================
      BADGES
      ======================================== */
-  
+
   .badge {
     @apply inline-flex items-center gap-1.5 px-3 py-1 rounded-full;
     @apply text-sm font-medium;
@@ -268,7 +269,7 @@
   /* ========================================
      HEADER
      ======================================== */
-  
+
   .header-glass {
     @apply fixed top-0 left-0 right-0 z-50;
     @apply transition-all duration-300;
@@ -281,7 +282,7 @@
   /* ========================================
      SCROLLBAR
      ======================================== */
-  
+
   .scrollbar-minimal::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -304,7 +305,7 @@
   /* ========================================
      UTILITY CLASSES
      ======================================== */
-  
+
   .text-gradient {
     @apply bg-clip-text text-transparent;
     background-image: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
@@ -367,11 +368,13 @@
     transform-origin: left center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   }
+
   50% {
     transform: perspective(2000px) rotateY(-90deg);
     transform-origin: left center;
     box-shadow: 20px 0 40px rgba(0, 0, 0, 0.5);
   }
+
   100% {
     transform: perspective(2000px) rotateY(-180deg);
     transform-origin: left center;
@@ -385,11 +388,13 @@
     transform-origin: left center;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   }
+
   50% {
     transform: perspective(2000px) rotateY(-90deg);
     transform-origin: left center;
     box-shadow: 20px 0 40px rgba(0, 0, 0, 0.5);
   }
+
   100% {
     transform: perspective(2000px) rotateY(0deg);
     transform-origin: left center;
@@ -398,8 +403,13 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes slideUp {
@@ -407,6 +417,7 @@
     transform: translateY(30px);
     opacity: 0;
   }
+
   to {
     transform: translateY(0);
     opacity: 1;
@@ -414,16 +425,36 @@
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -1000px 0; }
-  100% { background-position: 1000px 0; }
+  0% {
+    backgroundPosition: '-1000px 0'
+  }
+
+  ,
+  100% {
+    backgroundPosition: '1000px 0'
+  }
 }
 
 @keyframes pulseSoft {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
 }
