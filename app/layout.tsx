@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Space_Grotesk, Playfair_Display, Lora } from 'next/font/google';
 import Header from '@/components/layout/Header';
+import 'leaflet/dist/leaflet.css';
 import './globals.css';
 import './globals-enhanced.css';
 

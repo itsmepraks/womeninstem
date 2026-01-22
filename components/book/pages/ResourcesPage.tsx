@@ -1,11 +1,24 @@
 /**
  * Resources Chapter - Companies, Events, Organizations + Heat Map
  */
+'use client';
+
 import React, { useState } from 'react';
 import { Building2, Calendar, Award, MapPin, ExternalLink } from 'lucide-react';
+import dynamic from 'next/dynamic';
+
+// Dynamic import for the map to avoid SSR issues
+const ActivityMap = dynamic(() => import('./ActivityMap'), {
+    ssr: false,
+    loading: () => (
+        <div className="aspect-[2/1] bg-white/5 rounded-lg flex items-center justify-center border border-white/10 animate-pulse">
+            <div className="text-white/30">Loading map...</div>
+        </div>
+    )
+});
 
 export default function ResourcesPage() {
-    const [activeTab, setActiveTab] = useState<'companies' | 'events' | 'orgs'>('companies');
+    const [activeTab, setActiveTab] = useState<'map' | 'companies' | 'events' | 'orgs'>('map');
 
     const companies = [
         { name: 'Google', initiative: 'Women Techmakers', location: 'Global' },
@@ -31,6 +44,7 @@ export default function ResourcesPage() {
     ];
 
     const tabs = [
+        { id: 'map' as const, label: 'Activity Map', icon: MapPin },
         { id: 'companies' as const, label: 'Companies', icon: Building2 },
         { id: 'events' as const, label: 'Events', icon: Calendar },
         { id: 'orgs' as const, label: 'Organizations', icon: Award },
@@ -48,29 +62,8 @@ export default function ResourcesPage() {
                 </p>
             </div>
 
-            {/* Heat Map Placeholder */}
-            <div className="glass rounded-xl p-6 mb-8">
-                <div className="flex items-center gap-2 mb-4">
-                    <MapPin className="w-5 h-5 text-white/70" />
-                    <h2 className="font-display text-lg font-semibold text-white">
-                        Activity Map
-                    </h2>
-                </div>
-                <div className="aspect-[2/1] bg-white/5 rounded-lg flex items-center justify-center border border-white/10">
-                    <div className="text-center">
-                        <MapPin className="w-12 h-12 text-white/20 mx-auto mb-2" />
-                        <p className="text-white/30 text-sm">
-                            Interactive heat map showing women-in-STEM activity
-                        </p>
-                        <p className="text-white/20 text-xs mt-1">
-                            Companies • Organizations • Events by Region
-                        </p>
-                    </div>
-                </div>
-            </div>
-
             {/* Tabs */}
-            <div className="flex gap-2 mb-6">
+            <div className="flex flex-wrap gap-2 mb-6">
                 {tabs.map((tab) => (
                     <button
                         key={tab.id}
@@ -88,6 +81,21 @@ export default function ResourcesPage() {
 
             {/* Tab Content */}
             <div className="glass rounded-xl p-6">
+                {activeTab === 'map' && (
+                    <div>
+                        <div className="flex items-center gap-2 mb-4">
+                            <MapPin className="w-5 h-5 text-white/70" />
+                            <h2 className="font-display text-lg font-semibold text-white">
+                                Women in STEM Activity Map
+                            </h2>
+                        </div>
+                        <p className="text-white/40 text-sm mb-4">
+                            Explore companies, organizations, and events supporting women in STEM across the US.
+                        </p>
+                        <ActivityMap />
+                    </div>
+                )}
+
                 {activeTab === 'companies' && (
                     <div className="grid md:grid-cols-2 gap-3">
                         {companies.map((company) => (
