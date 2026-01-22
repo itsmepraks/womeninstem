@@ -1,12 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { ArrowUp, Github, Twitter, Linkedin, Globe, Heart, Sparkles } from 'lucide-react';
 import { NAV_ITEMS, SOCIAL_LINKS, SITE_NAME } from '@/lib/constants';
+import { useBookStore } from '@/lib/store/bookStore';
 
 export default function Footer() {
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const { goToPage } = useBookStore();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +34,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Column */}
           <div className="lg:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-3 group mb-6">
+            <button onClick={() => goToPage(0)} className="inline-flex items-center gap-3 group mb-6">
               <div className="relative flex items-center justify-center w-10 h-10 rounded-full bg-white/10 border border-white/20">
                 <Sparkles className="w-5 h-5 text-white" strokeWidth={2} />
               </div>
@@ -42,11 +43,10 @@ export default function Footer() {
                 <span className="text-white/40 mx-0.5">•</span>
                 <span className="text-white/80">SPARK</span>
               </div>
-            </Link>
+            </button>
 
             <p className="text-white/50 mb-6 max-w-md leading-relaxed">
-              Igniting curiosity and empowering the next generation of women in STEM through
-              interactive learning, mentorship, and community.
+              Your all-in-one platform for resources, mentorship, community, and opportunities in STEM.
             </p>
 
             {/* Social Links */}
@@ -72,16 +72,16 @@ export default function Footer() {
 
           {/* Navigation Column */}
           <div>
-            <h3 className="font-display font-semibold text-white mb-4">Navigate</h3>
+            <h3 className="font-display font-semibold text-white mb-4">Chapters</h3>
             <ul className="space-y-3">
               {NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
+                <li key={item.id}>
+                  <button
+                    onClick={() => goToPage(item.chapter)}
                     className="text-white/50 hover:text-white transition-colors text-sm"
                   >
                     {item.label}
-                  </Link>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -89,21 +89,23 @@ export default function Footer() {
 
           {/* Resources Column */}
           <div>
-            <h3 className="font-display font-semibold text-white mb-4">Resources</h3>
+            <h3 className="font-display font-semibold text-white mb-4">Links</h3>
             <ul className="space-y-3">
               {[
-                { label: 'About', href: '/about' },
-                { label: 'Contact', href: '/contact' },
-                { label: 'Privacy', href: '/privacy' },
-                { label: 'Terms', href: '/terms' },
+                { label: 'GitHub', href: SOCIAL_LINKS.github },
+                { label: 'Twitter', href: SOCIAL_LINKS.twitter },
+                { label: 'LinkedIn', href: SOCIAL_LINKS.linkedin },
+                { label: 'Website', href: SOCIAL_LINKS.website },
               ].map((link) => (
-                <li key={link.href}>
-                  <Link
+                <li key={link.label}>
+                  <a
                     href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-white/50 hover:text-white transition-colors text-sm"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
