@@ -1,160 +1,191 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useBookStore } from '@/lib/store/bookStore';
-import { usePageTurn } from '@/hooks/usePageTurn';
-import { calculateProgress } from '@/lib/bookHelpers';
+import { chapters } from '@/data/chapters';
 import { cn } from '@/lib/utils';
-import { ChevronLeft, ChevronRight, Home } from 'lucide-react';
+import { ChevronLeft, ChevronRight, BookOpen } from 'lucide-react';
 
-export interface BookReaderProps {
-  pages: React.ReactNode[];
-  showControls?: boolean;
-  showProgress?: boolean;
-  className?: string;
-}
+// Chapter page components
+import CoverPage from './pages/CoverPage';
+import ExplorePage from './pages/ExplorePage';
+import LearningPage from './pages/LearningPage';
+import MentorshipPage from './pages/MentorshipPage';
+import CommunityPage from './pages/CommunityPage';
+import ResourcesPage from './pages/ResourcesPage';
 
 /**
- * Main book reader component with page navigation and progress tracking
+ * Main Book Reader - The entire website experience
  */
-export default function BookReader({
-  pages,
-  showControls = true,
-  showProgress = true,
-  className,
-}: BookReaderProps) {
-  const [mounted, setMounted] = useState(false);
-  const { setTotalPages } = useBookStore();
-  const {
-    currentPage,
-    totalPages,
-    canGoNext,
-    canGoPrevious,
-    turnNextPage,
-    turnPreviousPage,
-    navigateToPage,
-    isFlipping,
-  } = usePageTurn();
+export default function BookReader() {
+  const [isFlipping, setIsFlipping] = useState(false);
+  const [flipDirection, setFlipDirection] = useState<'forward' | 'backward' | null>(null);
+
+  const { currentPage, goToPage, setTotalPages } = useBookStore();
 
   useEffect(() => {
-    setMounted(true);
-    setTotalPages(pages.length);
-  }, [pages.length, setTotalPages]);
+    setTotalPages(chapters.length);
+  }, [setTotalPages]);
 
-  if (!mounted) {
-    return (
-      <div className="flex items-center justify-center min-h-[500px]">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-4 border-sepia-600 border-t-transparent mx-auto mb-4" />
-          <p className="text-ink-light font-serif">Loading book...</p>
-        </div>
-      </div>
-    );
-  }
+  const canGoNext = currentPage < chapters.length - 1;
+  const canGoPrevious = currentPage > 0;
 
-  const progress = calculateProgress(currentPage, totalPages);
+  const handleNextPage = useCallback(() => {
+    if (!canGoNext || isFlipping) return;
+    setFlipDirection('forward');
+    setIsFlipping(true);
+
+    setTimeout(() => {
+      goToPage(currentPage + 1);
+      setIsFlipping(false);
+      setFlipDirection(null);
+    }, 400);
+  }, [canGoNext, isFlipping, currentPage, goToPage]);
+
+  const handlePreviousPage = useCallback(() => {
+    if (!canGoPrevious || isFlipping) return;
+    setFlipDirection('backward');
+    setIsFlipping(true);
+
+    setTimeout(() => {
+      goToPage(currentPage - 1);
+      setIsFlipping(false);
+      setFlipDirection(null);
+    }, 400);
+  }, [canGoPrevious, isFlipping, currentPage, goToPage]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        handleNextPage();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        handlePreviousPage();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleNextPage, handlePreviousPage]);
+
+  // Render page content based on current chapter
+  const renderPageContent = () => {
+    switch (currentPage) {
+      case 0:
+        return <CoverPage />;
+      case 1:
+        return <ExplorePage />;
+      case 2:
+        return <LearningPage />;
+      case 3:
+        return <MentorshipPage />;
+      case 4:
+        return <CommunityPage />;
+      case 5:
+        return <ResourcesPage />;
+      default:
+        return <CoverPage />;
+    }
+  };
+
+  const currentChapter = chapters[currentPage];
+  const progress = Math.round(((currentPage + 1) / chapters.length) * 100);
 
   return (
-    <div className={cn('book-reader w-full', className)}>
-      {/* Progress Bar */}
-      {showProgress && (
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-sm font-serif text-ink-light">
-              Page {currentPage + 1} of {totalPages}
-            </span>
-            <span className="text-sm font-serif text-ink-light">{progress}%</span>
-          </div>
-          <div className="h-2 bg-sepia-200 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-sepia-600 transition-all duration-500 ease-out"
-              style={{ width: `${progress}%` }}
-            />
-          </div>
+    <div className="min-h-screen pt-20 pb-8">
+      {/* Progress indicator */}
+      <div className="fixed top-16 left-0 right-0 z-40">
+        <div className="h-0.5 bg-white/5">
+          <div
+            className="h-full bg-white/30 transition-all duration-500"
+            style={{ width: `${progress}%` }}
+          />
         </div>
-      )}
-
-      {/* Book Page Container */}
-      <div className="relative">
-        <div
-          className={cn(
-            'book-page bg-parchment rounded-page shadow-book-xl',
-            'border-2 border-sepia-200/50',
-            'p-8 md:p-12 lg:p-16',
-            'min-h-[600px]',
-            'transition-opacity duration-300',
-            isFlipping && 'opacity-50'
-          )}
-        >
-          {pages[currentPage]}
-        </div>
-
-        {/* Navigation Buttons */}
-        {showControls && (
-          <>
-            <button
-              onClick={turnPreviousPage}
-              disabled={!canGoPrevious || isFlipping}
-              className={cn(
-                'absolute left-4 top-1/2 -translate-y-1/2',
-                'w-12 h-12 rounded-full',
-                'bg-sepia-600 text-parchment',
-                'border-2 border-sepia-700',
-                'shadow-book hover:shadow-book-lg',
-                'transition-all duration-300',
-                'disabled:opacity-30 disabled:cursor-not-allowed',
-                'hover:scale-110',
-                'focus:outline-none focus:ring-2 focus:ring-sepia-500'
-              )}
-              aria-label="Previous page"
-            >
-              <ChevronLeft className="w-6 h-6 mx-auto" />
-            </button>
-
-            <button
-              onClick={turnNextPage}
-              disabled={!canGoNext || isFlipping}
-              className={cn(
-                'absolute right-4 top-1/2 -translate-y-1/2',
-                'w-12 h-12 rounded-full',
-                'bg-sepia-600 text-parchment',
-                'border-2 border-sepia-700',
-                'shadow-book hover:shadow-book-lg',
-                'transition-all duration-300',
-                'disabled:opacity-30 disabled:cursor-not-allowed',
-                'hover:scale-110',
-                'focus:outline-none focus:ring-2 focus:ring-sepia-500'
-              )}
-              aria-label="Next page"
-            >
-              <ChevronRight className="w-6 h-6 mx-auto" />
-            </button>
-          </>
-        )}
       </div>
 
-      {/* Bottom Controls */}
-      {showControls && (
-        <div className="mt-6 flex items-center justify-center gap-4">
-          <button
-            onClick={() => navigateToPage(0)}
-            disabled={currentPage === 0 || isFlipping}
+      {/* Book container */}
+      <div className="book-container max-w-6xl mx-auto px-4">
+        <div className="book relative">
+          {/* Book shadow */}
+          <div className="absolute -inset-6 bg-black/40 blur-3xl rounded-3xl" />
+
+          {/* Main book content */}
+          <div
             className={cn(
-              'px-4 py-2 rounded-book',
-              'bg-parchment text-ink',
-              'border-2 border-sepia-300',
-              'hover:bg-parchment-dark hover:border-sepia-400',
-              'transition-all duration-300',
-              'disabled:opacity-30 disabled:cursor-not-allowed',
-              'focus:outline-none focus:ring-2 focus:ring-sepia-500',
-              'font-serif font-semibold text-sm'
+              'relative bg-gradient-to-br from-obsidian-800 via-obsidian-900 to-obsidian',
+              'rounded-2xl overflow-hidden',
+              'border border-white/5',
+              'shadow-book',
+              'min-h-[70vh]',
+              isFlipping && 'pointer-events-none'
             )}
           >
-            <Home className="w-4 h-4 inline mr-2" />
-            First Page
+            {/* Page fold effect */}
+            <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-black/30 to-transparent pointer-events-none z-10" />
+
+            {/* Chapter indicator */}
+            <div className="absolute top-4 left-4 z-20">
+              <div className="flex items-center gap-2 text-white/30 text-sm">
+                <BookOpen className="w-4 h-4" />
+                <span>{currentChapter?.title}</span>
+              </div>
+            </div>
+
+            {/* Page content */}
+            <div
+              className={cn(
+                'relative p-8 md:p-12 lg:p-16',
+                'transition-all duration-400',
+                isFlipping && flipDirection === 'forward' && 'animate-page-flip-forward',
+                isFlipping && flipDirection === 'backward' && 'opacity-50 scale-95'
+              )}
+            >
+              {renderPageContent()}
+            </div>
+
+            {/* Page number */}
+            <div className="absolute bottom-4 right-6 text-white/20 text-sm font-serif">
+              {currentPage + 1} / {chapters.length}
+            </div>
+          </div>
+
+          {/* Navigation arrows */}
+          <button
+            onClick={handlePreviousPage}
+            disabled={!canGoPrevious || isFlipping}
+            className={cn(
+              'absolute left-2 md:-left-16 top-1/2 -translate-y-1/2',
+              'nav-button',
+              'z-20'
+            )}
+            aria-label="Previous chapter"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+
+          <button
+            onClick={handleNextPage}
+            disabled={!canGoNext || isFlipping}
+            className={cn(
+              'absolute right-2 md:-right-16 top-1/2 -translate-y-1/2',
+              'nav-button',
+              'z-20'
+            )}
+            aria-label="Next chapter"
+          >
+            <ChevronRight className="w-5 h-5" />
           </button>
         </div>
-      )}
+      </div>
+
+      {/* Keyboard hint */}
+      <div className="text-center mt-8">
+        <p className="text-white/20 text-sm">
+          Use ← → to navigate chapters
+        </p>
+      </div>
     </div>
   );
 }

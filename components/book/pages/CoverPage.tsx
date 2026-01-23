@@ -1,53 +1,58 @@
 /**
- * Book cover page component
+ * Book cover page - Elegant minimal design with animation
  */
+'use client';
+
 import React from 'react';
+import { Sparkles, ArrowRight } from 'lucide-react';
+import { useBookStore } from '@/lib/store/bookStore';
 
 export default function CoverPage() {
+  const { goToPage } = useBookStore();
+
   return (
-    <div className="h-full w-full flex flex-col items-center justify-center p-12 bg-gradient-to-br from-burgundy-600 via-burgundy-700 to-burgundy-900 text-parchment rounded-page">
-      {/* Decorative border */}
-      <div className="absolute inset-8 border-4 border-gold-400 rounded-book opacity-50" />
-      <div className="absolute inset-12 border-2 border-gold-400/30 rounded-book" />
-
-      {/* Content */}
-      <div className="relative z-10 text-center space-y-6">
-        {/* Main Title */}
-        <div className="space-y-2">
-          <div className="text-gold-400 text-sm font-serif uppercase tracking-wider mb-4">
-            A Journey of Discovery
-          </div>
-          <h1 className="font-serif text-6xl md:text-7xl font-bold tracking-tight text-shadow-vintage">
-            STEM•SPARK
-          </h1>
-          <div className="chapter-ornament text-gold-400" />
+    <div className="h-full w-full flex flex-col items-center justify-center text-center min-h-[450px]">
+      {/* Logo Icon */}
+      <div className="mb-8 animate-float">
+        <div className="inline-flex items-center justify-center w-24 h-24 rounded-full bg-white/5 border border-white/10">
+          <Sparkles className="w-12 h-12 text-white/80" strokeWidth={1.5} />
         </div>
+      </div>
 
-        {/* Subtitle */}
-        <p className="text-2xl md:text-3xl font-serif italic text-parchment/90 max-w-md mx-auto leading-relaxed">
-          Igniting Curiosity,
-          <br />
-          Empowering Women
-          <br />
-          in STEM
+      {/* Main Title */}
+      <div className="space-y-4 mb-8">
+        <div className="text-white/30 text-sm uppercase tracking-[0.3em] mb-6">
+          A Journey of Discovery
+        </div>
+        <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight text-white">
+          STEM•SPARK
+        </h1>
+        <div className="w-16 h-px bg-white/20 mx-auto my-6" />
+      </div>
+
+      {/* Subtitle */}
+      <div className="space-y-2 mb-10">
+        <p className="text-2xl md:text-3xl font-serif italic text-white/60">
+          Igniting Curiosity
         </p>
-
-        {/* Decorative element */}
-        <div className="pt-8">
-          <div className="w-24 h-1 bg-gold-400 mx-auto" />
-        </div>
-
-        {/* Author/Creator */}
-        <p className="text-sm font-serif text-parchment/70 tracking-wide pt-4">
-          Created by Prakriti Bista
+        <p className="text-2xl md:text-3xl font-serif italic text-white/60">
+          Empowering Women in STEM
         </p>
       </div>
 
-      {/* Corner decorations */}
-      <div className="absolute top-4 left-4 text-gold-400/30 text-4xl">❦</div>
-      <div className="absolute top-4 right-4 text-gold-400/30 text-4xl">❦</div>
-      <div className="absolute bottom-4 left-4 text-gold-400/30 text-4xl">❦</div>
-      <div className="absolute bottom-4 right-4 text-gold-400/30 text-4xl">❦</div>
+      {/* CTA Button */}
+      <button
+        onClick={() => goToPage(1)}
+        className="group flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/15 border border-white/20 rounded-full transition-all duration-300 hover:scale-105"
+      >
+        <span className="text-white font-medium">Start Exploring</span>
+        <ArrowRight className="w-4 h-4 text-white/70 group-hover:translate-x-1 transition-transform" />
+      </button>
+
+      {/* Author */}
+      <p className="mt-12 text-sm text-white/30 tracking-wider uppercase">
+        Created by Prakriti Bista
+      </p>
     </div>
   );
 }
