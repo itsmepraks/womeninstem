@@ -27,6 +27,7 @@ export interface Program {
   category: 'k12' | 'bootcamp' | 'summer' | 'online' | 'certification';
   cost: string;
   audience?: string;
+  url: string;
 }
 
 export interface Conference {
@@ -36,6 +37,7 @@ export interface Conference {
   size?: string;
   timing?: string;
   cost?: string;
+  url?: string;
 }
 
 export interface MentorshipPlatform {
@@ -43,6 +45,7 @@ export interface MentorshipPlatform {
   name: string;
   description: string;
   cost: string;
+  url?: string;
 }
 
 export interface JobBoard {
@@ -50,6 +53,7 @@ export interface JobBoard {
   name: string;
   description: string;
   cost: string;
+  url?: string;
 }
 
 // ─── Scholarships ─────────────────────────────────────────────────────────────
@@ -594,6 +598,7 @@ export const programs: Program[] = [
     category: 'k12',
     cost: 'Free',
     audience: 'Grades 3-12',
+    url: 'https://girlswhocode.com/',
   },
   {
     id: 'black-girls-code-program',
@@ -602,6 +607,7 @@ export const programs: Program[] = [
     category: 'k12',
     cost: 'Free or low-cost',
     audience: 'Ages 7-17',
+    url: 'https://www.blackgirlscode.com/',
   },
   {
     id: 'techgirlz',
@@ -610,6 +616,7 @@ export const programs: Program[] = [
     category: 'k12',
     cost: 'Free',
     audience: 'Middle school girls',
+    url: 'https://www.techgirlz.org/',
   },
   {
     id: 'stem-like-a-girl',
@@ -618,6 +625,7 @@ export const programs: Program[] = [
     category: 'k12',
     cost: 'Free',
     audience: 'Elementary and middle school',
+    url: 'https://stemlikeagirl.org/',
   },
   {
     id: 'engineergirl',
@@ -626,6 +634,7 @@ export const programs: Program[] = [
     category: 'k12',
     cost: 'Free',
     audience: 'K-12',
+    url: 'https://www.engineergirl.org/',
   },
   {
     id: 'code-org',
@@ -634,6 +643,7 @@ export const programs: Program[] = [
     category: 'k12',
     cost: 'Free',
     audience: 'All ages',
+    url: 'https://code.org/',
   },
   {
     id: 'nasa-stem-engagement',
@@ -642,6 +652,7 @@ export const programs: Program[] = [
     category: 'k12',
     cost: 'Free',
     audience: 'K-12 and beyond',
+    url: 'https://www.nasa.gov/stem',
   },
   {
     id: 'first-robotics',
@@ -650,6 +661,7 @@ export const programs: Program[] = [
     category: 'k12',
     cost: 'Varies',
     audience: 'Ages 4-18',
+    url: 'https://www.firstinspires.org/',
   },
   // Coding Bootcamps and Tech Training
   {
@@ -659,6 +671,7 @@ export const programs: Program[] = [
     category: 'bootcamp',
     cost: 'Free',
     audience: 'Women',
+    url: 'https://www.womenwhocode.com/',
   },
   {
     id: 'hackbright-academy',
@@ -667,6 +680,7 @@ export const programs: Program[] = [
     category: 'bootcamp',
     cost: '~$17,000',
     audience: 'Women',
+    url: 'https://www.hackbrightacademy.com/',
   },
   {
     id: 'grace-hopper-fullstack',
@@ -675,6 +689,7 @@ export const programs: Program[] = [
     category: 'bootcamp',
     cost: '~$17,000',
     audience: 'Women and non-binary',
+    url: 'https://www.gracehopper.com/',
   },
   {
     id: 'ada-developers',
@@ -683,6 +698,7 @@ export const programs: Program[] = [
     category: 'bootcamp',
     cost: 'Free',
     audience: 'Women and gender-diverse people',
+    url: 'https://www.adadevelopersacademy.org/',
   },
   {
     id: 'app-academy',
@@ -691,6 +707,7 @@ export const programs: Program[] = [
     category: 'bootcamp',
     cost: 'Deferred tuition',
     audience: 'All',
+    url: 'https://www.appacademy.io/',
   },
   {
     id: 'general-assembly',
@@ -699,6 +716,7 @@ export const programs: Program[] = [
     category: 'bootcamp',
     cost: 'Varies by program',
     audience: 'All',
+    url: 'https://generalassemb.ly/',
   },
   // Summer Programs
   {
@@ -708,6 +726,7 @@ export const programs: Program[] = [
     category: 'summer',
     cost: 'Free',
     audience: 'High school seniors',
+    url: 'https://buildyourfuture.withgoogle.com/programs/computer-science-summer-institute',
   },
   {
     id: 'microsoft-hs-internship',
@@ -716,6 +735,7 @@ export const programs: Program[] = [
     category: 'summer',
     cost: 'Paid',
     audience: 'High school students',
+    url: 'https://www.microsoft.com/university',
   },
   {
     id: 'nasa-internships',
@@ -724,6 +744,7 @@ export const programs: Program[] = [
     category: 'summer',
     cost: 'Paid',
     audience: 'High school through graduate',
+    url: 'https://intern.nasa.gov/',
   },
   {
     id: 'nsf-reu',
@@ -732,6 +753,7 @@ export const programs: Program[] = [
     category: 'summer',
     cost: 'Paid stipend',
     audience: 'Undergraduates',
+    url: 'https://www.nsf.gov/crssprgm/reu/',
   },
   // Online Learning Platforms
   {
@@ -741,6 +763,7 @@ export const programs: Program[] = [
     category: 'online',
     cost: 'Free to audit; $49-$99 for certificates',
     audience: 'All',
+    url: 'https://www.coursera.org/',
   },
   {
     id: 'edx',
@@ -749,6 +772,7 @@ export const programs: Program[] = [
     category: 'online',
     cost: 'Free to audit; $50-$300 for certificates',
     audience: 'All',
+    url: 'https://www.edx.org/',
   },
   {
     id: 'khan-academy',
@@ -757,6 +781,7 @@ export const programs: Program[] = [
     category: 'online',
     cost: 'Free',
     audience: 'K-12 and early college',
+    url: 'https://www.khanacademy.org/',
   },
   {
     id: 'codecademy',
@@ -765,6 +790,7 @@ export const programs: Program[] = [
     category: 'online',
     cost: 'Free basic; $20/month Pro',
     audience: 'All',
+    url: 'https://www.codecademy.com/',
   },
   {
     id: 'freecodecamp',
@@ -773,6 +799,7 @@ export const programs: Program[] = [
     category: 'online',
     cost: 'Free',
     audience: 'All',
+    url: 'https://www.freecodecamp.org/',
   },
   {
     id: 'linkedin-learning',
@@ -781,6 +808,7 @@ export const programs: Program[] = [
     category: 'online',
     cost: '$30-$40/month',
     audience: 'All',
+    url: 'https://www.linkedin.com/learning/',
   },
   {
     id: 'udacity',
@@ -789,6 +817,7 @@ export const programs: Program[] = [
     category: 'online',
     cost: '~$400/month',
     audience: 'All',
+    url: 'https://www.udacity.com/',
   },
   {
     id: 'mit-ocw',
@@ -797,6 +826,7 @@ export const programs: Program[] = [
     category: 'online',
     cost: 'Free',
     audience: 'All',
+    url: 'https://ocw.mit.edu/',
   },
   // Certification Programs
   {
@@ -806,6 +836,7 @@ export const programs: Program[] = [
     category: 'certification',
     cost: '$39/month',
     audience: 'All',
+    url: 'https://grow.google/certificates/',
   },
   {
     id: 'aws-certification',
@@ -814,6 +845,7 @@ export const programs: Program[] = [
     category: 'certification',
     cost: 'Varies',
     audience: 'All',
+    url: 'https://aws.amazon.com/certification/',
   },
   {
     id: 'microsoft-certifications',
@@ -822,6 +854,7 @@ export const programs: Program[] = [
     category: 'certification',
     cost: 'Varies',
     audience: 'All',
+    url: 'https://www.microsoft.com/certifications',
   },
   {
     id: 'cisco-certifications',
@@ -830,6 +863,7 @@ export const programs: Program[] = [
     category: 'certification',
     cost: 'Varies',
     audience: 'All',
+    url: 'https://www.cisco.com/certifications',
   },
 ];
 
@@ -843,6 +877,7 @@ export const conferences: Conference[] = [
     size: '26,000+',
     timing: 'September/October',
     cost: '$300-$600',
+    url: 'https://ghc.anitab.org/',
   },
   {
     id: 'swe-we',
@@ -851,6 +886,7 @@ export const conferences: Conference[] = [
     size: '15,000+',
     timing: 'October/November',
     cost: 'Varies (scholarships available)',
+    url: 'https://we.swe.org/',
   },
   {
     id: 'wids',
@@ -858,6 +894,7 @@ export const conferences: Conference[] = [
     description: 'Annual global data science conference with year-round regional events worldwide.',
     timing: 'March',
     cost: 'Free or low-cost',
+    url: 'https://www.widsconference.org/',
   },
   {
     id: 'lwt-summit',
@@ -865,12 +902,14 @@ export const conferences: Conference[] = [
     description: 'Summit for LGBTQ+ women and non-binary people in technology.',
     size: '5,000+',
     timing: 'February/March',
+    url: 'https://www.lesbianswhotech.org/summit/',
   },
   {
     id: 'wicys',
     name: 'Women in Cybersecurity (WiCyS) Conference',
     description: 'Annual conference focused on recruiting, retaining, and advancing women in cybersecurity.',
     timing: 'March',
+    url: 'https://www.wicys.org/conference/',
   },
   {
     id: 'sacnas-conference',
@@ -878,6 +917,7 @@ export const conferences: Conference[] = [
     description: 'Conference for Hispanics/Chicanos and Native Americans in STEM with career expo.',
     size: '5,000+',
     timing: 'October',
+    url: 'https://www.sacnas.org/conference/',
   },
   {
     id: 'nsbe-convention',
@@ -885,24 +925,28 @@ export const conferences: Conference[] = [
     description: 'One of the largest STEM conferences focused on Black engineers with career fair and workshops.',
     size: '10,000+',
     timing: 'March',
+    url: 'https://www.nsbe.org/convention/',
   },
   {
     id: 'awm-symposium',
     name: 'AWM Research Symposium',
     description: 'Biennial symposium showcasing research by women in mathematics.',
     timing: 'Biennial',
+    url: 'https://awm-math.org/',
   },
   {
     id: 'cra-w-grad-cohort',
     name: 'CRA-W Grad Cohort Workshop',
     description: 'Workshop for graduate women in computing research with mentoring and networking.',
     timing: 'April',
+    url: 'https://cra.org/cra-w/grad-cohort-for-women/',
   },
   {
     id: 'ewm-meeting',
     name: 'European Women in Mathematics (EWM) General Meeting',
     description: 'International meeting for women mathematicians held every 2-4 years in Europe.',
     timing: 'Every 2-4 years',
+    url: 'https://www.europeanwomeninmaths.org/',
   },
   {
     id: 'pyladies-meetups',
@@ -910,6 +954,7 @@ export const conferences: Conference[] = [
     description: 'Ongoing local meetups for women Python developers in cities worldwide.',
     timing: 'Ongoing',
     cost: 'Free',
+    url: 'https://www.pyladies.com/',
   },
   {
     id: 'wwc-networking',
@@ -917,6 +962,7 @@ export const conferences: Conference[] = [
     description: 'Monthly networking events for women in tech across various cities.',
     timing: 'Monthly',
     cost: 'Free',
+    url: 'https://www.womenwhocode.com/events',
   },
   {
     id: 'rails-girls',
@@ -924,6 +970,7 @@ export const conferences: Conference[] = [
     description: 'Free workshops teaching Ruby on Rails to beginners worldwide.',
     timing: 'Ongoing',
     cost: 'Free',
+    url: 'https://railsgirls.com/',
   },
   {
     id: 'django-girls-workshops',
@@ -931,6 +978,7 @@ export const conferences: Conference[] = [
     description: 'Free Python and Django workshops for beginners held worldwide.',
     timing: 'Ongoing',
     cost: 'Free',
+    url: 'https://djangogirls.org/',
   },
 ];
 
@@ -942,42 +990,35 @@ export const mentorshipPlatforms: MentorshipPlatform[] = [
     name: 'MentorNet',
     description: 'One-on-one e-mentoring platform that matches mentees with mentors based on goals and interests.',
     cost: 'Free',
-  },
-  {
-    id: 'women-in-tech-mentorship',
-    name: 'Women in Tech Mentorship Program',
-    description: 'Technology mentorship programs offered through various tech companies and organizations.',
-    cost: 'Varies',
+    url: 'https://www.mentornet.org/',
   },
   {
     id: 'stem-connector',
     name: 'STEM Connector Mentorship',
     description: 'Mentorship and career development across various STEM fields.',
     cost: 'Varies',
+    url: 'https://www.stemconnector.com/',
   },
   {
     id: 'linkedin-career-advice',
     name: 'LinkedIn Career Advice',
     description: 'Algorithm-matched mentorship where you opt in as mentor or mentee based on career goals.',
     cost: 'Free',
+    url: 'https://www.linkedin.com/',
   },
   {
     id: 'adplist',
     name: 'ADPList (Amazing Design People List)',
     description: 'Book time with mentors in design and tech, with group sessions available.',
     cost: 'Free',
-  },
-  {
-    id: 'chronus',
-    name: 'Chronus',
-    description: 'Enterprise mentorship platform used internally by many companies and organizations.',
-    cost: 'Varies (employer-provided)',
+    url: 'https://www.adplist.org/',
   },
   {
     id: 'million-women-mentors',
     name: 'Million Women Mentors (MWM)',
     description: 'Connects mentors with mentees focused on supporting girls and women in STEM from K-12 to early career.',
     cost: 'Free',
+    url: 'https://www.millionwomenmentors.org/',
   },
 ];
 
@@ -989,53 +1030,55 @@ export const jobBoards: JobBoard[] = [
     name: 'PowerToFly',
     description: 'Remote-first job board featuring diversity-focused companies with networking events and career advice.',
     cost: 'Free',
+    url: 'https://powertofly.com/',
   },
   {
     id: 'hire-tech-ladies',
     name: 'Hire Tech Ladies',
     description: 'Job board and community for women in tech with free basic access and premium features.',
     cost: 'Free basic; $19/month premium',
+    url: 'https://www.hiretechladies.com/',
   },
   {
     id: 'wwc-job-board',
     name: 'Women Who Code Job Board',
     description: 'Free job board focused on software engineering positions for women.',
     cost: 'Free',
+    url: 'https://www.womenwhocode.com/jobs',
   },
   {
     id: 'fairygodboss',
     name: 'Fairygodboss',
     description: 'Job board with company reviews from women, career advice, and women-friendly employer listings.',
     cost: 'Free',
+    url: 'https://www.fairygodboss.com/',
   },
   {
     id: 'the-mom-project',
     name: 'The Mom Project',
     description: 'Jobs for mothers including flexible, remote, and returnship opportunities.',
     cost: 'Free',
-  },
-  {
-    id: 'lane',
-    name: 'Lane (formerly Landit)',
-    description: 'Career pathing and development platform for women, available through select employers.',
-    cost: 'Employer-provided',
+    url: 'https://www.themomproject.com/',
   },
   {
     id: 'jopwell',
     name: 'Jopwell',
     description: 'Career platform for Black, Latinx, and Native American professionals.',
     cost: 'Free',
+    url: 'https://www.jopwell.com/',
   },
   {
     id: 'diversify-tech',
     name: 'Diversify Tech',
     description: 'Jobs and resources for underrepresented people in tech.',
     cost: 'Free',
+    url: 'https://www.diversifytech.co/',
   },
   {
     id: 'linkedin-diversity',
     name: 'LinkedIn (with diversity filters)',
     description: 'Use filters to find companies with diversity initiatives and women-friendly workplaces.',
     cost: 'Free',
+    url: 'https://www.linkedin.com/jobs/',
   },
 ];
