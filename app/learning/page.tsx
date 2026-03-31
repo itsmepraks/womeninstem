@@ -135,7 +135,7 @@ export default function LearningPage() {
           ))}
         </div>
         <Link
-          href="/resources"
+          href="/resources#scholarships"
           className="inline-block mt-4 text-sm text-accent-primary font-medium underline underline-offset-4 hover:text-accent-secondary transition-colors"
         >
           View all {scholarships.length} scholarships →
