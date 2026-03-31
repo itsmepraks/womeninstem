@@ -1,6 +1,6 @@
 import SectionHeading from '@/components/ui/SectionHeading';
 import ResourceCard from '@/components/ui/ResourceCard';
-import { openScholarships } from '@/data/resources';
+import { scholarships } from '@/data/resources';
 import { getPioneerByField } from '@/data/pioneers';
 
 const fields = [
@@ -78,15 +78,13 @@ export default function LearningPage() {
 
       {/* Scholarships spotlight */}
       <section className="pb-10">
-        <SectionHeading title="Scholarships Open Now" accent="Apply before they close" />
+        <SectionHeading title="Scholarships & Funding" accent={`${scholarships.length} opportunities`} />
         <div className="space-y-3">
-          {openScholarships.slice(0, 2).map((s) => (
+          {scholarships.slice(0, 3).map((s) => (
             <ResourceCard
               key={s.id}
-              title={s.title}
-              description={s.description}
-              deadline={s.deadline}
-              daysLeft={s.daysLeft}
+              title={s.name}
+              description={`${s.amount} — ${s.description}`}
             />
           ))}
         </div>
