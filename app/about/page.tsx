@@ -1,413 +1,77 @@
-import { Container, Card, Button, Badge } from '@/components/ui';
-import { 
-  Target, 
-  Heart, 
-  Users, 
-  Sparkles, 
-  Mail, 
-  Github, 
-  Linkedin, 
-  Globe,
-  CheckCircle2,
-  Zap,
-  Code,
-  Palette,
-  Layers,
-  User
-} from 'lucide-react';
-import Link from 'next/link';
+import StatCard from '@/components/ui/StatCard';
 import { SOCIAL_LINKS } from '@/lib/constants';
-import { cn } from '@/lib/utils';
-
-export const metadata = {
-  title: 'About - STEM•SPARK',
-  description: 'Learn about our mission to empower girls and women in STEM through interactive learning and community',
-};
 
 export default function AboutPage() {
-  const stats = [
-    { value: '1,000+', label: 'Future Members' },
-    { value: '50+', label: 'Learning Paths' },
-    { value: '100+', label: 'Mentors' },
-    { value: '24/7', label: 'Community Support' },
-  ];
-
-  const values = [
-    {
-      icon: <Heart className="w-8 h-8" strokeWidth={2} />,
-      title: 'Inclusivity',
-      description: 'Creating a welcoming space for all women in STEM, regardless of background or experience level',
-      color: 'supernova',
-    },
-    {
-      icon: <Sparkles className="w-8 h-8" strokeWidth={2} />,
-      title: 'Excellence',
-      description: 'Providing high-quality content and experiences that inspire learning and growth',
-      color: 'stardust',
-    },
-    {
-      icon: <Users className="w-8 h-8" strokeWidth={2} />,
-      title: 'Community',
-      description: 'Building meaningful connections that foster collaboration and support',
-      color: 'aurora',
-    },
-    {
-      icon: <Target className="w-8 h-8" strokeWidth={2} />,
-      title: 'Empowerment',
-      description: 'Equipping women with skills, confidence, and opportunities to thrive in STEM',
-      color: 'nebula',
-    },
-  ];
-
   return (
-    <div className="relative">
-      {/* Hero Section */}
-      <section className="min-h-[70vh] flex items-center justify-center px-4 py-20">
-        <Container size="lg">
-          <div className="text-center space-y-8">
-            <Badge variant="nebula" size="lg" className="inline-flex items-center gap-2">
-              <Sparkles className="w-4 h-4" strokeWidth={2.5} />
-              Our Story
-            </Badge>
-            
-            <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight">
-              <span className="text-nebula-400">Empowering</span>{' '}
-              <span className="text-aurora-400">Women</span>{' '}
-              <span className="text-white">in STEM</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              STEM•SPARK is more than a platform—it&apos;s a movement to ignite curiosity,
-              foster connections, and break down barriers for women in STEM.
+    <div className="max-w-[880px] mx-auto px-6 md:px-10">
+      <section className="pt-12 md:pt-20 pb-10">
+        <h1 className="font-display text-[2.75rem] text-text-heading font-light leading-tight max-w-[600px]">
+          Built by a woman in STEM,{' '}
+          <em className="italic text-accent-primary">for women in STEM</em>
+        </h1>
+        <p className="text-body-lg text-text-body mt-4 max-w-[540px] leading-relaxed">
+          STEMSpark started because finding resources, mentors, and community as
+          a woman in tech shouldn&apos;t require 47 browser tabs. Everything you
+          need, in one place, curated by people who understand the journey.
+        </p>
+      </section>
+
+      <section className="pb-10">
+        <div className="card-white p-8 md:p-10">
+          <h2 className="font-display text-display text-text-heading mb-4">
+            The story
+          </h2>
+          <div className="space-y-4 text-body text-text-body leading-relaxed">
+            <p>
+              When I started my career in tech, the hardest part wasn&apos;t the
+              code — it was feeling like I was the only one navigating it.
+              Scholarships existed but were buried. Mentors existed but were hard
+              to find. Communities existed but were scattered across platforms.
+            </p>
+            <p>
+              STEMSpark is the resource I wish I had. A single, curated hub
+              where women at any stage — students, career changers, senior
+              professionals — can find what they need without the noise.
+            </p>
+            <p>
+              Every resource is vetted. Every mentor is real. Every piece of
+              content is written with the belief that the next breakthrough in
+              science will come from someone who almost didn&apos;t think she
+              belonged.
             </p>
           </div>
-        </Container>
-      </section>
-
-      {/* Mission & Vision */}
-      <section className="py-20 px-4">
-        <Container size="xl">
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card hover className="group">
-              <div className="space-y-4">
-                <div className="inline-flex p-4 rounded-xl bg-nebula-500/20 text-nebula-400 group-hover:scale-110 transition-transform-elegant">
-                  <Target className="w-10 h-10" strokeWidth={2} />
-                </div>
-                
-                <h2 className="font-display text-3xl font-bold text-white">Our Mission</h2>
-                <p className="text-gray-400 text-lg leading-relaxed">
-                  To create an inclusive, engaging platform that empowers girls and women to
-                  explore, learn, and excel in STEM fields through interactive education,
-                  mentorship, and community support.
-                </p>
-
-                <ul className="space-y-3 pt-4">
-                  {[
-                    'Make STEM education accessible and engaging',
-                    'Connect learners with inspiring mentors',
-                    'Build a supportive, inclusive community',
-                    'Provide resources for career success',
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-nebula-400 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-                      <span className="text-gray-300">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Card>
-
-            <Card hover className="group">
-              <div className="space-y-4">
-                <div className="inline-flex p-4 rounded-xl bg-aurora-500/20 text-aurora-400 group-hover:scale-110 transition-transform-elegant">
-                  <Sparkles className="w-10 h-10" strokeWidth={2} />
-                </div>
-                
-                <h2 className="font-display text-3xl font-bold text-white">Our Vision</h2>
-                <p className="text-gray-400 text-lg leading-relaxed">
-                  A world where every woman has the opportunity, confidence, and support to
-                  pursue and thrive in STEM careers, breaking down barriers and inspiring
-                  future generations.
-                </p>
-
-                <ul className="space-y-3 pt-4">
-                  {[
-                    'Close the gender gap in STEM fields',
-                    'Inspire the next generation of innovators',
-                    'Create lasting impact through education',
-                    'Build a global network of women in STEM',
-                  ].map((item, index) => (
-                    <li key={index} className="flex items-start gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-aurora-400 flex-shrink-0 mt-0.5" strokeWidth={2.5} />
-                      <span className="text-gray-300">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Card>
-          </div>
-        </Container>
-      </section>
-
-      {/* Stats */}
-      <section className="py-20 px-4 bg-white/[0.02]">
-        <Container size="lg">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
-              Building Something Special
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Here&apos;s what we&apos;re creating for you
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center space-y-2 glass p-6 rounded-premium hover:bg-white/10 transition-elegant">
-                <div className="text-4xl md:text-5xl font-bold text-nebula-400">
-                  {stat.value}
-                </div>
-                <div className="text-gray-400">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Values */}
-      <section className="py-20 px-4">
-        <Container size="xl">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
-              Our Core Values
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              The principles that guide everything we do
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-6">
-            {values.map((value, index) => (
-              <Card key={index} hover>
-                <div className="space-y-4">
-                  <div className={cn(
-                    'inline-flex p-3 rounded-xl',
-                    {
-                      'bg-nebula-500/20 text-nebula-400': value.color === 'nebula',
-                      'bg-aurora-500/20 text-aurora-400': value.color === 'aurora',
-                      'bg-cosmic-blue-500/20 text-cosmic-blue-400': value.color === 'cosmic',
-                      'bg-stardust-500/20 text-stardust-400': value.color === 'stardust',
-                      'bg-supernova-500/20 text-supernova-400': value.color === 'supernova',
-                    }
-                  )}>
-                    {value.icon}
-                  </div>
-                  <h3 className="font-display text-2xl font-semibold text-white">{value.title}</h3>
-                  <p className="text-gray-400 leading-relaxed">{value.description}</p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Creator Section */}
-      <section className="py-20 px-4 bg-white/[0.02]">
-        <Container size="lg">
-          <div className="glass-strong rounded-premium p-8 md:p-12 shadow-elegant-lg">
-            <div className="grid md:grid-cols-2 gap-8 items-center">
-              <div className="space-y-6">
-                <Badge variant="nebula" className="inline-flex items-center gap-2">
-                  <User className="w-4 h-4" strokeWidth={2.5} />
-                  Meet the Creator
-                </Badge>
-                <h2 className="font-display text-3xl md:text-4xl font-bold text-white inline-flex items-center gap-3 flex-wrap">
-                  Built with
-                  <Heart 
-                    className="inline-block w-8 h-8 text-supernova-400 fill-supernova-400 animate-pulse-subtle" 
-                    strokeWidth={0}
-                  />
-                  by Prakriti Bista
-                </h2>
-                <p className="text-gray-400 leading-relaxed">
-                  As a woman in tech, I&apos;ve experienced firsthand the challenges and opportunities
-                  in STEM. STEM•SPARK was born from a desire to create the platform I wished I
-                  had when starting my journey—a place where women can learn, connect, and thrive
-                  together.
-                </p>
-                <p className="text-gray-400 leading-relaxed">
-                  This project combines my passion for education, community building, and
-                  empowering the next generation of women in STEM.
-                </p>
-
-                <div className="flex flex-wrap gap-4 pt-4">
-                  <a
-                    href={SOCIAL_LINKS.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-elegant group"
-                    aria-label="Website"
-                  >
-                    <Globe className="w-5 h-5 text-gray-400 group-hover:text-cosmic-blue-400 transition-colors-elegant" />
-                  </a>
-                  <a
-                    href={SOCIAL_LINKS.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-elegant group"
-                    aria-label="GitHub"
-                  >
-                    <Github className="w-5 h-5 text-gray-400 group-hover:text-cosmic-blue-400 transition-colors-elegant" />
-                  </a>
-                  <a
-                    href={SOCIAL_LINKS.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass p-3 rounded-lg hover:bg-white/10 transition-elegant group"
-                    aria-label="LinkedIn"
-                  >
-                    <Linkedin className="w-5 h-5 text-gray-400 group-hover:text-cosmic-blue-400 transition-colors-elegant" />
-                  </a>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div className="aspect-square rounded-premium bg-nebula-600 shadow-glow-nebula flex items-center justify-center p-12 relative overflow-hidden group">
-                  {/* Decorative background elements */}
-                  <div className="absolute inset-0 bg-nebula-500/20 opacity-0 group-hover:opacity-100 transition-elegant"></div>
-                  
-                  {/* Icon representation */}
-                  <div className="relative z-10 flex flex-col items-center gap-6">
-                    <div className="w-32 h-32 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center border-4 border-white/20 group-hover:scale-110 transition-transform-elegant">
-                      <User className="w-16 h-16 text-white" strokeWidth={1.5} />
-                    </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-white mb-2">Prakriti Bista</div>
-                      <div className="text-nebula-200 text-sm flex items-center justify-center gap-2">
-                        <Code className="w-4 h-4" strokeWidth={2} />
-                        Developer & Educator
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Technology Stack */}
-      <section className="py-20 px-4">
-        <Container size="lg">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
-              Built with Modern Technology
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Leveraging the best tools for a stellar experience
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { 
-                icon: <Layers className="w-8 h-8" strokeWidth={2} />,
-                name: 'Next.js 14', 
-                desc: 'React Framework',
-                color: 'text-nebula-400'
-              },
-              { 
-                icon: <Code className="w-8 h-8" strokeWidth={2} />,
-                name: 'TypeScript', 
-                desc: 'Type Safety',
-                color: 'text-cosmic-blue-400'
-              },
-              { 
-                icon: <Palette className="w-8 h-8" strokeWidth={2} />,
-                name: 'Tailwind CSS', 
-                desc: 'Styling',
-                color: 'text-aurora-400'
-              },
-              { 
-                icon: <Zap className="w-8 h-8" strokeWidth={2} />,
-                name: 'Framer Motion', 
-                desc: 'Animations',
-                color: 'text-stardust-400'
-              },
-            ].map((tech, index) => (
-              <div key={index} className="glass p-6 rounded-premium text-center space-y-3 hover:bg-white/10 transition-elegant group">
-                <div className={cn('inline-flex p-3 rounded-lg bg-white/5 group-hover:scale-110 transition-transform-elegant', tech.color)}>
-                  {tech.icon}
-                </div>
-                <h3 className="font-semibold text-white">{tech.name}</h3>
-                <p className="text-sm text-gray-400">{tech.desc}</p>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Open Source */}
-      <section className="py-20 px-4 bg-white/[0.02]">
-        <Container size="lg">
-          <div className="text-center space-y-6">
-            <div className="inline-flex p-4 rounded-full bg-cosmic-blue-500/20 mb-4">
-              <Github className="w-16 h-16 text-cosmic-blue-400" strokeWidth={2} />
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
-              Open Source & Community Driven
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              STEM•SPARK is open source and built in public. We welcome contributions from
-              developers, designers, and content creators who share our mission.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer">
-                <Button variant="primary" className="inline-flex items-center gap-2">
-                  <Github className="w-5 h-5" strokeWidth={2.5} />
-                  View on GitHub
-                </Button>
+          <div className="mt-6 pt-6 border-t border-accent-primary/[0.06]">
+            <p className="text-sm text-text-heading font-semibold">Prakriti Bista</p>
+            <p className="text-xs text-text-muted mt-0.5">
+              Builder ·{' '}
+              <a
+                href={SOCIAL_LINKS.website}
+                className="text-accent-primary underline underline-offset-2 hover:text-accent-secondary transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                praks.me
               </a>
-              <a href={`${SOCIAL_LINKS.github}/blob/main/CONTRIBUTING.md`} target="_blank" rel="noopener noreferrer">
-                <Button variant="secondary" className="inline-flex items-center gap-2">
-                  <Users className="w-5 h-5" strokeWidth={2.5} />
-                  Contribution Guide
-                </Button>
-              </a>
-            </div>
+            </p>
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* Contact CTA */}
-      <section className="py-20 px-4">
-        <Container size="md">
-          <div className="text-center space-y-6">
-            <div className="inline-flex p-4 rounded-full bg-aurora-500/20 mb-4">
-              <Mail className="w-16 h-16 text-aurora-400" strokeWidth={2} />
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
-              Get in Touch
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Have questions, suggestions, or want to get involved? We&apos;d love to hear from you!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Link href="/community">
-                <Button variant="primary" className="inline-flex items-center gap-2">
-                  <Users className="w-5 h-5" strokeWidth={2.5} />
-                  Join Community
-                </Button>
-              </Link>
-              <a href={`${SOCIAL_LINKS.github}/issues`} target="_blank" rel="noopener noreferrer">
-                <Button variant="secondary" className="inline-flex items-center gap-2">
-                  <Github className="w-5 h-5" strokeWidth={2.5} />
-                  Report Issue
-                </Button>
-              </a>
-            </div>
+      <section className="pb-10">
+        <h2 className="font-display text-display text-text-heading mb-6">
+          By the numbers
+        </h2>
+        <div className="relative h-[200px]">
+          <div className="absolute left-0 top-0 w-[200px]">
+            <StatCard value="500+" label="resources curated" rotation={-1.5} />
           </div>
-        </Container>
+          <div className="absolute left-[220px] top-5 w-[200px] hidden md:block">
+            <StatCard value="120+" label="mentors in the network" rotation={1} />
+          </div>
+          <div className="absolute right-0 top-2 w-[200px] hidden md:block">
+            <StatCard value="50+" label="partner organizations" rotation={2} />
+          </div>
+        </div>
       </section>
     </div>
   );
