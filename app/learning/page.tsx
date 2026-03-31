@@ -1,36 +1,41 @@
+import Link from 'next/link';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ResourceCard from '@/components/ui/ResourceCard';
-import { scholarships } from '@/data/resources';
+import { scholarships, programs } from '@/data/resources';
 import { getPioneerByField } from '@/data/pioneers';
 
 const fields = [
   {
     name: 'Computer Science',
     courses: [
-      'Harvard CS50 — Introduction to Computer Science (Free)',
-      'Stanford Machine Learning — Andrew Ng (Free)',
-      'freeCodeCamp — Full Stack Web Development (Free)',
+      { title: 'Harvard CS50 — Introduction to Computer Science', cost: 'Free', url: 'https://cs50.harvard.edu/' },
+      { title: 'Stanford Machine Learning — Andrew Ng', cost: 'Free to audit', url: 'https://www.coursera.org/learn/machine-learning' },
+      { title: 'freeCodeCamp — Full Stack Web Development', cost: 'Free', url: 'https://www.freecodecamp.org/' },
+      { title: 'Codecademy — Learn Python', cost: 'Free basic', url: 'https://www.codecademy.com/' },
     ],
   },
   {
     name: 'Engineering',
     courses: [
-      'MIT OpenCourseWare — Mechanical Engineering (Free)',
-      'Coursera — Engineering Project Management',
-      'edX — Environmental Engineering MicroMasters',
+      { title: 'MIT OpenCourseWare — Engineering Courses', cost: 'Free', url: 'https://ocw.mit.edu/' },
+      { title: 'Coursera — Engineering Project Management', cost: '$49/month', url: 'https://www.coursera.org/' },
+      { title: 'edX — Environmental Engineering MicroMasters', cost: 'Free to audit', url: 'https://www.edx.org/' },
     ],
   },
   {
     name: 'Biotech & Life Sciences',
     courses: [
-      'Coursera — Genomic Data Science Specialization',
-      'edX — Principles of Biochemistry',
-      'Khan Academy — Biology (Free)',
+      { title: 'Coursera — Genomic Data Science Specialization', cost: '$49/month', url: 'https://www.coursera.org/' },
+      { title: 'edX — Principles of Biochemistry', cost: 'Free to audit', url: 'https://www.edx.org/' },
+      { title: 'Khan Academy — Biology', cost: 'Free', url: 'https://www.khanacademy.org/science/biology' },
     ],
   },
 ];
 
 export default function LearningPage() {
+  // Get bootcamp programs to feature
+  const bootcamps = programs.filter((p) => p.category === 'bootcamp').slice(0, 3);
+
   return (
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       {/* Hero */}
@@ -39,8 +44,8 @@ export default function LearningPage() {
           Learn <em className="italic text-accent-primary">without limits</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[500px]">
-          Courses, bootcamps, and scholarships — organized by field, filtered by
-          what actually matters to you.
+          Courses, bootcamps, and scholarships — organized by field, with direct
+          links to every resource.
         </p>
       </section>
 
@@ -52,12 +57,21 @@ export default function LearningPage() {
             <SectionHeading title={field.name} />
             <div className="space-y-2.5">
               {field.courses.map((course) => (
-                <div key={course} className="card-white p-5 flex items-center justify-between">
-                  <span className="text-body text-text-heading font-medium">{course}</span>
-                  <span className="text-xs text-accent-primary font-medium cursor-pointer hover:text-accent-secondary transition-colors flex-shrink-0 ml-4">
-                    View →
+                <a
+                  key={course.title}
+                  href={course.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+                >
+                  <div>
+                    <span className="text-body text-text-heading font-medium">{course.title}</span>
+                    <span className="text-xs text-text-muted ml-2">({course.cost})</span>
+                  </div>
+                  <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors flex-shrink-0 ml-4">
+                    Start learning →
                   </span>
-                </div>
+                </a>
               ))}
             </div>
             {/* Contextual pioneer callout */}
@@ -69,6 +83,9 @@ export default function LearningPage() {
                 <p className="text-sm text-text-body">
                   <strong className="text-text-heading">{pioneer.name}</strong>{' '}
                   — {pioneer.title}
+                  {pioneer.link && (
+                    <a href={pioneer.link} target="_blank" rel="noopener noreferrer" className="text-accent-primary ml-1 hover:text-accent-secondary transition-colors">↗</a>
+                  )}
                 </p>
               </div>
             )}
@@ -76,18 +93,53 @@ export default function LearningPage() {
         );
       })}
 
-      {/* Scholarships spotlight */}
+      {/* Bootcamps */}
+      {bootcamps.length > 0 && (
+        <section className="pb-10">
+          <SectionHeading title="Coding Bootcamps" accent="Intensive programs for career changers" />
+          <div className="space-y-2.5">
+            {bootcamps.map((b) => (
+              <a
+                key={b.id}
+                href={b.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+              >
+                <div>
+                  <span className="text-body text-text-heading font-medium">{b.name}</span>
+                  <span className="text-xs text-text-muted ml-2">({b.cost})</span>
+                  <p className="text-xs text-text-secondary mt-1">{b.description}</p>
+                </div>
+                <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors flex-shrink-0 ml-4">
+                  Apply →
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Scholarships */}
       <section className="pb-10">
         <SectionHeading title="Scholarships & Funding" accent={`${scholarships.length} opportunities`} />
         <div className="space-y-3">
-          {scholarships.slice(0, 3).map((s) => (
+          {scholarships.slice(0, 5).map((s) => (
             <ResourceCard
               key={s.id}
               title={s.name}
-              description={`${s.amount} — ${s.description}`}
+              description={s.description}
+              amount={s.amount}
+              url={s.url}
             />
           ))}
         </div>
+        <Link
+          href="/resources"
+          className="inline-block mt-4 text-sm text-accent-primary font-medium underline underline-offset-4 hover:text-accent-secondary transition-colors"
+        >
+          View all {scholarships.length} scholarships →
+        </Link>
       </section>
     </div>
   );

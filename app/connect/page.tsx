@@ -8,13 +8,6 @@ import { mentorshipPlatforms, conferences } from '@/data/resources';
 
 const ConnectMap = dynamic(() => import('./ConnectMap'), { ssr: false });
 
-const regionStats = [
-  { region: 'North America', count: '15+ orgs' },
-  { region: 'Europe', count: '8+ orgs' },
-  { region: 'Asia Pacific', count: '5+ orgs' },
-  { region: 'Global / Remote', count: '20+ orgs' },
-];
-
 export default function ConnectPage() {
   return (
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
@@ -31,78 +24,88 @@ export default function ConnectPage() {
 
       {/* Interactive Map */}
       <section className="pb-10">
-        <SectionHeading title="Global Impact" subtitle="Women in STEM organizations worldwide" />
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-[1.2] rounded-organic overflow-hidden h-[320px]">
-            <ConnectMap />
-          </div>
-          <div className="flex-[0.8]">
-            <div className="card-white p-5">
-              <p className="text-label mb-3">By Region</p>
-              <div className="space-y-0">
-                {regionStats.map((r, i) => (
-                  <div
-                    key={r.region}
-                    className={`flex justify-between py-2.5 text-sm ${
-                      i < regionStats.length - 1
-                        ? 'border-b border-accent-primary/[0.05]'
-                        : ''
-                    }`}
-                  >
-                    <span className="text-text-heading font-semibold">{r.region}</span>
-                    <span className="text-accent-primary font-bold">{r.count}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
+        <SectionHeading title="Global Community" subtitle="Women in STEM organizations span every continent" />
+        <div className="rounded-organic overflow-hidden h-[360px]">
+          <ConnectMap />
         </div>
       </section>
 
-      {/* Mentorship Platforms — real platforms, not fake people */}
+      {/* Mentorship Platforms — only real ones with URLs */}
       <section className="pb-10">
         <SectionHeading title="Mentorship Platforms" accent="Find real guidance" />
         <div className="space-y-3">
-          {mentorshipPlatforms.map((platform) => (
-            <div key={platform.id} className="card-white p-6 flex items-center justify-between">
-              <div>
-                <h3 className="text-base font-semibold text-text-heading">{platform.name}</h3>
-                <p className="text-sm text-text-secondary mt-0.5">{platform.description}</p>
-              </div>
-              <span className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1 rounded-pill flex-shrink-0">
-                {platform.cost}
-              </span>
-            </div>
-          ))}
+          {mentorshipPlatforms.map((platform) => {
+            const Wrapper = platform.url ? 'a' : 'div';
+            const linkProps = platform.url
+              ? { href: platform.url, target: '_blank' as const, rel: 'noopener noreferrer' }
+              : {};
+            return (
+              <Wrapper
+                key={platform.id}
+                {...linkProps}
+                className="card-white p-6 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+              >
+                <div>
+                  <h3 className="text-base font-semibold text-text-heading">{platform.name}</h3>
+                  <p className="text-sm text-text-secondary mt-0.5">{platform.description}</p>
+                </div>
+                <div className="flex items-center gap-3 flex-shrink-0">
+                  <span className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1 rounded-pill">
+                    {platform.cost}
+                  </span>
+                  {platform.url && (
+                    <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors">
+                      Visit →
+                    </span>
+                  )}
+                </div>
+              </Wrapper>
+            );
+          })}
         </div>
       </section>
 
-      {/* Conferences — real conferences from RESOURCES.md */}
+      {/* Conferences — with links */}
       <section className="pb-10">
         <SectionHeading title="Major Conferences" accent="Network in person" />
         <div className="space-y-2.5">
-          {conferences.slice(0, 7).map((conf) => (
-            <div key={conf.id} className="card-white p-5 flex items-center justify-between">
-              <div>
-                <h3 className="text-body text-text-heading font-medium">{conf.name}</h3>
-                <p className="text-xs text-text-muted mt-1">{conf.description}</p>
-              </div>
-              <div className="flex items-center gap-2 flex-shrink-0">
-                {conf.size && (
-                  <span className="text-xs bg-accent-gold/10 text-text-muted px-3 py-1 rounded-pill">
-                    {conf.size}
-                  </span>
-                )}
-                {conf.timing && (
-                  <span className="text-xs text-text-muted">{conf.timing}</span>
-                )}
-              </div>
-            </div>
-          ))}
+          {conferences.slice(0, 7).map((conf) => {
+            const Wrapper = conf.url ? 'a' : 'div';
+            const linkProps = conf.url
+              ? { href: conf.url, target: '_blank' as const, rel: 'noopener noreferrer' }
+              : {};
+            return (
+              <Wrapper
+                key={conf.id}
+                {...linkProps}
+                className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+              >
+                <div>
+                  <h3 className="text-body text-text-heading font-medium">{conf.name}</h3>
+                  <p className="text-xs text-text-muted mt-1">{conf.description}</p>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  {conf.size && (
+                    <span className="text-xs bg-accent-gold/10 text-text-muted px-3 py-1 rounded-pill">
+                      {conf.size}
+                    </span>
+                  )}
+                  {conf.timing && (
+                    <span className="text-xs text-text-muted">{conf.timing}</span>
+                  )}
+                  {conf.url && (
+                    <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors ml-1">
+                      Register →
+                    </span>
+                  )}
+                </div>
+              </Wrapper>
+            );
+          })}
         </div>
       </section>
 
-      {/* Pioneers */}
+      {/* Pioneers — with links */}
       <section className="pb-10">
         <SectionHeading title="Stand on their shoulders" subtitle="Pioneers who paved the way" />
         <DarkPanel className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -118,6 +121,16 @@ export default function ConnectPage() {
                 </div>
               </div>
               <p className="text-sm text-surface-dark-text/60 leading-relaxed">{p.title}</p>
+              {p.link && (
+                <a
+                  href={p.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block mt-2 text-xs text-accent-gold/60 hover:text-accent-gold transition-colors underline underline-offset-2"
+                >
+                  Learn more →
+                </a>
+              )}
             </div>
           ))}
         </DarkPanel>
