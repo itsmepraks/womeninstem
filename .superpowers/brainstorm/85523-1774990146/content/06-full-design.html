@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STEMSpark — Full Design</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,400;1,9..144,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #111; font-family: 'DM Sans', sans-serif; overflow-x: hidden; }
+
+  .page-label {
+    text-align: center;
+    padding: 48px 24px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: #666;
+  }
+  .page-label:first-of-type { padding-top: 32px; }
+
+  .page-frame {
+    max-width: 880px;
+    margin: 0 auto 48px;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 80px rgba(0,0,0,0.3);
+  }
+
+  .approve-bar {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+  }
+  .approve-btn {
+    padding: 14px 32px;
+    border-radius: 32px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .approve-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .approve-btn.yes { background: #c47a52; color: #fff; }
+  .approve-btn.revise { background: #222; color: #aaa; border: 1px solid #333; }
+  .approve-btn.selected { outline: 3px solid #e8976b; outline-offset: 3px; }
+</style>
+<script>
+  function vote(choice, el) {
+    document.querySelectorAll('.approve-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    fetch('/event', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ type: 'click', choice, text: el.textContent.trim(), timestamp: Date.now() })
+    }).catch(() => {});
+  }
+</script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- HOMEPAGE                                   -->
+<!-- ══════════════════════════════════════════ -->
+<div class="page-label">Page 1 — Homepage</div>
+<div class="page-frame">
+<div style="position:relative;overflow:hidden;">
+  <!-- Background -->
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,#fdf8f3 0%,#fceee3 40%,#f7e4d4 100%);"></div>
+  <!-- Organic blobs -->
+  <div style="position:absolute;top:-80px;right:-60px;width:400px;height:400px;border-radius:60% 40% 55% 45%;background:rgba(232,151,107,0.07);transform:rotate(-12deg);"></div>
+  <div style="position:absolute;top:300px;left:-100px;width:350px;height:280px;border-radius:45% 55% 60% 40%;background:rgba(244,200,122,0.05);transform:rotate(8deg);"></div>
+  <div style="position:absolute;bottom:-60px;right:100px;width:250px;height:250px;border-radius:50% 50% 40% 60%;background:rgba(232,151,107,0.04);transform:rotate(-5deg);"></div>
+
+  <div style="position:relative;z-index:1;">
+
+    <!-- ─── NAV ─── -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 40px;">
+      <div style="font-family:'Fraunces',serif;font-size:24px;color:#3d2518;font-weight:500;">stem·spark</div>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <span style="font-size:14px;color:#6b5344;padding:10px 18px;border-radius:24px;background:rgba(232,151,107,0.08);">Learning</span>
+        <span style="font-size:14px;color:#6b5344;padding:10px 18px;border-radius:24px;">Connect</span>
+        <span style="font-size:14px;color:#6b5344;padding:10px 18px;border-radius:24px;">Resources</span>
+        <span style="font-size:14px;color:#6b5344;padding:10px 18px;border-radius:24px;">About</span>
+        <span style="font-size:14px;color:#fdf8f3;padding:10px 22px;border-radius:24px;background:#3d2518;margin-left:8px;font-weight:500;">Join us</span>
+      </div>
+    </div>
+
+    <!-- ─── HERO ─── -->
+    <div style="padding:64px 40px 40px;max-width:640px;">
+      <div style="font-family:'Fraunces',serif;font-size:56px;color:#3d2518;line-height:1.08;font-weight:300;margin-bottom:20px;">
+        Every woman in STEM
+        <span style="font-weight:900;font-style:italic;color:#c47a52;display:inline-block;transform:rotate(-1.5deg);">
+          changes the equation
+        </span>
+      </div>
+      <div style="font-size:18px;color:#6b5344;line-height:1.75;max-width:460px;margin-bottom:32px;">
+        Resources, mentors, and community. We bring it all together so you can focus on what matters — your work.
+      </div>
+      <div style="display:flex;gap:14px;align-items:center;">
+        <span style="background:#3d2518;color:#fdf8f3;padding:14px 32px;border-radius:32px;font-size:16px;font-weight:500;">Explore resources</span>
+        <span style="font-size:15px;color:#c47a52;font-weight:500;text-decoration:underline;text-underline-offset:4px;cursor:pointer;">How it works</span>
+      </div>
+    </div>
+
+    <!-- ─── FLOATING STAT CARDS ─── -->
+    <div style="position:relative;height:220px;margin:0 40px 20px;">
+      <div style="position:absolute;left:0;top:10px;width:240px;background:#fff;border-radius:22px;padding:28px;box-shadow:0 12px 40px rgba(92,58,46,0.06);transform:rotate(-2deg);">
+        <div style="font-family:'Fraunces',serif;font-size:40px;color:#c47a52;font-weight:700;line-height:1;">500+</div>
+        <div style="font-size:15px;color:#6b5344;margin-top:4px;">curated resources</div>
+        <div style="font-size:12px;color:#b8946c;margin-top:10px;">Courses · Scholarships · Programs</div>
+      </div>
+      <div style="position:absolute;left:270px;top:30px;width:220px;background:#fff;border-radius:22px;padding:28px;box-shadow:0 12px 40px rgba(92,58,46,0.06);transform:rotate(1.2deg);">
+        <div style="font-family:'Fraunces',serif;font-size:40px;color:#c47a52;font-weight:700;line-height:1;">120+</div>
+        <div style="font-size:15px;color:#6b5344;margin-top:4px;">mentors ready</div>
+        <div style="font-size:12px;color:#b8946c;margin-top:10px;">1-on-1 · Group · Async</div>
+      </div>
+      <div style="position:absolute;right:0;top:0;width:280px;background:#3d2518;border-radius:22px;padding:28px;box-shadow:0 12px 40px rgba(92,58,46,0.15);transform:rotate(2.5deg);">
+        <div style="font-family:'Fraunces',serif;font-size:17px;color:rgba(253,248,243,0.8);line-height:1.6;font-style:italic;">"I found my first research position through STEMSpark. The mentorship directory changed everything."</div>
+        <div style="font-size:13px;color:rgba(253,248,243,0.45);margin-top:12px;">— Priya, computational biology</div>
+      </div>
+    </div>
+
+    <!-- ─── SECTION: What you'll find ─── -->
+    <div style="padding:48px 40px 12px;">
+      <div style="font-family:'Fraunces',serif;font-size:32px;color:#3d2518;font-weight:500;margin-bottom:6px;">What you'll find here</div>
+      <div style="font-size:16px;color:#8b6e5a;line-height:1.6;">Everything is curated by women who've been where you are.</div>
+    </div>
+
+    <!-- Feature blocks — NOT a grid. Stacked, varied layout -->
+    <div style="padding:24px 40px 0;">
+      <!-- Row 1: wide card -->
+      <div style="background:#fff;border-radius:20px;padding:32px 36px;box-shadow:0 4px 20px rgba(92,58,46,0.04);margin-bottom:16px;display:flex;align-items:center;gap:32px;">
+        <div style="flex:1;">
+          <div style="font-family:'Fraunces',serif;font-size:24px;color:#3d2518;font-weight:600;margin-bottom:8px;">Learning Hub</div>
+          <div style="font-size:15px;color:#6b5344;line-height:1.7;">Courses, bootcamps, and scholarships from institutions that care about diversity. Filtered by field, level, and deadline so you find what's relevant — not everything that exists.</div>
+        </div>
+        <div style="width:100px;height:100px;border-radius:50% 50% 50% 20%;background:linear-gradient(135deg,rgba(232,151,107,0.12),rgba(244,200,122,0.15));flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+          <div style="font-family:'Fraunces',serif;font-size:36px;color:#c47a52;font-weight:300;">42</div>
+        </div>
+      </div>
+
+      <!-- Row 2: two cards side by side, different sizes -->
+      <div style="display:flex;gap:16px;margin-bottom:16px;">
+        <div style="flex:1.2;background:#fff;border-radius:20px;padding:32px;box-shadow:0 4px 20px rgba(92,58,46,0.04);">
+          <div style="font-family:'Fraunces',serif;font-size:24px;color:#3d2518;font-weight:600;margin-bottom:8px;">Connect</div>
+          <div style="font-size:15px;color:#6b5344;line-height:1.7;">Find a mentor who gets it. Join study groups. Attend events. Your network is your superpower — we just make it easier to build.</div>
+          <div style="margin-top:16px;padding:14px 18px;background:rgba(232,151,107,0.05);border-radius:14px;">
+            <div style="font-size:12px;color:#b8946c;font-style:italic;">"My mentor helped me negotiate a 40% raise. I didn't even know I was underpaid."</div>
+            <div style="font-size:11px;color:#c4a07a;margin-top:4px;">— Sarah, data science</div>
+          </div>
+        </div>
+        <div style="flex:0.8;background:#3d2518;border-radius:20px;padding:32px;display:flex;flex-direction:column;justify-content:space-between;">
+          <div>
+            <div style="font-family:'Fraunces',serif;font-size:24px;color:#fceee3;font-weight:600;margin-bottom:8px;">Organizations</div>
+            <div style="font-size:15px;color:rgba(253,248,243,0.6);line-height:1.7;">50+ companies and nonprofits that walk the talk on supporting women in STEM.</div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:16px;">
+            <span style="background:rgba(253,248,243,0.08);color:rgba(253,248,243,0.5);padding:5px 12px;border-radius:14px;font-size:11px;">Tech</span>
+            <span style="background:rgba(253,248,243,0.08);color:rgba(253,248,243,0.5);padding:5px 12px;border-radius:14px;font-size:11px;">Biotech</span>
+            <span style="background:rgba(253,248,243,0.08);color:rgba(253,248,243,0.5);padding:5px 12px;border-radius:14px;font-size:11px;">Research</span>
+            <span style="background:rgba(253,248,243,0.08);color:rgba(253,248,243,0.5);padding:5px 12px;border-radius:14px;font-size:11px;">Engineering</span>
+            <span style="background:rgba(253,248,243,0.08);color:rgba(253,248,243,0.5);padding:5px 12px;border-radius:14px;font-size:11px;">Aerospace</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── PIONEER SPOTLIGHT ─── -->
+    <div style="padding:32px 40px;">
+      <div style="background:#fff;border-radius:22px;padding:36px;box-shadow:0 4px 20px rgba(92,58,46,0.04);display:flex;gap:28px;align-items:center;position:relative;overflow:hidden;">
+        <!-- Decorative blob inside card -->
+        <div style="position:absolute;top:-30px;right:-30px;width:150px;height:150px;border-radius:50%;background:rgba(244,200,122,0.06);"></div>
+        <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#fceee3,#f7e4d4);flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+          <div style="font-family:'Fraunces',serif;font-size:32px;color:#c47a52;">M</div>
+        </div>
+        <div style="flex:1;position:relative;z-index:1;">
+          <div style="font-size:11px;text-transform:uppercase;letter-spacing:2px;color:#b8946c;margin-bottom:6px;">Pioneer Spotlight</div>
+          <div style="font-family:'Fraunces',serif;font-size:22px;color:#3d2518;font-weight:600;">Marie Curie</div>
+          <div style="font-size:15px;color:#6b5344;line-height:1.6;margin-top:6px;">First woman to win a Nobel Prize. Discovered radioactivity. Proved that brilliance has no gender — then won a second Nobel just to make sure everyone understood.</div>
+        </div>
+        <div style="flex-shrink:0;text-align:right;">
+          <div style="font-size:14px;color:#c47a52;font-weight:500;text-decoration:underline;text-underline-offset:4px;">Read her story</div>
+          <div style="font-size:12px;color:#b8946c;margin-top:6px;">1 of 42 pioneers</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── FOOTER CTA ─── -->
+    <div style="padding:56px 40px;text-align:center;position:relative;">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(232,151,107,0.04));"></div>
+      <div style="position:relative;z-index:1;">
+        <div style="font-family:'Fraunces',serif;font-size:36px;color:#3d2518;font-weight:300;margin-bottom:12px;">Ready to start?</div>
+        <div style="font-size:16px;color:#8b6e5a;margin-bottom:28px;line-height:1.6;">Join thousands of women discovering their place in STEM.</div>
+        <span style="background:#3d2518;color:#fdf8f3;padding:16px 36px;border-radius:32px;font-size:16px;font-weight:500;display:inline-block;">Join the community</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!-- RESOURCES PAGE                             -->
+<!-- ══════════════════════════════════════════ -->
+<div class="page-label">Page 2 — Resources (Editorial Curation)</div>
+<div class="page-frame">
+<div style="position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,#fdf8f3 0%,#fceee3 50%,#f7e4d4 100%);"></div>
+  <div style="position:absolute;bottom:-80px;right:-40px;width:300px;height:300px;border-radius:55% 45% 50% 50%;background:rgba(232,151,107,0.05);transform:rotate(15deg);"></div>
+
+  <div style="position:relative;z-index:1;">
+
+    <!-- Nav (same) -->
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:22px 40px;">
+      <div style="font-family:'Fraunces',serif;font-size:24px;color:#3d2518;font-weight:500;">stem·spark</div>
+      <div style="display:flex;gap:6px;align-items:center;">
+        <span style="font-size:14px;color:#6b5344;padding:10px 18px;border-radius:24px;">Learning</span>
+        <span style="font-size:14px;color:#6b5344;padding:10px 18px;border-radius:24px;">Connect</span>
+        <span style="font-size:14px;color:#6b5344;padding:10px 18px;border-radius:24px;background:rgba(232,151,107,0.08);">Resources</span>
+        <span style="font-size:14px;color:#6b5344;padding:10px 18px;border-radius:24px;">About</span>
+        <span style="font-size:14px;color:#fdf8f3;padding:10px 22px;border-radius:24px;background:#3d2518;margin-left:8px;font-weight:500;">Join us</span>
+      </div>
+    </div>
+
+    <!-- Resources hero -->
+    <div style="padding:48px 40px 36px;">
+      <div style="font-family:'Fraunces',serif;font-size:44px;color:#3d2518;line-height:1.1;font-weight:300;margin-bottom:12px;">
+        Resources <span style="font-style:italic;color:#c47a52;">that matter</span>
+      </div>
+      <div style="font-size:17px;color:#6b5344;line-height:1.7;max-width:500px;">Curated by women in the field. Updated weekly. No fluff — just opportunities worth your time.</div>
+    </div>
+
+    <!-- ─── SECTION: Open Now (urgent/deadline-driven) ─── -->
+    <div style="padding:0 40px 32px;">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:20px;">
+        <div style="font-family:'Fraunces',serif;font-size:22px;color:#3d2518;font-weight:600;">Open Now</div>
+        <div style="font-size:13px;color:#c47a52;font-weight:500;">Deadlines approaching</div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;">
+        <!-- Resource item 1 -->
+        <div style="background:#fff;border-radius:18px;padding:24px 28px;box-shadow:0 2px 12px rgba(92,58,46,0.03);display:flex;align-items:center;gap:20px;">
+          <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(232,151,107,0.12),rgba(244,200,122,0.1));flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <div style="font-family:'Fraunces',serif;font-size:20px;color:#c47a52;">$</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:17px;color:#3d2518;font-weight:600;margin-bottom:3px;">Google Women in Engineering Scholarship</div>
+            <div style="font-size:14px;color:#8b6e5a;line-height:1.5;">Full tuition + mentorship for undergraduate women in CS and engineering.</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-size:13px;color:#c47a52;font-weight:600;">Apr 15</div>
+            <div style="font-size:11px;color:#b8946c;">15 days left</div>
+          </div>
+        </div>
+
+        <!-- Resource item 2 -->
+        <div style="background:#fff;border-radius:18px;padding:24px 28px;box-shadow:0 2px 12px rgba(92,58,46,0.03);display:flex;align-items:center;gap:20px;">
+          <div style="width:52px;height:52px;border-radius:14px;background:linear-gradient(135deg,rgba(196,122,82,0.1),rgba(232,151,107,0.08));flex-shrink:0;display:flex;align-items:center;justify-content:center;">
+            <div style="font-family:'Fraunces',serif;font-size:20px;color:#c47a52;">$</div>
+          </div>
+          <div style="flex:1;">
+            <div style="font-size:17px;color:#3d2518;font-weight:600;margin-bottom:3px;">Adobe Research Women-in-Tech Fellowship</div>
+            <div style="font-size:14px;color:#8b6e5a;line-height:1.5;">$10,000 award + internship for women pursuing PhDs in CS-related fields.</div>
+          </div>
+          <div style="text-align:right;flex-shrink:0;">
+            <div style="font-size:13px;color:#c47a52;font-weight:600;">May 1</div>
+            <div style="font-size:11px;color:#b8946c;">31 days left</div>
+          </div>
+        </div>
+
+        <div style="font-size:14px;color:#c47a52;font-weight:500;text-decoration:underline;text-underline-offset:4px;margin-top:4px;cursor:pointer;">View all 42 open scholarships →</div>
+      </div>
+    </div>
+
+    <!-- ─── SECTION: Companies Hiring ─── -->
+    <div style="padding:0 40px 32px;">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:20px;">
+        <div style="font-family:'Fraunces',serif;font-size:22px;color:#3d2518;font-weight:600;">Companies Hiring</div>
+        <div style="font-size:13px;color:#8b6e5a;">With strong women-in-STEM programs</div>
+      </div>
+
+      <div style="display:flex;gap:14px;">
+        <div style="flex:1;background:#fff;border-radius:18px;padding:24px;box-shadow:0 2px 12px rgba(92,58,46,0.03);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:36px;height:36px;border-radius:10px;background:#3d2518;display:flex;align-items:center;justify-content:center;color:#fdf8f3;font-size:14px;font-weight:700;">N</div>
+            <div style="font-size:16px;color:#3d2518;font-weight:600;">NASA JPL</div>
+          </div>
+          <div style="font-size:13px;color:#8b6e5a;line-height:1.6;">14 open roles specifically recruiting women in aerospace engineering.</div>
+          <div style="margin-top:10px;font-size:12px;color:#c47a52;font-weight:500;">View roles →</div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:18px;padding:24px;box-shadow:0 2px 12px rgba(92,58,46,0.03);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:36px;height:36px;border-radius:10px;background:#c47a52;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;">M</div>
+            <div style="font-size:16px;color:#3d2518;font-weight:600;">Microsoft</div>
+          </div>
+          <div style="font-size:13px;color:#8b6e5a;line-height:1.6;">Women@Microsoft ERG — 8 mentorship tracks open for applications.</div>
+          <div style="margin-top:10px;font-size:12px;color:#c47a52;font-weight:500;">View roles →</div>
+        </div>
+        <div style="flex:1;background:#fff;border-radius:18px;padding:24px;box-shadow:0 2px 12px rgba(92,58,46,0.03);">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <div style="width:36px;height:36px;border-radius:10px;background:#b8946c;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;">G</div>
+            <div style="font-size:16px;color:#3d2518;font-weight:600;">Genentech</div>
+          </div>
+          <div style="font-size:13px;color:#8b6e5a;line-height:1.6;">Biotech leader with 48% women in research leadership roles.</div>
+          <div style="margin-top:10px;font-size:12px;color:#c47a52;font-weight:500;">View roles →</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ─── SECTION: Community Picks ─── -->
+    <div style="padding:0 40px 40px;">
+      <div style="display:flex;align-items:baseline;gap:12px;margin-bottom:20px;">
+        <div style="font-family:'Fraunces',serif;font-size:22px;color:#3d2518;font-weight:600;">Community Picks</div>
+        <div style="font-size:13px;color:#8b6e5a;">Recommended by members</div>
+      </div>
+
+      <div style="background:#3d2518;border-radius:22px;padding:32px;display:flex;gap:24px;">
+        <div style="flex:1;">
+          <div style="font-family:'Fraunces',serif;font-size:18px;color:#fceee3;font-weight:500;margin-bottom:8px;">Girls Who Code — Summer Programs</div>
+          <div style="font-size:14px;color:rgba(253,248,243,0.6);line-height:1.6;margin-bottom:12px;">Free 7-week immersive CS program for high school girls. Recommended by 89 community members.</div>
+          <div style="display:flex;gap:8px;">
+            <span style="background:rgba(253,248,243,0.08);color:rgba(253,248,243,0.5);padding:5px 14px;border-radius:14px;font-size:12px;">Free</span>
+            <span style="background:rgba(253,248,243,0.08);color:rgba(253,248,243,0.5);padding:5px 14px;border-radius:14px;font-size:12px;">Ages 15-18</span>
+            <span style="background:rgba(253,248,243,0.08);color:rgba(253,248,243,0.5);padding:5px 14px;border-radius:14px;font-size:12px;">In-person & virtual</span>
+          </div>
+        </div>
+        <div style="width:1px;background:rgba(253,248,243,0.08);"></div>
+        <div style="flex:1;">
+          <div style="font-family:'Fraunces',serif;font-size:18px;color:#fceee3;font-weight:500;margin-bottom:8px;">Society of Women Engineers — Annual Conference</div>
+          <div style="font-size:14px;color:rgba(253,248,243,0.6);line-height:1.6;margin-bottom:12px;">World's largest conference for women in engineering. Career fair, workshops, 300+ employers.</div>
+          <div style="display:flex;gap:8px;">
+            <span style="background:rgba(253,248,243,0.08);color:rgba(253,248,243,0.5);padding:5px 14px;border-radius:14px;font-size:12px;">October 2026</span>
+            <span style="background:rgba(253,248,243,0.08);color:rgba(253,248,243,0.5);padding:5px 14px;border-radius:14px;font-size:12px;">Networking</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+
+<!-- ═══ APPROVAL ═══ -->
+<div class="page-label" style="padding-bottom:8px;">Does this direction feel right?</div>
+<div class="approve-bar">
+  <button class="approve-btn yes" onclick="vote('approve', this)">This is it — let's build this</button>
+  <button class="approve-btn revise" onclick="vote('revise', this)">Needs changes — I'll share feedback</button>
+</div>
+
+</body>
+</html>
