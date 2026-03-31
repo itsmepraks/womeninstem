@@ -66,7 +66,7 @@ export const pioneers: Pioneer[] = [
 ];
 
 export function getRandomPioneer(): Pioneer {
-  return pioneers[Math.floor(Math.random() * pioneers.length)];
+  return pioneers[Math.floor(Math.random() * pioneers.length)]!;
 }
 
 export function getPioneerByField(field: string): Pioneer | undefined {

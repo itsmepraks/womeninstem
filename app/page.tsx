@@ -5,7 +5,9 @@ import { siteStats, testimonial } from '@/data/stats';
 import { pioneers } from '@/data/pioneers';
 
 export default function HomePage() {
-  const spotlightPioneer = pioneers[0];
+  const spotlightPioneer = pioneers[0]!;
+  const stat1 = siteStats[0]!;
+  const stat2 = siteStats[1]!;
 
   return (
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
@@ -39,18 +41,18 @@ export default function HomePage() {
       <section className="relative h-[240px] md:h-[220px] mb-5">
         <div className="absolute left-0 top-2.5 w-[240px]">
           <StatCard
-            value={siteStats[0].value}
-            label={siteStats[0].label}
+            value={stat1.value}
+            label={stat1.label}
             detail="Courses · Scholarships · Programs"
-            rotation={siteStats[0].rotation}
+            rotation={stat1.rotation}
           />
         </div>
         <div className="absolute left-[270px] top-7 w-[220px] hidden md:block">
           <StatCard
-            value={siteStats[1].value}
-            label={siteStats[1].label}
+            value={stat2.value}
+            label={stat2.label}
             detail="1-on-1 · Group · Async"
-            rotation={siteStats[1].rotation}
+            rotation={stat2.rotation}
           />
         </div>
         <div
