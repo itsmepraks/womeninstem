@@ -8,7 +8,7 @@ interface PioneerSpotlightProps {
 
 export default function PioneerSpotlight({
   pioneer,
-  totalCount = 42,
+  totalCount = 32,
   index = 1,
 }: PioneerSpotlightProps) {
   return (
@@ -23,7 +23,7 @@ export default function PioneerSpotlight({
       </div>
 
       <div className="flex-1 relative z-[1]">
-        <p className="text-label mb-1.5">Pioneer Spotlight</p>
+        <p className="text-label mb-1.5">Pioneer Spotlight · {pioneer.years}</p>
         <h3 className="font-display text-heading text-text-heading">
           {pioneer.name}
         </h3>
@@ -33,9 +33,20 @@ export default function PioneerSpotlight({
       </div>
 
       <div className="flex-shrink-0 text-right">
-        <span className="text-sm text-accent-primary font-medium underline underline-offset-4 cursor-pointer hover:text-accent-secondary transition-colors">
-          Read her story
-        </span>
+        {pioneer.link ? (
+          <a
+            href={pioneer.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-sm text-accent-primary font-medium underline underline-offset-4 hover:text-accent-secondary transition-colors"
+          >
+            Read her story →
+          </a>
+        ) : (
+          <span className="text-sm text-text-muted">
+            {pioneer.field}
+          </span>
+        )}
         <p className="text-xs text-text-muted mt-1.5">
           {index} of {totalCount} pioneers
         </p>
