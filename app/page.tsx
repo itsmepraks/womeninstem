@@ -1,13 +1,15 @@
 import Link from 'next/link';
 import StatCard from '@/components/ui/StatCard';
 import PioneerSpotlight from '@/components/ui/PioneerSpotlight';
-import { siteStats, testimonial } from '@/data/stats';
+import { heroStats, heroHighlight } from '@/data/stats';
+import { scholarships } from '@/data/resources';
 import { pioneers } from '@/data/pioneers';
 
 export default function HomePage() {
   const spotlightPioneer = pioneers[0]!;
-  const stat1 = siteStats[0]!;
-  const stat2 = siteStats[1]!;
+  const stat1 = heroStats[0]!;
+  const stat2 = heroStats[1]!;
+  const scholarshipCount = scholarships.length;
 
   return (
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
@@ -43,7 +45,7 @@ export default function HomePage() {
           <StatCard
             value={stat1.value}
             label={stat1.label}
-            detail="Courses · Scholarships · Programs"
+            detail={stat1.source}
             rotation={stat1.rotation}
           />
         </div>
@@ -51,19 +53,19 @@ export default function HomePage() {
           <StatCard
             value={stat2.value}
             label={stat2.label}
-            detail="1-on-1 · Group · Async"
+            detail={stat2.source}
             rotation={stat2.rotation}
           />
         </div>
         <div
           className="absolute right-0 top-0 w-[280px] hidden md:block card-dark p-7"
-          style={{ transform: `rotate(${testimonial.rotation}deg)` }}
+          style={{ transform: `rotate(${heroHighlight.rotation}deg)` }}
         >
-          <p className="font-display text-[1.0625rem] text-surface-dark-text/80 leading-relaxed italic">
-            &ldquo;{testimonial.quote}&rdquo;
+          <p className="font-display text-[1.0625rem] text-surface-dark-text/80 leading-relaxed">
+            {heroHighlight.text}
           </p>
           <p className="text-sm text-surface-dark-text/45 mt-3">
-            — {testimonial.author}, {testimonial.field}
+            — {heroHighlight.source}
           </p>
         </div>
       </section>
@@ -100,7 +102,7 @@ export default function HomePage() {
           </div>
           <div className="w-24 h-24 rounded-[50%_50%_50%_20%] bg-gradient-to-br from-accent-secondary/10 to-accent-gold/15 flex-shrink-0 flex items-center justify-center">
             <span className="font-display text-4xl text-accent-primary font-light">
-              42
+              {scholarshipCount}
             </span>
           </div>
         </div>
@@ -118,11 +120,11 @@ export default function HomePage() {
             </p>
             <div className="mt-4 p-3.5 bg-accent-secondary/[0.04] rounded-[0.875rem]">
               <p className="text-xs text-text-muted italic">
-                &ldquo;My mentor helped me negotiate a 40% raise. I didn&apos;t
-                even know I was underpaid.&rdquo;
+                Women in computing are 45% more likely to leave than men.
+                Companies with gender-diverse teams are 15% more likely to outperform competitors.
               </p>
               <p className="text-[0.6875rem] text-text-muted/70 mt-1">
-                — Sarah, data science
+                — Center for Talent Innovation
               </p>
             </div>
           </div>
@@ -134,8 +136,7 @@ export default function HomePage() {
                 Organizations
               </h3>
               <p className="text-body text-surface-dark-text/60 leading-relaxed">
-                50+ companies and nonprofits that walk the talk on supporting
-                women in STEM.
+                30+ professional organizations championing women across every STEM field.
               </p>
             </div>
             <div className="flex flex-wrap gap-1.5 mt-4">
