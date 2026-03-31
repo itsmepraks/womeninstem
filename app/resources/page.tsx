@@ -1,365 +1,100 @@
-import { Container, Card, Button, Badge } from '@/components/ui';
-import { 
-  BookOpen, 
-  FileText, 
-  Video, 
-  Newspaper, 
-  ExternalLink, 
-  Search,
-  Sparkles,
-  Github,
-  Code,
-  BarChart3,
-  MessageSquare,
-  GraduationCap,
-  Zap,
-  Users,
-  Mail
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
-import type { BadgeProps } from '@/components/ui/Badge';
-
-export const metadata = {
-  title: 'Resources - STEM•SPARK',
-  description: 'Curated collection of tutorials, articles, tools, and career guides for women in STEM',
-};
-
-// Define valid color type to match Badge variants
-type BadgeVariant = NonNullable<BadgeProps['variant']>;
+import Link from 'next/link';
+import SectionHeading from '@/components/ui/SectionHeading';
+import ResourceCard from '@/components/ui/ResourceCard';
+import CompanyCard from '@/components/ui/CompanyCard';
+import DarkPanel from '@/components/ui/DarkPanel';
+import { openScholarships, companiesHiring, communityPicks } from '@/data/resources';
 
 export default function ResourcesPage() {
-  const resourceCategories = [
-    {
-      icon: <BookOpen className="w-8 h-8" strokeWidth={2} />,
-      title: 'Tutorials & Guides',
-      description: 'Step-by-step tutorials for learning new skills',
-      count: '150+ resources',
-      color: 'nebula' as BadgeVariant,
-    },
-    {
-      icon: <Newspaper className="w-8 h-8" strokeWidth={2} />,
-      title: 'Articles & Blogs',
-      description: 'In-depth articles on STEM topics and careers',
-      count: '200+ articles',
-      color: 'cosmic' as BadgeVariant,
-    },
-    {
-      icon: <Video className="w-8 h-8" strokeWidth={2} />,
-      title: 'Video Content',
-      description: 'Educational videos and recorded webinars',
-      count: '80+ videos',
-      color: 'aurora' as BadgeVariant,
-    },
-    {
-      icon: <FileText className="w-8 h-8" strokeWidth={2} />,
-      title: 'Career Resources',
-      description: 'Resume templates, interview prep, and career advice',
-      count: '50+ resources',
-      color: 'stardust' as BadgeVariant,
-    },
-  ];
-
-  const featuredResources = [
-    {
-      type: 'Tutorial',
-      title: 'Getting Started with Python Programming',
-      description: 'A beginner-friendly guide to learning Python from scratch',
-      author: 'Dr. Sarah Chen',
-      readTime: '15 min read',
-      tags: ['Python', 'Beginner', 'Programming'],
-    },
-    {
-      type: 'Article',
-      title: "Breaking Into the Tech Industry: A Woman's Guide",
-      description: 'Navigate your tech career with insights from industry leaders',
-      author: 'Maria Rodriguez',
-      readTime: '10 min read',
-      tags: ['Career', 'Tech', 'Advice'],
-    },
-    {
-      type: 'Video',
-      title: 'Introduction to Machine Learning Concepts',
-      description: 'Learn the fundamentals of ML in this comprehensive video',
-      author: 'Dr. Aisha Patel',
-      readTime: '45 min watch',
-      tags: ['Machine Learning', 'AI', 'Advanced'],
-    },
-  ];
-
-  const toolsAndPlatforms = [
-    { name: 'GitHub', desc: 'Version control and collaboration', icon: <Github className="w-6 h-6" strokeWidth={2} /> },
-    { name: 'Kaggle', desc: 'Data science competitions', icon: <BarChart3 className="w-6 h-6" strokeWidth={2} /> },
-    { name: 'Stack Overflow', desc: 'Q&A for programmers', icon: <MessageSquare className="w-6 h-6" strokeWidth={2} /> },
-    { name: 'Coursera', desc: 'Online courses', icon: <GraduationCap className="w-6 h-6" strokeWidth={2} /> },
-    { name: 'LeetCode', desc: 'Coding practice', icon: <Code className="w-6 h-6" strokeWidth={2} /> },
-    { name: 'Dev.to', desc: 'Developer community', icon: <Users className="w-6 h-6" strokeWidth={2} /> },
-  ];
-
   return (
-    <div className="relative">
-      {/* Hero Section */}
-      <section className="min-h-[70vh] flex items-center justify-center px-4 py-20">
-        <Container size="lg">
-          <div className="text-center space-y-8">
-            <Badge variant="cosmic" size="lg" dot className="inline-flex items-center gap-2">
-              <Sparkles className="w-4 h-4" strokeWidth={2.5} />
-              Coming Soon
-            </Badge>
-            
-            <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight">
-              <span className="text-cosmic-blue-400">Resource</span>
-              {' '}
-              <span className="text-nebula-400">Library</span>
-            </h1>
-            
-            <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-              Your curated collection of tutorials, articles, tools, and career guides.
-              Everything you need to succeed in STEM, all in one place.
-            </p>
+    <div className="max-w-[880px] mx-auto px-6 md:px-10">
+      {/* Hero */}
+      <section className="pt-12 md:pt-20 pb-10">
+        <h1 className="font-display text-[2.75rem] text-text-heading font-light leading-tight">
+          Resources <em className="italic text-accent-primary">that matter</em>
+        </h1>
+        <p className="text-body-lg text-text-body mt-3 max-w-[500px]">
+          Curated by women in the field. Updated weekly. No fluff — just
+          opportunities worth your time.
+        </p>
+      </section>
 
-            {/* Search Bar Preview */}
-            <div className="max-w-2xl mx-auto pt-4">
-              <div className="glass-strong rounded-full p-3 flex items-center gap-3 shadow-elegant">
-                <Search className="w-5 h-5 text-gray-400 ml-2" strokeWidth={2} />
-                <input
-                  type="text"
-                  placeholder="Search resources..."
-                  className="flex-1 bg-transparent border-none outline-none text-white placeholder-gray-400"
-                  disabled
-                />
-                <Button variant="primary" size="sm">Search</Button>
+      {/* Open Now */}
+      <section className="pb-10">
+        <SectionHeading title="Open Now" accent="Deadlines approaching" />
+        <div className="space-y-3">
+          {openScholarships.map((s) => (
+            <ResourceCard
+              key={s.id}
+              title={s.title}
+              description={s.description}
+              deadline={s.deadline}
+              daysLeft={s.daysLeft}
+            />
+          ))}
+        </div>
+        <Link
+          href="#"
+          className="inline-block mt-4 text-sm text-accent-primary font-medium underline underline-offset-4 hover:text-accent-secondary transition-colors"
+        >
+          View all 42 open scholarships →
+        </Link>
+      </section>
+
+      {/* Companies Hiring */}
+      <section className="pb-10">
+        <SectionHeading
+          title="Companies Hiring"
+          subtitle="With strong women-in-STEM programs"
+        />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+          {companiesHiring.map((c) => (
+            <CompanyCard
+              key={c.id}
+              name={c.name}
+              initial={c.initial}
+              color={c.color}
+              description={c.description}
+            />
+          ))}
+        </div>
+      </section>
+
+      {/* Community Picks */}
+      <section className="pb-10">
+        <SectionHeading
+          title="Community Picks"
+          subtitle="Recommended by members"
+        />
+        <DarkPanel className="flex flex-col md:flex-row gap-6">
+          {communityPicks.map((pick, i) => (
+            <div
+              key={pick.id}
+              className={`flex-1 ${
+                i < communityPicks.length - 1
+                  ? 'md:border-r md:border-surface-dark-text/[0.06] md:pr-6'
+                  : ''
+              }`}
+            >
+              <h3 className="font-display text-lg text-surface-dark-text font-medium mb-2">
+                {pick.title}
+              </h3>
+              <p className="text-sm text-surface-dark-text/60 leading-relaxed mb-3">
+                {pick.description}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {pick.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="bg-surface-dark-text/[0.06] text-surface-dark-text/50 px-3.5 py-1 rounded-[0.875rem] text-xs"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
-
-            <div className="flex flex-wrap gap-4 justify-center text-sm">
-              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
-                <BookOpen className="w-4 h-4 text-nebula-400" strokeWidth={2.5} />
-                500+ Resources
-              </span>
-              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
-                <Zap className="w-4 h-4 text-stardust-400" strokeWidth={2.5} />
-                All Free
-              </span>
-              <span className="glass px-4 py-2 rounded-full inline-flex items-center gap-2 hover:bg-white/10 transition-elegant">
-                <Sparkles className="w-4 h-4 text-aurora-400" strokeWidth={2.5} />
-                Curated Content
-              </span>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Resource Categories */}
-      <section className="py-20 px-4">
-        <Container size="xl">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-ink">
-              Browse by Category
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Find exactly what you need to level up your skills
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {resourceCategories.map((category, index) => (
-              <Card key={index} hover className="group">
-                <div className="space-y-4 text-center">
-                  <div className={cn(
-                    'inline-flex p-4 rounded-xl group-hover:scale-110 transition-transform-elegant',
-                    {
-                      'bg-nebula-500/20 text-nebula-400': category.color === 'nebula',
-                      'bg-aurora-500/20 text-aurora-400': category.color === 'aurora',
-                      'bg-cosmic-blue-500/20 text-cosmic-blue-400': category.color === 'cosmic',
-                      'bg-stardust-500/20 text-stardust-400': category.color === 'stardust',
-                      'bg-supernova-500/20 text-supernova-400': category.color === 'supernova',
-                    }
-                  )}>
-                    {category.icon}
-                  </div>
-                  
-                  <div>
-                    <h3 className="font-display text-xl font-semibold mb-2 text-white">
-                      {category.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm mb-3">{category.description}</p>
-                    <Badge variant={category.color} size="sm">
-                      {category.count}
-                    </Badge>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Featured Resources */}
-      <section className="py-20 px-4 bg-white/[0.02]">
-        <Container size="xl">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-ink">
-              Featured Resources
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Hand-picked content to help you grow
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-6">
-            {featuredResources.map((resource, index) => (
-              <Card key={index} hover>
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <Badge variant="nebula" size="sm">{resource.type}</Badge>
-                    <span className="text-xs text-gray-500">{resource.readTime}</span>
-                  </div>
-
-                  <div>
-                    <h3 className="font-display text-lg font-semibold mb-2 line-clamp-2 text-white">
-                      {resource.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm mb-3 line-clamp-2">
-                      {resource.description}
-                    </p>
-                    <p className="text-xs text-gray-500">by {resource.author}</p>
-                  </div>
-
-                  <div className="flex flex-wrap gap-2">
-                    {resource.tags.map((tag, idx) => (
-                      <span key={idx} className="px-2 py-1 bg-white/5 rounded text-xs text-gray-400">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
-                  <Button variant="ghost" className="w-full" rightIcon={<ExternalLink className="w-4 h-4" />}>
-                    Read More
-                  </Button>
-                </div>
-              </Card>
-            ))}
-          </div>
-
-          <div className="text-center mt-8">
-            <Button variant="secondary">Browse All Resources</Button>
-          </div>
-        </Container>
-      </section>
-
-      {/* Tools & Platforms */}
-      <section className="py-20 px-4">
-        <Container size="lg">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-ink">
-              Essential Tools & Platforms
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Recommended tools for your STEM journey
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {toolsAndPlatforms.map((tool, index) => (
-              <div key={index} className="glass p-4 rounded-premium hover:bg-white/10 transition-elegant group">
-                <div className="flex items-center gap-3">
-                  <div className="text-cosmic-blue-400 group-hover:scale-110 transition-transform-elegant">
-                    {tool.icon}
-                  </div>
-                  <div className="flex-1">
-                    <h3 className="font-semibold group-hover:text-nebula-400 transition-colors-elegant text-white">
-                      {tool.name}
-                    </h3>
-                    <p className="text-sm text-gray-400">{tool.desc}</p>
-                  </div>
-                  <ExternalLink className="w-4 h-4 text-gray-500 group-hover:text-nebula-400 transition-colors-elegant" strokeWidth={2} />
-                </div>
-              </div>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Topics */}
-      <section className="py-20 px-4 bg-white/[0.02]">
-        <Container size="lg">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4 text-white">
-              Popular Topics
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Explore resources by topic
-            </p>
-          </div>
-
-          <div className="flex flex-wrap gap-3 justify-center">
-            {[
-              'Python', 'JavaScript', 'Data Science', 'Machine Learning', 'Web Development',
-              'Career Advice', 'Interview Prep', 'Algorithms', 'Database', 'Cloud Computing',
-              'Cybersecurity', 'Mobile Development', 'UI/UX Design', 'DevOps', 'Blockchain',
-            ].map((topic, index) => (
-              <button
-                key={index}
-                className="px-4 py-2 glass rounded-full hover:bg-white/10 transition-elegant text-sm"
-              >
-                {topic}
-              </button>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Contribution CTA */}
-      <section className="py-20 px-4">
-        <Container size="md">
-          <div className="glass-strong rounded-premium p-8 md:p-12 text-center space-y-6 shadow-elegant-lg">
-            <div className="inline-flex p-4 rounded-full bg-cosmic-blue-500/20 mb-4">
-              <BookOpen className="w-16 h-16 text-cosmic-blue-400" strokeWidth={2} />
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
-              Have a Resource to Share?
-            </h2>
-            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-              Help grow our library! Contribute tutorials, articles, or tools that have
-              helped you in your STEM journey.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-              <Button variant="primary" className="inline-flex items-center gap-2">
-                <Sparkles className="w-4 h-4" strokeWidth={2.5} />
-                Submit Resource
-              </Button>
-              <Button variant="secondary" className="inline-flex items-center gap-2">
-                <FileText className="w-4 h-4" strokeWidth={2.5} />
-                View Guidelines
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Newsletter CTA */}
-      <section className="py-20 px-4">
-        <Container size="md">
-          <div className="text-center space-y-6">
-            <h2 className="font-display text-3xl md:text-4xl font-bold text-white">
-              Get Weekly Resource Roundup
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Receive curated STEM resources delivered to your inbox every week
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-gray-500 focus:outline-none focus:ring-2 focus:ring-cosmic-blue-400 focus:border-transparent transition-elegant hover:border-white/20"
-              />
-              <Button variant="primary" className="inline-flex items-center gap-2">
-                <Mail className="w-4 h-4" strokeWidth={2.5} />
-                Subscribe
-              </Button>
-            </div>
-          </div>
-        </Container>
+          ))}
+        </DarkPanel>
       </section>
     </div>
   );
