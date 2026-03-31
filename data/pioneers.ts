@@ -26,6 +26,7 @@ export const pioneers: Pioneer[] = [
     category: 'science',
     era: 'historical',
     years: '1867-1934',
+    link: 'https://en.wikipedia.org/wiki/Marie_Curie',
   },
   {
     id: 'rosalind-franklin',
@@ -38,6 +39,7 @@ export const pioneers: Pioneer[] = [
     category: 'science',
     era: 'historical',
     years: '1920-1958',
+    link: 'https://en.wikipedia.org/wiki/Rosalind_Franklin',
   },
   {
     id: 'barbara-mcclintock',
@@ -50,6 +52,7 @@ export const pioneers: Pioneer[] = [
     category: 'science',
     era: 'historical',
     years: '1902-1992',
+    link: 'https://en.wikipedia.org/wiki/Barbara_McClintock',
   },
   {
     id: 'rachel-carson',
@@ -62,6 +65,7 @@ export const pioneers: Pioneer[] = [
     category: 'science',
     era: 'historical',
     years: '1907-1964',
+    link: 'https://en.wikipedia.org/wiki/Rachel_Carson',
   },
   {
     id: 'jane-goodall',
@@ -74,6 +78,7 @@ export const pioneers: Pioneer[] = [
     category: 'science',
     era: 'historical',
     years: '1934-Present',
+    link: 'https://en.wikipedia.org/wiki/Jane_Goodall',
   },
 
   // =====================
@@ -90,6 +95,7 @@ export const pioneers: Pioneer[] = [
     category: 'science',
     era: 'contemporary',
     years: '1930-Present',
+    link: 'https://en.wikipedia.org/wiki/Tu_Youyou',
   },
   {
     id: 'jennifer-doudna',
@@ -102,6 +108,7 @@ export const pioneers: Pioneer[] = [
     category: 'science',
     era: 'contemporary',
     years: '1964-Present',
+    link: 'https://en.wikipedia.org/wiki/Jennifer_Doudna',
   },
   {
     id: 'fabiola-gianotti',
@@ -114,6 +121,7 @@ export const pioneers: Pioneer[] = [
     category: 'science',
     era: 'contemporary',
     years: '1960-Present',
+    link: 'https://en.wikipedia.org/wiki/Fabiola_Gianotti',
   },
   {
     id: 'katalin-kariko',
@@ -126,6 +134,7 @@ export const pioneers: Pioneer[] = [
     category: 'science',
     era: 'contemporary',
     years: '1955-Present',
+    link: 'https://en.wikipedia.org/wiki/Katalin_Karik%C3%B3',
   },
 
   // =====================
@@ -142,6 +151,7 @@ export const pioneers: Pioneer[] = [
     category: 'technology',
     era: 'historical',
     years: '1815-1852',
+    link: 'https://en.wikipedia.org/wiki/Ada_Lovelace',
   },
   {
     id: 'grace-hopper',
@@ -154,6 +164,7 @@ export const pioneers: Pioneer[] = [
     category: 'technology',
     era: 'historical',
     years: '1906-1992',
+    link: 'https://en.wikipedia.org/wiki/Grace_Hopper',
   },
   {
     id: 'hedy-lamarr',
@@ -166,6 +177,7 @@ export const pioneers: Pioneer[] = [
     category: 'technology',
     era: 'historical',
     years: '1914-2000',
+    link: 'https://en.wikipedia.org/wiki/Hedy_Lamarr',
   },
   {
     id: 'radia-perlman',
@@ -178,6 +190,7 @@ export const pioneers: Pioneer[] = [
     category: 'technology',
     era: 'historical',
     years: '1951-Present',
+    link: 'https://en.wikipedia.org/wiki/Radia_Perlman',
   },
 
   // =====================
@@ -194,6 +207,7 @@ export const pioneers: Pioneer[] = [
     category: 'technology',
     era: 'contemporary',
     years: '1968-2024',
+    link: 'https://en.wikipedia.org/wiki/Susan_Wojcicki',
   },
   {
     id: 'reshma-saujani',
@@ -206,6 +220,7 @@ export const pioneers: Pioneer[] = [
     category: 'technology',
     era: 'contemporary',
     years: '1975-Present',
+    link: 'https://en.wikipedia.org/wiki/Reshma_Saujani',
   },
   {
     id: 'fei-fei-li',
@@ -218,6 +233,7 @@ export const pioneers: Pioneer[] = [
     category: 'technology',
     era: 'contemporary',
     years: '1976-Present',
+    link: 'https://en.wikipedia.org/wiki/Fei-Fei_Li',
   },
   {
     id: 'timnit-gebru',
@@ -230,6 +246,7 @@ export const pioneers: Pioneer[] = [
     category: 'technology',
     era: 'contemporary',
     years: '1983-Present',
+    link: 'https://en.wikipedia.org/wiki/Timnit_Gebru',
   },
 
   // =====================
@@ -246,6 +263,7 @@ export const pioneers: Pioneer[] = [
     category: 'engineering',
     era: 'historical',
     years: '1843-1903',
+    link: 'https://en.wikipedia.org/wiki/Emily_Warren_Roebling',
   },
   {
     id: 'lillian-gilbreth',
@@ -258,6 +276,7 @@ export const pioneers: Pioneer[] = [
     category: 'engineering',
     era: 'historical',
     years: '1878-1972',
+    link: 'https://en.wikipedia.org/wiki/Lillian_Moller_Gilbreth',
   },
   {
     id: 'irmgard-flugge-lotz',
@@ -270,6 +289,7 @@ export const pioneers: Pioneer[] = [
     category: 'engineering',
     era: 'historical',
     years: '1903-1974',
+    link: 'https://en.wikipedia.org/wiki/Irmgard_Fl%C3%BCgge-Lotz',
   },
 
   // =====================
@@ -286,6 +306,7 @@ export const pioneers: Pioneer[] = [
     category: 'engineering',
     era: 'contemporary',
     years: '1963-Present',
+    link: 'https://en.wikipedia.org/wiki/Gwynne_Shotwell',
   },
   {
     id: 'yoky-matsuoka',
@@ -298,6 +319,7 @@ export const pioneers: Pioneer[] = [
     category: 'engineering',
     era: 'contemporary',
     years: '1971-Present',
+    link: 'https://en.wikipedia.org/wiki/Yoky_Matsuoka',
   },
   {
     id: 'ayanna-howard',
@@ -310,6 +332,7 @@ export const pioneers: Pioneer[] = [
     category: 'engineering',
     era: 'contemporary',
     years: '1972-Present',
+    link: 'https://en.wikipedia.org/wiki/Ayanna_Howard',
   },
   {
     id: 'debbie-sterling',
@@ -322,6 +345,7 @@ export const pioneers: Pioneer[] = [
     category: 'engineering',
     era: 'contemporary',
     years: '1983-Present',
+    link: 'https://en.wikipedia.org/wiki/Debbie_Sterling',
   },
 
   // =====================
@@ -338,6 +362,7 @@ export const pioneers: Pioneer[] = [
     category: 'mathematics',
     era: 'historical',
     years: '1850-1891',
+    link: 'https://en.wikipedia.org/wiki/Sofia_Kovalevskaya',
   },
   {
     id: 'emmy-noether',
@@ -350,6 +375,7 @@ export const pioneers: Pioneer[] = [
     category: 'mathematics',
     era: 'historical',
     years: '1882-1935',
+    link: 'https://en.wikipedia.org/wiki/Emmy_Noether',
   },
   {
     id: 'katherine-johnson',
@@ -362,6 +388,7 @@ export const pioneers: Pioneer[] = [
     category: 'mathematics',
     era: 'historical',
     years: '1918-2020',
+    link: 'https://en.wikipedia.org/wiki/Katherine_Johnson',
   },
   {
     id: 'mary-jackson',
@@ -374,6 +401,7 @@ export const pioneers: Pioneer[] = [
     category: 'mathematics',
     era: 'historical',
     years: '1921-2005',
+    link: 'https://en.wikipedia.org/wiki/Mary_Jackson_(engineer)',
   },
 
   // =====================
@@ -390,6 +418,7 @@ export const pioneers: Pioneer[] = [
     category: 'mathematics',
     era: 'contemporary',
     years: '1977-2017',
+    link: 'https://en.wikipedia.org/wiki/Maryam_Mirzakhani',
   },
   {
     id: 'ingrid-daubechies',
@@ -402,6 +431,7 @@ export const pioneers: Pioneer[] = [
     category: 'mathematics',
     era: 'contemporary',
     years: '1954-Present',
+    link: 'https://en.wikipedia.org/wiki/Ingrid_Daubechies',
   },
   {
     id: 'chelsea-walton',
@@ -414,6 +444,7 @@ export const pioneers: Pioneer[] = [
     category: 'mathematics',
     era: 'contemporary',
     years: '1983-Present',
+    link: 'https://en.wikipedia.org/wiki/Chelsea_Walton',
   },
   {
     id: 'talithia-williams',
@@ -426,6 +457,7 @@ export const pioneers: Pioneer[] = [
     category: 'mathematics',
     era: 'contemporary',
     years: '1980-Present',
+    link: 'https://en.wikipedia.org/wiki/Talithia_Williams',
   },
 ];
 
