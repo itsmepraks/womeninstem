@@ -44,9 +44,21 @@ export default function LiveFeed({
 
   useEffect(() => {
     let cancelled = false;
+    const controller = new AbortController();
+
+    // Timeout after 12 seconds — don't leave users staring at skeletons
+    const timeout = setTimeout(() => {
+      controller.abort();
+      if (!cancelled) {
+        setError(true);
+        setLoading(false);
+      }
+    }, 12000);
+
     async function fetchData() {
       try {
-        const res = await fetch(endpoint);
+        const res = await fetch(endpoint, { signal: controller.signal });
+        clearTimeout(timeout);
         if (!res.ok) throw new Error(`${res.status}`);
         const json: ResourcesResponse = await res.json();
         if (!cancelled) {
@@ -55,6 +67,7 @@ export default function LiveFeed({
           setLoading(false);
         }
       } catch {
+        clearTimeout(timeout);
         if (!cancelled) {
           setError(true);
           setLoading(false);
@@ -62,7 +75,7 @@ export default function LiveFeed({
       }
     }
     fetchData();
-    return () => { cancelled = true; };
+    return () => { cancelled = true; controller.abort(); clearTimeout(timeout); };
   }, [endpoint, limit]);
 
   return (
@@ -94,10 +107,37 @@ export default function LiveFeed({
       )}
 
       {error && (
-        <div className="card-white p-5 text-center">
-          <p className="text-sm text-text-muted">
-            Couldn&apos;t load live data right now. The feeds refresh automatically — try again later.
+        <div className="card-white p-5">
+          <p className="text-sm text-text-muted mb-3">
+            Live feed is loading in the background. In the meantime, check these sources directly:
           </p>
+          <div className="flex flex-wrap gap-2">
+            {endpoint.includes('jobs') && (
+              <>
+                <a href="https://remotive.com" target="_blank" rel="noopener noreferrer" className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1.5 rounded-pill hover:bg-accent-secondary/20 transition-colors">Remotive →</a>
+                <a href="https://www.arbeitnow.com" target="_blank" rel="noopener noreferrer" className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1.5 rounded-pill hover:bg-accent-secondary/20 transition-colors">Arbeitnow →</a>
+                <a href="https://powertofly.com" target="_blank" rel="noopener noreferrer" className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1.5 rounded-pill hover:bg-accent-secondary/20 transition-colors">PowerToFly →</a>
+              </>
+            )}
+            {endpoint.includes('events') && (
+              <>
+                <a href="https://ghc.anitab.org" target="_blank" rel="noopener noreferrer" className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1.5 rounded-pill hover:bg-accent-secondary/20 transition-colors">Grace Hopper →</a>
+                <a href="https://www.widsconference.org" target="_blank" rel="noopener noreferrer" className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1.5 rounded-pill hover:bg-accent-secondary/20 transition-colors">WiDS →</a>
+              </>
+            )}
+            {endpoint.includes('hackathons') && (
+              <>
+                <a href="https://devpost.com" target="_blank" rel="noopener noreferrer" className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1.5 rounded-pill hover:bg-accent-secondary/20 transition-colors">Devpost →</a>
+                <a href="https://mlh.io" target="_blank" rel="noopener noreferrer" className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1.5 rounded-pill hover:bg-accent-secondary/20 transition-colors">MLH →</a>
+              </>
+            )}
+            {endpoint.includes('grants') && (
+              <>
+                <a href="https://www.nsf.gov/funding" target="_blank" rel="noopener noreferrer" className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1.5 rounded-pill hover:bg-accent-secondary/20 transition-colors">NSF →</a>
+                <a href="https://www.swe.org/scholarships" target="_blank" rel="noopener noreferrer" className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1.5 rounded-pill hover:bg-accent-secondary/20 transition-colors">SWE →</a>
+              </>
+            )}
+          </div>
         </div>
       )}
 
