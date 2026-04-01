@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import SectionHeading from '@/components/ui/SectionHeading';
 import DarkPanel from '@/components/ui/DarkPanel';
+import LiveFeed from '@/components/ui/LiveFeed';
 import { pioneers } from '@/data/pioneers';
 import { mentorshipPlatforms, conferences } from '@/data/resources';
 
@@ -13,16 +14,48 @@ export default function ConnectPage() {
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       <section className="pt-12 md:pt-20 pb-10">
         <h1 className="font-display text-[2.75rem] text-text-heading font-light leading-tight">
-          You don&apos;t have to{' '}
-          <em className="italic text-accent-primary">do it alone</em>
+          Explore <em className="italic text-accent-primary">what&apos;s out there</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[500px]">
-          Find mentors, attend conferences, and join a global network of women
-          who understand the journey.
+          Live data from across the web — jobs, events, hackathons, grants, and
+          more, updated automatically every few hours.
         </p>
       </section>
 
-      {/* Interactive Map */}
+      {/* ─── LIVE FEEDS ─── */}
+      <section className="pb-10">
+        <LiveFeed
+          endpoint="/api/resources/jobs"
+          title="Jobs & Internships"
+          limit={6}
+        />
+      </section>
+
+      <section className="pb-10">
+        <LiveFeed
+          endpoint="/api/resources/events"
+          title="Upcoming Events"
+          limit={6}
+        />
+      </section>
+
+      <section className="pb-10">
+        <LiveFeed
+          endpoint="/api/resources/hackathons"
+          title="Hackathons"
+          limit={5}
+        />
+      </section>
+
+      <section className="pb-10">
+        <LiveFeed
+          endpoint="/api/resources/grants"
+          title="Grants & Funding"
+          limit={5}
+        />
+      </section>
+
+      {/* ─── MAP ─── */}
       <section className="pb-10">
         <SectionHeading title="Global Community" subtitle="Women in STEM organizations span every continent" />
         <div className="rounded-organic overflow-hidden h-[360px]">
@@ -30,10 +63,10 @@ export default function ConnectPage() {
         </div>
       </section>
 
-      {/* Mentorship Platforms — only real ones with URLs */}
+      {/* ─── MENTORSHIP PLATFORMS ─── */}
       <section className="pb-10">
-        <SectionHeading title="Mentorship Platforms" accent="Find real guidance" />
-        <div className="space-y-3">
+        <SectionHeading title="Mentorship Platforms" accent="External platforms — we don't run these" />
+        <div className="space-y-2.5">
           {mentorshipPlatforms.map((platform) => {
             const Wrapper = platform.url ? 'a' : 'div';
             const linkProps = platform.url
@@ -43,13 +76,13 @@ export default function ConnectPage() {
               <Wrapper
                 key={platform.id}
                 {...linkProps}
-                className="card-white p-6 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+                className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
               >
                 <div>
-                  <h3 className="text-base font-semibold text-text-heading">{platform.name}</h3>
-                  <p className="text-sm text-text-secondary mt-0.5">{platform.description}</p>
+                  <h3 className="text-body text-text-heading font-medium">{platform.name}</h3>
+                  <p className="text-xs text-text-secondary mt-1">{platform.description}</p>
                 </div>
-                <div className="flex items-center gap-3 flex-shrink-0">
+                <div className="flex items-center gap-2 flex-shrink-0">
                   <span className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1 rounded-pill">
                     {platform.cost}
                   </span>
@@ -65,9 +98,9 @@ export default function ConnectPage() {
         </div>
       </section>
 
-      {/* Conferences — with links */}
+      {/* ─── CONFERENCES ─── */}
       <section className="pb-10">
-        <SectionHeading title="Major Conferences" accent="Network in person" />
+        <SectionHeading title="Major Conferences" accent="Annual events" />
         <div className="space-y-2.5">
           {conferences.slice(0, 7).map((conf) => {
             const Wrapper = conf.url ? 'a' : 'div';
@@ -94,7 +127,7 @@ export default function ConnectPage() {
                     <span className="text-xs text-text-muted">{conf.timing}</span>
                   )}
                   {conf.url && (
-                    <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors ml-1">
+                    <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors">
                       Register →
                     </span>
                   )}
@@ -105,7 +138,7 @@ export default function ConnectPage() {
         </div>
       </section>
 
-      {/* Pioneers — with links */}
+      {/* ─── PIONEERS ─── */}
       <section className="pb-10">
         <SectionHeading title="Stand on their shoulders" subtitle="Pioneers who paved the way" />
         <DarkPanel className="grid grid-cols-1 md:grid-cols-2 gap-6">

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import StatCard from '@/components/ui/StatCard';
 import PioneerSpotlight from '@/components/ui/PioneerSpotlight';
+import LiveFeed from '@/components/ui/LiveFeed';
 import { heroStats, heroHighlight } from '@/data/stats';
 import { scholarships } from '@/data/resources';
 import { pioneers } from '@/data/pioneers';
@@ -158,6 +159,21 @@ export default function HomePage() {
       {/* ─── PIONEER SPOTLIGHT ─── */}
       <section className="py-8">
         <PioneerSpotlight pioneer={spotlightPioneer} />
+      </section>
+
+      {/* ─── LIVE PREVIEW ─── */}
+      <section className="py-8">
+        <LiveFeed
+          endpoint="/api/resources/jobs"
+          title="Latest Opportunities"
+          limit={3}
+        />
+        <Link
+          href="/connect"
+          className="inline-block mt-4 text-sm text-accent-primary font-medium underline underline-offset-4 hover:text-accent-secondary transition-colors"
+        >
+          See all live feeds (jobs, events, hackathons, grants) →
+        </Link>
       </section>
 
       {/* ─── FOOTER CTA ─── */}
