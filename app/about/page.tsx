@@ -1,49 +1,44 @@
-import StatCard from '@/components/ui/StatCard';
 import { SOCIAL_LINKS } from '@/lib/constants';
+import { pioneers } from '@/data/pioneers';
+import { scholarships, organizations, programs, conferences } from '@/data/resources';
 
 export default function AboutPage() {
   return (
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
+      {/* Hero */}
       <section className="pt-12 md:pt-20 pb-10">
         <h1 className="font-display text-[2.75rem] text-text-heading font-light leading-tight max-w-[600px]">
-          Built by a woman in STEM,{' '}
-          <em className="italic text-accent-primary">for women in STEM</em>
+          Why <em className="italic text-accent-primary">this exists</em>
         </h1>
-        <p className="text-body-lg text-text-body mt-4 max-w-[540px] leading-relaxed">
-          STEMSpark started because finding resources, mentors, and community as
-          a woman in tech shouldn&apos;t require 47 browser tabs. Everything you
-          need, in one place, curated by people who understand the journey.
-        </p>
       </section>
 
+      {/* The real story */}
       <section className="pb-10">
         <div className="card-white p-8 md:p-10">
-          <h2 className="font-display text-display text-text-heading mb-4">
-            The story
-          </h2>
-          <div className="space-y-4 text-body text-text-body leading-relaxed">
+          <div className="space-y-5 text-body-lg text-text-body leading-relaxed">
             <p>
-              When I started my career in tech, the hardest part wasn&apos;t the
-              code — it was feeling like I was the only one navigating it.
-              Scholarships existed but were buried. Mentors existed but were hard
-              to find. Communities existed but were scattered across platforms.
+              I&apos;m a student about to graduate, and I kept running into the
+              same problem: information about opportunities for women in STEM
+              exists, but it&apos;s scattered everywhere. Scholarships on one
+              site, mentorship programs on another, organizations somewhere else,
+              conferences buried in newsletters you didn&apos;t know to subscribe to.
             </p>
             <p>
-              STEMSpark is the resource I wish I had. A single, curated hub
-              where women at any stage — students, career changers, senior
-              professionals — can find what they need without the noise.
+              I&apos;d miss application deadlines because I didn&apos;t know they
+              existed. I&apos;d hear about workshops after they already happened.
+              Opportunities were there — I just couldn&apos;t find them in time.
             </p>
             <p>
-              Every resource is vetted. Every mentor is real. Every piece of
-              content is written with the belief that the next breakthrough in
-              science will come from someone who almost didn&apos;t think she
-              belonged.
+              So I made this. It&apos;s not a company. It&apos;s not a platform
+              with user accounts or a community forum. It&apos;s a simple website
+              that links real resources in one place so people like me don&apos;t
+              have to dig through 47 tabs to find what they need.
             </p>
           </div>
-          <div className="mt-6 pt-6 border-t border-accent-primary/[0.06]">
+          <div className="mt-8 pt-6 border-t border-accent-primary/[0.06]">
             <p className="text-sm text-text-heading font-semibold">Prakriti Bista</p>
             <p className="text-xs text-text-muted mt-0.5">
-              Builder ·{' '}
+              Student & builder ·{' '}
               <a
                 href={SOCIAL_LINKS.website}
                 className="text-accent-primary underline underline-offset-2 hover:text-accent-secondary transition-colors"
@@ -57,19 +52,121 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* What this is (and isn't) */}
       <section className="pb-10">
-        <h2 className="font-display text-display text-text-heading mb-6">
-          By the numbers
+        <h2 className="font-display text-display text-text-heading mb-4">
+          What this site is
         </h2>
-        <div className="relative h-[200px]">
-          <div className="absolute left-0 top-0 w-[200px]">
-            <StatCard value="500+" label="resources curated" rotation={-1.5} />
+        <div className="space-y-3">
+          <div className="card-white p-6">
+            <h3 className="text-base font-semibold text-text-heading mb-1">A curated directory</h3>
+            <p className="text-body text-text-body">
+              Every link goes to a real organization, real scholarship, or real
+              program. I don&apos;t make up data. If something is listed here,
+              you can click through and verify it yourself.
+            </p>
           </div>
-          <div className="absolute left-[220px] top-5 w-[200px] hidden md:block">
-            <StatCard value="120+" label="mentors in the network" rotation={1} />
+          <div className="card-white p-6">
+            <h3 className="text-base font-semibold text-text-heading mb-1">Automatically updated</h3>
+            <p className="text-body text-text-body">
+              Live data (jobs, events, hackathons, grants) is pulled automatically
+              from public sources every few hours. Static resources (scholarships,
+              organizations, programs) are manually curated and updated regularly.
+            </p>
           </div>
-          <div className="absolute right-0 top-2 w-[200px] hidden md:block">
-            <StatCard value="50+" label="partner organizations" rotation={2} />
+          <div className="card-white p-6">
+            <h3 className="text-base font-semibold text-text-heading mb-1">Free and open</h3>
+            <p className="text-body text-text-body">
+              No accounts, no paywalls, no tracking. The{' '}
+              <a
+                href={SOCIAL_LINKS.github}
+                className="text-accent-primary underline underline-offset-2 hover:text-accent-secondary transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                source code is on GitHub
+              </a>
+              . Found a broken link or want to suggest a resource? Open an issue.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* What this isn't */}
+      <section className="pb-10">
+        <h2 className="font-display text-display text-text-heading mb-4">
+          What this site is <em className="italic text-accent-primary">not</em>
+        </h2>
+        <div className="card-dark p-8">
+          <ul className="space-y-3 text-body text-surface-dark-text/70">
+            <li>We don&apos;t run any mentorship programs — we link to platforms that do.</li>
+            <li>We don&apos;t host events or conferences — we help you find them.</li>
+            <li>We don&apos;t verify scholarship deadlines in real-time — always check the source.</li>
+            <li>We don&apos;t endorse any specific organization — we just make them easier to find.</li>
+            <li>We don&apos;t collect your data or require sign-up.</li>
+          </ul>
+        </div>
+      </section>
+
+      {/* What's here */}
+      <section className="pb-10">
+        <h2 className="font-display text-display text-text-heading mb-4">
+          What you&apos;ll find
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {[
+            { label: 'Pioneer profiles', count: pioneers.length },
+            { label: 'Scholarships & grants', count: scholarships.length },
+            { label: 'Organizations', count: organizations.length },
+            { label: 'Educational programs', count: programs.length },
+            { label: 'Conferences & events', count: conferences.length },
+            { label: 'Live data feeds', count: 6, suffix: 'Jobs, events, hackathons, grants, mentors, orgs' },
+          ].map((item) => (
+            <div key={item.label} className="card-white p-5">
+              <div className="font-display text-2xl text-accent-primary font-bold">
+                {item.count}
+              </div>
+              <div className="text-sm text-text-heading font-medium mt-1">{item.label}</div>
+              {item.suffix && (
+                <div className="text-xs text-text-muted mt-0.5">{item.suffix}</div>
+              )}
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Data transparency */}
+      <section className="pb-10">
+        <h2 className="font-display text-display text-text-heading mb-4">
+          How data stays current
+        </h2>
+        <div className="card-white p-8">
+          <div className="space-y-4 text-body text-text-body">
+            <div className="flex gap-4">
+              <div className="w-2 h-2 rounded-full bg-green-500 mt-2 flex-shrink-0" />
+              <div>
+                <strong className="text-text-heading">Live feeds (updated every 6-24 hours):</strong>{' '}
+                Jobs, events, hackathons, grants, mentor profiles, and organizations
+                are fetched automatically from public APIs and RSS feeds.
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="w-2 h-2 rounded-full bg-accent-gold mt-2 flex-shrink-0" />
+              <div>
+                <strong className="text-text-heading">Curated resources (updated manually):</strong>{' '}
+                Scholarships, professional organizations, educational programs, and
+                pioneer profiles are researched and added by hand. Always verify
+                details on the source website.
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div className="w-2 h-2 rounded-full bg-text-muted/40 mt-2 flex-shrink-0" />
+              <div>
+                <strong className="text-text-heading">What we don&apos;t have yet:</strong>{' '}
+                Real-time scholarship deadline tracking, user-submitted resources,
+                and search/filter functionality. These are planned.
+              </div>
+            </div>
           </div>
         </div>
       </section>

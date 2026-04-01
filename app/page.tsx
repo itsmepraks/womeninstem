@@ -165,13 +165,13 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-accent-secondary/[0.03] rounded-3xl" />
         <div className="relative z-[1]">
           <h2 className="font-display text-[2.25rem] text-text-heading font-light mb-3">
-            Ready to start?
+            Start exploring
           </h2>
           <p className="text-body-lg text-text-secondary mb-7">
-            Join thousands of women discovering their place in STEM.
+            All the resources, scholarships, and opportunities in one place.
           </p>
-          <Link href="/connect" className="btn-primary text-base">
-            Join the community
+          <Link href="/resources" className="btn-primary text-base">
+            Browse all resources
           </Link>
         </div>
       </section>
