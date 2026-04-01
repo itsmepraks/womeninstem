@@ -1,0 +1,92 @@
+import { XMLParser } from 'fast-xml-parser'
+import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
+import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
+import { geocodeAll } from '@/lib/geocoding'
+import { filterExpired } from '@/lib/api/filterExpired'
+import type { Resource, ResourcesResponse } from '@/types/resource'
+import { randomUUID } from 'crypto'
+
+const parser = new XMLParser({ ignoreAttributes: false, cdataPropName: '__cdata' })
+
+// RSS adapter factory
+function makeRssFetcher(
+  url: string,
+  sourceName: string,
+  defaultLocation: string,
+  category: Resource['category'] = 'events'
+): () => Promise<Resource[]> {
+  const fn = async function () {
+    const res = await fetchWithTimeout(url, { headers: { 'User-Agent': 'stemspark/1.0' } })
+    const xml = await res.text()
+    const parsed = parser.parse(xml)
+    const channel = parsed?.rss?.channel ?? parsed?.feed
+    const items: unknown[] = channel?.item ?? channel?.entry ?? []
+    const arr = Array.isArray(items) ? items : [items]
+    return arr
+      .filter(Boolean)
+      .map((item: unknown) => {
+        const i = item as Record<string, unknown>
+        const title = String(
+          i.title ?? (i['title'] as unknown as Record<string, unknown>)?.['__cdata'] ?? ''
+        ).trim()
+        const link = String(i.link ?? i.guid ?? '').trim()
+        const description = String(i.description ?? i.summary ?? '')
+          .replace(/<[^>]+>/g, '')
+          .trim()
+        const date = String(i.pubDate ?? i.updated ?? '').trim()
+        if (!title || !link) return null
+        return {
+          id: randomUUID(),
+          name: title,
+          category,
+          lat: 0,
+          lng: 0,
+          location: defaultLocation,
+          url: link,
+          description: description.slice(0, 200),
+          date: date || undefined,
+          sourceName,
+        } as Resource
+      })
+      .filter((r): r is Resource => r !== null)
+  }
+  Object.defineProperty(fn, 'name', { value: sourceName })
+  return fn
+}
+
+// 18 RSS event sources
+const EVENT_SOURCES = [
+  { url: 'https://ghc.anitab.org/feed/',                                           name: 'GHC',           location: 'USA' },
+  { url: 'https://swe.org/feed/',                                                   name: 'SWE',           location: 'USA' },
+  { url: 'https://www.ieee.org/feeds/wie-events.rss',                              name: 'IEEE-WIE',      location: 'Global' },
+  { url: 'https://www.aauw.org/feed/',                                              name: 'AAUW',          location: 'USA' },
+  { url: 'https://womenintechnology.org/feed/',                                    name: 'WIT',           location: 'USA' },
+  { url: 'https://www.ncwit.org/feed/',                                             name: 'NCWIT',         location: 'USA' },
+  { url: 'https://girlsintech.org/feed/',                                           name: 'GirlsInTech',   location: 'Global' },
+  { url: 'https://womenwhocodeams.com/feed/',                                       name: 'WWCode-AMS',    location: 'Amsterdam, Netherlands' },
+  { url: 'https://techwomen.org/feed/',                                             name: 'TechWomen',     location: 'Global' },
+  { url: 'https://www.stemconnector.com/feed/',                                    name: 'STEMConnector', location: 'USA' },
+  { url: 'https://www.witi.com/rss/feed.xml',                                      name: 'WITI',          location: 'USA' },
+  { url: 'https://womensleadershipproject.org/feed/',                              name: 'WLP',           location: 'Global' },
+  { url: 'https://www.abie-award.org/feed/',                                       name: 'Abie',          location: 'USA' },
+  { url: 'https://rss.app/feeds/tXWxn2v4M6g1ZMVD.xml',                           name: 'WiMLDS',        location: 'Global' },
+  { url: 'https://www.womentechmakers.com/blog/feed',                             name: 'WTM',           location: 'Global' },
+  { url: 'https://lesbianswhotech.org/feed/',                                      name: 'LWT',           location: 'USA' },
+  { url: 'https://www.latinaintech.org/feed/',                                     name: 'LatinaInTech',  location: 'USA' },
+  { url: 'https://afrostem.com/feed/',                                              name: 'AfroSTEM',      location: 'USA' },
+]
+
+const fetchers = EVENT_SOURCES.map((s) => makeRssFetcher(s.url, s.name, s.location))
+
+export async function fetchEvents(): Promise<ResourcesResponse> {
+  const agg = await aggregateSources(fetchers)
+  const deduped = deduplicateResources(agg.data)
+  const geocoded = await geocodeAll(deduped)
+  const filtered = filterExpired(geocoded)
+  return buildResponse(filtered, 'events', {
+    revalidateSeconds: 300,
+    sources: agg.sourceNames,
+    sourcesAttempted: agg.sourcesAttempted,
+    sourcesSucceeded: agg.sourcesSucceeded,
+  })
+}
