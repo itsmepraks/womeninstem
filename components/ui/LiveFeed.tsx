@@ -46,14 +46,14 @@ export default function LiveFeed({
     let cancelled = false;
     const controller = new AbortController();
 
-    // Timeout after 12 seconds — don't leave users staring at skeletons
+    // Timeout after 25 seconds — APIs can be slow on first fetch (ISR caches after)
     const timeout = setTimeout(() => {
       controller.abort();
       if (!cancelled) {
         setError(true);
         setLoading(false);
       }
-    }, 12000);
+    }, 25000);
 
     async function fetchData() {
       try {
