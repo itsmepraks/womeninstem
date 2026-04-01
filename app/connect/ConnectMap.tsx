@@ -45,7 +45,8 @@ export default function ConnectMap() {
       attributionControl={false}
     >
       <TileLayer
-        url="https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png"
+        url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
       />
       {markers.map((m) => (
         <CircleMarker
