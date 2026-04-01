@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { NAV_ITEMS } from '@/data/navigation';
 import { SITE_NAME } from '@/lib/constants';
+import GlobalSearch from '@/components/ui/GlobalSearch';
 
 export default function Nav() {
   const pathname = usePathname();
@@ -36,22 +37,26 @@ export default function Nav() {
             </Link>
           );
         })}
+        <GlobalSearch />
         <Link
           href="/connect"
-          className="ml-2 text-sm px-5 py-2.5 rounded-3xl bg-surface-dark text-bg-primary font-medium hover:bg-text-heading transition-colors"
+          className="ml-1 text-sm px-5 py-2.5 rounded-3xl bg-surface-dark text-bg-primary font-medium hover:bg-text-heading transition-colors"
         >
           Explore more
         </Link>
       </div>
 
       {/* Mobile toggle */}
-      <button
-        className="md:hidden p-2 text-text-heading"
-        onClick={() => setMobileOpen(!mobileOpen)}
-        aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-      >
-        {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-      </button>
+      <div className="flex items-center gap-2 md:hidden">
+        <GlobalSearch />
+        <button
+          className="p-2 text-text-heading"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+        >
+          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
 
       {/* Mobile menu */}
       {mobileOpen && (
