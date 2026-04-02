@@ -40,33 +40,37 @@ export default function HomePage() {
       </section>
 
       {/* ─── FLOATING STAT CARDS ─── */}
-      <section className="relative h-[240px] md:h-[220px] mb-5">
-        <div className="absolute left-0 top-2.5 w-[240px]">
-          <StatCard
-            value={stat1.value}
-            label={stat1.label}
-            detail={stat1.source}
-            rotation={stat1.rotation}
-          />
+      {/* Mobile: stacked cards. Desktop: floating positioned */}
+      <section className="mb-5">
+        {/* Mobile layout */}
+        <div className="flex flex-col gap-3 md:hidden">
+          <StatCard value={stat1.value} label={stat1.label} detail={stat1.source} />
+          <StatCard value={stat2.value} label={stat2.label} detail={stat2.source} />
+          <div className="card-dark p-6">
+            <p className="font-display text-[0.9375rem] text-surface-dark-text/80 leading-relaxed">
+              {heroHighlight.text}
+            </p>
+            <p className="text-sm text-surface-dark-text/45 mt-2">
+              — {heroHighlight.source}
+            </p>
+          </div>
         </div>
-        <div className="absolute left-[270px] top-7 w-[220px] hidden md:block">
-          <StatCard
-            value={stat2.value}
-            label={stat2.label}
-            detail={stat2.source}
-            rotation={stat2.rotation}
-          />
-        </div>
-        <div
-          className="absolute right-0 top-0 w-[280px] hidden md:block card-dark p-7"
-          style={{ transform: `rotate(${heroHighlight.rotation}deg)` }}
-        >
-          <p className="font-display text-[1.0625rem] text-surface-dark-text/80 leading-relaxed">
-            {heroHighlight.text}
-          </p>
-          <p className="text-sm text-surface-dark-text/45 mt-3">
-            — {heroHighlight.source}
-          </p>
+        {/* Desktop layout */}
+        <div className="relative h-[220px] hidden md:block">
+          <div className="absolute left-0 top-2.5 w-[240px]">
+            <StatCard value={stat1.value} label={stat1.label} detail={stat1.source} rotation={stat1.rotation} />
+          </div>
+          <div className="absolute left-[270px] top-7 w-[220px]">
+            <StatCard value={stat2.value} label={stat2.label} detail={stat2.source} rotation={stat2.rotation} />
+          </div>
+          <div className="absolute right-0 top-0 w-[280px] card-dark p-7" style={{ transform: `rotate(${heroHighlight.rotation}deg)` }}>
+            <p className="font-display text-[1.0625rem] text-surface-dark-text/80 leading-relaxed">
+              {heroHighlight.text}
+            </p>
+            <p className="text-sm text-surface-dark-text/45 mt-3">
+              — {heroHighlight.source}
+            </p>
+          </div>
         </div>
       </section>
 

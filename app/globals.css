@@ -24,6 +24,31 @@
     background: rgba(196, 122, 82, 0.2);
     color: #3d2518;
   }
+
+  /* Focus states for keyboard navigation */
+  :focus-visible {
+    outline: 2px solid #c47a52;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  /* Skip to content link */
+  .skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 16px;
+    z-index: 100;
+    background: #3d2518;
+    color: #fdf8f3;
+    padding: 8px 16px;
+    border-radius: 0 0 8px 8px;
+    font-size: 0.875rem;
+    transition: top 0.2s;
+  }
+
+  .skip-to-content:focus {
+    top: 0;
+  }
 }
 
 @layer components {

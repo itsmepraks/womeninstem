@@ -19,20 +19,35 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'stem·spark — Resources, Mentors & Community for Women in STEM',
+  title: 'stem·spark — Scholarships, orgs, and courses for women in STEM',
   description:
-    'Resources, mentors, and a supportive community — everything you need to start and grow your career in science and technology.',
-  keywords: ['STEM', 'women in STEM', 'resources', 'mentorship', 'community', 'scholarships'],
+    'Scholarships, organizations, courses, and mentorship platforms for women in STEM. All linked, all real, all free to browse.',
+  keywords: ['STEM', 'women in STEM', 'scholarships', 'organizations', 'courses', 'women in tech'],
   authors: [{ name: 'Prakriti Bista', url: 'https://praks.me' }],
+  openGraph: {
+    title: 'stem·spark',
+    description: 'Scholarships, orgs, and courses for women in STEM. One site.',
+    url: 'https://stemspark.dev',
+    siteName: 'stem·spark',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'stem·spark',
+    description: 'Scholarships, orgs, and courses for women in STEM. One site.',
+    creator: '@its_me_praks',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${fraunces.variable} ${dmSans.variable}`}>
       <body className="font-body antialiased min-h-screen">
+        <a href="#main-content" className="skip-to-content">Skip to content</a>
         <BackgroundBlobs />
         <Nav />
-        <main className="relative z-10">{children}</main>
+        <main id="main-content" className="relative z-10">{children}</main>
         <Footer />
       </body>
     </html>
