@@ -41,11 +41,10 @@ export default function LearningPage() {
       {/* Hero */}
       <section className="pt-12 md:pt-20 pb-10">
         <h1 className="font-display text-[2.75rem] text-text-heading font-light leading-tight">
-          Learn <em className="italic text-accent-primary">without limits</em>
+          Learn <em className="italic text-accent-primary">for free (mostly)</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[500px]">
-          Courses, bootcamps, and scholarships — organized by field, with direct
-          links to every resource.
+          Online courses and bootcamps, sorted by field. Every link goes to the real thing.
         </p>
       </section>
 
@@ -96,7 +95,7 @@ export default function LearningPage() {
       {/* Bootcamps */}
       {bootcamps.length > 0 && (
         <section className="pb-10">
-          <SectionHeading title="Coding Bootcamps" accent="Intensive programs for career changers" />
+          <SectionHeading title="Coding Bootcamps" accent="Intensive, for career switchers" />
           <div className="space-y-2.5">
             {bootcamps.map((b) => (
               <a

@@ -181,7 +181,7 @@ export default function GlobalSearch() {
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search scholarships, organizations, pioneers, programs..."
+                placeholder="Search everything..."
                 className="flex-1 bg-transparent text-body-lg text-text-heading placeholder:text-text-muted/50 outline-none"
               />
               {query && (
@@ -202,7 +202,7 @@ export default function GlobalSearch() {
               {query.length < 2 && (
                 <div className="px-5 py-8 text-center">
                   <p className="text-sm text-text-muted">
-                    Type at least 2 characters to search across {index.length} resources
+                    Start typing to search {index.length} resources
                   </p>
                 </div>
               )}
@@ -213,7 +213,7 @@ export default function GlobalSearch() {
                     No results for &ldquo;{query}&rdquo;
                   </p>
                   <p className="text-xs text-text-muted/60 mt-1">
-                    Try searching for a field, organization name, or topic
+                    Try a name, field, or keyword
                   </p>
                 </div>
               )}

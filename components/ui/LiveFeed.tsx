@@ -109,7 +109,7 @@ export default function LiveFeed({
       {error && (
         <div className="card-white p-5">
           <p className="text-sm text-text-muted mb-3">
-            Live feed is loading in the background. In the meantime, check these sources directly:
+            Still loading. In the meantime, try these directly:
           </p>
           <div className="flex flex-wrap gap-2">
             {endpoint.includes('jobs') && (

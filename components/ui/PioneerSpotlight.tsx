@@ -23,7 +23,7 @@ export default function PioneerSpotlight({
       </div>
 
       <div className="flex-1 relative z-[1]">
-        <p className="text-label mb-1.5">Pioneer Spotlight · {pioneer.years}</p>
+        <p className="text-label mb-1.5">{pioneer.years}</p>
         <h3 className="font-display text-heading text-text-heading">
           {pioneer.name}
         </h3>
@@ -40,7 +40,7 @@ export default function PioneerSpotlight({
             rel="noopener noreferrer"
             className="text-sm text-accent-primary font-medium underline underline-offset-4 hover:text-accent-secondary transition-colors"
           >
-            Read her story →
+            Wikipedia →
           </a>
         ) : (
           <span className="text-sm text-text-muted">
