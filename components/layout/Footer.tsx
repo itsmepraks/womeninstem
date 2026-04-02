@@ -27,9 +27,16 @@ export default function Footer() {
             <div>
               <p className="text-label mb-3">Social</p>
               <div className="flex flex-col gap-2">
-                <a href={SOCIAL_LINKS.twitter} className="text-sm text-text-body hover:text-text-heading transition-colors" target="_blank" rel="noopener noreferrer">Twitter</a>
+                <a href={SOCIAL_LINKS.twitter} className="text-sm text-text-body hover:text-text-heading transition-colors" target="_blank" rel="noopener noreferrer">X / Twitter</a>
                 <a href={SOCIAL_LINKS.github} className="text-sm text-text-body hover:text-text-heading transition-colors" target="_blank" rel="noopener noreferrer">GitHub</a>
                 <a href={SOCIAL_LINKS.linkedin} className="text-sm text-text-body hover:text-text-heading transition-colors" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+              </div>
+            </div>
+            <div>
+              <p className="text-label mb-3">Contribute</p>
+              <div className="flex flex-col gap-2">
+                <a href="https://github.com/itsmepraks/womeninstem/issues/new?title=Suggest+a+resource&labels=resource-suggestion" className="text-sm text-text-body hover:text-text-heading transition-colors" target="_blank" rel="noopener noreferrer">Suggest a resource</a>
+                <a href="https://github.com/itsmepraks/womeninstem/issues/new?title=Report+broken+link&labels=bug" className="text-sm text-text-body hover:text-text-heading transition-colors" target="_blank" rel="noopener noreferrer">Report broken link</a>
               </div>
             </div>
           </div>
