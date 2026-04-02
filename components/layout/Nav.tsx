@@ -42,7 +42,7 @@ export default function Nav() {
           href="/connect"
           className="ml-1 text-sm px-5 py-2.5 rounded-3xl bg-surface-dark text-bg-primary font-medium hover:bg-text-heading transition-colors"
         >
-          Explore more
+          See more
         </Link>
       </div>
 
@@ -76,7 +76,7 @@ export default function Nav() {
             className="btn-primary text-center mt-2"
             onClick={() => setMobileOpen(false)}
           >
-            Explore more
+            See more
           </Link>
         </div>
       )}

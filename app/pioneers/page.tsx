@@ -9,8 +9,7 @@ export default function PioneersPage() {
           Pioneers <em className="italic text-accent-primary">who led the way</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[500px]">
-          The women who proved that science has no gender. Their stories are the
-          foundation everything here is built on.
+          Real people, real contributions. Click any name to read more.
         </p>
       </section>
 

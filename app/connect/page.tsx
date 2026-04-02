@@ -14,11 +14,10 @@ export default function ConnectPage() {
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       <section className="pt-12 md:pt-20 pb-10">
         <h1 className="font-display text-[2.75rem] text-text-heading font-light leading-tight">
-          Explore <em className="italic text-accent-primary">what&apos;s out there</em>
+          Live <em className="italic text-accent-primary">feeds</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[500px]">
-          Live data from across the web — jobs, events, hackathons, grants, and
-          more, updated automatically every few hours.
+          These pull from public APIs and RSS feeds. Data refreshes every few hours.
         </p>
       </section>
 
@@ -57,7 +56,7 @@ export default function ConnectPage() {
 
       {/* ─── MAP ─── */}
       <section className="pb-10">
-        <SectionHeading title="Global Community" subtitle="Women in STEM organizations span every continent" />
+        <SectionHeading title="Global Community" subtitle="Where these organizations are based" />
         <div className="rounded-organic overflow-hidden h-[360px]">
           <ConnectMap />
         </div>
@@ -65,7 +64,7 @@ export default function ConnectPage() {
 
       {/* ─── MENTORSHIP PLATFORMS ─── */}
       <section className="pb-10">
-        <SectionHeading title="Mentorship Platforms" accent="External platforms — we don't run these" />
+        <SectionHeading title="Mentorship Platforms" accent="We link to these, we don't run them" />
         <div className="space-y-2.5">
           {mentorshipPlatforms.map((platform) => {
             const Wrapper = platform.url ? 'a' : 'div';
@@ -100,7 +99,7 @@ export default function ConnectPage() {
 
       {/* ─── CONFERENCES ─── */}
       <section className="pb-10">
-        <SectionHeading title="Major Conferences" accent="Annual events" />
+        <SectionHeading title="Major Conferences" accent="Recurring" />
         <div className="space-y-2.5">
           {conferences.slice(0, 7).map((conf) => {
             const Wrapper = conf.url ? 'a' : 'div';
@@ -140,7 +139,7 @@ export default function ConnectPage() {
 
       {/* ─── PIONEERS ─── */}
       <section className="pb-10">
-        <SectionHeading title="Stand on their shoulders" subtitle="Pioneers who paved the way" />
+        <SectionHeading title="Stand on their shoulders" subtitle="Some of the women behind the work" />
         <DarkPanel className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {pioneers.slice(0, 4).map((p) => (
             <div key={p.id}>

@@ -11,7 +11,7 @@ export default function Footer() {
               {SITE_NAME}
             </span>
             <p className="text-sm text-text-secondary mt-2 max-w-xs">
-              Resources, mentors, and community for women building the future of STEM.
+              Scholarships, orgs, courses, and more for women in STEM. All in one place.
             </p>
           </div>
           <div className="flex gap-12">
@@ -35,7 +35,7 @@ export default function Footer() {
           </div>
         </div>
         <p className="text-xs text-text-muted mt-10">
-          Built with care by{' '}
+          Made by{' '}
           <a href={SOCIAL_LINKS.website} className="underline underline-offset-2 hover:text-text-secondary transition-colors" target="_blank" rel="noopener noreferrer">
             Prakriti Bista
           </a>

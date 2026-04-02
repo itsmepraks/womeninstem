@@ -27,8 +27,7 @@ export default function ResourcesPage() {
           Resources <em className="italic text-accent-primary">that matter</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[500px]">
-          {scholarships.length} scholarships, {organizations.length} organizations,{' '}
-          {programs.length} programs, and more — all with direct links.
+          Everything links to the real source. Click through to verify.
         </p>
 
         {/* Quick nav */}
@@ -92,7 +91,7 @@ export default function ResourcesPage() {
 
       {/* ─── ORGANIZATIONS ─── */}
       <section id="organizations" className="pb-12">
-        <SectionHeading title="Professional Organizations" accent={`${organizations.length} communities`} />
+        <SectionHeading title="Professional Organizations" accent={`${organizations.length} listed`} />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
           {organizations.map((org) => (
             <CompanyCard
@@ -110,7 +109,7 @@ export default function ResourcesPage() {
 
       {/* ─── PROGRAMS ─── */}
       <section id="programs" className="pb-12">
-        <SectionHeading title="Educational Programs" accent={`${programs.length} programs`} />
+        <SectionHeading title="Educational Programs" accent={`${programs.length} listed`} />
 
         {k12Programs.length > 0 && (
           <div className="mb-8">
@@ -193,7 +192,7 @@ export default function ResourcesPage() {
 
       {/* ─── CONFERENCES ─── */}
       <section id="conferences" className="pb-12">
-        <SectionHeading title="Conferences & Events" accent={`${conferences.length} events`} />
+        <SectionHeading title="Conferences & Events" accent={`${conferences.length} listed`} />
         <div className="space-y-2.5">
           {conferences.map((conf) => {
             const Wrapper = conf.url ? 'a' : 'div';
@@ -233,7 +232,7 @@ export default function ResourcesPage() {
 
       {/* ─── MENTORSHIP ─── */}
       <section id="mentorship" className="pb-12">
-        <SectionHeading title="Mentorship Platforms" accent="Find real guidance" />
+        <SectionHeading title="Mentorship Platforms" accent="External platforms" />
         <div className="space-y-2.5">
           {mentorshipPlatforms.map((platform) => {
             const Wrapper = platform.url ? 'a' : 'div';
@@ -268,7 +267,7 @@ export default function ResourcesPage() {
 
       {/* ─── JOB BOARDS ─── */}
       <section id="jobs" className="pb-12">
-        <SectionHeading title="Job Boards & Career" accent="Find your next role" />
+        <SectionHeading title="Job Boards & Career" accent="External job sites" />
         <div className="space-y-2.5">
           {jobBoards.map((board) => {
             const Wrapper = board.url ? 'a' : 'div';

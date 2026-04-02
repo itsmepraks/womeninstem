@@ -17,18 +17,17 @@ export default function HomePage() {
       {/* ─── HERO ─── */}
       <section className="pt-16 md:pt-24 pb-10 max-w-[640px]">
         <p className="text-label text-accent-primary font-semibold mb-3.5 tracking-[0.19em]">
-          For women who build the future
+          Women in STEM
         </p>
         <h1 className="font-display text-display-lg text-text-heading mb-1.5">
-          Every woman in STEM{' '}
+          Find what you need,{' '}
           <em className="font-black text-accent-primary inline-block -rotate-[1.5deg]">
-            changes the equation
+            in one place
           </em>
         </h1>
         <div className="accent-underline mt-4 mb-5" />
         <p className="text-body-lg text-text-body max-w-[460px] mb-8">
-          Resources, mentors, and community. We bring it all together so you can
-          focus on what matters — your work.
+          Scholarships, organizations, courses, and mentorship platforms. All linked, all real, all free to browse.
         </p>
         <div className="flex items-center gap-3.5">
           <Link href="/resources" className="btn-primary">
@@ -77,7 +76,7 @@ export default function HomePage() {
           What you&apos;ll find here
         </h2>
         <p className="text-body-lg text-text-secondary">
-          Everything is curated by women who&apos;ve been where you are.
+          Here&apos;s what we&apos;ve put together so far.
         </p>
       </section>
 
@@ -90,9 +89,7 @@ export default function HomePage() {
               Learning Hub
             </h3>
             <p className="text-body text-text-body leading-relaxed">
-              Courses, bootcamps, and scholarships from institutions that care
-              about diversity. Filtered by field, level, and deadline so you find
-              what&apos;s relevant — not everything that exists.
+              Courses, bootcamps, and scholarships. Sorted by field and level so you can skip the noise.
             </p>
             <Link
               href="/learning"
@@ -116,8 +113,7 @@ export default function HomePage() {
               Connect
             </h3>
             <p className="text-body text-text-body leading-relaxed">
-              Find a mentor who gets it. Join study groups. Attend events. Your
-              network is your superpower — we just make it easier to build.
+              Mentorship platforms, conferences, and events. We link to them — we don&apos;t run them.
             </p>
             <div className="mt-4 p-3.5 bg-accent-secondary/[0.04] rounded-[0.875rem]">
               <p className="text-xs text-text-muted italic">
@@ -137,7 +133,7 @@ export default function HomePage() {
                 Organizations
               </h3>
               <p className="text-body text-surface-dark-text/60 leading-relaxed">
-                30+ professional organizations championing women across every STEM field.
+                Professional orgs for women in tech, engineering, science, and math.
               </p>
             </div>
             <div className="flex flex-wrap gap-1.5 mt-4">
@@ -181,10 +177,10 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-accent-secondary/[0.03] rounded-3xl" />
         <div className="relative z-[1]">
           <h2 className="font-display text-[2.25rem] text-text-heading font-light mb-3">
-            Start exploring
+            That&apos;s what we&apos;ve got
           </h2>
           <p className="text-body-lg text-text-secondary mb-7">
-            All the resources, scholarships, and opportunities in one place.
+            Scholarships, orgs, courses, jobs, events. One site.
           </p>
           <Link href="/resources" className="btn-primary text-base">
             Browse all resources
