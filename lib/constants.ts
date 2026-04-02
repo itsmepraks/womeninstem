@@ -4,9 +4,9 @@ export const SITE_DESCRIPTION =
 export const SITE_URL = 'https://stemspark.dev';
 
 export const SOCIAL_LINKS = {
-  twitter: 'https://twitter.com/itsmepraks',
+  twitter: 'https://x.com/its_me_praks',
   github: 'https://github.com/itsmepraks',
-  linkedin: 'https://linkedin.com/in/prakritibista',
+  linkedin: 'https://www.linkedin.com/in/itsmeprakriti/',
   website: 'https://praks.me',
 };
 
