@@ -43,7 +43,7 @@ module.exports = {
         'display': ['2rem', { lineHeight: '1.15', fontWeight: '500' }],
         'heading': ['1.375rem', { lineHeight: '1.3', fontWeight: '600' }],
         'body-lg': ['1.125rem', { lineHeight: '1.75' }],
-        'body': ['0.9375rem', { lineHeight: '1.7' }],
+        'body': ['1rem', { lineHeight: '1.7' }],
         'label': ['0.6875rem', { lineHeight: '1', letterSpacing: '0.125em', fontWeight: '400' }],
       },
       borderRadius: {
