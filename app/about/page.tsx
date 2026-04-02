@@ -153,18 +153,18 @@ export default function AboutPage() {
             <div className="flex gap-4">
               <div className="w-2 h-2 rounded-full bg-accent-gold mt-2 flex-shrink-0" />
               <div>
-                <strong className="text-text-heading">Curated resources (updated manually):</strong>{' '}
-                Scholarships, professional organizations, educational programs, and
-                pioneer profiles are researched and added by hand. Always verify
-                details on the source website.
+                <strong className="text-text-heading">Curated resources (updated less often):</strong>{' '}
+                Scholarships, pioneer write-ups, book/podcast recommendations, and
+                statistics from published research. These are hand-picked. Always
+                verify details on the source website before applying.
               </div>
             </div>
             <div className="flex gap-4">
               <div className="w-2 h-2 rounded-full bg-text-muted/40 mt-2 flex-shrink-0" />
               <div>
-                <strong className="text-text-heading">What we don&apos;t have yet:</strong>{' '}
-                Real-time scholarship deadline tracking, user-submitted resources,
-                and search/filter functionality. These are planned.
+                <strong className="text-text-heading">Statistics:</strong>{' '}
+                Numbers on the Impact page come from published research (NSF, NCES, etc.).
+                These don&apos;t auto-update — they&apos;re from specific reports and studies.
               </div>
             </div>
           </div>
