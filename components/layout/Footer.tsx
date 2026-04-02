@@ -19,7 +19,7 @@ export default function Footer() {
               <p className="text-label mb-3">Pages</p>
               <div className="flex flex-col gap-2">
                 <Link href="/learning" className="text-sm text-text-body hover:text-text-heading transition-colors">Learning</Link>
-                <Link href="/connect" className="text-sm text-text-body hover:text-text-heading transition-colors">Connect</Link>
+                <Link href="/explore" className="text-sm text-text-body hover:text-text-heading transition-colors">Explore</Link>
                 <Link href="/resources" className="text-sm text-text-body hover:text-text-heading transition-colors">Resources</Link>
                 <Link href="/about" className="text-sm text-text-body hover:text-text-heading transition-colors">About</Link>
               </div>
