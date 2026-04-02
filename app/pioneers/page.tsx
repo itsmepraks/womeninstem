@@ -1,4 +1,7 @@
+'use client';
+
 import PioneerSpotlight from '@/components/ui/PioneerSpotlight';
+import LiveFeed from '@/components/ui/LiveFeed';
 import { pioneers } from '@/data/pioneers';
 
 export default function PioneersPage() {
@@ -13,6 +16,24 @@ export default function PioneersPage() {
         </p>
       </section>
 
+      {/* Live — fetched from Wikipedia/Wikidata */}
+      <section className="pb-10">
+        <LiveFeed
+          endpoint="/api/resources/pioneers"
+          title="From Wikipedia"
+          limit={20}
+          emptyMessage="Loading women in STEM from Wikipedia..."
+        />
+      </section>
+
+      {/* Curated profiles — hand-written with more detail */}
+      <section className="pb-4">
+        <h2 className="font-display text-display text-text-heading mb-2">Curated profiles</h2>
+        <p className="text-sm text-text-muted mb-4">
+          These have more detailed write-ups. The list above pulls automatically from Wikipedia.
+        </p>
+      </section>
+
       <section className="space-y-4 pb-10">
         {pioneers.map((pioneer, i) => (
           <PioneerSpotlight
@@ -22,6 +43,16 @@ export default function PioneersPage() {
             index={i + 1}
           />
         ))}
+      </section>
+
+      {/* Disclaimer */}
+      <section className="pb-10">
+        <div className="p-5 bg-accent-gold/[0.04] rounded-organic border border-accent-gold/[0.08]">
+          <p className="text-sm text-text-muted">
+            The &quot;From Wikipedia&quot; section pulls automatically from Wikidata every 24 hours.
+            Curated profiles are hand-written and updated less frequently.
+          </p>
+        </div>
       </section>
     </div>
   );
