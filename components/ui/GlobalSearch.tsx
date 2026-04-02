@@ -11,6 +11,7 @@ import {
   mentorshipPlatforms,
   jobBoards,
 } from '@/data/resources';
+import { courses } from '@/data/courses';
 
 interface SearchResult {
   title: string;
@@ -84,6 +85,15 @@ function buildSearchIndex(): SearchResult[] {
       subtitle: `${j.cost} · ${j.description}`,
       category: 'Job Boards',
       url: j.url,
+    });
+  }
+
+  for (const c of courses) {
+    results.push({
+      title: c.title,
+      subtitle: `${c.cost} · ${c.field}`,
+      category: 'Courses',
+      url: c.url,
     });
   }
 

@@ -145,7 +145,7 @@ export default function HomePage() {
                 (tag) => (
                   <span
                     key={tag}
-                    className="bg-surface-dark-text/[0.06] text-surface-dark-text/50 px-3 py-1 rounded-[0.875rem] text-xs"
+                    className="bg-surface-dark-text/[0.06] text-surface-dark-text/50 px-3 py-1 rounded-md text-xs cursor-default"
                   >
                     {tag}
                   </span>
@@ -169,7 +169,7 @@ export default function HomePage() {
           limit={3}
         />
         <Link
-          href="/connect"
+          href="/explore"
           className="inline-block mt-4 text-sm text-accent-primary font-medium underline underline-offset-4 hover:text-accent-secondary transition-colors"
         >
           See all live feeds (jobs, events, hackathons, grants) →

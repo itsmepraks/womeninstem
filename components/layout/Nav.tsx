@@ -39,10 +39,10 @@ export default function Nav() {
         })}
         <GlobalSearch />
         <Link
-          href="/connect"
+          href="/explore"
           className="ml-1 text-sm px-5 py-2.5 rounded-3xl bg-surface-dark text-bg-primary font-medium hover:bg-text-heading transition-colors"
         >
-          See more
+          Live data
         </Link>
       </div>
 
@@ -72,11 +72,11 @@ export default function Nav() {
             </Link>
           ))}
           <Link
-            href="/connect"
+            href="/explore"
             className="btn-primary text-center mt-2"
             onClick={() => setMobileOpen(false)}
           >
-            See more
+            Live data
           </Link>
         </div>
       )}
