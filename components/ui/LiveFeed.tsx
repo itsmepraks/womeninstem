@@ -1,23 +1,12 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import type { Resource, ResourcesResponse } from '@/types/resource';
+import { useLiveData } from '@/lib/useLiveData';
 
 interface LiveFeedProps {
   endpoint: string;
   title: string;
   limit?: number;
   emptyMessage?: string;
-}
-
-function formatDate(dateStr?: string): string {
-  if (!dateStr) return '';
-  try {
-    const d = new Date(dateStr);
-    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  } catch {
-    return '';
-  }
 }
 
 function timeSince(isoDate: string): string {
@@ -37,46 +26,8 @@ export default function LiveFeed({
   limit = 5,
   emptyMessage = 'No results yet — data refreshes automatically.',
 }: LiveFeedProps) {
-  const [items, setItems] = useState<Resource[]>([]);
-  const [updatedAt, setUpdatedAt] = useState<string | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    let cancelled = false;
-    const controller = new AbortController();
-
-    // Timeout after 25 seconds — APIs can be slow on first fetch (ISR caches after)
-    const timeout = setTimeout(() => {
-      controller.abort();
-      if (!cancelled) {
-        setError(true);
-        setLoading(false);
-      }
-    }, 25000);
-
-    async function fetchData() {
-      try {
-        const res = await fetch(endpoint, { signal: controller.signal });
-        clearTimeout(timeout);
-        if (!res.ok) throw new Error(`${res.status}`);
-        const json: ResourcesResponse = await res.json();
-        if (!cancelled) {
-          setItems(json.data.slice(0, limit));
-          setUpdatedAt(json.updatedAt);
-          setLoading(false);
-        }
-      } catch {
-        clearTimeout(timeout);
-        if (!cancelled) {
-          setError(true);
-          setLoading(false);
-        }
-      }
-    }
-    fetchData();
-    return () => { cancelled = true; controller.abort(); clearTimeout(timeout); };
-  }, [endpoint, limit]);
+  const { data, loading, error, updatedAt } = useLiveData(endpoint);
+  const items = data.slice(0, limit);
 
   return (
     <div>
@@ -155,7 +106,7 @@ export default function LiveFeed({
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="card-white p-5 flex items-start justify-between gap-4 group hover:shadow-card-hover transition-shadow block"
+              className="card-white p-5 flex items-start justify-between gap-4 group hover:shadow-card-hover transition-shadow"
             >
               <div className="flex-1 min-w-0">
                 <h3 className="text-body text-text-heading font-medium truncate">
@@ -174,7 +125,9 @@ export default function LiveFeed({
                     <span className="text-xs text-text-muted">{item.location}</span>
                   )}
                   {item.date && (
-                    <span className="text-xs text-text-muted">{formatDate(item.date)}</span>
+                    <span className="text-xs text-text-muted">
+                      {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                    </span>
                   )}
                   {item.amount && (
                     <span className="text-xs text-accent-primary font-medium">{item.amount}</span>

@@ -1,5 +1,3 @@
-'use client';
-
 import SectionHeading from '@/components/ui/SectionHeading';
 import LiveFeed from '@/components/ui/LiveFeed';
 import { books, podcasts, documentaries, youtubeChannels } from '@/data/media';

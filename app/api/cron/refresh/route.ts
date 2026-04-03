@@ -1,18 +1,9 @@
 import { NextResponse } from 'next/server'
+import { FEED_CONFIG } from '@/lib/api/feeds'
 
 export const dynamic = 'force-dynamic'
 
-const FEEDS = [
-  'jobs',
-  'events',
-  'hackathons',
-  'grants',
-  'mentors',
-  'orgs',
-  'pioneers',
-  'books',
-  'podcasts',
-]
+const FEEDS = FEED_CONFIG.map((f) => f.name)
 
 export async function GET(request: Request) {
   // Verify cron secret to prevent unauthorized calls

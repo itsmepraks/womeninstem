@@ -23,7 +23,7 @@ export default function CompanyCard({
   return (
     <Wrapper
       {...linkProps}
-      className="card-white p-6 group hover:shadow-card-hover transition-shadow block"
+      className="card-white p-6 group hover:shadow-card-hover transition-shadow"
     >
       <div className="flex items-center gap-2.5 mb-3">
         <div className="w-9 h-9 rounded-[0.625rem] flex items-center justify-center text-sm font-bold text-white bg-accent-primary">

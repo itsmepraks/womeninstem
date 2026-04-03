@@ -1,18 +1,9 @@
 import { NextResponse } from 'next/server'
+import { FEED_CONFIG } from '@/lib/api/feeds'
 
 export const dynamic = 'force-dynamic'
 
-const FEEDS = [
-  { name: 'jobs', revalidate: 21600 },
-  { name: 'events', revalidate: 21600 },
-  { name: 'hackathons', revalidate: 21600 },
-  { name: 'grants', revalidate: 21600 },
-  { name: 'mentors', revalidate: 86400 },
-  { name: 'orgs', revalidate: 86400 },
-  { name: 'pioneers', revalidate: 86400 },
-  { name: 'books', revalidate: 86400 },
-  { name: 'podcasts', revalidate: 86400 },
-]
+const FEEDS = FEED_CONFIG.map((f) => ({ name: f.name, revalidate: f.revalidateSeconds }))
 
 export async function GET() {
   const baseUrl = process.env.VERCEL_URL

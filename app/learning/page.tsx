@@ -35,7 +35,7 @@ export default function LearningPage() {
                   href={course.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+                  className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow"
                 >
                   <div>
                     <span className="text-body text-text-heading font-medium">{course.title}</span>
@@ -77,7 +77,7 @@ export default function LearningPage() {
                 href={b.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+                className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow"
               >
                 <div>
                   <span className="text-body text-text-heading font-medium">{b.name}</span>

@@ -19,7 +19,7 @@ export default function ResourceCard({
   return (
     <Wrapper
       {...linkProps}
-      className="card-white p-6 flex items-center gap-5 group hover:shadow-card-hover transition-shadow block"
+      className="card-white p-6 flex items-center gap-5 group hover:shadow-card-hover transition-shadow"
     >
       <div className="w-12 h-12 rounded-[0.875rem] bg-gradient-to-br from-accent-secondary/10 to-accent-gold/10 flex-shrink-0 flex items-center justify-center">
         <span className="font-display text-xl text-accent-primary w-full text-center">$</span>
