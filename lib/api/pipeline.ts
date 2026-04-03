@@ -7,23 +7,42 @@ export interface AggregateResult<T> {
   sourcesSucceeded: number
 }
 
-export async function aggregateSources<T>(
-  fetchers: Array<() => Promise<T[]>>,
-  timeoutMs = 8000
-): Promise<AggregateResult<T>> {
-  const results = await Promise.allSettled(
-    fetchers.map((fn) =>
-      Promise.race([
+async function runWithRetry<T>(
+  fn: () => Promise<T[]>,
+  timeoutMs: number,
+  retries = 1
+): Promise<T[]> {
+  for (let attempt = 0; attempt <= retries; attempt++) {
+    try {
+      return await Promise.race([
         fn(),
         new Promise<T[]>((_, reject) =>
           setTimeout(() => reject(new Error(`Timeout: ${fn.name}`)), timeoutMs)
         ),
       ])
-    )
+    } catch (err) {
+      if (attempt < retries) {
+        // Wait 1s before retry
+        await new Promise((r) => setTimeout(r, 1000))
+        continue
+      }
+      throw err
+    }
+  }
+  throw new Error('Exhausted retries')
+}
+
+export async function aggregateSources<T>(
+  fetchers: Array<() => Promise<T[]>>,
+  timeoutMs = 10000
+): Promise<AggregateResult<T>> {
+  const results = await Promise.allSettled(
+    fetchers.map((fn) => runWithRetry(fn, timeoutMs, 1))
   )
 
   const data: T[] = []
   const sourceNames: string[] = []
+  const failedSources: string[] = []
   let sourcesSucceeded = 0
 
   for (let i = 0; i < results.length; i++) {
@@ -34,8 +53,14 @@ export async function aggregateSources<T>(
       sourceNames.push(name)
       sourcesSucceeded++
     } else {
-      console.warn(`[pipeline] Source "${name}" failed:`, result.reason?.message ?? result.reason)
+      const reason = result.reason?.message ?? String(result.reason)
+      failedSources.push(`${name}: ${reason}`)
+      console.warn(`[pipeline] Source "${name}" failed after retry:`, reason)
     }
+  }
+
+  if (sourcesSucceeded === 0 && fetchers.length > 0) {
+    console.error(`[pipeline] ALL ${fetchers.length} sources failed:`, failedSources.join('; '))
   }
 
   return {
