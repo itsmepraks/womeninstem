@@ -121,26 +121,6 @@ async function fetchHashnodeMentors(): Promise<Resource[]> {
   return resources
 }
 
-async function fetchSpeakerinnen(): Promise<Resource[]> {
-  const res = await fetchWithTimeout('https://speakerinnen.org/api/v1/profiles?locale=en')
-  const json = await res.json()
-  const profiles: Array<{
-    fullname: string; city: string; country: string;
-    abstract: string; website: string;
-  }> = Array.isArray(json) ? json : json.profiles ?? []
-  return profiles.slice(0, 50).map((p) => ({
-    id: randomUUID(),
-    name: p.fullname ?? 'Speaker',
-    category: 'mentors' as const,
-    lat: 0, lng: 0,
-    location: [p.city, p.country].filter(Boolean).join(', ') || 'Global',
-    url: p.website ?? 'https://speakerinnen.org/en/profiles',
-    bio: (p.abstract ?? '').replace(/<[^>]+>/g, '').slice(0, 200),
-    tags: ['speaker', 'mentor', 'speakerinnen'],
-    sourceName: 'Speakerinnen',
-  }))
-}
-
 const fetchGitHubMentors1 = makeGithubMentorFetcher('women mentor STEM in:bio', 'GitHub-STEM')
 const fetchGitHubMentors2 = makeGithubMentorFetcher('"she/her" engineer mentor in:bio', 'GitHub-SheHer')
 const fetchGitHubMentors3 = makeGithubMentorFetcher('"women in tech" mentor in:bio', 'GitHub-WIT')
@@ -152,7 +132,6 @@ export async function fetchMentors(): Promise<ResourcesResponse> {
     fetchGitHubMentors3,
     fetchDevToMentors,
     fetchHashnodeMentors,
-    fetchSpeakerinnen,
   ])
   const deduped = deduplicateResources(agg.data)
   const geocoded = await geocodeAll(deduped)

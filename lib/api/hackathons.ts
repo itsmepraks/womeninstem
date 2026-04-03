@@ -1,4 +1,3 @@
-import { XMLParser } from 'fast-xml-parser'
 import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import { geocodeAll } from '@/lib/geocoding'
@@ -6,135 +5,66 @@ import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
 import { randomUUID } from 'crypto'
 
-const parser = new XMLParser({ ignoreAttributes: false, cdataPropName: '__cdata' })
+function makeDevpostFetcher(page: number): () => Promise<Resource[]> {
+  const label = `Devpost:page${page}`
+  const fn = async function (): Promise<Resource[]> {
+    const url = `https://devpost.com/api/hackathons?status=open&page=${page}`
+    const res = await fetchWithTimeout(url, {
+      headers: { 'User-Agent': 'stemspark/1.0' },
+    })
+    const json = await res.json()
+    const hackathons: Array<Record<string, unknown>> = json.hackathons ?? []
+    return hackathons
+      .map((h) => {
+        const title = String(h.title ?? '').trim()
+        const hackUrl = String(h.url ?? '').trim()
+        if (!title || !hackUrl) return null
 
-async function fetchDevpost(): Promise<Resource[]> {
-  const res = await fetchWithTimeout('https://devpost.com/hackathons.rss', {
-    headers: { 'User-Agent': 'stemspark/1.0' }
-  })
-  const xml = await res.text()
-  const parsed = parser.parse(xml)
-  const items: unknown[] = parsed?.rss?.channel?.item ?? []
-  const arr = Array.isArray(items) ? items : [items]
-  return arr.filter(Boolean).map((item: unknown) => {
-    const i = item as Record<string, unknown>
-    return {
-      id: randomUUID(),
-      name: String(i.title ?? '').trim(),
-      category: 'hackathons' as const,
-      lat: 0, lng: 0,
-      location: String(i['location'] ?? 'Online').trim(),
-      url: String(i.link ?? '').trim(),
-      description: String(i.description ?? '').replace(/<[^>]+>/g, '').trim().slice(0, 200),
-      date: String(i.pubDate ?? '').trim(),
-      sourceName: 'Devpost',
-    }
-  }).filter((r) => r.name && r.url)
-}
+        const displayedLocation = h.displayed_location as Record<string, unknown> | undefined
+        const location = String(displayedLocation?.location ?? 'Online').trim()
 
-async function fetchChallengeRocket(): Promise<Resource[]> {
-  const res = await fetchWithTimeout('https://challengerocket.com/rss.xml', {
-    headers: { 'User-Agent': 'stemspark/1.0' }
-  })
-  const xml = await res.text()
-  const parsed = parser.parse(xml)
-  const items: unknown[] = parsed?.rss?.channel?.item ?? []
-  const arr = Array.isArray(items) ? items : [items]
-  return arr.filter(Boolean).map((item: unknown) => {
-    const i = item as Record<string, unknown>
-    return {
-      id: randomUUID(),
-      name: String(i.title ?? '').trim(),
-      category: 'hackathons' as const,
-      lat: 0, lng: 0,
-      location: 'Europe',
-      url: String(i.link ?? '').trim(),
-      description: String(i.description ?? '').replace(/<[^>]+>/g, '').trim().slice(0, 200),
-      date: String(i.pubDate ?? '').trim(),
-      sourceName: 'ChallengeRocket',
-    }
-  }).filter((r) => r.name && r.url)
-}
+        const timeLeft = String(h.time_left_to_submission ?? '').trim()
+        const orgName = String(h.organization_name ?? '').trim()
+        const regCount = h.registrations_count ?? 0
+        const description = [timeLeft, orgName, `${regCount} registered`]
+          .filter(Boolean)
+          .join(' \u00b7 ')
 
-async function fetchMLH(): Promise<Resource[]> {
-  const year = new Date().getFullYear()
-  let res: Response
-  try {
-    res = await fetchWithTimeout(`https://mlh.io/api/v2/events?season=${year}&format=json`)
-    if (!res.ok) throw new Error(`MLH API returned ${res.status}`)
-  } catch {
-    console.warn('[hackathons] MLH API unavailable, skipping')
-    return []
+        const themes = Array.isArray(h.themes)
+          ? (h.themes as Array<{ name?: string }>).map((t) => t.name ?? '').filter(Boolean)
+          : []
+
+        const prizeRaw = String(h.prize_amount ?? '').replace(/<[^>]+>/g, '').trim() || undefined
+
+        return {
+          id: randomUUID(),
+          name: title,
+          category: 'hackathons' as const,
+          lat: 0,
+          lng: 0,
+          location,
+          url: hackUrl,
+          description: description.slice(0, 200),
+          tags: themes,
+          amount: prizeRaw,
+          sourceName: label,
+        } as Resource
+      })
+      .filter((r): r is Resource => r !== null)
   }
-  const json = await res.json()
-  const events: unknown[] = Array.isArray(json) ? json : json.events ?? []
-  return events.filter(Boolean).map((e: unknown) => {
-    const ev = e as Record<string, unknown>
-    return {
-      id: randomUUID(),
-      name: String(ev.name ?? '').trim(),
-      category: 'hackathons' as const,
-      lat: 0, lng: 0,
-      location: (ev.location as string) ?? 'USA/Europe',
-      url: String(ev.url ?? ev.website ?? '').trim(),
-      description: String(ev.description ?? '').trim().slice(0, 200),
-      date: String(ev.start_date ?? ev.startDate ?? '').trim(),
-      sourceName: 'MLH',
-    }
-  }).filter((r) => r.name && r.url)
+  Object.defineProperty(fn, 'name', { value: label })
+  return fn
 }
 
-async function fetchDevfolio(): Promise<Resource[]> {
-  const res = await fetchWithTimeout('https://devfolio.co/hackathons.rss', {
-    headers: { 'User-Agent': 'stemspark/1.0' }
-  })
-  const xml = await res.text()
-  const parsed = parser.parse(xml)
-  const items: unknown[] = parsed?.rss?.channel?.item ?? []
-  const arr = Array.isArray(items) ? items : [items]
-  return arr.filter(Boolean).map((item: unknown) => {
-    const i = item as Record<string, unknown>
-    return {
-      id: randomUUID(),
-      name: String(i.title ?? '').trim(),
-      category: 'hackathons' as const,
-      lat: 0, lng: 0,
-      location: 'India',
-      url: String(i.link ?? '').trim(),
-      description: String(i.description ?? '').replace(/<[^>]+>/g, '').trim().slice(0, 200),
-      date: String(i.pubDate ?? '').trim(),
-      sourceName: 'Devfolio',
-    }
-  }).filter((r) => r.name && r.url)
-}
-
-async function fetchUnstop(): Promise<Resource[]> {
-  const res = await fetchWithTimeout('https://unstop.com/api/public/competition/listing?per_page=30')
-  const json = await res.json()
-  const items: unknown[] = json.data?.data ?? []
-  return items.filter(Boolean).map((item: unknown) => {
-    const c = item as Record<string, unknown>
-    return {
-      id: randomUUID(),
-      name: String(c.title ?? '').trim(),
-      category: 'hackathons' as const,
-      lat: 0, lng: 0,
-      location: String(c.city ?? c.country ?? 'India').trim(),
-      url: `https://unstop.com/competitions/${c.slug ?? c.id}`,
-      description: String(c.description ?? '').replace(/<[^>]+>/g, '').trim().slice(0, 200),
-      date: String(c.end_date ?? c.deadline ?? '').trim(),
-      sourceName: 'Unstop',
-    }
-  }).filter((r: Resource) => r.name && r.url)
-}
+const fetchers = [makeDevpostFetcher(1), makeDevpostFetcher(2)]
 
 export async function fetchHackathons(): Promise<ResourcesResponse> {
-  const agg = await aggregateSources([fetchDevpost, fetchChallengeRocket, fetchMLH, fetchDevfolio, fetchUnstop])
+  const agg = await aggregateSources(fetchers)
   const deduped = deduplicateResources(agg.data)
   const geocoded = await geocodeAll(deduped)
   const filtered = filterExpired(geocoded)
   return buildResponse(filtered, 'hackathons', {
-    revalidateSeconds: 300,
+    revalidateSeconds: 21600,
     sources: agg.sourceNames,
     sourcesAttempted: agg.sourcesAttempted,
     sourcesSucceeded: agg.sourcesSucceeded,
