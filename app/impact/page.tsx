@@ -8,7 +8,7 @@ import {
 } from '@/data/stats';
 import type { Stat } from '@/data/stats';
 
-function StatCard({ stat }: { stat: Stat }) {
+function ImpactStat({ stat }: { stat: Stat }) {
   return (
     <div className="card-white p-5 md:p-6">
       <div className="font-display text-2xl md:text-3xl text-accent-primary font-bold leading-tight">
@@ -64,7 +64,7 @@ export default function ImpactPage() {
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {workforceStats.map((stat) => (
-            <StatCard key={stat.label} stat={stat} />
+            <ImpactStat key={stat.label} stat={stat} />
           ))}
         </div>
       </section>
@@ -80,7 +80,7 @@ export default function ImpactPage() {
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {educationStats.map((stat) => (
-            <StatCard key={stat.label} stat={stat} />
+            <ImpactStat key={stat.label} stat={stat} />
           ))}
         </div>
       </section>
@@ -120,7 +120,7 @@ export default function ImpactPage() {
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {economicStats.map((stat) => (
-            <StatCard key={stat.label} stat={stat} />
+            <ImpactStat key={stat.label} stat={stat} />
           ))}
         </div>
       </section>

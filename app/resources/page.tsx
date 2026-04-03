@@ -4,6 +4,7 @@ import { useState, useMemo } from 'react';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ResourceCard from '@/components/ui/ResourceCard';
 import CompanyCard from '@/components/ui/CompanyCard';
+import LinkCard from '@/components/ui/LinkCard';
 import {
   scholarships,
   organizations,
@@ -256,82 +257,36 @@ export default function ResourcesPage() {
         <section id="programs" className="pb-12">
           <SectionHeading title="Educational Programs" accent={`${filteredPrograms.length} listed`} />
 
-          {k12Programs.length > 0 && (
-            <div className="mb-8">
-              <h3 className="text-label text-accent-primary mb-3">K-12 & Youth</h3>
-              <div className="space-y-2.5">
-                {k12Programs.map((p) => (
-                  <a
-                    key={p.id}
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
-                  >
-                    <div>
-                      <span className="text-body text-text-heading font-medium">{p.name}</span>
-                      <span className="text-xs text-text-muted ml-2">({p.cost})</span>
-                      <p className="text-xs text-text-secondary mt-1">{p.description}</p>
-                    </div>
-                    <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors flex-shrink-0 ml-4">
-                      Learn more →
-                    </span>
-                  </a>
-                ))}
+          {[
+            { key: 'k12', label: 'K-12 & Youth', programs: k12Programs, cta: 'Learn more \u2192' },
+            { key: 'bootcamp', label: 'Coding Bootcamps', programs: bootcampPrograms, cta: 'Apply \u2192' },
+            { key: 'online', label: 'Online Learning Platforms', programs: onlinePrograms, cta: 'Start learning \u2192' },
+          ].map((section, idx) =>
+            section.programs.length > 0 && (
+              <div key={section.key} className={idx < 2 ? 'mb-8' : undefined}>
+                <h3 className="text-label text-accent-primary mb-3">{section.label}</h3>
+                <div className="space-y-2.5">
+                  {section.programs.map((p) => (
+                    <a
+                      key={p.id}
+                      href={p.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow"
+                    >
+                      <div>
+                        <span className="text-body text-text-heading font-medium">{p.name}</span>
+                        <span className="text-xs text-text-muted ml-2">({p.cost})</span>
+                        <p className="text-xs text-text-secondary mt-1">{p.description}</p>
+                      </div>
+                      <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors flex-shrink-0 ml-4">
+                        {section.cta}
+                      </span>
+                    </a>
+                  ))}
+                </div>
               </div>
-            </div>
-          )}
-
-          {bootcampPrograms.length > 0 && (
-            <div className="mb-8">
-              <h3 className="text-label text-accent-primary mb-3">Coding Bootcamps</h3>
-              <div className="space-y-2.5">
-                {bootcampPrograms.map((p) => (
-                  <a
-                    key={p.id}
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
-                  >
-                    <div>
-                      <span className="text-body text-text-heading font-medium">{p.name}</span>
-                      <span className="text-xs text-text-muted ml-2">({p.cost})</span>
-                      <p className="text-xs text-text-secondary mt-1">{p.description}</p>
-                    </div>
-                    <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors flex-shrink-0 ml-4">
-                      Apply →
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {onlinePrograms.length > 0 && (
-            <div>
-              <h3 className="text-label text-accent-primary mb-3">Online Learning Platforms</h3>
-              <div className="space-y-2.5">
-                {onlinePrograms.map((p) => (
-                  <a
-                    key={p.id}
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
-                  >
-                    <div>
-                      <span className="text-body text-text-heading font-medium">{p.name}</span>
-                      <span className="text-xs text-text-muted ml-2">({p.cost})</span>
-                      <p className="text-xs text-text-secondary mt-1">{p.description}</p>
-                    </div>
-                    <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors flex-shrink-0 ml-4">
-                      Start learning →
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </div>
+            )
           )}
         </section>
       )}
@@ -341,16 +296,11 @@ export default function ResourcesPage() {
         <section id="conferences" className="pb-12">
           <SectionHeading title="Conferences & Events" accent={`${filteredConferences.length} listed`} />
           <div className="space-y-2.5">
-            {filteredConferences.map((conf) => {
-              const Wrapper = conf.url ? 'a' : 'div';
-              const linkProps = conf.url
-                ? { href: conf.url, target: '_blank' as const, rel: 'noopener noreferrer' }
-                : {};
-              return (
-                <Wrapper
+            {filteredConferences.map((conf) => (
+                <LinkCard
                   key={conf.id}
-                  {...linkProps}
-                  className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+                  url={conf.url}
+                  className="p-5 flex items-center justify-between"
                 >
                   <div>
                     <h3 className="text-body text-text-heading font-medium">{conf.name}</h3>
@@ -371,9 +321,8 @@ export default function ResourcesPage() {
                       </span>
                     )}
                   </div>
-                </Wrapper>
-              );
-            })}
+                </LinkCard>
+            ))}
           </div>
         </section>
       )}
@@ -383,16 +332,11 @@ export default function ResourcesPage() {
         <section id="mentorship" className="pb-12">
           <SectionHeading title="Mentorship Platforms" accent="External platforms" />
           <div className="space-y-2.5">
-            {filteredMentorship.map((platform) => {
-              const Wrapper = platform.url ? 'a' : 'div';
-              const linkProps = platform.url
-                ? { href: platform.url, target: '_blank' as const, rel: 'noopener noreferrer' }
-                : {};
-              return (
-                <Wrapper
+            {filteredMentorship.map((platform) => (
+                <LinkCard
                   key={platform.id}
-                  {...linkProps}
-                  className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+                  url={platform.url}
+                  className="p-5 flex items-center justify-between"
                 >
                   <div>
                     <h3 className="text-body text-text-heading font-medium">{platform.name}</h3>
@@ -408,9 +352,8 @@ export default function ResourcesPage() {
                       </span>
                     )}
                   </div>
-                </Wrapper>
-              );
-            })}
+                </LinkCard>
+            ))}
           </div>
         </section>
       )}
@@ -420,16 +363,11 @@ export default function ResourcesPage() {
         <section id="jobs" className="pb-12">
           <SectionHeading title="Job Boards & Career" accent="External job sites" />
           <div className="space-y-2.5">
-            {filteredJobBoards.map((board) => {
-              const Wrapper = board.url ? 'a' : 'div';
-              const linkProps = board.url
-                ? { href: board.url, target: '_blank' as const, rel: 'noopener noreferrer' }
-                : {};
-              return (
-                <Wrapper
+            {filteredJobBoards.map((board) => (
+                <LinkCard
                   key={board.id}
-                  {...linkProps}
-                  className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+                  url={board.url}
+                  className="p-5 flex items-center justify-between"
                 >
                   <div>
                     <h3 className="text-body text-text-heading font-medium">{board.name}</h3>
@@ -445,9 +383,8 @@ export default function ResourcesPage() {
                       </span>
                     )}
                   </div>
-                </Wrapper>
-              );
-            })}
+                </LinkCard>
+            ))}
           </div>
         </section>
       )}

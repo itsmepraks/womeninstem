@@ -1,8 +1,7 @@
-'use client';
-
 import dynamic from 'next/dynamic';
 import SectionHeading from '@/components/ui/SectionHeading';
 import DarkPanel from '@/components/ui/DarkPanel';
+import LinkCard from '@/components/ui/LinkCard';
 import LiveFeed from '@/components/ui/LiveFeed';
 import { pioneers } from '@/data/pioneers';
 import { mentorshipPlatforms, conferences } from '@/data/resources';
@@ -66,16 +65,11 @@ export default function ConnectPage() {
       <section className="pb-10">
         <SectionHeading title="Mentorship Platforms" accent="We link to these, we don't run them" />
         <div className="space-y-2.5">
-          {mentorshipPlatforms.map((platform) => {
-            const Wrapper = platform.url ? 'a' : 'div';
-            const linkProps = platform.url
-              ? { href: platform.url, target: '_blank' as const, rel: 'noopener noreferrer' }
-              : {};
-            return (
-              <Wrapper
+          {mentorshipPlatforms.map((platform) => (
+              <LinkCard
                 key={platform.id}
-                {...linkProps}
-                className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+                url={platform.url}
+                className="p-5 flex items-center justify-between"
               >
                 <div>
                   <h3 className="text-body text-text-heading font-medium">{platform.name}</h3>
@@ -91,9 +85,8 @@ export default function ConnectPage() {
                     </span>
                   )}
                 </div>
-              </Wrapper>
-            );
-          })}
+              </LinkCard>
+          ))}
         </div>
       </section>
 
@@ -101,16 +94,11 @@ export default function ConnectPage() {
       <section className="pb-10">
         <SectionHeading title="Major Conferences" accent="Recurring" />
         <div className="space-y-2.5">
-          {conferences.slice(0, 7).map((conf) => {
-            const Wrapper = conf.url ? 'a' : 'div';
-            const linkProps = conf.url
-              ? { href: conf.url, target: '_blank' as const, rel: 'noopener noreferrer' }
-              : {};
-            return (
-              <Wrapper
+          {conferences.slice(0, 7).map((conf) => (
+              <LinkCard
                 key={conf.id}
-                {...linkProps}
-                className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow block"
+                url={conf.url}
+                className="p-5 flex items-center justify-between"
               >
                 <div>
                   <h3 className="text-body text-text-heading font-medium">{conf.name}</h3>
@@ -131,9 +119,8 @@ export default function ConnectPage() {
                     </span>
                   )}
                 </div>
-              </Wrapper>
-            );
-          })}
+              </LinkCard>
+          ))}
         </div>
       </section>
 
