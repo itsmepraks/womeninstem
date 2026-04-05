@@ -108,18 +108,18 @@ export default function GlobalSearch() {
 
   const index = useMemo(() => buildSearchIndex(), []);
 
-  const results = useMemo(() => {
+  const allMatches = useMemo(() => {
     if (query.length < 2) return [];
     const q = query.toLowerCase();
-    return index
-      .filter(
-        (r) =>
-          r.title.toLowerCase().includes(q) ||
-          r.subtitle.toLowerCase().includes(q) ||
-          r.category.toLowerCase().includes(q)
-      )
-      .slice(0, 12);
+    return index.filter(
+      (r) =>
+        r.title.toLowerCase().includes(q) ||
+        r.subtitle.toLowerCase().includes(q) ||
+        r.category.toLowerCase().includes(q)
+    );
   }, [query, index]);
+
+  const results = useMemo(() => allMatches.slice(0, 12), [allMatches]);
 
   // Group results by category
   const grouped = useMemo(() => {
@@ -269,6 +269,14 @@ export default function GlobalSearch() {
                 </div>
               )}
             </div>
+
+            {allMatches.length > 12 && (
+              <div className="px-5 py-2 text-center border-t border-accent-primary/5">
+                <span className="text-xs text-text-muted">
+                  Showing 12 of {allMatches.length} results. Try a more specific search.
+                </span>
+              </div>
+            )}
 
             {/* Footer */}
             {results.length > 0 && (

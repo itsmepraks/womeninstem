@@ -5,6 +5,7 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import ResourceCard from '@/components/ui/ResourceCard';
 import CompanyCard from '@/components/ui/CompanyCard';
 import LinkCard from '@/components/ui/LinkCard';
+import LiveFeed from '@/components/ui/LiveFeed';
 import {
   scholarships,
   organizations,
@@ -170,10 +171,22 @@ export default function ResourcesPage() {
         </div>
       </section>
 
+      {/* ─── LIVE FEEDS ─── */}
+      <section id="live" className="pb-10">
+        <SectionHeading title="Live Feeds" accent="Pulled from public APIs. Refreshes every few hours." />
+        <div className="space-y-6">
+          <LiveFeed endpoint="/api/resources/jobs" title="Jobs & Internships" limit={5} />
+          <LiveFeed endpoint="/api/resources/events" title="Events" limit={5} />
+          <LiveFeed endpoint="/api/resources/hackathons" title="Hackathons" limit={5} />
+          <LiveFeed endpoint="/api/resources/grants" title="Grants" limit={5} />
+        </div>
+      </section>
+
       {/* Quick nav */}
       <section className="pb-8">
         <div className="flex flex-wrap gap-2">
           {[
+            { label: 'Live', href: '#live' },
             { label: 'Scholarships', href: '#scholarships' },
             { label: 'Organizations', href: '#organizations' },
             { label: 'Programs', href: '#programs' },
