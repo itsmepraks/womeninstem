@@ -5,10 +5,9 @@ export interface NavItem {
 }
 
 export const NAV_ITEMS: NavItem[] = [
-  { id: 'learning', label: 'Learning', href: '/learning' },
-  { id: 'explore', label: 'Explore', href: '/explore' },
   { id: 'resources', label: 'Resources', href: '/resources' },
-  { id: 'media', label: 'Media', href: '/media' },
+  { id: 'learning', label: 'Learning', href: '/learning' },
+  { id: 'pioneers', label: 'Pioneers', href: '/pioneers' },
   { id: 'impact', label: 'Impact', href: '/impact' },
   { id: 'about', label: 'About', href: '/about' },
 ];

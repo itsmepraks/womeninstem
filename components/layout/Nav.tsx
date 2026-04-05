@@ -38,12 +38,6 @@ export default function Nav() {
           );
         })}
         <GlobalSearch />
-        <Link
-          href="/explore"
-          className="ml-1 text-sm px-5 py-2.5 rounded-3xl bg-surface-dark text-bg-primary font-medium hover:bg-text-heading transition-colors"
-        >
-          Live data
-        </Link>
       </div>
 
       {/* Mobile toggle */}
@@ -65,19 +59,16 @@ export default function Nav() {
             <Link
               key={item.id}
               href={item.href}
-              className="text-base text-text-body py-2 hover:text-text-heading transition-colors"
+              className={`text-base py-2 transition-colors ${
+                pathname === item.href
+                  ? 'text-accent-primary font-medium'
+                  : 'text-text-body hover:text-text-heading'
+              }`}
               onClick={() => setMobileOpen(false)}
             >
               {item.label}
             </Link>
           ))}
-          <Link
-            href="/explore"
-            className="btn-primary text-center mt-2"
-            onClick={() => setMobileOpen(false)}
-          >
-            Live data
-          </Link>
         </div>
       )}
     </nav>
