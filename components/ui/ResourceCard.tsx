@@ -28,7 +28,7 @@ export default function ResourceCard({
         <h3 className="text-[1.0625rem] font-semibold text-text-heading mb-0.5">{title}</h3>
         <p className="text-sm text-text-secondary leading-relaxed">
           {amount && <span className="text-accent-primary font-medium">{amount}</span>}
-          {amount && ' — '}
+          {amount && ' · '}
           {description}
         </p>
       </div>

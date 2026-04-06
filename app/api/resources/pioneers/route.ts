@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { fetchPioneers } from '@/lib/api/pioneers'
 
-export const revalidate = 86400 // 24 hours — pioneers don't change often
+export const revalidate = 86400 // 24 hours, pioneers don't change often
 
 export async function GET() {
   try {

@@ -24,7 +24,7 @@ export default function LiveFeed({
   endpoint,
   title,
   limit = 5,
-  emptyMessage = 'No results yet — data refreshes automatically.',
+  emptyMessage = 'No results yet, data refreshes automatically.',
 }: LiveFeedProps) {
   const { data, loading, error, updatedAt } = useLiveData(endpoint);
   const items = data.slice(0, limit);
@@ -60,7 +60,7 @@ export default function LiveFeed({
       {error && (
         <div className="card-white p-5">
           <p className="text-sm text-text-muted mb-3">
-            Still loading. In the meantime, try these directly:
+            Loading is slow right now. Try these directly:
           </p>
           <div className="flex flex-wrap gap-2">
             {endpoint.includes('jobs') && (

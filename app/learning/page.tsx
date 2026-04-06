@@ -15,10 +15,10 @@ export default function LearningPage() {
       {/* Hero */}
       <section className="pt-12 md:pt-20 pb-10">
         <h1 className="font-display text-[2.75rem] text-text-heading font-light leading-tight">
-          Learn <em className="italic text-accent-primary">for free (mostly)</em>
+          Learn <em className="italic text-accent-primary">for free</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[500px]">
-          Online courses and bootcamps, sorted by field. Every link goes to the real thing.
+          Online courses and bootcamps, sorted by field.
         </p>
       </section>
 
@@ -54,8 +54,8 @@ export default function LearningPage() {
                   Pioneer of {fieldName}
                 </p>
                 <p className="text-sm text-text-body">
-                  <strong className="text-text-heading">{pioneer.name}</strong>{' '}
-                  — {pioneer.title}
+                  <strong className="text-text-heading">{pioneer.name}</strong>
+                  , {pioneer.title}
                   {pioneer.link && (
                     <a href={pioneer.link} target="_blank" rel="noopener noreferrer" className="text-accent-primary ml-1 hover:text-accent-secondary transition-colors">↗</a>
                   )}

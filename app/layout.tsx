@@ -19,9 +19,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'stem·spark — Scholarships, orgs, and courses for women in STEM',
+  title: 'stem·spark · Scholarships, orgs, and courses for women in STEM',
   description:
-    'Scholarships, organizations, courses, and mentorship platforms for women in STEM. All linked, all real, all free to browse.',
+    'Scholarships, courses, mentors, organizations for women in STEM. All in one place. All free to browse.',
   keywords: ['STEM', 'women in STEM', 'scholarships', 'organizations', 'courses', 'women in tech'],
   authors: [{ name: 'Prakriti Bista', url: 'https://praks.me' }],
   openGraph: {

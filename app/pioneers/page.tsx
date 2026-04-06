@@ -12,7 +12,7 @@ export default function PioneersPage() {
           Pioneers <em className="italic text-accent-primary">who led the way</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[500px]">
-          Real people, real contributions. Click any name to read more.
+          Real people. Click any name to read more.
         </p>
       </section>
 
@@ -30,7 +30,7 @@ export default function PioneersPage() {
       <section className="pb-4">
         <h2 className="font-display text-display text-text-heading mb-2">Curated profiles</h2>
         <p className="text-sm text-text-muted mb-4">
-          These have more detailed write-ups. The list above pulls automatically from Wikipedia.
+          Hand-written. The list above pulls from Wikipedia.
         </p>
       </section>
 

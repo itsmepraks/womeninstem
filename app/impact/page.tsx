@@ -31,7 +31,7 @@ export default function ImpactPage() {
           The <em className="italic text-accent-primary">numbers</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[540px]">
-          Real data about women in STEM — sourced from published research,
+          Real data about women in STEM, sourced from published research,
           government agencies, and peer-reviewed studies.
         </p>
       </section>
@@ -115,7 +115,7 @@ export default function ImpactPage() {
           Economic impact
         </h2>
         <p className="text-body text-text-body mb-5">
-          Gender parity in STEM is not just a fairness issue — it is an economic
+          Gender parity in STEM is not just a fairness issue. It is an economic
           imperative worth trillions.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">

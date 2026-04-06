@@ -27,7 +27,7 @@ export default function HomePage() {
         </h1>
         <div className="accent-underline mt-4 mb-5" />
         <p className="text-body-lg text-text-body max-w-[460px] mb-8">
-          Scholarships, organizations, courses, and mentorship platforms. All linked, all real, all free to browse.
+          Scholarships, courses, mentors, organizations. All in one place. All free to browse.
         </p>
         <div className="flex items-center gap-3.5">
           <Link href="/resources" className="btn-primary">
@@ -51,7 +51,7 @@ export default function HomePage() {
               {heroHighlight.text}
             </p>
             <p className="text-sm text-surface-dark-text/45 mt-2">
-              — {heroHighlight.source}
+              {heroHighlight.source}
             </p>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function HomePage() {
               {heroHighlight.text}
             </p>
             <p className="text-sm text-surface-dark-text/45 mt-3">
-              — {heroHighlight.source}
+              {heroHighlight.source}
             </p>
           </div>
         </div>
@@ -80,7 +80,7 @@ export default function HomePage() {
           What you&apos;ll find here
         </h2>
         <p className="text-body-lg text-text-secondary">
-          Here&apos;s what we&apos;ve put together so far.
+          Here&apos;s what&apos;s inside.
         </p>
       </section>
 
@@ -93,7 +93,7 @@ export default function HomePage() {
               Learning Hub
             </h3>
             <p className="text-body text-text-body leading-relaxed">
-              Courses, bootcamps, and scholarships. Sorted by field and level so you can skip the noise.
+              Free courses and bootcamps, sorted by field. No paid junk.
             </p>
             <Link
               href="/learning"
@@ -117,7 +117,7 @@ export default function HomePage() {
               Connect
             </h3>
             <p className="text-body text-text-body leading-relaxed">
-              Mentorship platforms, conferences, and events. We link to them — we don&apos;t run them.
+              Mentorship platforms, conferences, events. We link to them. We don&apos;t run them.
             </p>
             <div className="mt-4 p-3.5 bg-accent-secondary/[0.04] rounded-[0.875rem]">
               <p className="text-xs text-text-muted italic">
@@ -125,7 +125,7 @@ export default function HomePage() {
                 Companies with gender-diverse teams are 15% more likely to outperform competitors.
               </p>
               <p className="text-[0.6875rem] text-text-muted/70 mt-1">
-                — Center for Talent Innovation
+                Center for Talent Innovation
               </p>
             </div>
           </div>
@@ -165,14 +165,14 @@ export default function HomePage() {
       <section className="py-8">
         <LiveFeed
           endpoint="/api/resources/jobs"
-          title="Latest Opportunities"
+          title="What's new"
           limit={3}
         />
         <Link
           href="/resources#live"
           className="inline-block mt-4 text-sm text-accent-primary font-medium underline underline-offset-4 hover:text-accent-secondary transition-colors"
         >
-          See all live feeds (jobs, events, hackathons, grants) →
+          See everything →
         </Link>
       </section>
 
@@ -181,13 +181,13 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-accent-secondary/[0.03] rounded-3xl" />
         <div className="relative z-[1]">
           <h2 className="font-display text-[2.25rem] text-text-heading font-light mb-3">
-            That&apos;s what we&apos;ve got
+            Find what you need
           </h2>
           <p className="text-body-lg text-text-secondary mb-7">
-            Scholarships, orgs, courses, jobs, events. One site.
+            Scholarships, courses, jobs, events. One site.
           </p>
           <Link href="/resources" className="btn-primary text-base">
-            Browse all resources
+            Browse resources
           </Link>
         </div>
       </section>
