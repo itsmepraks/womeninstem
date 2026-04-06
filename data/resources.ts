@@ -7,6 +7,7 @@ export interface Scholarship {
   description: string;
   level: 'undergraduate' | 'graduate' | 'postdoctoral' | 'all';
   url: string;
+  nextDeadline?: string; // ISO date YYYY-MM-DD for next application deadline
 }
 
 export interface Organization {
@@ -41,9 +42,11 @@ export interface Conference {
   name: string;
   description: string;
   size?: string;
-  timing?: string;
+  timing?: string; // Keep for backward compat / display fallback
   cost?: string;
   url?: string;
+  month?: number; // 1-12, the month it usually happens
+  monthEnd?: number; // For events spanning 2 months
 }
 
 export interface MentorshipPlatform {
@@ -74,6 +77,7 @@ export const scholarships: Scholarship[] = [
       'Over 260 scholarships for women studying engineering or computer science, some renewable.',
     level: 'undergraduate',
     url: 'https://swe.org/scholarships/',
+    nextDeadline: '2027-02-15',
   },
   {
     id: 'google-women-techmakers',
@@ -83,6 +87,7 @@ export const scholarships: Scholarship[] = [
       'Award for women in computer science or related technical fields, includes invitation to annual retreat.',
     level: 'all',
     url: 'https://buildyourfuture.withgoogle.com/scholarships/google-women-techmakers-scholars-program',
+    nextDeadline: '2026-12-01',
   },
   {
     id: 'palantir-wit',
@@ -92,6 +97,7 @@ export const scholarships: Scholarship[] = [
       'Scholarship for women studying computer science, includes networking with Palantir engineers.',
     level: 'undergraduate',
     url: 'https://www.palantir.com/students/scholarship/wit-north-america/',
+    nextDeadline: '2026-09-15',
   },
   {
     id: 'microsoft-tuition',
@@ -101,6 +107,7 @@ export const scholarships: Scholarship[] = [
       'Multiple scholarship programs for women, minorities, and students with disabilities in computing.',
     level: 'undergraduate',
     url: 'https://www.microsoft.com/university',
+    nextDeadline: '2027-02-01',
   },
   {
     id: 'bhw-stem',
@@ -128,6 +135,7 @@ export const scholarships: Scholarship[] = [
       'Multiple programs for women pursuing various STEM degrees at different career stages.',
     level: 'all',
     url: 'https://www.aauw.org/resources/programs/fellowships-grants/',
+    nextDeadline: '2026-11-15',
   },
   {
     id: 'shpe-scholarships',
@@ -165,6 +173,7 @@ export const scholarships: Scholarship[] = [
       'Highly prestigious fellowship for STEM graduate students usable at any accredited US institution.',
     level: 'graduate',
     url: 'https://www.nsfgrfp.org/',
+    nextDeadline: '2026-10-20',
   },
   {
     id: 'ford-foundation',
@@ -174,6 +183,7 @@ export const scholarships: Scholarship[] = [
       'Prestigious fellowship for underrepresented minorities committed to advancing diversity in academia.',
     level: 'graduate',
     url: 'https://nap.edu/ford',
+    nextDeadline: '2026-12-15',
   },
   {
     id: 'pdsoros',
@@ -192,6 +202,7 @@ export const scholarships: Scholarship[] = [
       'One of the most prestigious STEM fellowships for applied physical, biological, and engineering sciences.',
     level: 'graduate',
     url: 'https://www.hertzfoundation.org/',
+    nextDeadline: '2026-10-25',
   },
   {
     id: 'peo-scholar',
@@ -210,6 +221,7 @@ export const scholarships: Scholarship[] = [
       'Fellowships for international women pursuing graduate study in the United States.',
     level: 'graduate',
     url: 'https://www.aauw.org/resources/programs/fellowships-grants/international/',
+    nextDeadline: '2026-11-15',
   },
   {
     id: 'loreal-usa',
@@ -219,6 +231,7 @@ export const scholarships: Scholarship[] = [
       'Prestigious award for women postdoctoral researchers in life sciences, physical sciences, math, engineering, and CS.',
     level: 'postdoctoral',
     url: 'https://www.loreal.com/usa-forwomeninscience',
+    nextDeadline: '2027-01-31',
   },
   {
     id: 'facebook-fellowship',
@@ -291,6 +304,7 @@ export const scholarships: Scholarship[] = [
       'Prestigious early-career faculty award with an education component.',
     level: 'postdoctoral',
     url: 'https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=503214',
+    nextDeadline: '2026-07-31',
   },
   {
     id: 'nih-early-independence',
@@ -962,6 +976,8 @@ export const conferences: Conference[] = [
       "World's largest gathering of women technologists with a career fair featuring 600+ employers.",
     size: '26,000+',
     timing: 'September/October',
+    month: 9,
+    monthEnd: 10,
     cost: '$300-$600',
     url: 'https://ghc.anitab.org/',
   },
@@ -972,6 +988,8 @@ export const conferences: Conference[] = [
       'Largest conference for women in engineering with career fair, professional development, and networking.',
     size: '15,000+',
     timing: 'October/November',
+    month: 10,
+    monthEnd: 11,
     cost: 'Varies (scholarships available)',
     url: 'https://we.swe.org/',
   },
@@ -981,6 +999,7 @@ export const conferences: Conference[] = [
     description:
       'Annual global data science conference with year-round regional events worldwide.',
     timing: 'March',
+    month: 3,
     cost: 'Free or low-cost',
     url: 'https://www.widsconference.org/',
   },
@@ -991,6 +1010,8 @@ export const conferences: Conference[] = [
       'Summit for LGBTQ+ women and non-binary people in technology.',
     size: '5,000+',
     timing: 'February/March',
+    month: 2,
+    monthEnd: 3,
     url: 'https://www.lesbianswhotech.org/summit/',
   },
   {
@@ -999,6 +1020,7 @@ export const conferences: Conference[] = [
     description:
       'Annual conference focused on recruiting, retaining, and advancing women in cybersecurity.',
     timing: 'March',
+    month: 3,
     url: 'https://www.wicys.org/conference/',
   },
   {
@@ -1008,6 +1030,7 @@ export const conferences: Conference[] = [
       'Conference for Hispanics/Chicanos and Native Americans in STEM with career expo.',
     size: '5,000+',
     timing: 'October',
+    month: 10,
     url: 'https://www.sacnas.org/conference/',
   },
   {
@@ -1017,6 +1040,7 @@ export const conferences: Conference[] = [
       'One of the largest STEM conferences focused on Black engineers with career fair and workshops.',
     size: '10,000+',
     timing: 'March',
+    month: 3,
     url: 'https://www.nsbe.org/convention/',
   },
   {
@@ -1033,6 +1057,7 @@ export const conferences: Conference[] = [
     description:
       'Workshop for graduate women in computing research with mentoring and networking.',
     timing: 'April',
+    month: 4,
     url: 'https://cra.org/cra-w/grad-cohort-for-women/',
   },
   {

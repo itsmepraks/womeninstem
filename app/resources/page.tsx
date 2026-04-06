@@ -15,6 +15,7 @@ import {
   jobBoards,
 } from '@/data/resources';
 import { communities } from '@/data/communities';
+import { getNextAnnualOccurrence, formatDeadlineDisplay } from '@/lib/dateHelpers';
 
 type Category = 'all' | 'scholarships' | 'organizations' | 'programs' | 'conferences' | 'mentorship' | 'jobs' | 'communities';
 type CostFilter = 'all' | 'free' | 'paid';
@@ -110,7 +111,28 @@ export default function ResourcesPage() {
     [searchQuery],
   );
 
-  const featuredScholarships = useMemo(() => scholarships.slice(0, 5), []);
+  const closingSoonScholarships = useMemo(() => {
+    return scholarships
+      .filter((s) => s.nextDeadline)
+      .map((s) => ({ s, info: formatDeadlineDisplay(s.nextDeadline!) }))
+      .filter(({ info }) => !info.isExpired)
+      .sort((a, b) => a.info.daysLeft - b.info.daysLeft)
+      .slice(0, 5);
+  }, []);
+
+  const sortedConferences = useMemo(() => {
+    return [...filteredConferences]
+      .map((c) => ({
+        conf: c,
+        occurrence: c.month ? getNextAnnualOccurrence(c.month, c.monthEnd) : null,
+      }))
+      .sort((a, b) => {
+        if (a.occurrence && b.occurrence) return a.occurrence.date.getTime() - b.occurrence.date.getTime();
+        if (a.occurrence) return -1;
+        if (b.occurrence) return 1;
+        return 0;
+      });
+  }, [filteredConferences]);
 
   return (
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
@@ -180,18 +202,20 @@ export default function ResourcesPage() {
         </div>
       </section>
 
-      {/* FEATURED SCHOLARSHIPS */}
-      {featuredScholarships.length > 0 && (
+      {/* CLOSING SOON */}
+      {closingSoonScholarships.length > 0 && (
         <section className="pb-10">
-          <SectionHeading title="Featured scholarships" accent="Start here" />
+          <SectionHeading title="Closing soon" accent="Apply before they expire" />
           <div className="space-y-2.5">
-            {featuredScholarships.map((s) => (
+            {closingSoonScholarships.map(({ s, info }) => (
               <ResourceCard
                 key={s.id}
                 title={s.name}
                 description={s.description}
                 amount={s.amount}
                 url={s.url}
+                daysLeft={info.daysLeft}
+                deadlineLabel={info.label}
               />
             ))}
           </div>
@@ -337,7 +361,7 @@ export default function ResourcesPage() {
         <section id="conferences" className="pb-12">
           <SectionHeading title="Conferences & Events" accent={`${filteredConferences.length} listed`} />
           <div className="space-y-2.5">
-            {filteredConferences.map((conf) => (
+            {sortedConferences.map(({ conf, occurrence }) => (
                 <LinkCard
                   key={conf.id}
                   url={conf.url}
@@ -353,8 +377,10 @@ export default function ResourcesPage() {
                         {conf.size}
                       </span>
                     )}
-                    {conf.timing && (
-                      <span className="text-xs text-text-muted">{conf.timing}</span>
+                    {(occurrence || conf.timing) && (
+                      <span className="text-xs text-text-muted">
+                        {occurrence ? occurrence.display : conf.timing}
+                      </span>
                     )}
                     {conf.url && (
                       <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors">

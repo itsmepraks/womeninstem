@@ -3,6 +3,8 @@ interface ResourceCardProps {
   description: string;
   amount?: string;
   url?: string;
+  daysLeft?: number;
+  deadlineLabel?: string;
 }
 
 export default function ResourceCard({
@@ -10,11 +12,29 @@ export default function ResourceCard({
   description,
   amount,
   url,
+  daysLeft,
+  deadlineLabel,
 }: ResourceCardProps) {
   const Wrapper = url ? 'a' : 'div';
   const linkProps = url
     ? { href: url, target: '_blank' as const, rel: 'noopener noreferrer' }
     : {};
+
+  const hasDeadline = typeof daysLeft === 'number' && deadlineLabel;
+  let badgeText = '';
+  let badgeClass = '';
+  if (hasDeadline) {
+    if (daysLeft! <= 7) {
+      badgeText = `${daysLeft} days left`;
+      badgeClass = 'bg-red-50 text-red-600';
+    } else if (daysLeft! <= 30) {
+      badgeText = `${daysLeft} days left`;
+      badgeClass = 'bg-accent-secondary/10 text-accent-primary';
+    } else {
+      badgeText = deadlineLabel!;
+      badgeClass = 'text-text-muted';
+    }
+  }
 
   return (
     <Wrapper
@@ -32,7 +52,12 @@ export default function ResourceCard({
           {description}
         </p>
       </div>
-      {url && (
+      {hasDeadline && (
+        <span className={`text-xs font-medium flex-shrink-0 px-3 py-1 rounded-pill ${badgeClass}`}>
+          {badgeText}
+        </span>
+      )}
+      {url && !hasDeadline && (
         <span className="text-xs text-accent-primary font-medium flex-shrink-0 group-hover:text-accent-secondary transition-colors">
           Apply →
         </span>
