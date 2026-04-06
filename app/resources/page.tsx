@@ -14,8 +14,9 @@ import {
   mentorshipPlatforms,
   jobBoards,
 } from '@/data/resources';
+import { communities } from '@/data/communities';
 
-type Category = 'all' | 'scholarships' | 'organizations' | 'programs' | 'conferences' | 'mentorship' | 'jobs';
+type Category = 'all' | 'scholarships' | 'organizations' | 'programs' | 'conferences' | 'mentorship' | 'jobs' | 'communities';
 type CostFilter = 'all' | 'free' | 'paid';
 
 const CATEGORIES: { value: Category; label: string }[] = [
@@ -26,6 +27,7 @@ const CATEGORIES: { value: Category; label: string }[] = [
   { value: 'conferences', label: 'Conferences' },
   { value: 'mentorship', label: 'Mentorship' },
   { value: 'jobs', label: 'Jobs' },
+  { value: 'communities', label: 'Communities' },
 ];
 
 const COST_OPTIONS: { value: CostFilter; label: string }[] = [
@@ -103,6 +105,13 @@ export default function ResourcesPage() {
     [searchQuery, activeCost],
   );
 
+  const filteredCommunities = useMemo(
+    () => communities.filter((c) => matchesSearch(searchQuery, c.name, c.description)),
+    [searchQuery],
+  );
+
+  const featuredScholarships = useMemo(() => scholarships.slice(0, 5), []);
+
   return (
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       {/* Hero */}
@@ -171,6 +180,24 @@ export default function ResourcesPage() {
         </div>
       </section>
 
+      {/* FEATURED SCHOLARSHIPS */}
+      {featuredScholarships.length > 0 && (
+        <section className="pb-10">
+          <SectionHeading title="Featured scholarships" accent="Start here" />
+          <div className="space-y-2.5">
+            {featuredScholarships.map((s) => (
+              <ResourceCard
+                key={s.id}
+                title={s.name}
+                description={s.description}
+                amount={s.amount}
+                url={s.url}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* ─── LIVE FEEDS ─── */}
       <section id="live" className="pb-10">
         <SectionHeading title="Live Feeds" accent="From public APIs. Updated every few hours." />
@@ -193,6 +220,7 @@ export default function ResourcesPage() {
             { label: 'Conferences', href: '#conferences' },
             { label: 'Mentorship', href: '#mentorship' },
             { label: 'Job Boards', href: '#jobs' },
+            { label: 'Communities', href: '#communities' },
           ].map((item) => (
             <a
               key={item.href}
@@ -402,6 +430,34 @@ export default function ResourcesPage() {
         </section>
       )}
 
+      {/* ─── COMMUNITIES ─── */}
+      {showSection('communities') && filteredCommunities.length > 0 && (
+        <section id="communities" className="pb-12">
+          <SectionHeading title="Communities" accent="Slack, Discord, newsletters" />
+          <div className="space-y-2.5">
+            {filteredCommunities.map((c) => (
+              <LinkCard key={c.id} url={c.url} className="p-5 flex items-center justify-between">
+                <div>
+                  <h3 className="text-body text-text-heading font-medium">{c.name}</h3>
+                  <p className="text-xs text-text-secondary mt-1">{c.description}</p>
+                </div>
+                <div className="flex items-center gap-2 flex-shrink-0">
+                  <span className="text-xs bg-accent-secondary/10 text-accent-primary px-3 py-1 rounded-pill capitalize">
+                    {c.platform}
+                  </span>
+                  {c.members && (
+                    <span className="text-xs text-text-muted">{c.members}</span>
+                  )}
+                  <span className="text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors">
+                    Join →
+                  </span>
+                </div>
+              </LinkCard>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Empty state */}
       {(activeCategory !== 'all' || activeCost !== 'all' || searchQuery) &&
         filteredScholarships.length === 0 &&
@@ -409,7 +465,8 @@ export default function ResourcesPage() {
         filteredPrograms.length === 0 &&
         filteredConferences.length === 0 &&
         filteredMentorship.length === 0 &&
-        filteredJobBoards.length === 0 && (
+        filteredJobBoards.length === 0 &&
+        filteredCommunities.length === 0 && (
           <div className="text-center py-16">
             <p className="text-text-muted text-sm">No resources match your filters.</p>
             <button
