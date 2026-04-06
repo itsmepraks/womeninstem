@@ -24,7 +24,7 @@ export default function LiveFeed({
   endpoint,
   title,
   limit = 5,
-  emptyMessage = 'No results yet, data refreshes automatically.',
+  emptyMessage = 'No items right now. New data fetches automatically every few hours.',
 }: LiveFeedProps) {
   const { data, loading, error, updatedAt } = useLiveData(endpoint);
   const items = data.slice(0, limit);

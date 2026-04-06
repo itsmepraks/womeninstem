@@ -26,7 +26,7 @@ export default function ResourceCard({
   if (hasDeadline) {
     if (daysLeft! <= 7) {
       badgeText = `${daysLeft} days left`;
-      badgeClass = 'bg-red-50 text-red-600';
+      badgeClass = 'bg-red-100 text-red-900';
     } else if (daysLeft! <= 30) {
       badgeText = `${daysLeft} days left`;
       badgeClass = 'bg-accent-secondary/10 text-accent-primary';

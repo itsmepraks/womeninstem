@@ -44,7 +44,7 @@ export default function Nav() {
       <div className="flex items-center gap-2 md:hidden">
         <GlobalSearch />
         <button
-          className="p-2 text-text-heading"
+          className="md:hidden p-2 text-text-heading focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-lg"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         >
