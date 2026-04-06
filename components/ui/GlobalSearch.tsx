@@ -169,7 +169,7 @@ export default function GlobalSearch() {
           setOpen(true);
           setTimeout(() => inputRef.current?.focus(), 50);
         }}
-        className="flex items-center gap-2 text-sm text-text-muted hover:text-text-heading transition-colors px-3 py-2 rounded-xl hover:bg-accent-secondary/5"
+        className="flex items-center gap-2 text-sm text-text-muted hover:text-text-heading transition-colors px-4 py-2.5 rounded-xl hover:bg-accent-secondary/5"
         aria-label="Search"
       >
         <Search size={16} />
@@ -186,12 +186,15 @@ export default function GlobalSearch() {
             {/* Search input */}
             <div className="flex items-center gap-3 px-5 py-4 border-b border-accent-primary/5">
               <Search size={18} className="text-text-muted flex-shrink-0" />
+              <label htmlFor="global-search-input" className="sr-only">Search resources</label>
               <input
+                id="global-search-input"
                 ref={inputRef}
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search everything..."
+                aria-label="Search resources"
                 className="flex-1 bg-transparent text-body-lg text-text-heading placeholder:text-text-muted/50 outline-none"
               />
               {query && (

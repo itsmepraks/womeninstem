@@ -147,17 +147,17 @@ export default function ResourcesPage() {
       </section>
 
       {/* ─── FILTER BAR ─── */}
-      <section className="pb-8">
+      <section className="sticky top-0 z-30 -mx-6 md:-mx-10 px-6 md:px-10 py-4 mb-8 bg-bg-primary/90 backdrop-blur-md border-b border-accent-primary/5">
         <div className="space-y-4">
           {/* Category toggles */}
           <div>
             <span className="text-xs text-text-muted uppercase tracking-wide font-medium block mb-2">Category</span>
-            <div className="flex flex-wrap gap-2">
+            <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-2">
               {CATEGORIES.map((cat) => (
                 <button
                   key={cat.value}
                   onClick={() => setActiveCategory(cat.value)}
-                  className={`text-xs px-3.5 py-1.5 rounded-pill transition-colors ${
+                  className={`text-xs px-4 py-2 rounded-pill transition-colors ${
                     activeCategory === cat.value
                       ? 'bg-accent-secondary/10 text-accent-primary font-medium'
                       : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
@@ -172,12 +172,12 @@ export default function ResourcesPage() {
           {/* Cost toggles */}
           <div>
             <span className="text-xs text-text-muted uppercase tracking-wide font-medium block mb-2">Cost</span>
-            <div className="flex flex-wrap gap-2">
+            <div role="group" aria-label="Filter by cost" className="flex flex-wrap gap-2">
               {COST_OPTIONS.map((opt) => (
                 <button
                   key={opt.value}
                   onClick={() => setActiveCost(opt.value)}
-                  className={`text-xs px-3.5 py-1.5 rounded-pill transition-colors ${
+                  className={`text-xs px-4 py-2 rounded-pill transition-colors ${
                     activeCost === opt.value
                       ? 'bg-accent-secondary/10 text-accent-primary font-medium'
                       : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
@@ -191,11 +191,14 @@ export default function ResourcesPage() {
 
           {/* Search input */}
           <div>
+            <label htmlFor="resources-search-input" className="sr-only">Search resources by name</label>
             <input
+              id="resources-search-input"
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by name or description..."
+              aria-label="Search resources by name"
               className="w-full text-sm px-4 py-2.5 rounded-pill border border-accent-secondary/20 bg-white text-text-body placeholder:text-text-muted focus:outline-none focus:border-accent-primary/40 focus:ring-1 focus:ring-accent-primary/20 transition-colors"
             />
           </div>
@@ -501,7 +504,7 @@ export default function ResourcesPage() {
                 setActiveCost('all');
                 setSearchQuery('');
               }}
-              className="text-xs text-accent-primary mt-2 hover:underline"
+              className="mt-3 inline-block text-sm px-4 py-2.5 rounded-pill bg-accent-secondary/10 text-accent-primary hover:bg-accent-secondary/20 transition-colors"
             >
               Clear all filters
             </button>
