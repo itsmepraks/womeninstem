@@ -26,7 +26,7 @@ export default function AboutPage() {
             <p>
               I&apos;d miss application deadlines because I didn&apos;t know they
               existed. I&apos;d hear about workshops after they already happened.
-              Opportunities were there — I just couldn&apos;t find them in time.
+              Opportunities were there. I just couldn&apos;t find them in time.
             </p>
             <p>
               So I made this. It&apos;s not a company. It&apos;s not a platform
@@ -99,10 +99,10 @@ export default function AboutPage() {
         </h2>
         <div className="card-dark p-8">
           <ul className="space-y-3 text-body text-surface-dark-text/70">
-            <li>We don&apos;t run any mentorship programs — we link to platforms that do.</li>
-            <li>We don&apos;t host events or conferences — we help you find them.</li>
-            <li>We don&apos;t verify scholarship deadlines in real-time — always check the source.</li>
-            <li>We don&apos;t endorse any specific organization — we just make them easier to find.</li>
+            <li>We don&apos;t run any mentorship programs. We link to platforms that do.</li>
+            <li>We don&apos;t host events or conferences. We help you find them.</li>
+            <li>We don&apos;t verify scholarship deadlines in real-time. Always check the source.</li>
+            <li>We don&apos;t endorse any specific organization. We just make them easier to find.</li>
             <li>We don&apos;t collect your data or require sign-up.</li>
           </ul>
         </div>
@@ -164,7 +164,7 @@ export default function AboutPage() {
               <div>
                 <strong className="text-text-heading">Statistics:</strong>{' '}
                 Numbers on the Impact page come from published research (NSF, NCES, etc.).
-                These don&apos;t auto-update — they&apos;re from specific reports and studies.
+                These don&apos;t auto-update. They&apos;re from specific reports and studies.
               </div>
             </div>
           </div>

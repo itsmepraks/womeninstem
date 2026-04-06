@@ -28,7 +28,7 @@ export default function MediaPage() {
           Books, podcasts, <em className="italic text-accent-primary">and more</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[520px]">
-          Some of these are fetched automatically. Others are hand-picked recommendations that we update over time.
+          Some auto-update from public APIs. Others are hand-picked.
         </p>
 
         <div className="flex flex-wrap gap-2 mt-6">
@@ -75,7 +75,7 @@ export default function MediaPage() {
       <section id="curated-books" className="pb-10">
         <SectionHeading title="Curated book list" />
         <p className="text-sm text-text-muted mb-4">
-          Hand-picked recommendations. These don&apos;t auto-update — they&apos;re books we think are worth reading.
+          Books worth reading. We pick these by hand.
         </p>
         {bookCategories.map((cat) => {
           const filtered = books.filter((b) => b.category === cat);
@@ -102,7 +102,7 @@ export default function MediaPage() {
       <section id="curated-podcasts" className="pb-10">
         <SectionHeading title="Curated podcast list" />
         <p className="text-sm text-text-muted mb-4">
-          Hand-picked shows. The live feed above pulls from iTunes automatically — this list is our personal picks.
+          Our personal podcast picks. The live feed above pulls from iTunes.
         </p>
         {podcastCategories.map((cat) => {
           const filtered = podcasts.filter((p) => p.category === cat);
@@ -116,7 +116,7 @@ export default function MediaPage() {
                 {filtered.map((pod) => (
                   <div key={pod.name} className="card-white p-4">
                     <span className="text-body text-text-heading font-medium">{pod.name}</span>
-                    {pod.host && <span className="text-sm text-text-muted ml-2">— {pod.host}</span>}
+                    {pod.host && <span className="text-sm text-text-muted ml-2">with {pod.host}</span>}
                     <p className="text-sm text-text-secondary mt-1">{pod.description}</p>
                   </div>
                 ))}
@@ -134,7 +134,7 @@ export default function MediaPage() {
             <div key={doc.title} className="card-white p-4 flex items-baseline gap-2">
               <span className="text-body text-text-heading font-medium">{doc.title}</span>
               {doc.year && <span className="text-sm text-text-muted">({doc.year})</span>}
-              <span className="text-sm text-text-secondary">— {doc.description}</span>
+              <span className="text-sm text-text-secondary">{doc.description}</span>
             </div>
           ))}
         </div>
@@ -147,7 +147,7 @@ export default function MediaPage() {
           {youtubeChannels.map((ch) => (
             <div key={ch.name} className="card-white p-4">
               <span className="text-body text-text-heading font-medium">{ch.name}</span>
-              {ch.host && <span className="text-sm text-text-muted ml-2">— {ch.host}</span>}
+              {ch.host && <span className="text-sm text-text-muted ml-2">with {ch.host}</span>}
               <p className="text-sm text-text-secondary mt-1">{ch.description}</p>
             </div>
           ))}

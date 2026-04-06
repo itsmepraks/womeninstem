@@ -111,7 +111,7 @@ export default function ResourcesPage() {
           Resources <em className="italic text-accent-primary">that matter</em>
         </h1>
         <p className="text-body-lg text-text-body mt-3 max-w-[500px]">
-          Everything links to the real source. Click through to verify.
+          Every link is real. Click through to verify before you apply.
         </p>
       </section>
 
@@ -173,7 +173,7 @@ export default function ResourcesPage() {
 
       {/* ─── LIVE FEEDS ─── */}
       <section id="live" className="pb-10">
-        <SectionHeading title="Live Feeds" accent="Pulled from public APIs. Refreshes every few hours." />
+        <SectionHeading title="Live Feeds" accent="From public APIs. Updated every few hours." />
         <div className="space-y-6">
           <LiveFeed endpoint="/api/resources/jobs" title="Jobs & Internships" limit={5} />
           <LiveFeed endpoint="/api/resources/events" title="Events" limit={5} />
