@@ -59,6 +59,29 @@ export default function ResourcesPage() {
   const [activeCategory, setActiveCategory] = useState<Category>('all');
   const [activeCost, setActiveCost] = useState<CostFilter>('all');
   const [searchQuery, setSearchQuery] = useState('');
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+
+  function toggle(key: string) {
+    setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
+  }
+
+  const PREVIEW = 6;
+
+  function ShowMoreButton({ sectionKey, total }: { sectionKey: string; total: number }) {
+    if (total <= PREVIEW) return null;
+    return (
+      <button
+        onClick={() => toggle(sectionKey)}
+        className="mt-3 text-sm text-accent-primary font-medium underline underline-offset-4 hover:text-accent-secondary transition-colors"
+      >
+        {expanded[sectionKey] ? 'Show less' : `Show all ${total}`}
+      </button>
+    );
+  }
+
+  function sliced<T>(arr: T[], key: string): T[] {
+    return expanded[key] ? arr : arr.slice(0, PREVIEW);
+  }
 
   const showSection = (section: Category) => activeCategory === 'all' || activeCategory === section;
 
@@ -269,10 +292,11 @@ export default function ResourcesPage() {
             <div className="mb-8">
               <h3 className="text-label text-accent-primary mb-3">Undergraduate</h3>
               <div className="space-y-2.5">
-                {undergradScholarships.map((s) => (
+                {sliced(undergradScholarships, 'scholarships-undergrad').map((s) => (
                   <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} />
                 ))}
               </div>
+              <ShowMoreButton sectionKey="scholarships-undergrad" total={undergradScholarships.length} />
             </div>
           )}
 
@@ -280,10 +304,11 @@ export default function ResourcesPage() {
             <div className="mb-8">
               <h3 className="text-label text-accent-primary mb-3">Graduate & Fellowship</h3>
               <div className="space-y-2.5">
-                {gradScholarships.map((s) => (
+                {sliced(gradScholarships, 'scholarships-grad').map((s) => (
                   <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} />
                 ))}
               </div>
+              <ShowMoreButton sectionKey="scholarships-grad" total={gradScholarships.length} />
             </div>
           )}
 
@@ -291,10 +316,11 @@ export default function ResourcesPage() {
             <div>
               <h3 className="text-label text-accent-primary mb-3">Postdoctoral & Research Grants</h3>
               <div className="space-y-2.5">
-                {postdocScholarships.map((s) => (
+                {sliced(postdocScholarships, 'scholarships-postdoc').map((s) => (
                   <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} />
                 ))}
               </div>
+              <ShowMoreButton sectionKey="scholarships-postdoc" total={postdocScholarships.length} />
             </div>
           )}
         </section>
@@ -305,7 +331,7 @@ export default function ResourcesPage() {
         <section id="organizations" className="pb-12">
           <SectionHeading title="Professional Organizations" accent={`${filteredOrganizations.length} listed`} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
-            {filteredOrganizations.map((org) => (
+            {sliced(filteredOrganizations, 'organizations').map((org) => (
               <CompanyCard
                 key={org.id}
                 name={org.name}
@@ -317,6 +343,7 @@ export default function ResourcesPage() {
               />
             ))}
           </div>
+          <ShowMoreButton sectionKey="organizations" total={filteredOrganizations.length} />
         </section>
       )}
 
@@ -334,13 +361,13 @@ export default function ResourcesPage() {
               <div key={section.key} className={idx < 2 ? 'mb-8' : undefined}>
                 <h3 className="text-label text-accent-primary mb-3">{section.label}</h3>
                 <div className="space-y-2.5">
-                  {section.programs.map((p) => (
+                  {sliced(section.programs, `programs-${section.key}`).map((p) => (
                     <a
                       key={p.id}
                       href={p.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="card-white p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow"
+                      className="card-white p-6 md:p-5 flex items-center justify-between group hover:shadow-card-hover transition-shadow"
                     >
                       <div>
                         <span className="text-body text-text-heading font-medium">{p.name}</span>
@@ -353,6 +380,7 @@ export default function ResourcesPage() {
                     </a>
                   ))}
                 </div>
+                <ShowMoreButton sectionKey={`programs-${section.key}`} total={section.programs.length} />
               </div>
             )
           )}
@@ -364,11 +392,11 @@ export default function ResourcesPage() {
         <section id="conferences" className="pb-12">
           <SectionHeading title="Conferences & Events" accent={`${filteredConferences.length} listed`} />
           <div className="space-y-2.5">
-            {sortedConferences.map(({ conf, occurrence }) => (
+            {sliced(sortedConferences, 'conferences').map(({ conf, occurrence }) => (
                 <LinkCard
                   key={conf.id}
                   url={conf.url}
-                  className="p-5 flex items-center justify-between"
+                  className="p-6 md:p-5 flex items-center justify-between"
                 >
                   <div>
                     <h3 className="text-body text-text-heading font-medium">{conf.name}</h3>
@@ -394,6 +422,7 @@ export default function ResourcesPage() {
                 </LinkCard>
             ))}
           </div>
+          <ShowMoreButton sectionKey="conferences" total={sortedConferences.length} />
         </section>
       )}
 
@@ -402,11 +431,11 @@ export default function ResourcesPage() {
         <section id="mentorship" className="pb-12">
           <SectionHeading title="Mentorship Platforms" accent="External platforms" />
           <div className="space-y-2.5">
-            {filteredMentorship.map((platform) => (
+            {sliced(filteredMentorship, 'mentorship').map((platform) => (
                 <LinkCard
                   key={platform.id}
                   url={platform.url}
-                  className="p-5 flex items-center justify-between"
+                  className="p-6 md:p-5 flex items-center justify-between"
                 >
                   <div>
                     <h3 className="text-body text-text-heading font-medium">{platform.name}</h3>
@@ -425,6 +454,7 @@ export default function ResourcesPage() {
                 </LinkCard>
             ))}
           </div>
+          <ShowMoreButton sectionKey="mentorship" total={filteredMentorship.length} />
         </section>
       )}
 
@@ -433,11 +463,11 @@ export default function ResourcesPage() {
         <section id="jobs" className="pb-12">
           <SectionHeading title="Job Boards & Career" accent="External job sites" />
           <div className="space-y-2.5">
-            {filteredJobBoards.map((board) => (
+            {sliced(filteredJobBoards, 'jobs').map((board) => (
                 <LinkCard
                   key={board.id}
                   url={board.url}
-                  className="p-5 flex items-center justify-between"
+                  className="p-6 md:p-5 flex items-center justify-between"
                 >
                   <div>
                     <h3 className="text-body text-text-heading font-medium">{board.name}</h3>
@@ -456,6 +486,7 @@ export default function ResourcesPage() {
                 </LinkCard>
             ))}
           </div>
+          <ShowMoreButton sectionKey="jobs" total={filteredJobBoards.length} />
         </section>
       )}
 
@@ -464,8 +495,8 @@ export default function ResourcesPage() {
         <section id="communities" className="pb-12">
           <SectionHeading title="Communities" accent="Slack, Discord, newsletters" />
           <div className="space-y-2.5">
-            {filteredCommunities.map((c) => (
-              <LinkCard key={c.id} url={c.url} className="p-5 flex items-center justify-between">
+            {sliced(filteredCommunities, 'communities').map((c) => (
+              <LinkCard key={c.id} url={c.url} className="p-6 md:p-5 flex items-center justify-between">
                 <div>
                   <h3 className="text-body text-text-heading font-medium">{c.name}</h3>
                   <p className="text-xs text-text-secondary mt-1">{c.description}</p>
@@ -484,6 +515,7 @@ export default function ResourcesPage() {
               </LinkCard>
             ))}
           </div>
+          <ShowMoreButton sectionKey="communities" total={filteredCommunities.length} />
         </section>
       )}
 

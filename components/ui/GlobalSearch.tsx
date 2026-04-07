@@ -173,7 +173,7 @@ export default function GlobalSearch() {
         aria-label="Search"
       >
         <Search size={16} />
-        <span className="hidden lg:inline">Search</span>
+        <span className="hidden sm:inline">Search</span>
         <kbd className="hidden lg:inline text-xs bg-accent-secondary/10 text-text-muted px-2 py-0.5 rounded">
           ⌘K
         </kbd>

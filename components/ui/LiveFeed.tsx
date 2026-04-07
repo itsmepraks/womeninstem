@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useLiveData } from '@/lib/useLiveData';
 
 interface LiveFeedProps {
@@ -28,6 +29,16 @@ export default function LiveFeed({
 }: LiveFeedProps) {
   const { data, loading, error, updatedAt } = useLiveData(endpoint);
   const items = data.slice(0, limit);
+  const [slowLoading, setSlowLoading] = useState(false);
+
+  useEffect(() => {
+    if (!loading) {
+      setSlowLoading(false);
+      return;
+    }
+    const id = setTimeout(() => setSlowLoading(true), 5000);
+    return () => clearTimeout(id);
+  }, [loading]);
 
   return (
     <div>
@@ -54,6 +65,11 @@ export default function LiveFeed({
               <div className="h-3 bg-accent-secondary/5 rounded w-1/2" />
             </div>
           ))}
+          {slowLoading && (
+            <p className="text-sm text-text-muted text-center mt-3">
+              Still fetching... external APIs can be slow on first load.
+            </p>
+          )}
         </div>
       )}
 
