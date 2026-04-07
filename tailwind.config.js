@@ -15,9 +15,9 @@ module.exports = {
         },
         text: {
           heading: '#3d2518',
-          body: '#6b5344',
-          secondary: '#8b6e5a',
-          muted: '#b8946c',
+          body: '#5c4636',
+          secondary: '#7a5e48',
+          muted: '#94704f',
         },
         accent: {
           primary: '#c47a52',
@@ -41,10 +41,12 @@ module.exports = {
       fontSize: {
         'display-lg': ['3.5rem', { lineHeight: '1.08', fontWeight: '300' }],
         'display': ['2rem', { lineHeight: '1.15', fontWeight: '500' }],
-        'heading': ['1.375rem', { lineHeight: '1.3', fontWeight: '600' }],
+        'heading': ['1.5rem', { lineHeight: '1.3', fontWeight: '600' }],
         'body-lg': ['1.125rem', { lineHeight: '1.75' }],
         'body': ['1rem', { lineHeight: '1.7' }],
-        'label': ['0.6875rem', { lineHeight: '1', letterSpacing: '0.125em', fontWeight: '400' }],
+        'xs': ['0.8125rem', { lineHeight: '1.6' }],
+        'sm': ['0.9375rem', { lineHeight: '1.6' }],
+        'label': ['0.8125rem', { lineHeight: '1.4', letterSpacing: '0.1em', fontWeight: '500' }],
       },
       borderRadius: {
         'organic': '1.25rem',

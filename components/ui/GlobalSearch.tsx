@@ -174,7 +174,7 @@ export default function GlobalSearch() {
       >
         <Search size={16} />
         <span className="hidden lg:inline">Search</span>
-        <kbd className="hidden lg:inline text-[0.625rem] bg-accent-secondary/10 text-text-muted px-1.5 py-0.5 rounded">
+        <kbd className="hidden lg:inline text-xs bg-accent-secondary/10 text-text-muted px-2 py-0.5 rounded">
           ⌘K
         </kbd>
       </button>
@@ -205,7 +205,7 @@ export default function GlobalSearch() {
                   <X size={16} />
                 </button>
               )}
-              <kbd className="text-[0.625rem] bg-accent-secondary/10 text-text-muted px-1.5 py-0.5 rounded flex-shrink-0">
+              <kbd className="text-xs bg-accent-secondary/10 text-text-muted px-2 py-0.5 rounded flex-shrink-0">
                 ESC
               </kbd>
             </div>
@@ -261,7 +261,7 @@ export default function GlobalSearch() {
                                 {item.subtitle}
                               </p>
                             </div>
-                            <span className="text-[0.625rem] text-accent-primary flex-shrink-0 mt-0.5">
+                            <span className="text-sm text-accent-primary flex-shrink-0 mt-0.5">
                               {isExternal ? '↗' : '→'}
                             </span>
                           </a>

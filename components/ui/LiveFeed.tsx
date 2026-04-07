@@ -135,7 +135,7 @@ export default function LiveFeed({
                   {item.tags && item.tags.slice(0, 3).map((tag) => (
                     <span
                       key={tag}
-                      className="text-[0.625rem] bg-accent-secondary/10 text-accent-primary px-2 py-0.5 rounded-pill"
+                      className="text-xs bg-accent-secondary/10 text-accent-primary px-2 py-1 rounded-pill"
                     >
                       {tag}
                     </span>
