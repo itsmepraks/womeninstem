@@ -124,7 +124,7 @@ export default function HomePage() {
                 Women in computing are 45% more likely to leave than men.
                 Companies with gender-diverse teams are 15% more likely to outperform competitors.
               </p>
-              <p className="text-[0.6875rem] text-text-muted/70 mt-1">
+              <p className="text-xs text-text-muted/90 mt-1">
                 Center for Talent Innovation
               </p>
             </div>
