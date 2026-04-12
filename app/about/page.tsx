@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
 import { SOCIAL_LINKS } from '@/lib/constants';
 import { pioneers } from '@/data/pioneers';
 import { scholarships, organizations, programs, conferences } from '@/data/resources';
+
+export const metadata: Metadata = {
+  title: 'About · stem·spark',
+  description: 'Why this site exists. Built by a student who couldn\'t find what she needed.',
+};
 
 export default function AboutPage() {
   return (

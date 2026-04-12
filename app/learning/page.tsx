@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import SectionHeading from '@/components/ui/SectionHeading';
+
+export const metadata: Metadata = {
+  title: 'Learning · stem·spark',
+  description: 'Free courses and bootcamps for women in STEM, sorted by field.',
+};
 import ResourceCard from '@/components/ui/ResourceCard';
 import { scholarships, programs } from '@/data/resources';
 import { getPioneerByField } from '@/data/pioneers';
