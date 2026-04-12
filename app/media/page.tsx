@@ -1,6 +1,12 @@
+import type { Metadata } from 'next';
 import SectionHeading from '@/components/ui/SectionHeading';
 import LiveFeed from '@/components/ui/LiveFeed';
 import { books, podcasts, documentaries, youtubeChannels } from '@/data/media';
+
+export const metadata: Metadata = {
+  title: 'Media · stem·spark',
+  description: 'Books, podcasts, and documentaries about women in STEM.',
+};
 
 const bookCategoryLabels: Record<string, string> = {
   challenges: 'Understanding the Challenges',

@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import {
   heroStats,
   workforceStats,
@@ -7,6 +8,11 @@ import {
   challenges,
 } from '@/data/stats';
 import type { Stat } from '@/data/stats';
+
+export const metadata: Metadata = {
+  title: 'Impact · stem·spark',
+  description: 'Real statistics about women in STEM from published research.',
+};
 
 function ImpactStat({ stat }: { stat: Stat }) {
   return (
