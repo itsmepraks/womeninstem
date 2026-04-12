@@ -117,6 +117,7 @@ export const scholarships: Scholarship[] = [
       "Essay-based scholarship for women pursuing undergraduate or master's degrees in STEM.",
     level: 'all',
     url: 'https://thebhwgroup.com/scholarship',
+    nextDeadline: '2027-03-01',
   },
   {
     id: 'astronaut-scholarship',
@@ -126,6 +127,7 @@ export const scholarships: Scholarship[] = [
       'Prestigious faculty-nominated award for STEM majors at select universities.',
     level: 'undergraduate',
     url: 'https://www.astronautscholarship.org/',
+    nextDeadline: '2027-03-15',
   },
   {
     id: 'aauw-scholarships',
@@ -145,6 +147,7 @@ export const scholarships: Scholarship[] = [
       'Scholarships for Hispanic students pursuing degrees in STEM fields.',
     level: 'undergraduate',
     url: 'https://www.shpe.org/students/scholarships/',
+    nextDeadline: '2026-11-01',
   },
   {
     id: 'nsbe-scholarships',
@@ -154,6 +157,7 @@ export const scholarships: Scholarship[] = [
       'Scholarships supporting Black students in engineering programs.',
     level: 'undergraduate',
     url: 'https://www.nsbe.org/Programs/Scholarships.aspx',
+    nextDeadline: '2026-11-30',
   },
   {
     id: 'science-ambassador',
@@ -163,6 +167,7 @@ export const scholarships: Scholarship[] = [
       'Unique video-based application for women in STEM with a full-tuition award.',
     level: 'undergraduate',
     url: 'https://www.scienceambassadorscholarship.org/',
+    nextDeadline: '2026-12-15',
   },
   // Graduate Fellowships
   {
@@ -193,6 +198,7 @@ export const scholarships: Scholarship[] = [
       'Highly competitive fellowship for immigrants and children of immigrants in graduate programs.',
     level: 'graduate',
     url: 'https://www.pdsoros.org/',
+    nextDeadline: '2026-10-28',
   },
   {
     id: 'hertz-fellowship',
@@ -212,6 +218,7 @@ export const scholarships: Scholarship[] = [
       'International award for women in the final two years of their doctoral program.',
     level: 'graduate',
     url: 'https://www.peointernational.org/',
+    nextDeadline: '2026-11-20',
   },
   {
     id: 'aauw-international',
@@ -241,6 +248,7 @@ export const scholarships: Scholarship[] = [
       'Fellowship for PhD students in computer science and related fields.',
     level: 'graduate',
     url: 'https://research.facebook.com/fellowship',
+    nextDeadline: '2026-10-01',
   },
   {
     id: 'microsoft-research-phd',
@@ -249,6 +257,7 @@ export const scholarships: Scholarship[] = [
     description: 'Fellowship for PhD students in computing-related fields.',
     level: 'graduate',
     url: 'https://www.microsoft.com/research/academic-program/phd-fellowship',
+    nextDeadline: '2026-10-15',
   },
   {
     id: 'google-phd',
@@ -257,6 +266,7 @@ export const scholarships: Scholarship[] = [
     description: 'Fellowship for PhD students in computer science.',
     level: 'graduate',
     url: 'https://research.google/outreach/phd-fellowship',
+    nextDeadline: '2026-12-01',
   },
   // Postdoctoral Funding
   {
@@ -267,6 +277,7 @@ export const scholarships: Scholarship[] = [
       'International program with regional and international awards for women postdoctoral researchers.',
     level: 'postdoctoral',
     url: 'https://www.forwomeninscience.com/',
+    nextDeadline: '2026-10-31',
   },
   {
     id: 'aauw-career-development',
@@ -276,6 +287,7 @@ export const scholarships: Scholarship[] = [
       'Grants for women pursuing advanced degrees, certificates, or credentials.',
     level: 'postdoctoral',
     url: 'https://www.aauw.org/resources/programs/fellowships-grants/current-opportunities/career-development/',
+    nextDeadline: '2026-11-15',
   },
   {
     id: 'blavatnik-awards',
@@ -285,6 +297,7 @@ export const scholarships: Scholarship[] = [
       'Awards for young faculty in life sciences, physical sciences, and engineering.',
     level: 'postdoctoral',
     url: 'https://www.blavatnikawards.org/',
+    nextDeadline: '2026-06-30',
   },
   {
     id: 'schlumberger-faculty',
@@ -294,6 +307,7 @@ export const scholarships: Scholarship[] = [
       'Fellowships for women from developing countries pursuing PhD or postdoc in STEM, focused on returning home.',
     level: 'postdoctoral',
     url: 'https://www.facultyforthefuture.net/',
+    nextDeadline: '2026-11-07',
   },
   // Research Grants
   {
@@ -313,6 +327,7 @@ export const scholarships: Scholarship[] = [
     description: 'Research award for exceptional junior investigators.',
     level: 'postdoctoral',
     url: 'https://commonfund.nih.gov/earlyindependence',
+    nextDeadline: '2026-08-15',
   },
   {
     id: 'sloan-fellowships',
@@ -322,6 +337,7 @@ export const scholarships: Scholarship[] = [
       'Highly prestigious unrestricted fellowships for early-career scholars in STEM fields.',
     level: 'postdoctoral',
     url: 'https://sloan.org/fellowships',
+    nextDeadline: '2026-09-15',
   },
   {
     id: 'mozilla-moss',
@@ -330,6 +346,7 @@ export const scholarships: Scholarship[] = [
     description: 'Grants supporting open source projects and contributors.',
     level: 'all',
     url: 'https://www.mozilla.org/moss',
+    nextDeadline: '2026-06-15',
   },
   // Conference Travel Grants
   {
@@ -340,6 +357,7 @@ export const scholarships: Scholarship[] = [
       "Highly competitive scholarships for students and emerging professionals to attend the world's largest gathering of women technologists.",
     level: 'all',
     url: 'https://ghc.anitab.org/attend/scholarships/',
+    nextDeadline: '2027-03-10',
   },
   {
     id: 'acm-w-scholarships',
@@ -349,6 +367,7 @@ export const scholarships: Scholarship[] = [
       'Travel scholarships for women in computing attending ACM conferences.',
     level: 'all',
     url: 'https://women.acm.org/scholarships/',
+    nextDeadline: '2026-05-15',
   },
   {
     id: 'swe-conference-scholarships',
@@ -358,6 +377,7 @@ export const scholarships: Scholarship[] = [
       'Scholarships for SWE members attending WE Local, WE, or regional conferences.',
     level: 'all',
     url: 'https://swe.org',
+    nextDeadline: '2026-08-01',
   },
 ];
 
