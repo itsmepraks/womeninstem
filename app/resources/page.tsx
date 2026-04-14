@@ -347,7 +347,7 @@ export default function ResourcesPage() {
       {/* ─── ORGANIZATIONS ─── */}
       {showSection('organizations') && filteredOrganizations.length > 0 && (
         <motion.section variants={fadeUp} id="organizations" className="pb-12">
-          <SectionHeading title="Professional Organizations" accent={`${filteredOrganizations.length} listed`} />
+          <SectionHeading title="Organizations" accent={`${filteredOrganizations.length} listed`} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
             {sliced(filteredOrganizations, 'organizations').map((org) => (
               <CompanyCard
