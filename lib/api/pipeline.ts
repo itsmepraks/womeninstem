@@ -79,8 +79,8 @@ export function fingerprintUrl(url: string): string {
     TRACKING_PARAMS.forEach((p) => u.searchParams.delete(p))
     // Rebuild: strip www, strip trailing slash
     const host = u.hostname.replace(/^www\./, '')
-    const path = (u.pathname + u.search).replace(/\/$/, '')
-    return host + path
+    const path = (u.pathname + u.search).replace(/\/$/, '').toLowerCase()
+    return (host + path).toLowerCase()
   } catch {
     return url
   }

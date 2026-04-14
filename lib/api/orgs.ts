@@ -173,7 +173,7 @@ export async function fetchOrgs(): Promise<ResourcesResponse> {
   const deduped = deduplicateResources(agg.data)
   const filtered = filterExpired(deduped)
   return buildResponse(filtered, 'orgs', {
-    revalidateSeconds: 21600,
+    revalidateSeconds: 86400,
     sources: agg.sourceNames,
     sourcesAttempted: agg.sourcesAttempted,
     sourcesSucceeded: agg.sourcesSucceeded,

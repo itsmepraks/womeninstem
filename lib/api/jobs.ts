@@ -126,7 +126,7 @@ export async function fetchJobs(): Promise<ResourcesResponse> {
   const deduped = deduplicateResources(agg.data)
   // Don't filterExpired for jobs — date is posting date, not expiry
   return buildResponse(deduped, 'jobs', {
-    revalidateSeconds: 300,
+    revalidateSeconds: 21600,
     sources: agg.sourceNames,
     sourcesAttempted: agg.sourcesAttempted,
     sourcesSucceeded: agg.sourcesSucceeded,

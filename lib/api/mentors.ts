@@ -137,7 +137,7 @@ export async function fetchMentors(): Promise<ResourcesResponse> {
   const deduped = deduplicateResources(agg.data)
   const filtered = filterExpired(deduped)
   return buildResponse(filtered, 'mentors', {
-    revalidateSeconds: 21600,
+    revalidateSeconds: 86400,
     sources: agg.sourceNames,
     sourcesAttempted: agg.sourcesAttempted,
     sourcesSucceeded: agg.sourcesSucceeded,
