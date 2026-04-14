@@ -1,6 +1,5 @@
 import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
-import { geocodeAll } from '@/lib/geocoding'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
 import { randomUUID } from 'crypto'
@@ -30,27 +29,29 @@ function makeGithubMentorFetcher(query: string, label: string): () => Promise<Re
     )
     const json = await res.json()
     const users: Array<{ login: string }> = json.items ?? []
-    const resources: Resource[] = []
-    for (const user of users.slice(0, 20)) {
-      try {
+    const profileResults = await Promise.allSettled(
+      users.slice(0, 20).map(async (user) => {
         const profileRes = await fetchWithTimeout(`https://api.github.com/users/${user.login}`, { headers: githubHeaders })
-        const p = await profileRes.json()
-        if (!p.html_url) continue
-        if (!p.bio || !hasMentorSignal(p.bio)) continue
-        resources.push({
-          id: randomUUID(),
-          name: p.name ?? p.login,
-          category: 'mentors' as const,
-          lat: 0, lng: 0,
-          location: p.location ?? 'Global',
-          url: p.blog ?? p.html_url,
-          bio: (p.bio ?? '').slice(0, 200),
-          tags: ['github', 'mentor'],
-          sourceName: label,
-        })
-      } catch {
-        // skip individual failures
-      }
+        return profileRes.json()
+      })
+    )
+    const resources: Resource[] = []
+    for (const result of profileResults) {
+      if (result.status !== 'fulfilled') continue
+      const p = result.value
+      if (!p.html_url) continue
+      if (!p.bio || !hasMentorSignal(p.bio)) continue
+      resources.push({
+        id: randomUUID(),
+        name: p.name ?? p.login,
+        category: 'mentors' as const,
+        lat: 0, lng: 0,
+        location: p.location ?? 'Global',
+        url: p.blog ?? p.html_url,
+        bio: (p.bio ?? '').slice(0, 200),
+        tags: ['github', 'mentor'],
+        sourceName: label,
+      })
     }
     return resources
   }
@@ -134,8 +135,7 @@ export async function fetchMentors(): Promise<ResourcesResponse> {
     fetchHashnodeMentors,
   ])
   const deduped = deduplicateResources(agg.data)
-  const geocoded = await geocodeAll(deduped)
-  const filtered = filterExpired(geocoded)
+  const filtered = filterExpired(deduped)
   return buildResponse(filtered, 'mentors', {
     revalidateSeconds: 21600,
     sources: agg.sourceNames,

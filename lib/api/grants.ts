@@ -1,7 +1,6 @@
 import { XMLParser } from 'fast-xml-parser'
 import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
-import { geocodeAll } from '@/lib/geocoding'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
 import { randomUUID } from 'crypto'
@@ -138,8 +137,7 @@ export async function fetchGrants(): Promise<ResourcesResponse> {
   const rssFetchers = GRANTS_RSS_SOURCES.map((s) => makeGrantsRssFetcher(s.url, s.name, s.filter))
   const agg = await aggregateSources([fetchNSF, fetchGrantsGov, fetchNIH, ...rssFetchers])
   const deduped = deduplicateResources(agg.data)
-  const geocoded = await geocodeAll(deduped)
-  const filtered = filterExpired(geocoded)
+  const filtered = filterExpired(deduped)
   return buildResponse(filtered, 'grants', {
     revalidateSeconds: 1800,
     sources: agg.sourceNames,

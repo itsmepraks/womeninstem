@@ -60,19 +60,9 @@ module.exports = {
         'dark-card': '0 12px 40px rgba(92,58,46,0.15)',
       },
       animation: {
-        'fade-in': 'fadeIn 0.6s ease-out forwards',
-        'slide-up': 'slideUp 0.6s ease-out forwards',
         'blob-drift': 'blobDrift 20s ease-in-out infinite',
       },
       keyframes: {
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
-        },
-        slideUp: {
-          '0%': { transform: 'translateY(24px)', opacity: '0' },
-          '100%': { transform: 'translateY(0)', opacity: '1' },
-        },
         blobDrift: {
           '0%, 100%': { transform: 'translate(0, 0) rotate(0deg)' },
           '33%': { transform: 'translate(15px, -10px) rotate(3deg)' },

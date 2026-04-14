@@ -1,7 +1,5 @@
 import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
-import { geocodeAll } from '@/lib/geocoding'
-import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
 import { randomUUID } from 'crypto'
 
@@ -126,9 +124,8 @@ async function fetchWWR(): Promise<Resource[]> {
 export async function fetchJobs(): Promise<ResourcesResponse> {
   const agg = await aggregateSources([fetchArbeitnow, fetchRemotive, fetchJobicy, fetchHimalayas, fetchWWR])
   const deduped = deduplicateResources(agg.data)
-  const geocoded = await geocodeAll(deduped)
   // Don't filterExpired for jobs — date is posting date, not expiry
-  return buildResponse(geocoded, 'jobs', {
+  return buildResponse(deduped, 'jobs', {
     revalidateSeconds: 300,
     sources: agg.sourceNames,
     sourcesAttempted: agg.sourcesAttempted,

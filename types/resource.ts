@@ -7,6 +7,8 @@ export type ResourceCategory =
   | 'mentors'
   | 'grants'
   | 'hackathons'
+  | 'books'
+  | 'podcasts'
 
 export interface Resource {
   id: string
@@ -48,6 +50,8 @@ export const CATEGORY_COLORS: Record<ResourceCategory, string> = {
   mentors:   '#e11d48',
   grants:    '#10b981',
   hackathons: '#0ea5e9',
+  books:      '#8b5cf6',
+  podcasts:   '#ec4899',
 }
 
 export const CATEGORY_LABELS: Record<ResourceCategory, string> = {
@@ -57,12 +61,14 @@ export const CATEGORY_LABELS: Record<ResourceCategory, string> = {
   mentors:    'Mentors',
   grants:     'Grants & Scholarships',
   hackathons: 'Hackathons',
+  books:      'Books',
+  podcasts:   'Podcasts',
 }
 
 export function isResource(obj: unknown): obj is Resource {
   if (typeof obj !== 'object' || obj === null) return false
   const r = obj as Record<string, unknown>
-  const validCategories: string[] = ['events', 'orgs', 'jobs', 'mentors', 'grants', 'hackathons']
+  const validCategories: string[] = ['events', 'orgs', 'jobs', 'mentors', 'grants', 'hackathons', 'books', 'podcasts']
   return (
     typeof r.id === 'string' &&
     typeof r.name === 'string' &&

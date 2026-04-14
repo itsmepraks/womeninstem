@@ -45,7 +45,7 @@ function makeBookFetcher(query: string): () => Promise<Resource[]> {
         return {
           id: randomUUID(),
           name: title,
-          category: 'grants' as const,
+          category: 'books' as const,
           url: `https://openlibrary.org${key}`,
           description: firstSentence.slice(0, 200),
           lat: 0,
@@ -67,7 +67,7 @@ const fetchers = SEARCH_QUERIES.map((q) => makeBookFetcher(q))
 export async function fetchBooks(): Promise<ResourcesResponse> {
   const agg = await aggregateSources(fetchers)
   const deduped = deduplicateResources(agg.data)
-  return buildResponse(deduped, 'grants', {
+  return buildResponse(deduped, 'books', {
     revalidateSeconds: 86400,
     sources: agg.sourceNames,
     sourcesAttempted: agg.sourcesAttempted,
