@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import SectionHeading from '@/components/ui/SectionHeading';
+import PageTransition from '@/components/ui/PageTransition';
+import Feedback from '@/components/ui/Feedback';
 
 export const metadata: Metadata = {
   title: 'Learning · stem·spark',
@@ -17,6 +19,7 @@ export default function LearningPage() {
   const coursesByField = getCoursesByField();
 
   return (
+    <PageTransition>
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       {/* Hero */}
       <section className="pt-12 md:pt-20 pb-10">
@@ -120,6 +123,9 @@ export default function LearningPage() {
           View all {scholarships.length} scholarships →
         </Link>
       </section>
+
+      <Feedback />
     </div>
+    </PageTransition>
   );
 }

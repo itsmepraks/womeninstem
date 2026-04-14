@@ -1,11 +1,14 @@
 'use client';
 
 import { useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ResourceCard from '@/components/ui/ResourceCard';
 import CompanyCard from '@/components/ui/CompanyCard';
 import LinkCard from '@/components/ui/LinkCard';
 import LiveFeed from '@/components/ui/LiveFeed';
+import PageTransition from '@/components/ui/PageTransition';
+import Feedback from '@/components/ui/Feedback';
 import {
   scholarships,
   organizations,
@@ -143,6 +146,16 @@ export default function ResourcesPage() {
       .slice(0, 5);
   }, []);
 
+  const stagger = {
+    hidden: {},
+    show: { transition: { staggerChildren: 0.05 } },
+  };
+
+  const fadeUp = {
+    hidden: { opacity: 0, y: 12 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.3 } },
+  };
+
   const sortedConferences = useMemo(() => {
     return [...filteredConferences]
       .map((c) => ({
@@ -158,6 +171,7 @@ export default function ResourcesPage() {
   }, [filteredConferences]);
 
   return (
+    <PageTransition>
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       {/* Hero */}
       <section className="pt-12 md:pt-20 pb-10">
@@ -228,9 +242,10 @@ export default function ResourcesPage() {
         </div>
       </section>
 
+      <motion.div variants={stagger} initial="hidden" animate="show">
       {/* CLOSING SOON */}
       {closingSoonScholarships.length > 0 && (
-        <section className="pb-10">
+        <motion.section variants={fadeUp} className="pb-10">
           <SectionHeading title="Closing soon" accent="Apply before they expire" />
           <div className="space-y-2.5">
             {closingSoonScholarships.map(({ s, info }) => (
@@ -245,11 +260,11 @@ export default function ResourcesPage() {
               />
             ))}
           </div>
-        </section>
+        </motion.section>
       )}
 
       {/* ─── LIVE FEEDS ─── */}
-      <section id="live" className="pb-10">
+      <motion.section variants={fadeUp} id="live" className="pb-10">
         <SectionHeading title="Live Feeds" accent="From public APIs. Updated every few hours." />
         <div className="space-y-6">
           <LiveFeed endpoint="/api/resources/jobs" title="Jobs & Internships" limit={5} />
@@ -257,10 +272,10 @@ export default function ResourcesPage() {
           <LiveFeed endpoint="/api/resources/hackathons" title="Hackathons" limit={5} />
           <LiveFeed endpoint="/api/resources/grants" title="Grants" limit={5} />
         </div>
-      </section>
+      </motion.section>
 
       {/* Quick nav */}
-      <section className="pb-8">
+      <motion.section variants={fadeUp} className="pb-8">
         <div className="flex flex-wrap gap-2">
           {[
             { label: 'Live', href: '#live' },
@@ -281,11 +296,11 @@ export default function ResourcesPage() {
             </a>
           ))}
         </div>
-      </section>
+      </motion.section>
 
       {/* ─── SCHOLARSHIPS ─── */}
       {showSection('scholarships') && filteredScholarships.length > 0 && (
-        <section id="scholarships" className="pb-12">
+        <motion.section variants={fadeUp} id="scholarships" className="pb-12">
           <SectionHeading title="Scholarships & Funding" accent={`${filteredScholarships.length} opportunities`} />
 
           {undergradScholarships.length > 0 && (
@@ -323,12 +338,12 @@ export default function ResourcesPage() {
               <ShowMoreButton sectionKey="scholarships-postdoc" total={postdocScholarships.length} />
             </div>
           )}
-        </section>
+        </motion.section>
       )}
 
       {/* ─── ORGANIZATIONS ─── */}
       {showSection('organizations') && filteredOrganizations.length > 0 && (
-        <section id="organizations" className="pb-12">
+        <motion.section variants={fadeUp} id="organizations" className="pb-12">
           <SectionHeading title="Professional Organizations" accent={`${filteredOrganizations.length} listed`} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5">
             {sliced(filteredOrganizations, 'organizations').map((org) => (
@@ -344,12 +359,12 @@ export default function ResourcesPage() {
             ))}
           </div>
           <ShowMoreButton sectionKey="organizations" total={filteredOrganizations.length} />
-        </section>
+        </motion.section>
       )}
 
       {/* ─── PROGRAMS ─── */}
       {showSection('programs') && filteredPrograms.length > 0 && (
-        <section id="programs" className="pb-12">
+        <motion.section variants={fadeUp} id="programs" className="pb-12">
           <SectionHeading title="Educational Programs" accent={`${filteredPrograms.length} listed`} />
 
           {[
@@ -384,12 +399,12 @@ export default function ResourcesPage() {
               </div>
             )
           )}
-        </section>
+        </motion.section>
       )}
 
       {/* ─── CONFERENCES ─── */}
       {showSection('conferences') && filteredConferences.length > 0 && (
-        <section id="conferences" className="pb-12">
+        <motion.section variants={fadeUp} id="conferences" className="pb-12">
           <SectionHeading title="Conferences & Events" accent={`${filteredConferences.length} listed`} />
           <div className="space-y-2.5">
             {sliced(sortedConferences, 'conferences').map(({ conf, occurrence }) => (
@@ -423,12 +438,12 @@ export default function ResourcesPage() {
             ))}
           </div>
           <ShowMoreButton sectionKey="conferences" total={sortedConferences.length} />
-        </section>
+        </motion.section>
       )}
 
       {/* ─── MENTORSHIP ─── */}
       {showSection('mentorship') && filteredMentorship.length > 0 && (
-        <section id="mentorship" className="pb-12">
+        <motion.section variants={fadeUp} id="mentorship" className="pb-12">
           <SectionHeading title="Mentorship Platforms" accent="External platforms" />
           <div className="space-y-2.5">
             {sliced(filteredMentorship, 'mentorship').map((platform) => (
@@ -455,12 +470,12 @@ export default function ResourcesPage() {
             ))}
           </div>
           <ShowMoreButton sectionKey="mentorship" total={filteredMentorship.length} />
-        </section>
+        </motion.section>
       )}
 
       {/* ─── JOB BOARDS ─── */}
       {showSection('jobs') && filteredJobBoards.length > 0 && (
-        <section id="jobs" className="pb-12">
+        <motion.section variants={fadeUp} id="jobs" className="pb-12">
           <SectionHeading title="Job Boards & Career" accent="External job sites" />
           <div className="space-y-2.5">
             {sliced(filteredJobBoards, 'jobs').map((board) => (
@@ -487,12 +502,12 @@ export default function ResourcesPage() {
             ))}
           </div>
           <ShowMoreButton sectionKey="jobs" total={filteredJobBoards.length} />
-        </section>
+        </motion.section>
       )}
 
       {/* ─── COMMUNITIES ─── */}
       {showSection('communities') && filteredCommunities.length > 0 && (
-        <section id="communities" className="pb-12">
+        <motion.section variants={fadeUp} id="communities" className="pb-12">
           <SectionHeading title="Communities" accent="Slack, Discord, newsletters" />
           <div className="space-y-2.5">
             {sliced(filteredCommunities, 'communities').map((c) => (
@@ -516,8 +531,9 @@ export default function ResourcesPage() {
             ))}
           </div>
           <ShowMoreButton sectionKey="communities" total={filteredCommunities.length} />
-        </section>
+        </motion.section>
       )}
+      </motion.div>
 
       {/* Empty state */}
       {(activeCategory !== 'all' || activeCost !== 'all' || searchQuery) &&
@@ -542,6 +558,9 @@ export default function ResourcesPage() {
             </button>
           </div>
         )}
+
+      <Feedback />
     </div>
+    </PageTransition>
   );
 }

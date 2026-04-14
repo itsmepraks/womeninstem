@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import SectionHeading from '@/components/ui/SectionHeading';
 import LiveFeed from '@/components/ui/LiveFeed';
+import PageTransition from '@/components/ui/PageTransition';
+import Feedback from '@/components/ui/Feedback';
 import { books, podcasts, documentaries, youtubeChannels } from '@/data/media';
 
 export const metadata: Metadata = {
@@ -27,6 +29,7 @@ export default function MediaPage() {
   const podcastCategories = ['general', 'technology', 'science', 'career'] as const;
 
   return (
+    <PageTransition>
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       {/* Hero */}
       <section className="pt-12 md:pt-20 pb-10">
@@ -172,6 +175,9 @@ export default function MediaPage() {
           </p>
         </div>
       </section>
+
+      <Feedback />
     </div>
+    </PageTransition>
   );
 }
