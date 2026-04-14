@@ -10,7 +10,6 @@ export const FEED_CONFIG: FeedConfig[] = [
   { name: 'grants', revalidateSeconds: 21600 },
   { name: 'mentors', revalidateSeconds: 86400 },
   { name: 'orgs', revalidateSeconds: 86400 },
-  { name: 'pioneers', revalidateSeconds: 86400 },
   { name: 'books', revalidateSeconds: 86400 },
   { name: 'podcasts', revalidateSeconds: 86400 },
 ];

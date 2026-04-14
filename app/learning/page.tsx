@@ -10,7 +10,6 @@ export const metadata: Metadata = {
 };
 import ResourceCard from '@/components/ui/ResourceCard';
 import { scholarships, programs } from '@/data/resources';
-import { getPioneerByField } from '@/data/pioneers';
 import { getCoursesByField } from '@/data/courses';
 
 export default function LearningPage() {
@@ -33,7 +32,6 @@ export default function LearningPage() {
 
       {/* Courses by field */}
       {Array.from(coursesByField.entries()).map(([fieldName, fieldCourses]) => {
-        const pioneer = getPioneerByField(fieldName);
         return (
           <section key={fieldName} className="pb-10">
             <SectionHeading title={fieldName} />
@@ -56,21 +54,6 @@ export default function LearningPage() {
                 </a>
               ))}
             </div>
-            {/* Contextual pioneer callout */}
-            {pioneer && (
-              <div className="mt-4 p-5 bg-accent-gold/[0.04] rounded-organic border border-accent-gold/[0.08]">
-                <p className="text-label text-accent-primary mb-1.5">
-                  Pioneer of {fieldName}
-                </p>
-                <p className="text-sm text-text-body">
-                  <strong className="text-text-heading">{pioneer.name}</strong>
-                  , {pioneer.title}
-                  {pioneer.link && (
-                    <a href={pioneer.link} target="_blank" rel="noopener noreferrer" className="text-accent-primary ml-1 hover:text-accent-secondary transition-colors">↗</a>
-                  )}
-                </p>
-              </div>
-            )}
           </section>
         );
       })}

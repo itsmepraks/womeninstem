@@ -4,7 +4,6 @@ export { default as Badge } from './Badge';
 export { default as Container } from './Container';
 export { default as Loading } from './Loading';
 export { default as StatCard } from './StatCard';
-export { default as PioneerSpotlight } from './PioneerSpotlight';
 export { default as DarkPanel } from './DarkPanel';
 export { default as SectionHeading } from './SectionHeading';
 export { default as ResourceCard } from './ResourceCard';
