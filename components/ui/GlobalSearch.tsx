@@ -40,6 +40,7 @@ function buildSearchIndex(): SearchResult[] {
       subtitle: `${s.amount} · ${s.level}`,
       category: 'Scholarships',
       url: s.url,
+      href: '/resources#scholarships',
     });
   }
 
@@ -49,6 +50,7 @@ function buildSearchIndex(): SearchResult[] {
       subtitle: o.description,
       category: 'Organizations',
       url: o.url,
+      href: '/resources#organizations',
     });
   }
 
@@ -58,6 +60,7 @@ function buildSearchIndex(): SearchResult[] {
       subtitle: `${p.cost} · ${p.description}`,
       category: 'Programs',
       url: p.url,
+      href: '/resources#programs',
     });
   }
 
@@ -67,6 +70,7 @@ function buildSearchIndex(): SearchResult[] {
       subtitle: c.description,
       category: 'Conferences',
       url: c.url,
+      href: '/resources#conferences',
     });
   }
 
@@ -76,6 +80,7 @@ function buildSearchIndex(): SearchResult[] {
       subtitle: `${m.cost} · ${m.description}`,
       category: 'Mentorship',
       url: m.url,
+      href: '/resources#mentorship',
     });
   }
 
@@ -85,6 +90,7 @@ function buildSearchIndex(): SearchResult[] {
       subtitle: `${j.cost} · ${j.description}`,
       category: 'Job Boards',
       url: j.url,
+      href: '/resources#jobs',
     });
   }
 
