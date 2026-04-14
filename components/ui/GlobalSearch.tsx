@@ -26,7 +26,7 @@ function buildSearchIndex(): SearchResult[] {
   for (const s of scholarships) {
     results.push({
       title: s.name,
-      subtitle: `${s.amount} · ${s.level}`,
+      subtitle: `${s.amount} · ${s.level}${s.region ? ` · ${s.region}` : ''}`,
       category: 'Scholarships',
       url: s.url,
       href: '/resources#scholarships',
@@ -36,7 +36,7 @@ function buildSearchIndex(): SearchResult[] {
   for (const o of organizations) {
     results.push({
       title: o.name,
-      subtitle: o.description,
+      subtitle: `${o.description}${o.region ? ` · ${o.region}` : ''}`,
       category: 'Organizations',
       url: o.url,
       href: '/resources#organizations',
@@ -46,7 +46,7 @@ function buildSearchIndex(): SearchResult[] {
   for (const p of programs) {
     results.push({
       title: p.name,
-      subtitle: `${p.cost} · ${p.description}`,
+      subtitle: `${p.cost} · ${p.description}${p.region ? ` · ${p.region}` : ''}`,
       category: 'Programs',
       url: p.url,
       href: '/resources#programs',
@@ -56,7 +56,7 @@ function buildSearchIndex(): SearchResult[] {
   for (const c of conferences) {
     results.push({
       title: c.name,
-      subtitle: c.description,
+      subtitle: `${c.description}${c.region ? ` · ${c.region}` : ''}`,
       category: 'Conferences',
       url: c.url,
       href: '/resources#conferences',
@@ -66,7 +66,7 @@ function buildSearchIndex(): SearchResult[] {
   for (const m of mentorshipPlatforms) {
     results.push({
       title: m.name,
-      subtitle: `${m.cost} · ${m.description}`,
+      subtitle: `${m.cost} · ${m.description}${m.region ? ` · ${m.region}` : ''}`,
       category: 'Mentorship',
       url: m.url,
       href: '/resources#mentorship',
@@ -76,7 +76,7 @@ function buildSearchIndex(): SearchResult[] {
   for (const j of jobBoards) {
     results.push({
       title: j.name,
-      subtitle: `${j.cost} · ${j.description}`,
+      subtitle: `${j.cost} · ${j.description}${j.region ? ` · ${j.region}` : ''}`,
       category: 'Job Boards',
       url: j.url,
       href: '/resources#jobs',

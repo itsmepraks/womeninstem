@@ -5,6 +5,7 @@ export interface Community {
   platform: 'slack' | 'discord' | 'forum' | 'newsletter';
   members?: string;
   url: string;
+  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
 }
 
 export const communities: Community[] = [
@@ -15,6 +16,7 @@ export const communities: Community[] = [
     platform: 'slack',
     members: '360,000+',
     url: 'https://www.womenwhocode.com/',
+    region: 'Global',
   },
   {
     id: 'wnb-discord',
@@ -22,6 +24,7 @@ export const communities: Community[] = [
     description: 'Discord server for women and non-binary people in tech.',
     platform: 'discord',
     url: 'https://discord.gg/womenintech',
+    region: 'Global',
   },
   {
     id: 'techladies',
@@ -30,6 +33,7 @@ export const communities: Community[] = [
     platform: 'forum',
     members: '250,000+',
     url: 'https://www.hiretechladies.com/',
+    region: 'US',
   },
   {
     id: 'rewriting-the-code',
@@ -38,6 +42,7 @@ export const communities: Community[] = [
     platform: 'forum',
     members: '20,000+',
     url: 'https://rewritingthecode.org/',
+    region: 'US',
   },
   {
     id: 'lesbians-who-tech-slack',
@@ -46,6 +51,7 @@ export const communities: Community[] = [
     platform: 'slack',
     members: '50,000+',
     url: 'https://lesbianswhotech.org/',
+    region: 'US',
   },
   {
     id: 'wnb-newsletter',
@@ -53,6 +59,7 @@ export const communities: Community[] = [
     description: 'Weekly newsletter with jobs, events, and articles.',
     platform: 'newsletter',
     url: 'https://womenintechnology.org/',
+    region: 'Global',
   },
   {
     id: 'girls-in-tech',
@@ -61,6 +68,7 @@ export const communities: Community[] = [
     platform: 'forum',
     members: '70,000+',
     url: 'https://girlsintech.org/',
+    region: 'Global',
   },
   {
     id: 'awsis',
@@ -68,5 +76,6 @@ export const communities: Community[] = [
     description: 'Membership community for women in all STEM fields.',
     platform: 'forum',
     url: 'https://www.awis.org/',
+    region: 'US',
   },
 ];

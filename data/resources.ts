@@ -8,6 +8,7 @@ export interface Scholarship {
   level: 'undergraduate' | 'graduate' | 'postdoctoral' | 'all';
   url: string;
   nextDeadline?: string; // ISO date YYYY-MM-DD for next application deadline
+  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
 }
 
 export interface Organization {
@@ -25,6 +26,7 @@ export interface Organization {
     | 'intersectional';
   cost?: string;
   url?: string;
+  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
 }
 
 export interface Program {
@@ -35,6 +37,7 @@ export interface Program {
   cost: string;
   audience?: string;
   url: string;
+  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
 }
 
 export interface Conference {
@@ -47,6 +50,7 @@ export interface Conference {
   url?: string;
   month?: number; // 1-12, the month it usually happens
   monthEnd?: number; // For events spanning 2 months
+  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
 }
 
 export interface MentorshipPlatform {
@@ -55,6 +59,7 @@ export interface MentorshipPlatform {
   description: string;
   cost: string;
   url?: string;
+  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
 }
 
 export interface JobBoard {
@@ -63,6 +68,7 @@ export interface JobBoard {
   description: string;
   cost: string;
   url: string;
+  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
 }
 
 // ─── Scholarships ─────────────────────────────────────────────────────────────
@@ -78,6 +84,7 @@ export const scholarships: Scholarship[] = [
     level: 'undergraduate',
     url: 'https://swe.org/scholarships/',
     nextDeadline: '2027-02-15',
+    region: 'US',
   },
   {
     id: 'google-women-techmakers',
@@ -88,6 +95,7 @@ export const scholarships: Scholarship[] = [
     level: 'all',
     url: 'https://buildyourfuture.withgoogle.com/scholarships/google-women-techmakers-scholars-program',
     nextDeadline: '2026-12-01',
+    region: 'Global',
   },
   {
     id: 'palantir-wit',
@@ -98,6 +106,7 @@ export const scholarships: Scholarship[] = [
     level: 'undergraduate',
     url: 'https://www.palantir.com/students/scholarship/wit-north-america/',
     nextDeadline: '2026-09-15',
+    region: 'US',
   },
   {
     id: 'microsoft-tuition',
@@ -108,6 +117,7 @@ export const scholarships: Scholarship[] = [
     level: 'undergraduate',
     url: 'https://www.microsoft.com/university',
     nextDeadline: '2027-02-01',
+    region: 'US',
   },
   {
     id: 'bhw-stem',
@@ -118,6 +128,7 @@ export const scholarships: Scholarship[] = [
     level: 'all',
     url: 'https://thebhwgroup.com/scholarship',
     nextDeadline: '2027-03-01',
+    region: 'US',
   },
   {
     id: 'astronaut-scholarship',
@@ -128,6 +139,7 @@ export const scholarships: Scholarship[] = [
     level: 'undergraduate',
     url: 'https://www.astronautscholarship.org/',
     nextDeadline: '2027-03-15',
+    region: 'US',
   },
   {
     id: 'aauw-scholarships',
@@ -138,6 +150,7 @@ export const scholarships: Scholarship[] = [
     level: 'all',
     url: 'https://www.aauw.org/resources/programs/fellowships-grants/',
     nextDeadline: '2026-11-15',
+    region: 'US',
   },
   {
     id: 'shpe-scholarships',
@@ -148,6 +161,7 @@ export const scholarships: Scholarship[] = [
     level: 'undergraduate',
     url: 'https://www.shpe.org/students/scholarships/',
     nextDeadline: '2026-11-01',
+    region: 'US',
   },
   {
     id: 'nsbe-scholarships',
@@ -158,6 +172,7 @@ export const scholarships: Scholarship[] = [
     level: 'undergraduate',
     url: 'https://www.nsbe.org/Programs/Scholarships.aspx',
     nextDeadline: '2026-11-30',
+    region: 'US',
   },
   {
     id: 'science-ambassador',
@@ -168,6 +183,7 @@ export const scholarships: Scholarship[] = [
     level: 'undergraduate',
     url: 'https://www.scienceambassadorscholarship.org/',
     nextDeadline: '2026-12-15',
+    region: 'US',
   },
   // Graduate Fellowships
   {
@@ -179,6 +195,7 @@ export const scholarships: Scholarship[] = [
     level: 'graduate',
     url: 'https://www.nsfgrfp.org/',
     nextDeadline: '2026-10-20',
+    region: 'US',
   },
   {
     id: 'ford-foundation',
@@ -189,6 +206,7 @@ export const scholarships: Scholarship[] = [
     level: 'graduate',
     url: 'https://nap.edu/ford',
     nextDeadline: '2026-12-15',
+    region: 'US',
   },
   {
     id: 'pdsoros',
@@ -199,6 +217,7 @@ export const scholarships: Scholarship[] = [
     level: 'graduate',
     url: 'https://www.pdsoros.org/',
     nextDeadline: '2026-10-28',
+    region: 'US',
   },
   {
     id: 'hertz-fellowship',
@@ -209,6 +228,7 @@ export const scholarships: Scholarship[] = [
     level: 'graduate',
     url: 'https://www.hertzfoundation.org/',
     nextDeadline: '2026-10-25',
+    region: 'US',
   },
   {
     id: 'peo-scholar',
@@ -219,6 +239,7 @@ export const scholarships: Scholarship[] = [
     level: 'graduate',
     url: 'https://www.peointernational.org/',
     nextDeadline: '2026-11-20',
+    region: 'Global',
   },
   {
     id: 'aauw-international',
@@ -229,6 +250,7 @@ export const scholarships: Scholarship[] = [
     level: 'graduate',
     url: 'https://www.aauw.org/resources/programs/fellowships-grants/international/',
     nextDeadline: '2026-11-15',
+    region: 'Global',
   },
   {
     id: 'loreal-usa',
@@ -239,6 +261,7 @@ export const scholarships: Scholarship[] = [
     level: 'postdoctoral',
     url: 'https://www.loreal.com/usa-forwomeninscience',
     nextDeadline: '2027-01-31',
+    region: 'US',
   },
   {
     id: 'facebook-fellowship',
@@ -249,6 +272,7 @@ export const scholarships: Scholarship[] = [
     level: 'graduate',
     url: 'https://research.facebook.com/fellowship',
     nextDeadline: '2026-10-01',
+    region: 'Global',
   },
   {
     id: 'microsoft-research-phd',
@@ -258,6 +282,7 @@ export const scholarships: Scholarship[] = [
     level: 'graduate',
     url: 'https://www.microsoft.com/research/academic-program/phd-fellowship',
     nextDeadline: '2026-10-15',
+    region: 'Global',
   },
   {
     id: 'google-phd',
@@ -267,6 +292,7 @@ export const scholarships: Scholarship[] = [
     level: 'graduate',
     url: 'https://research.google/outreach/phd-fellowship',
     nextDeadline: '2026-12-01',
+    region: 'Global',
   },
   // Postdoctoral Funding
   {
@@ -278,6 +304,7 @@ export const scholarships: Scholarship[] = [
     level: 'postdoctoral',
     url: 'https://www.forwomeninscience.com/',
     nextDeadline: '2026-10-31',
+    region: 'Global',
   },
   {
     id: 'aauw-career-development',
@@ -288,6 +315,7 @@ export const scholarships: Scholarship[] = [
     level: 'postdoctoral',
     url: 'https://www.aauw.org/resources/programs/fellowships-grants/current-opportunities/career-development/',
     nextDeadline: '2026-11-15',
+    region: 'US',
   },
   {
     id: 'blavatnik-awards',
@@ -298,6 +326,7 @@ export const scholarships: Scholarship[] = [
     level: 'postdoctoral',
     url: 'https://www.blavatnikawards.org/',
     nextDeadline: '2026-06-30',
+    region: 'US',
   },
   {
     id: 'schlumberger-faculty',
@@ -308,6 +337,7 @@ export const scholarships: Scholarship[] = [
     level: 'postdoctoral',
     url: 'https://www.facultyforthefuture.net/',
     nextDeadline: '2026-11-07',
+    region: 'Global',
   },
   // Research Grants
   {
@@ -319,6 +349,7 @@ export const scholarships: Scholarship[] = [
     level: 'postdoctoral',
     url: 'https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=503214',
     nextDeadline: '2026-07-31',
+    region: 'US',
   },
   {
     id: 'nih-early-independence',
@@ -328,6 +359,7 @@ export const scholarships: Scholarship[] = [
     level: 'postdoctoral',
     url: 'https://commonfund.nih.gov/earlyindependence',
     nextDeadline: '2026-08-15',
+    region: 'US',
   },
   {
     id: 'sloan-fellowships',
@@ -338,6 +370,7 @@ export const scholarships: Scholarship[] = [
     level: 'postdoctoral',
     url: 'https://sloan.org/fellowships',
     nextDeadline: '2026-09-15',
+    region: 'US',
   },
   {
     id: 'mozilla-moss',
@@ -347,6 +380,7 @@ export const scholarships: Scholarship[] = [
     level: 'all',
     url: 'https://www.mozilla.org/moss',
     nextDeadline: '2026-06-15',
+    region: 'Global',
   },
   // Conference Travel Grants
   {
@@ -358,6 +392,7 @@ export const scholarships: Scholarship[] = [
     level: 'all',
     url: 'https://ghc.anitab.org/attend/scholarships/',
     nextDeadline: '2027-03-10',
+    region: 'US',
   },
   {
     id: 'acm-w-scholarships',
@@ -368,6 +403,7 @@ export const scholarships: Scholarship[] = [
     level: 'all',
     url: 'https://women.acm.org/scholarships/',
     nextDeadline: '2026-05-15',
+    region: 'Global',
   },
   {
     id: 'swe-conference-scholarships',
@@ -378,6 +414,7 @@ export const scholarships: Scholarship[] = [
     level: 'all',
     url: 'https://swe.org',
     nextDeadline: '2026-08-01',
+    region: 'US',
   },
 ];
 
@@ -394,6 +431,7 @@ export const organizations: Organization[] = [
     category: 'general',
     cost: '$45-$110',
     url: 'https://www.awis.org/',
+    region: 'US',
   },
   {
     id: 'women-stem-leadership',
@@ -403,6 +441,7 @@ export const organizations: Organization[] = [
       'Leadership development organization focused on women in STEM careers.',
     category: 'general',
     url: 'https://www.womeninstemleadership.com/',
+    region: 'US',
   },
   // Engineering
   {
@@ -415,6 +454,7 @@ export const organizations: Organization[] = [
     category: 'engineering',
     cost: '$20-$125',
     url: 'https://swe.org/',
+    region: 'US',
   },
   {
     id: 'wepan',
@@ -424,6 +464,7 @@ export const organizations: Organization[] = [
       'Focused on engineering education and careers, great for educators and institutional change agents.',
     category: 'engineering',
     url: 'https://www.wepan.org/',
+    region: 'US',
   },
   {
     id: 'nsbe',
@@ -434,6 +475,7 @@ export const organizations: Organization[] = [
     members: '18,000+',
     category: 'engineering',
     url: 'https://www.nsbe.org/',
+    region: 'US',
   },
   {
     id: 'shpe',
@@ -444,6 +486,7 @@ export const organizations: Organization[] = [
     members: '13,000+',
     category: 'engineering',
     url: 'https://www.shpe.org/',
+    region: 'US',
   },
   {
     id: 'sase',
@@ -453,6 +496,7 @@ export const organizations: Organization[] = [
       'Professional organization for people of Asian heritage in STEM fields.',
     category: 'engineering',
     url: 'https://www.saseconnect.org/',
+    region: 'US',
   },
   // Technology and Computer Science
   {
@@ -464,6 +508,7 @@ export const organizations: Organization[] = [
     category: 'technology',
     cost: 'Free',
     url: 'https://anitab.org/',
+    region: 'Global',
   },
   {
     id: 'women-who-code',
@@ -475,6 +520,7 @@ export const organizations: Organization[] = [
     category: 'technology',
     cost: 'Free',
     url: 'https://www.womenwhocode.com/',
+    region: 'Global',
   },
   {
     id: 'girl-develop-it',
@@ -485,6 +531,7 @@ export const organizations: Organization[] = [
     category: 'technology',
     cost: 'Low-cost',
     url: 'https://www.girldevelopit.com/',
+    region: 'US',
   },
   {
     id: 'acm-w',
@@ -494,6 +541,7 @@ export const organizations: Organization[] = [
       'Academic and industry computer science organization with scholarships, conferences, and chapters.',
     category: 'technology',
     url: 'https://women.acm.org/',
+    region: 'Global',
   },
   {
     id: 'witi',
@@ -503,6 +551,7 @@ export const organizations: Organization[] = [
       'Global organization connecting women technology professionals for networking and career growth.',
     category: 'technology',
     url: 'https://witi.com/',
+    region: 'Global',
   },
   {
     id: 'ncwit',
@@ -512,6 +561,7 @@ export const organizations: Organization[] = [
       'Research-driven organization with K-12 programs and the Aspirations in Computing Award.',
     category: 'technology',
     url: 'https://www.ncwit.org/',
+    region: 'US',
   },
   {
     id: 'django-girls',
@@ -522,6 +572,7 @@ export const organizations: Organization[] = [
     category: 'technology',
     cost: 'Free',
     url: 'https://djangogirls.org/',
+    region: 'Global',
   },
   {
     id: 'pyladies',
@@ -532,6 +583,7 @@ export const organizations: Organization[] = [
     category: 'technology',
     cost: 'Free',
     url: 'https://www.pyladies.com/',
+    region: 'Global',
   },
   // Science
   {
@@ -542,6 +594,7 @@ export const organizations: Organization[] = [
       'Publisher of Science journal, offering advocacy, career resources across all sciences.',
     category: 'science',
     url: 'https://www.aaas.org/',
+    region: 'US',
   },
   {
     id: 'awp',
@@ -551,6 +604,7 @@ export const organizations: Organization[] = [
       'Professional organization supporting women in psychology and related fields.',
     category: 'science',
     url: 'https://www.awpsych.org/',
+    region: 'US',
   },
   {
     id: 'acs-wcc',
@@ -560,6 +614,7 @@ export const organizations: Organization[] = [
       'Committee within ACS dedicated to supporting and advancing women in chemistry.',
     category: 'science',
     url: 'https://www.acs.org/wcc',
+    region: 'US',
   },
   {
     id: 'sacnas',
@@ -570,6 +625,7 @@ export const organizations: Organization[] = [
     members: '10,000+',
     category: 'science',
     url: 'https://www.sacnas.org/',
+    region: 'US',
   },
   {
     id: 'aps-cswp',
@@ -579,6 +635,7 @@ export const organizations: Organization[] = [
       'American Physical Society committee focused on advancing women in physics.',
     category: 'science',
     url: 'https://www.aps.org/cswp',
+    region: 'US',
   },
   {
     id: 'women-in-bio',
@@ -588,6 +645,7 @@ export const organizations: Organization[] = [
       'Organization supporting women in the life sciences industry.',
     category: 'science',
     url: 'https://www.womeninbio.org/',
+    region: 'US',
   },
   // Mathematics and Statistics
   {
@@ -599,6 +657,7 @@ export const organizations: Organization[] = [
     category: 'mathematics',
     cost: '$30-$75',
     url: 'https://awm-math.org/',
+    region: 'US',
   },
   {
     id: 'ewm',
@@ -608,6 +667,7 @@ export const organizations: Organization[] = [
       'European organization for women mathematicians with biennial conferences and networking.',
     category: 'mathematics',
     url: 'https://www.europeanwomeninmaths.org/',
+    region: 'Europe',
   },
   {
     id: 'cwstat',
@@ -617,6 +677,7 @@ export const organizations: Organization[] = [
       'Organization dedicated to supporting and promoting women statisticians.',
     category: 'mathematics',
     url: 'https://www.cwstat.org/',
+    region: 'US',
   },
   // Intersectional Organizations
   {
@@ -628,6 +689,7 @@ export const organizations: Organization[] = [
     category: 'intersectional',
     cost: 'Free',
     url: 'https://www.blackgirlscode.com/',
+    region: 'US',
   },
   {
     id: 'latinas-in-tech',
@@ -638,6 +700,7 @@ export const organizations: Organization[] = [
     category: 'intersectional',
     cost: 'Free',
     url: 'https://www.latinasintech.org/',
+    region: 'US',
   },
   {
     id: 'out-in-tech',
@@ -647,6 +710,7 @@ export const organizations: Organization[] = [
       'Networking events and career development for LGBTQ+ professionals in technology.',
     category: 'intersectional',
     url: 'https://www.outintech.com/',
+    region: 'US',
   },
   {
     id: 'lesbians-who-tech',
@@ -656,6 +720,7 @@ export const organizations: Organization[] = [
       'Annual summit, city communities, and job board for LGBTQ women and non-binary people in tech.',
     category: 'intersectional',
     url: 'https://www.lesbianswhotech.org/',
+    region: 'US',
   },
   {
     id: 'cmd-it',
@@ -665,6 +730,7 @@ export const organizations: Organization[] = [
       'Collaborations Conference and scholarships for women of color in computing fields.',
     category: 'intersectional',
     url: 'https://cmd-it.org/',
+    region: 'US',
   },
   {
     id: 'rewriting-the-code',
@@ -674,6 +740,71 @@ export const organizations: Organization[] = [
       'Peer community for college women in tech with internship opportunities and mentorship.',
     category: 'intersectional',
     url: 'https://www.rewritingthecode.org/',
+    region: 'US',
+  },
+  // International Organizations
+  {
+    id: 'wise-uk',
+    name: 'WISE Campaign',
+    initial: 'W',
+    description: 'Women in Science and Engineering. UK-based with awards, campaigns, and research.',
+    category: 'general',
+    url: 'https://www.wisecampaign.org.uk/',
+    region: 'Europe',
+  },
+  {
+    id: 'owsd',
+    name: 'OWSD',
+    initial: 'O',
+    description: 'Organization for Women in Science for the Developing World. Fellowships and networking.',
+    category: 'general',
+    url: 'https://owsd.net/',
+    region: 'Global',
+  },
+  {
+    id: 'scwist',
+    name: 'SCWIST',
+    initial: 'S',
+    description: 'Society for Canadian Women in Science and Technology.',
+    category: 'general',
+    url: 'https://www.scwist.ca/',
+    region: 'Americas',
+  },
+  {
+    id: 'wit-australia',
+    name: 'Women in Technology Australia',
+    initial: 'W',
+    description: 'Australian network for women in technology.',
+    category: 'technology',
+    url: 'https://www.wit.org.au/',
+    region: 'Oceania',
+  },
+  {
+    id: 'epws',
+    name: 'European Platform of Women Scientists',
+    initial: 'E',
+    description: 'Network representing women scientists across Europe.',
+    category: 'science',
+    url: 'https://epws.org/',
+    region: 'Europe',
+  },
+  {
+    id: 'awse',
+    name: 'African Women in Science and Engineering',
+    initial: 'A',
+    description: 'Supporting women scientists and engineers across Africa.',
+    category: 'general',
+    url: 'https://awse-net.org/',
+    region: 'Africa',
+  },
+  {
+    id: 'loreal-unesco-intl',
+    name: "L'Oreal-UNESCO For Women in Science",
+    initial: 'L',
+    description: 'International awards and fellowships for women scientists.',
+    category: 'general',
+    url: 'https://www.forwomeninscience.com/',
+    region: 'Global',
   },
 ];
 
@@ -690,6 +821,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'Grades 3-12',
     url: 'https://girlswhocode.com/',
+    region: 'US',
   },
   {
     id: 'black-girls-code-program',
@@ -700,6 +832,7 @@ export const programs: Program[] = [
     cost: 'Free or low-cost',
     audience: 'Ages 7-17',
     url: 'https://www.blackgirlscode.com/',
+    region: 'US',
   },
   {
     id: 'techgirlz',
@@ -710,6 +843,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'Middle school girls',
     url: 'https://www.techgirlz.org/',
+    region: 'US',
   },
   {
     id: 'stem-like-a-girl',
@@ -720,6 +854,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'Elementary and middle school',
     url: 'https://stemlikeagirl.org/',
+    region: 'US',
   },
   {
     id: 'engineergirl',
@@ -730,6 +865,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'K-12',
     url: 'https://www.engineergirl.org/',
+    region: 'US',
   },
   {
     id: 'code-org',
@@ -740,6 +876,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'All ages',
     url: 'https://code.org/',
+    region: 'Global',
   },
   {
     id: 'nasa-stem-engagement',
@@ -750,6 +887,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'K-12 and beyond',
     url: 'https://www.nasa.gov/stem',
+    region: 'US',
   },
   {
     id: 'first-robotics',
@@ -760,6 +898,7 @@ export const programs: Program[] = [
     cost: 'Varies',
     audience: 'Ages 4-18',
     url: 'https://www.firstinspires.org/',
+    region: 'Global',
   },
   // Coding Bootcamps and Tech Training
   {
@@ -771,6 +910,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'Women',
     url: 'https://www.womenwhocode.com/',
+    region: 'Global',
   },
   {
     id: 'hackbright-academy',
@@ -781,6 +921,7 @@ export const programs: Program[] = [
     cost: '~$17,000',
     audience: 'Women',
     url: 'https://www.hackbrightacademy.com/',
+    region: 'US',
   },
   {
     id: 'grace-hopper-fullstack',
@@ -791,6 +932,7 @@ export const programs: Program[] = [
     cost: '~$17,000',
     audience: 'Women and non-binary',
     url: 'https://www.gracehopper.com/',
+    region: 'US',
   },
   {
     id: 'ada-developers',
@@ -801,6 +943,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'Women and gender-diverse people',
     url: 'https://www.adadevelopersacademy.org/',
+    region: 'US',
   },
   {
     id: 'app-academy',
@@ -811,6 +954,7 @@ export const programs: Program[] = [
     cost: 'Deferred tuition',
     audience: 'All',
     url: 'https://www.appacademy.io/',
+    region: 'US',
   },
   {
     id: 'general-assembly',
@@ -821,6 +965,7 @@ export const programs: Program[] = [
     cost: 'Varies by program',
     audience: 'All',
     url: 'https://generalassemb.ly/',
+    region: 'Global',
   },
   // Summer Programs
   {
@@ -832,6 +977,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'High school seniors',
     url: 'https://buildyourfuture.withgoogle.com/programs/computer-science-summer-institute',
+    region: 'US',
   },
   {
     id: 'microsoft-hs-internship',
@@ -842,6 +988,7 @@ export const programs: Program[] = [
     cost: 'Paid',
     audience: 'High school students',
     url: 'https://www.microsoft.com/university',
+    region: 'US',
   },
   {
     id: 'nasa-internships',
@@ -852,6 +999,7 @@ export const programs: Program[] = [
     cost: 'Paid',
     audience: 'High school through graduate',
     url: 'https://intern.nasa.gov/',
+    region: 'US',
   },
   {
     id: 'nsf-reu',
@@ -862,6 +1010,7 @@ export const programs: Program[] = [
     cost: 'Paid stipend',
     audience: 'Undergraduates',
     url: 'https://www.nsf.gov/crssprgm/reu/',
+    region: 'US',
   },
   // Online Learning Platforms
   {
@@ -873,6 +1022,7 @@ export const programs: Program[] = [
     cost: 'Free to audit; $49-$99 for certificates',
     audience: 'All',
     url: 'https://www.coursera.org/',
+    region: 'Global',
   },
   {
     id: 'edx',
@@ -883,6 +1033,7 @@ export const programs: Program[] = [
     cost: 'Free to audit; $50-$300 for certificates',
     audience: 'All',
     url: 'https://www.edx.org/',
+    region: 'Global',
   },
   {
     id: 'khan-academy',
@@ -893,6 +1044,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'K-12 and early college',
     url: 'https://www.khanacademy.org/',
+    region: 'Global',
   },
   {
     id: 'codecademy',
@@ -903,6 +1055,7 @@ export const programs: Program[] = [
     cost: 'Free basic; $20/month Pro',
     audience: 'All',
     url: 'https://www.codecademy.com/',
+    region: 'Global',
   },
   {
     id: 'freecodecamp',
@@ -913,6 +1066,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'All',
     url: 'https://www.freecodecamp.org/',
+    region: 'Global',
   },
   {
     id: 'linkedin-learning',
@@ -923,6 +1077,7 @@ export const programs: Program[] = [
     cost: '$30-$40/month',
     audience: 'All',
     url: 'https://www.linkedin.com/learning/',
+    region: 'Global',
   },
   {
     id: 'udacity',
@@ -933,6 +1088,7 @@ export const programs: Program[] = [
     cost: '~$400/month',
     audience: 'All',
     url: 'https://www.udacity.com/',
+    region: 'Global',
   },
   {
     id: 'mit-ocw',
@@ -943,6 +1099,7 @@ export const programs: Program[] = [
     cost: 'Free',
     audience: 'All',
     url: 'https://ocw.mit.edu/',
+    region: 'Global',
   },
   // Certification Programs
   {
@@ -954,6 +1111,7 @@ export const programs: Program[] = [
     cost: '$39/month',
     audience: 'All',
     url: 'https://grow.google/certificates/',
+    region: 'Global',
   },
   {
     id: 'aws-certification',
@@ -964,6 +1122,7 @@ export const programs: Program[] = [
     cost: 'Varies',
     audience: 'All',
     url: 'https://aws.amazon.com/certification/',
+    region: 'Global',
   },
   {
     id: 'microsoft-certifications',
@@ -974,6 +1133,7 @@ export const programs: Program[] = [
     cost: 'Varies',
     audience: 'All',
     url: 'https://www.microsoft.com/certifications',
+    region: 'Global',
   },
   {
     id: 'cisco-certifications',
@@ -983,6 +1143,7 @@ export const programs: Program[] = [
     cost: 'Varies',
     audience: 'All',
     url: 'https://www.cisco.com/certifications',
+    region: 'Global',
   },
 ];
 
@@ -1000,6 +1161,7 @@ export const conferences: Conference[] = [
     monthEnd: 10,
     cost: '$300-$600',
     url: 'https://ghc.anitab.org/',
+    region: 'US',
   },
   {
     id: 'swe-we',
@@ -1012,6 +1174,7 @@ export const conferences: Conference[] = [
     monthEnd: 11,
     cost: 'Varies (scholarships available)',
     url: 'https://we.swe.org/',
+    region: 'US',
   },
   {
     id: 'wids',
@@ -1022,6 +1185,7 @@ export const conferences: Conference[] = [
     month: 3,
     cost: 'Free or low-cost',
     url: 'https://www.widsconference.org/',
+    region: 'Global',
   },
   {
     id: 'lwt-summit',
@@ -1033,6 +1197,7 @@ export const conferences: Conference[] = [
     month: 2,
     monthEnd: 3,
     url: 'https://www.lesbianswhotech.org/summit/',
+    region: 'US',
   },
   {
     id: 'wicys',
@@ -1042,6 +1207,7 @@ export const conferences: Conference[] = [
     timing: 'March',
     month: 3,
     url: 'https://www.wicys.org/conference/',
+    region: 'US',
   },
   {
     id: 'sacnas-conference',
@@ -1052,6 +1218,7 @@ export const conferences: Conference[] = [
     timing: 'October',
     month: 10,
     url: 'https://www.sacnas.org/conference/',
+    region: 'US',
   },
   {
     id: 'nsbe-convention',
@@ -1062,6 +1229,7 @@ export const conferences: Conference[] = [
     timing: 'March',
     month: 3,
     url: 'https://www.nsbe.org/convention/',
+    region: 'US',
   },
   {
     id: 'awm-symposium',
@@ -1070,6 +1238,7 @@ export const conferences: Conference[] = [
       'Biennial symposium showcasing research by women in mathematics.',
     timing: 'Biennial',
     url: 'https://awm-math.org/',
+    region: 'US',
   },
   {
     id: 'cra-w-grad-cohort',
@@ -1079,6 +1248,7 @@ export const conferences: Conference[] = [
     timing: 'April',
     month: 4,
     url: 'https://cra.org/cra-w/grad-cohort-for-women/',
+    region: 'US',
   },
   {
     id: 'ewm-meeting',
@@ -1087,6 +1257,7 @@ export const conferences: Conference[] = [
       'International meeting for women mathematicians held every 2-4 years in Europe.',
     timing: 'Every 2-4 years',
     url: 'https://www.europeanwomeninmaths.org/',
+    region: 'Europe',
   },
   {
     id: 'pyladies-meetups',
@@ -1096,6 +1267,7 @@ export const conferences: Conference[] = [
     timing: 'Ongoing',
     cost: 'Free',
     url: 'https://www.pyladies.com/',
+    region: 'Global',
   },
   {
     id: 'wwc-networking',
@@ -1105,6 +1277,7 @@ export const conferences: Conference[] = [
     timing: 'Monthly',
     cost: 'Free',
     url: 'https://www.womenwhocode.com/events',
+    region: 'Global',
   },
   {
     id: 'rails-girls',
@@ -1114,6 +1287,7 @@ export const conferences: Conference[] = [
     timing: 'Ongoing',
     cost: 'Free',
     url: 'https://railsgirls.com/',
+    region: 'Global',
   },
   {
     id: 'django-girls-workshops',
@@ -1123,6 +1297,7 @@ export const conferences: Conference[] = [
     timing: 'Ongoing',
     cost: 'Free',
     url: 'https://djangogirls.org/',
+    region: 'Global',
   },
 ];
 
@@ -1136,6 +1311,7 @@ export const mentorshipPlatforms: MentorshipPlatform[] = [
       'One-on-one e-mentoring platform that matches mentees with mentors based on goals and interests.',
     cost: 'Free',
     url: 'https://www.mentornet.org/',
+    region: 'US',
   },
   {
     id: 'linkedin-career-advice',
@@ -1144,6 +1320,7 @@ export const mentorshipPlatforms: MentorshipPlatform[] = [
       'Algorithm-matched mentorship where you opt in as mentor or mentee based on career goals.',
     cost: 'Free',
     url: 'https://www.linkedin.com/',
+    region: 'Global',
   },
   {
     id: 'adplist',
@@ -1152,6 +1329,7 @@ export const mentorshipPlatforms: MentorshipPlatform[] = [
       'Book time with mentors in design and tech, with group sessions available.',
     cost: 'Free',
     url: 'https://www.adplist.org/',
+    region: 'Global',
   },
   {
     id: 'million-women-mentors',
@@ -1160,6 +1338,7 @@ export const mentorshipPlatforms: MentorshipPlatform[] = [
       'Connects mentors with mentees focused on supporting girls and women in STEM from K-12 to early career.',
     cost: 'Free',
     url: 'https://www.millionwomenmentors.org/',
+    region: 'US',
   },
 ];
 
@@ -1173,6 +1352,7 @@ export const jobBoards: JobBoard[] = [
       'Remote-first job board featuring diversity-focused companies with networking events and career advice.',
     cost: 'Free',
     url: 'https://powertofly.com/',
+    region: 'Global',
   },
   {
     id: 'hire-tech-ladies',
@@ -1181,6 +1361,7 @@ export const jobBoards: JobBoard[] = [
       'Job board and community for women in tech with free basic access and premium features.',
     cost: 'Free basic; $19/month premium',
     url: 'https://www.hiretechladies.com/',
+    region: 'US',
   },
   {
     id: 'wwc-job-board',
@@ -1189,6 +1370,7 @@ export const jobBoards: JobBoard[] = [
       'Free job board focused on software engineering positions for women.',
     cost: 'Free',
     url: 'https://www.womenwhocode.com/jobs',
+    region: 'Global',
   },
   {
     id: 'fairygodboss',
@@ -1197,6 +1379,7 @@ export const jobBoards: JobBoard[] = [
       'Job board with company reviews from women, career advice, and women-friendly employer listings.',
     cost: 'Free',
     url: 'https://www.fairygodboss.com/',
+    region: 'US',
   },
   {
     id: 'the-mom-project',
@@ -1205,6 +1388,7 @@ export const jobBoards: JobBoard[] = [
       'Jobs for mothers including flexible, remote, and returnship opportunities.',
     cost: 'Free',
     url: 'https://www.themomproject.com/',
+    region: 'US',
   },
   {
     id: 'jopwell',
@@ -1213,6 +1397,7 @@ export const jobBoards: JobBoard[] = [
       'Career platform for Black, Latinx, and Native American professionals.',
     cost: 'Free',
     url: 'https://www.jopwell.com/',
+    region: 'US',
   },
   {
     id: 'diversify-tech',
@@ -1221,6 +1406,7 @@ export const jobBoards: JobBoard[] = [
       'Jobs and resources for underrepresented people in tech.',
     cost: 'Free',
     url: 'https://www.diversifytech.co/',
+    region: 'Global',
   },
   {
     id: 'linkedin-diversity',
@@ -1229,5 +1415,6 @@ export const jobBoards: JobBoard[] = [
       'Use filters to find companies with diversity initiatives and women-friendly workplaces.',
     cost: 'Free',
     url: 'https://www.linkedin.com/jobs/',
+    region: 'Global',
   },
 ];
