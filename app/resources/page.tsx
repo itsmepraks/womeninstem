@@ -22,6 +22,7 @@ import { getNextAnnualOccurrence, formatDeadlineDisplay } from '@/lib/dateHelper
 
 type Category = 'all' | 'scholarships' | 'organizations' | 'programs' | 'conferences' | 'mentorship' | 'jobs' | 'communities';
 type CostFilter = 'all' | 'free' | 'paid';
+type RegionFilter = 'all' | 'Global' | 'US' | 'Europe' | 'Americas' | 'Asia' | 'Africa' | 'Oceania';
 
 const CATEGORIES: { value: Category; label: string }[] = [
   { value: 'all', label: 'All' },
@@ -38,6 +39,17 @@ const COST_OPTIONS: { value: CostFilter; label: string }[] = [
   { value: 'all', label: 'All' },
   { value: 'free', label: 'Free' },
   { value: 'paid', label: 'Paid' },
+];
+
+const REGIONS: { value: RegionFilter; label: string }[] = [
+  { value: 'all', label: 'All regions' },
+  { value: 'Global', label: 'Global' },
+  { value: 'US', label: 'United States' },
+  { value: 'Europe', label: 'Europe' },
+  { value: 'Americas', label: 'Americas' },
+  { value: 'Asia', label: 'Asia' },
+  { value: 'Africa', label: 'Africa' },
+  { value: 'Oceania', label: 'Oceania' },
 ];
 
 function isFree(cost: string | undefined): boolean {
@@ -58,9 +70,16 @@ function matchesCost(costFilter: CostFilter, cost: string | undefined): boolean 
   return !isFree(cost);
 }
 
+function matchesRegion(activeRegion: string, itemRegion?: string): boolean {
+  if (activeRegion === 'all') return true;
+  if (!itemRegion) return true; // Show items without region under all filters
+  return itemRegion === activeRegion;
+}
+
 export default function ResourcesPage() {
   const [activeCategory, setActiveCategory] = useState<Category>('all');
   const [activeCost, setActiveCost] = useState<CostFilter>('all');
+  const [activeRegion, setActiveRegion] = useState<RegionFilter>('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
 
@@ -95,22 +114,23 @@ export default function ResourcesPage() {
       if (!matchesSearch(searchQuery, s.name, s.description)) return false;
       // Scholarships are inherently free (they give money), so if cost filter is "paid", hide them
       if (activeCost === 'paid') return false;
+      if (!matchesRegion(activeRegion, s.region)) return false;
       return true;
     });
-  }, [searchQuery, activeCost]);
+  }, [searchQuery, activeCost, activeRegion]);
 
   const undergradScholarships = useMemo(() => filteredScholarships.filter((s) => s.level === 'undergraduate'), [filteredScholarships]);
   const gradScholarships = useMemo(() => filteredScholarships.filter((s) => s.level === 'graduate'), [filteredScholarships]);
   const postdocScholarships = useMemo(() => filteredScholarships.filter((s) => s.level === 'postdoctoral' || s.level === 'all'), [filteredScholarships]);
 
   const filteredOrganizations = useMemo(
-    () => organizations.filter((o) => matchesSearch(searchQuery, o.name, o.description) && matchesCost(activeCost, o.cost)),
-    [searchQuery, activeCost],
+    () => organizations.filter((o) => matchesSearch(searchQuery, o.name, o.description) && matchesCost(activeCost, o.cost) && matchesRegion(activeRegion, o.region)),
+    [searchQuery, activeCost, activeRegion],
   );
 
   const filteredPrograms = useMemo(
-    () => programs.filter((p) => matchesSearch(searchQuery, p.name, p.description) && matchesCost(activeCost, p.cost)),
-    [searchQuery, activeCost],
+    () => programs.filter((p) => matchesSearch(searchQuery, p.name, p.description) && matchesCost(activeCost, p.cost) && matchesRegion(activeRegion, p.region)),
+    [searchQuery, activeCost, activeRegion],
   );
 
   const k12Programs = useMemo(() => filteredPrograms.filter((p) => p.category === 'k12'), [filteredPrograms]);
@@ -118,23 +138,23 @@ export default function ResourcesPage() {
   const onlinePrograms = useMemo(() => filteredPrograms.filter((p) => p.category === 'online'), [filteredPrograms]);
 
   const filteredConferences = useMemo(
-    () => conferences.filter((c) => matchesSearch(searchQuery, c.name, c.description) && matchesCost(activeCost, c.cost)),
-    [searchQuery, activeCost],
+    () => conferences.filter((c) => matchesSearch(searchQuery, c.name, c.description) && matchesCost(activeCost, c.cost) && matchesRegion(activeRegion, c.region)),
+    [searchQuery, activeCost, activeRegion],
   );
 
   const filteredMentorship = useMemo(
-    () => mentorshipPlatforms.filter((m) => matchesSearch(searchQuery, m.name, m.description) && matchesCost(activeCost, m.cost)),
-    [searchQuery, activeCost],
+    () => mentorshipPlatforms.filter((m) => matchesSearch(searchQuery, m.name, m.description) && matchesCost(activeCost, m.cost) && matchesRegion(activeRegion, m.region)),
+    [searchQuery, activeCost, activeRegion],
   );
 
   const filteredJobBoards = useMemo(
-    () => jobBoards.filter((b) => matchesSearch(searchQuery, b.name, b.description) && matchesCost(activeCost, b.cost)),
-    [searchQuery, activeCost],
+    () => jobBoards.filter((b) => matchesSearch(searchQuery, b.name, b.description) && matchesCost(activeCost, b.cost) && matchesRegion(activeRegion, b.region)),
+    [searchQuery, activeCost, activeRegion],
   );
 
   const filteredCommunities = useMemo(
-    () => communities.filter((c) => matchesSearch(searchQuery, c.name, c.description)),
-    [searchQuery],
+    () => communities.filter((c) => matchesSearch(searchQuery, c.name, c.description) && matchesRegion(activeRegion, c.region)),
+    [searchQuery, activeRegion],
   );
 
   const closingSoonScholarships = useMemo(() => {
@@ -221,6 +241,26 @@ export default function ResourcesPage() {
                   }`}
                 >
                   {opt.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Region toggles */}
+          <div>
+            <span className="text-xs text-text-muted uppercase tracking-wide font-medium block mb-2">Region</span>
+            <div role="group" aria-label="Filter by region" className="flex flex-wrap gap-2">
+              {REGIONS.map((reg) => (
+                <button
+                  key={reg.value}
+                  onClick={() => setActiveRegion(reg.value)}
+                  className={`text-xs px-4 py-2 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
+                    activeRegion === reg.value
+                      ? 'bg-accent-secondary/10 text-accent-primary font-medium'
+                      : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
+                  }`}
+                >
+                  {reg.label}
                 </button>
               ))}
             </div>
@@ -539,7 +579,7 @@ export default function ResourcesPage() {
       </motion.div>
 
       {/* Empty state */}
-      {(activeCategory !== 'all' || activeCost !== 'all' || searchQuery) &&
+      {(activeCategory !== 'all' || activeCost !== 'all' || activeRegion !== 'all' || searchQuery) &&
         filteredScholarships.length === 0 &&
         filteredOrganizations.length === 0 &&
         filteredPrograms.length === 0 &&
@@ -553,6 +593,7 @@ export default function ResourcesPage() {
               onClick={() => {
                 setActiveCategory('all');
                 setActiveCost('all');
+                setActiveRegion('all');
                 setSearchQuery('');
               }}
               className="mt-3 inline-block text-sm px-4 py-2.5 rounded-pill bg-accent-secondary/10 text-accent-primary hover:bg-accent-secondary/20 transition-colors"

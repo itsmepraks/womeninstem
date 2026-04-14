@@ -5,7 +5,7 @@ import { randomUUID } from 'crypto'
 
 async function fetchArbeitnow(): Promise<Resource[]> {
   const res = await fetchWithTimeout(
-    'https://www.arbeitnow.com/api/job-board-api?lang=en',
+    'https://www.arbeitnow.com/api/job-board-api',
     { headers: { 'User-Agent': 'stemspark/1.0' } }
   )
   const json = await res.json()
