@@ -307,9 +307,10 @@ export default function ResourcesPage() {
             <div className="mb-8">
               <h3 className="text-label text-accent-primary mb-3">Undergraduate</h3>
               <div className="space-y-2.5">
-                {sliced(undergradScholarships, 'scholarships-undergrad').map((s) => (
-                  <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} />
-                ))}
+                {sliced(undergradScholarships, 'scholarships-undergrad').map((s) => {
+                  const dl = s.nextDeadline ? formatDeadlineDisplay(s.nextDeadline) : null;
+                  return <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} daysLeft={dl?.daysLeft} deadlineLabel={dl?.label} />;
+                })}
               </div>
               <ShowMoreButton sectionKey="scholarships-undergrad" total={undergradScholarships.length} />
             </div>
@@ -319,9 +320,10 @@ export default function ResourcesPage() {
             <div className="mb-8">
               <h3 className="text-label text-accent-primary mb-3">Graduate & Fellowship</h3>
               <div className="space-y-2.5">
-                {sliced(gradScholarships, 'scholarships-grad').map((s) => (
-                  <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} />
-                ))}
+                {sliced(gradScholarships, 'scholarships-grad').map((s) => {
+                  const dl = s.nextDeadline ? formatDeadlineDisplay(s.nextDeadline) : null;
+                  return <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} daysLeft={dl?.daysLeft} deadlineLabel={dl?.label} />;
+                })}
               </div>
               <ShowMoreButton sectionKey="scholarships-grad" total={gradScholarships.length} />
             </div>
@@ -331,9 +333,10 @@ export default function ResourcesPage() {
             <div>
               <h3 className="text-label text-accent-primary mb-3">Postdoctoral & Research Grants</h3>
               <div className="space-y-2.5">
-                {sliced(postdocScholarships, 'scholarships-postdoc').map((s) => (
-                  <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} />
-                ))}
+                {sliced(postdocScholarships, 'scholarships-postdoc').map((s) => {
+                  const dl = s.nextDeadline ? formatDeadlineDisplay(s.nextDeadline) : null;
+                  return <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} daysLeft={dl?.daysLeft} deadlineLabel={dl?.label} />;
+                })}
               </div>
               <ShowMoreButton sectionKey="scholarships-postdoc" total={postdocScholarships.length} />
             </div>
