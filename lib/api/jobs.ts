@@ -7,7 +7,7 @@ import { randomUUID } from 'crypto'
 
 async function fetchArbeitnow(): Promise<Resource[]> {
   const res = await fetchWithTimeout(
-    'https://arbeitnow.com/api/job-board-api?tag=women-in-tech',
+    'https://www.arbeitnow.com/api/job-board-api',
     { headers: { 'User-Agent': 'stemspark/1.0' } }
   )
   const json = await res.json()
@@ -127,8 +127,8 @@ export async function fetchJobs(): Promise<ResourcesResponse> {
   const agg = await aggregateSources([fetchArbeitnow, fetchRemotive, fetchJobicy, fetchHimalayas, fetchWWR])
   const deduped = deduplicateResources(agg.data)
   const geocoded = await geocodeAll(deduped)
-  const filtered = filterExpired(geocoded)
-  return buildResponse(filtered, 'jobs', {
+  // Don't filterExpired for jobs — date is posting date, not expiry
+  return buildResponse(geocoded, 'jobs', {
     revalidateSeconds: 300,
     sources: agg.sourceNames,
     sourcesAttempted: agg.sourcesAttempted,

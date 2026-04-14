@@ -15,9 +15,11 @@ function makeBookFetcher(query: string): () => Promise<Resource[]> {
   const fn = async function (): Promise<Resource[]> {
     const url = `https://openlibrary.org/search.json?q=${encodeURIComponent(query)}&limit=20`
     const res = await fetchWithTimeout(url, {
-      headers: { 'User-Agent': 'stemspark/1.0' },
+      headers: { 'User-Agent': 'stemspark/1.0', 'Accept': 'application/json' },
     })
-    const json = await res.json()
+    const text = await res.text()
+    if (!text.startsWith('{')) throw new Error('Non-JSON response from Open Library')
+    const json = JSON.parse(text)
     const docs: Array<Record<string, unknown>> = json.docs ?? []
     return docs
       .map((doc) => {
