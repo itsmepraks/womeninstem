@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { Search, X } from 'lucide-react';
-import { pioneers } from '@/data/pioneers';
 import {
   scholarships,
   organizations,
@@ -23,16 +22,6 @@ interface SearchResult {
 
 function buildSearchIndex(): SearchResult[] {
   const results: SearchResult[] = [];
-
-  for (const p of pioneers) {
-    results.push({
-      title: p.name,
-      subtitle: `${p.title} · ${p.field}`,
-      category: 'Pioneers',
-      url: p.link,
-      href: '/pioneers',
-    });
-  }
 
   for (const s of scholarships) {
     results.push({

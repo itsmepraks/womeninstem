@@ -1,14 +1,11 @@
 import Link from 'next/link';
 import StatCard from '@/components/ui/StatCard';
-import PioneerSpotlight from '@/components/ui/PioneerSpotlight';
 import LiveFeed from '@/components/ui/LiveFeed';
 import PageTransition from '@/components/ui/PageTransition';
 import { heroStats, heroHighlight } from '@/data/stats';
 import { scholarships } from '@/data/resources';
-import { pioneers } from '@/data/pioneers';
 
 export default function HomePage() {
-  const spotlightPioneer = pioneers[0]!;
   const stat1 = heroStats[0]!;
   const stat2 = heroStats[1]!;
   const scholarshipCount = scholarships.length;
@@ -156,11 +153,6 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* ─── PIONEER SPOTLIGHT ─── */}
-      <section className="py-8">
-        <PioneerSpotlight pioneer={spotlightPioneer} />
       </section>
 
       {/* ─── LIVE PREVIEW ─── */}

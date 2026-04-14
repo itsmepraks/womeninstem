@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import PageTransition from '@/components/ui/PageTransition';
 import { SOCIAL_LINKS } from '@/lib/constants';
-import { pioneers } from '@/data/pioneers';
 import { scholarships, organizations, programs, conferences } from '@/data/resources';
 
 export const metadata: Metadata = {
@@ -123,7 +122,6 @@ export default function AboutPage() {
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {[
-            { label: 'Pioneer profiles', count: pioneers.length },
             { label: 'Scholarships & grants', count: scholarships.length },
             { label: 'Organizations', count: organizations.length },
             { label: 'Educational programs', count: programs.length },
@@ -162,7 +160,7 @@ export default function AboutPage() {
               <div className="w-2 h-2 rounded-full bg-accent-gold mt-2 flex-shrink-0" />
               <div>
                 <strong className="text-text-heading">Curated resources (updated less often):</strong>{' '}
-                Scholarships, pioneer write-ups, book/podcast recommendations, and
+                Scholarships, book/podcast recommendations, and
                 statistics from published research. These are hand-picked. Always
                 verify details on the source website before applying.
               </div>
