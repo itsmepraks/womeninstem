@@ -203,81 +203,69 @@ export default function ResourcesPage() {
         </p>
       </section>
 
-      {/* ─── FILTER BAR ─── */}
+      {/* ─── FILTER BAR (simplified) ─── */}
       <section className="sticky top-0 z-30 -mx-6 md:-mx-10 px-6 md:px-10 py-4 mb-8 bg-bg-primary/90 backdrop-blur-md border-b border-accent-primary/5">
-        <div className="space-y-4">
-          {/* Category toggles */}
-          <div>
-            <span className="text-xs text-text-muted uppercase tracking-wide font-medium block mb-2">Category</span>
-            <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-2">
-              {CATEGORIES.map((cat) => (
-                <button
-                  key={cat.value}
-                  onClick={() => setActiveCategory(cat.value)}
-                  className={`text-xs px-4 py-2 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
-                    activeCategory === cat.value
-                      ? 'bg-accent-secondary/10 text-accent-primary font-medium'
-                      : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
-                  }`}
-                >
-                  {cat.label}
-                </button>
-              ))}
-            </div>
-          </div>
+        {/* Search */}
+        <label htmlFor="resources-search-input" className="sr-only">Search resources</label>
+        <input
+          id="resources-search-input"
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search resources..."
+          aria-label="Search resources"
+          className="w-full text-sm px-4 py-2.5 rounded-pill border border-accent-secondary/20 bg-white text-text-body placeholder:text-text-muted focus:outline-none focus:border-accent-primary/40 focus:ring-1 focus:ring-accent-primary/20 transition-colors mb-3"
+        />
 
-          {/* Cost toggles */}
-          <div>
-            <span className="text-xs text-text-muted uppercase tracking-wide font-medium block mb-2">Cost</span>
-            <div role="group" aria-label="Filter by cost" className="flex flex-wrap gap-2">
-              {COST_OPTIONS.map((opt) => (
-                <button
-                  key={opt.value}
-                  onClick={() => setActiveCost(opt.value)}
-                  className={`text-xs px-4 py-2 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
-                    activeCost === opt.value
-                      ? 'bg-accent-secondary/10 text-accent-primary font-medium'
-                      : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
-                  }`}
-                >
-                  {opt.label}
-                </button>
-              ))}
-            </div>
-          </div>
+        {/* Category pills */}
+        <div role="group" aria-label="Filter by category" className="flex flex-wrap gap-1.5 mb-2">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat.value}
+              onClick={() => setActiveCategory(cat.value)}
+              className={`text-xs px-3.5 py-1.5 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
+                activeCategory === cat.value
+                  ? 'bg-accent-secondary/10 text-accent-primary font-medium'
+                  : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
+              }`}
+            >
+              {cat.label}
+            </button>
+          ))}
+        </div>
 
-          {/* Region toggles */}
-          <div>
-            <span className="text-xs text-text-muted uppercase tracking-wide font-medium block mb-2">Region</span>
-            <div role="group" aria-label="Filter by region" className="flex flex-wrap gap-2">
-              {REGIONS.map((reg) => (
-                <button
-                  key={reg.value}
-                  onClick={() => setActiveRegion(reg.value)}
-                  className={`text-xs px-4 py-2 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
-                    activeRegion === reg.value
-                      ? 'bg-accent-secondary/10 text-accent-primary font-medium'
-                      : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
-                  }`}
-                >
-                  {reg.label}
-                </button>
-              ))}
-            </div>
+        {/* Cost + Region on one line */}
+        <div className="flex flex-wrap items-center gap-1.5">
+          <div role="group" aria-label="Filter by cost" className="flex gap-1.5">
+            {COST_OPTIONS.map((opt) => (
+              <button
+                key={opt.value}
+                onClick={() => setActiveCost(opt.value)}
+                className={`text-xs px-3 py-1 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
+                  activeCost === opt.value
+                    ? 'bg-accent-secondary/10 text-accent-primary font-medium'
+                    : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
+                }`}
+              >
+                {opt.label}
+              </button>
+            ))}
           </div>
-
-          {/* Search input */}
-          <div>
-            <label htmlFor="resources-search-input" className="sr-only">Search resources by name</label>
-            <input
-              id="resources-search-input"
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by name or description..."
-              aria-label="Search resources by name"
-              className="w-full text-sm px-4 py-2.5 rounded-pill border border-accent-secondary/20 bg-white text-text-body placeholder:text-text-muted focus:outline-none focus:border-accent-primary/40 focus:ring-1 focus:ring-accent-primary/20 transition-colors"
-            />
+          <span className="text-text-muted/30 mx-1">|</span>
+          <div role="group" aria-label="Filter by region" className="flex flex-wrap gap-1.5">
+            {REGIONS.map((reg) => (
+              <button
+                key={reg.value}
+                onClick={() => setActiveRegion(reg.value)}
+                className={`text-xs px-3 py-1 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
+                  activeRegion === reg.value
+                    ? 'bg-accent-secondary/10 text-accent-primary font-medium'
+                    : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
+                }`}
+              >
+                {reg.label}
+              </button>
+            ))}
           </div>
         </div>
       </section>
@@ -313,30 +301,6 @@ export default function ResourcesPage() {
           <LiveFeed endpoint="/api/resources/grants" title="Grants" limit={5} regionFilter={activeRegion} />
         </div>
       </motion.section>}
-
-      {/* Quick nav */}
-      <motion.section variants={fadeUp} className="pb-8">
-        <div className="flex flex-wrap gap-2">
-          {[
-            { label: 'Live', href: '#live' },
-            { label: 'Scholarships', href: '#scholarships' },
-            { label: 'Organizations', href: '#organizations' },
-            { label: 'Programs', href: '#programs' },
-            { label: 'Conferences', href: '#conferences' },
-            { label: 'Mentorship', href: '#mentorship' },
-            { label: 'Job Boards', href: '#jobs' },
-            { label: 'Communities', href: '#communities' },
-          ].map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-xs px-3.5 py-1.5 rounded-pill bg-accent-secondary/10 text-accent-primary hover:bg-accent-secondary/20 transition-colors"
-            >
-              {item.label}
-            </a>
-          ))}
-        </div>
-      </motion.section>
 
       {/* ─── SCHOLARSHIPS ─── */}
       {showSection('scholarships') && filteredScholarships.length > 0 && (
