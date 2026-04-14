@@ -161,6 +161,7 @@ export default function HomePage() {
           endpoint="/api/resources/jobs"
           title="What's new"
           limit={3}
+          regionFilter="Global"
         />
         <Link
           href="/resources#live"
