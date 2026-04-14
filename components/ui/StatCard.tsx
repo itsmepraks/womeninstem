@@ -17,13 +17,13 @@ export default function StatCard({
 
   return (
     <div
-      className={`rounded-organic-lg p-7 ${
+      className={`rounded-organic p-7 ${
         isDark ? 'card-dark' : 'card-white'
       }`}
       style={{ transform: `rotate(${rotation}deg)` }}
     >
       <div
-        className={`font-display text-[2.5rem] font-bold leading-none ${
+        className={`font-display text-stat ${
           isDark ? 'text-surface-dark-text' : 'text-accent-primary'
         }`}
       >
