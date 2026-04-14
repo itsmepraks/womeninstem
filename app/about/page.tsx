@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import PageTransition from '@/components/ui/PageTransition';
 import { SOCIAL_LINKS } from '@/lib/constants';
 import { pioneers } from '@/data/pioneers';
 import { scholarships, organizations, programs, conferences } from '@/data/resources';
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
+    <PageTransition>
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       {/* Hero */}
       <section className="pt-12 md:pt-20 pb-10">
@@ -177,5 +179,6 @@ export default function AboutPage() {
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 }

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import PageTransition from '@/components/ui/PageTransition';
 import {
   heroStats,
   workforceStats,
@@ -30,6 +31,7 @@ function ImpactStat({ stat }: { stat: Stat }) {
 
 export default function ImpactPage() {
   return (
+    <PageTransition>
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       {/* Hero */}
       <section className="pt-12 md:pt-20 pb-10">
@@ -187,5 +189,6 @@ export default function ImpactPage() {
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 }

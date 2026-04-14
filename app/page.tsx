@@ -2,6 +2,7 @@ import Link from 'next/link';
 import StatCard from '@/components/ui/StatCard';
 import PioneerSpotlight from '@/components/ui/PioneerSpotlight';
 import LiveFeed from '@/components/ui/LiveFeed';
+import PageTransition from '@/components/ui/PageTransition';
 import { heroStats, heroHighlight } from '@/data/stats';
 import { scholarships } from '@/data/resources';
 import { pioneers } from '@/data/pioneers';
@@ -13,6 +14,7 @@ export default function HomePage() {
   const scholarshipCount = scholarships.length;
 
   return (
+    <PageTransition>
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       {/* ─── HERO ─── */}
       <section className="pt-16 md:pt-24 pb-10 max-w-[640px]">
@@ -192,5 +194,6 @@ export default function HomePage() {
         </div>
       </section>
     </div>
+    </PageTransition>
   );
 }
