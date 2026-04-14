@@ -307,10 +307,10 @@ export default function ResourcesPage() {
       <motion.section variants={fadeUp} id="live" className="pb-10">
         <SectionHeading title="Live Feeds" accent="From public APIs. Updated every few hours." />
         <div className="space-y-6">
-          <LiveFeed endpoint="/api/resources/jobs" title="Jobs & Internships" limit={5} />
-          <LiveFeed endpoint="/api/resources/events" title="Events" limit={5} />
-          <LiveFeed endpoint="/api/resources/hackathons" title="Hackathons" limit={5} />
-          <LiveFeed endpoint="/api/resources/grants" title="Grants" limit={5} />
+          <LiveFeed endpoint="/api/resources/jobs" title="Jobs & Internships" limit={5} regionFilter={activeRegion} />
+          <LiveFeed endpoint="/api/resources/events" title="Events" limit={5} regionFilter={activeRegion} />
+          <LiveFeed endpoint="/api/resources/hackathons" title="Hackathons" limit={5} regionFilter={activeRegion} />
+          <LiveFeed endpoint="/api/resources/grants" title="Grants" limit={5} regionFilter={activeRegion} />
         </div>
       </motion.section>
 
