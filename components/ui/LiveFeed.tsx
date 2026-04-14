@@ -3,11 +3,31 @@
 import { useEffect, useState } from 'react';
 import { useLiveData } from '@/lib/useLiveData';
 
+// Map region filter values to location keywords for client-side filtering
+const REGION_KEYWORDS: Record<string, string[]> = {
+  US: ['usa', 'united states', 'us', 'new york', 'san francisco', 'california', 'texas', 'boston', 'seattle', 'chicago', 'austin', 'remote (us)', 'north america'],
+  Europe: ['uk', 'germany', 'france', 'london', 'berlin', 'paris', 'amsterdam', 'europe', 'eu', 'deutschland', 'españa', 'italia', 'remote (eu)'],
+  Americas: ['canada', 'brazil', 'mexico', 'toronto', 'vancouver', 'latin america', 'south america'],
+  Asia: ['india', 'japan', 'china', 'singapore', 'tokyo', 'mumbai', 'bangalore', 'asia'],
+  Africa: ['nigeria', 'kenya', 'south africa', 'africa', 'nairobi', 'lagos', 'cape town'],
+  Oceania: ['australia', 'new zealand', 'sydney', 'melbourne'],
+  Global: ['remote', 'worldwide', 'global', 'anywhere'],
+};
+
+function matchesRegionFilter(region: string, location: string): boolean {
+  if (region === 'all') return true;
+  const keywords = REGION_KEYWORDS[region];
+  if (!keywords) return true;
+  const loc = location.toLowerCase();
+  return keywords.some((kw) => loc.includes(kw));
+}
+
 interface LiveFeedProps {
   endpoint: string;
   title: string;
   limit?: number;
   emptyMessage?: string;
+  regionFilter?: string;
 }
 
 function timeSince(isoDate: string): string {
@@ -26,9 +46,13 @@ export default function LiveFeed({
   title,
   limit = 5,
   emptyMessage = 'No items right now. New data fetches automatically every few hours.',
+  regionFilter = 'all',
 }: LiveFeedProps) {
   const { data, loading, error, updatedAt } = useLiveData(endpoint);
-  const items = data.slice(0, limit);
+  const filtered = regionFilter === 'all'
+    ? data
+    : data.filter((item) => matchesRegionFilter(regionFilter, item.location || ''));
+  const items = filtered.slice(0, limit);
   const [slowLoading, setSlowLoading] = useState(false);
 
   useEffect(() => {
