@@ -17,7 +17,7 @@ module.exports = {
           heading: '#3d2518',
           body: '#5c4636',
           secondary: '#7a5e48',
-          muted: '#94704f',
+          muted: '#7d5f3f',
         },
         accent: {
           primary: '#c47a52',
@@ -46,11 +46,12 @@ module.exports = {
         'body': ['1rem', { lineHeight: '1.7' }],
         'xs': ['0.8125rem', { lineHeight: '1.6' }],
         'sm': ['0.9375rem', { lineHeight: '1.6' }],
+        'stat': ['2.5rem', { lineHeight: '1', fontWeight: '700' }],
+        'card-title': ['1.0625rem', { lineHeight: '1.4', fontWeight: '600' }],
         'label': ['0.8125rem', { lineHeight: '1.4', letterSpacing: '0.1em', fontWeight: '500' }],
       },
       borderRadius: {
         'organic': '1.25rem',
-        'organic-lg': '1.375rem',
         'pill': '2rem',
       },
       boxShadow: {
