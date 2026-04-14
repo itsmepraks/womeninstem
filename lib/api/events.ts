@@ -82,7 +82,7 @@ export async function fetchEvents(): Promise<ResourcesResponse> {
   const deduped = deduplicateResources(agg.data)
   const filtered = filterExpired(deduped)
   return buildResponse(filtered, 'events', {
-    revalidateSeconds: 300,
+    revalidateSeconds: 21600,
     sources: agg.sourceNames,
     sourcesAttempted: agg.sourcesAttempted,
     sourcesSucceeded: agg.sourcesSucceeded,

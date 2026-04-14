@@ -139,7 +139,7 @@ export async function fetchGrants(): Promise<ResourcesResponse> {
   const deduped = deduplicateResources(agg.data)
   const filtered = filterExpired(deduped)
   return buildResponse(filtered, 'grants', {
-    revalidateSeconds: 1800,
+    revalidateSeconds: 21600,
     sources: agg.sourceNames,
     sourcesAttempted: agg.sourcesAttempted,
     sourcesSucceeded: agg.sourcesSucceeded,
