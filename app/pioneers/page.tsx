@@ -2,10 +2,13 @@
 
 import PioneerSpotlight from '@/components/ui/PioneerSpotlight';
 import LiveFeed from '@/components/ui/LiveFeed';
+import PageTransition from '@/components/ui/PageTransition';
+import Feedback from '@/components/ui/Feedback';
 import { pioneers } from '@/data/pioneers';
 
 export default function PioneersPage() {
   return (
+    <PageTransition>
     <div className="max-w-[880px] mx-auto px-6 md:px-10">
       <section className="pt-12 md:pt-20 pb-10">
         <h1 className="font-display text-[2.75rem] text-text-heading font-light leading-tight">
@@ -54,6 +57,9 @@ export default function PioneersPage() {
           </p>
         </div>
       </section>
+
+      <Feedback />
     </div>
+    </PageTransition>
   );
 }
