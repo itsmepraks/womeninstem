@@ -1,7 +1,6 @@
 import { XMLParser } from 'fast-xml-parser'
 import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
-import { geocodeAll } from '@/lib/geocoding'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
 import { randomUUID } from 'crypto'
@@ -81,8 +80,7 @@ const fetchers = EVENT_SOURCES.map((s) => makeRssFetcher(s.url, s.name, s.locati
 export async function fetchEvents(): Promise<ResourcesResponse> {
   const agg = await aggregateSources(fetchers)
   const deduped = deduplicateResources(agg.data)
-  const geocoded = await geocodeAll(deduped)
-  const filtered = filterExpired(geocoded)
+  const filtered = filterExpired(deduped)
   return buildResponse(filtered, 'events', {
     revalidateSeconds: 300,
     sources: agg.sourceNames,

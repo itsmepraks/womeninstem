@@ -38,7 +38,7 @@ function makePodcastFetcher(term: string): () => Promise<Resource[]> {
         return {
           id: randomUUID(),
           name: trackName,
-          category: 'events' as const,
+          category: 'podcasts' as const,
           url: trackUrl,
           description: rawDescription,
           lat: 0,
@@ -59,7 +59,7 @@ const fetchers = SEARCH_TERMS.map((t) => makePodcastFetcher(t))
 export async function fetchPodcasts(): Promise<ResourcesResponse> {
   const agg = await aggregateSources(fetchers)
   const deduped = deduplicateResources(agg.data)
-  return buildResponse(deduped, 'events', {
+  return buildResponse(deduped, 'podcasts', {
     revalidateSeconds: 86400,
     sources: agg.sourceNames,
     sourcesAttempted: agg.sourcesAttempted,

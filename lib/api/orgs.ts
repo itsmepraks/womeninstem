@@ -1,6 +1,5 @@
 import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
-import { geocodeAll } from '@/lib/geocoding'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
 import { randomUUID } from 'crypto'
@@ -172,8 +171,7 @@ export async function fetchOrgs(): Promise<ResourcesResponse> {
     fetchGitHubRepos,
   ])
   const deduped = deduplicateResources(agg.data)
-  const geocoded = await geocodeAll(deduped)
-  const filtered = filterExpired(geocoded)
+  const filtered = filterExpired(deduped)
   return buildResponse(filtered, 'orgs', {
     revalidateSeconds: 21600,
     sources: agg.sourceNames,
