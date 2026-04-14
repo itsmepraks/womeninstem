@@ -180,7 +180,7 @@ export default function ResourcesPage() {
                 <button
                   key={cat.value}
                   onClick={() => setActiveCategory(cat.value)}
-                  className={`text-xs px-4 py-2 rounded-pill transition-colors ${
+                  className={`text-xs px-4 py-2 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
                     activeCategory === cat.value
                       ? 'bg-accent-secondary/10 text-accent-primary font-medium'
                       : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
@@ -200,7 +200,7 @@ export default function ResourcesPage() {
                 <button
                   key={opt.value}
                   onClick={() => setActiveCost(opt.value)}
-                  className={`text-xs px-4 py-2 rounded-pill transition-colors ${
+                  className={`text-xs px-4 py-2 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
                     activeCost === opt.value
                       ? 'bg-accent-secondary/10 text-accent-primary font-medium'
                       : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
