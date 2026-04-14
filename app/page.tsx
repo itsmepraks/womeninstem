@@ -3,12 +3,12 @@ import StatCard from '@/components/ui/StatCard';
 import LiveFeed from '@/components/ui/LiveFeed';
 import PageTransition from '@/components/ui/PageTransition';
 import { heroStats, heroHighlight } from '@/data/stats';
-import { scholarships } from '@/data/resources';
+import { courses } from '@/data/courses';
 
 export default function HomePage() {
   const stat1 = heroStats[0]!;
   const stat2 = heroStats[1]!;
-  const scholarshipCount = scholarships.length;
+  const courseCount = courses.length;
 
   return (
     <PageTransition>
@@ -103,7 +103,7 @@ export default function HomePage() {
           </div>
           <div className="w-24 h-24 rounded-[50%_50%_50%_20%] bg-gradient-to-br from-accent-secondary/10 to-accent-gold/15 flex-shrink-0 flex items-center justify-center">
             <span className="font-display text-4xl text-accent-primary font-light">
-              {scholarshipCount}
+              {courseCount}
             </span>
           </div>
         </div>
@@ -175,7 +175,7 @@ export default function HomePage() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-accent-secondary/[0.03] rounded-3xl" />
         <div className="relative z-[1]">
           <h2 className="font-display text-[2.25rem] text-text-heading font-light mb-3">
-            Find what you need
+            That&apos;s what we&apos;ve got
           </h2>
           <p className="text-body-lg text-text-secondary mb-7">
             Scholarships, courses, jobs, events. One site.
