@@ -140,7 +140,7 @@ export default function LiveFeed({
                   {item.location && item.location !== 'Unknown' && (
                     <span className="text-xs text-text-muted">{item.location}</span>
                   )}
-                  {item.date && (
+                  {item.date && !isNaN(new Date(item.date).getTime()) && (
                     <span className="text-xs text-text-muted">
                       {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </span>
