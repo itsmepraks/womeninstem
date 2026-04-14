@@ -283,8 +283,8 @@ export default function ResourcesPage() {
       </section>
 
       <motion.div variants={stagger} initial="hidden" animate="show">
-      {/* CLOSING SOON */}
-      {closingSoonScholarships.length > 0 && (
+      {/* CLOSING SOON — only show when All categories selected */}
+      {activeCategory === 'all' && closingSoonScholarships.length > 0 && (
         <motion.section variants={fadeUp} className="pb-10">
           <SectionHeading title="Closing soon" accent="Apply before they expire" />
           <div className="space-y-2.5">
@@ -303,8 +303,8 @@ export default function ResourcesPage() {
         </motion.section>
       )}
 
-      {/* ─── LIVE FEEDS ─── */}
-      <motion.section variants={fadeUp} id="live" className="pb-10">
+      {/* ─── LIVE FEEDS — only show when All categories selected ─── */}
+      {activeCategory === 'all' && <motion.section variants={fadeUp} id="live" className="pb-10">
         <SectionHeading title="Live Feeds" accent="From public APIs. Updated every few hours." />
         <div className="space-y-6">
           <LiveFeed endpoint="/api/resources/jobs" title="Jobs & Internships" limit={5} regionFilter={activeRegion} />
@@ -312,7 +312,7 @@ export default function ResourcesPage() {
           <LiveFeed endpoint="/api/resources/hackathons" title="Hackathons" limit={5} regionFilter={activeRegion} />
           <LiveFeed endpoint="/api/resources/grants" title="Grants" limit={5} regionFilter={activeRegion} />
         </div>
-      </motion.section>
+      </motion.section>}
 
       {/* Quick nav */}
       <motion.section variants={fadeUp} className="pb-8">
