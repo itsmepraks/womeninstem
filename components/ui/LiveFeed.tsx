@@ -152,7 +152,7 @@ export default function LiveFeed({
                 <h3 className="text-body text-text-heading font-medium truncate">
                   {item.name}
                 </h3>
-                {item.description && (
+                {item.description && typeof item.description === 'string' && (
                   <p className="text-xs text-text-secondary mt-1 line-clamp-2">
                     {item.description}
                   </p>

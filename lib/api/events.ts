@@ -29,7 +29,11 @@ function makeRssFetcher(
           i.title ?? (i['title'] as unknown as Record<string, unknown>)?.['__cdata'] ?? ''
         ).trim()
         const link = String(i.link ?? i.guid ?? '').trim()
-        const description = String(i.description ?? i.summary ?? '')
+        const rawDesc = i.description ?? i.summary ?? ''
+        const descStr = typeof rawDesc === 'object' && rawDesc !== null
+          ? (rawDesc as Record<string, unknown>)['__cdata'] ?? JSON.stringify(rawDesc)
+          : rawDesc
+        const description = String(descStr)
           .replace(/<[^>]+>/g, '')
           .trim()
         const date = String(i.pubDate ?? i.updated ?? '').trim()
