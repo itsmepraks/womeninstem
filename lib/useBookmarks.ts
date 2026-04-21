@@ -22,8 +22,17 @@ export interface BookmarkItem {
   savedAt: number;
 }
 
+export type CelebrationKind = 'first' | 'milestone';
+
+export interface CelebrationDetail {
+  kind: CelebrationKind;
+  count: number;
+}
+
 const STORAGE_KEY = 'stemspark:bookmarks:v1';
 const CHANGE_EVENT = 'stemspark:bookmarks:change';
+export const CELEBRATE_EVENT = 'stemspark:bookmarks:celebrate';
+const MILESTONES = [5, 10, 25, 50, 100];
 
 function readAll(): BookmarkItem[] {
   if (typeof window === 'undefined') return [];
@@ -41,6 +50,11 @@ function writeAll(items: BookmarkItem[]) {
   if (typeof window === 'undefined') return;
   window.localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   window.dispatchEvent(new CustomEvent(CHANGE_EVENT));
+}
+
+function emitCelebration(detail: CelebrationDetail) {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(new CustomEvent<CelebrationDetail>(CELEBRATE_EVENT, { detail }));
 }
 
 export function useBookmarks() {
@@ -72,6 +86,13 @@ export function useBookmarks() {
     if (current.some((i) => i.key === item.key)) return;
     const next = [{ ...item, savedAt: Date.now() }, ...current];
     writeAll(next);
+
+    const newCount = next.length;
+    if (current.length === 0) {
+      emitCelebration({ kind: 'first', count: 1 });
+    } else if (MILESTONES.includes(newCount)) {
+      emitCelebration({ kind: 'milestone', count: newCount });
+    }
   }, []);
 
   const remove = useCallback((key: string) => {
