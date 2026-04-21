@@ -3,9 +3,21 @@ import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
+import type {
+  RssItem,
+  NSFResponse,
+  GrantsGovResponse,
+  NIHResponse,
+} from '@/types/external'
+import { readXmlText } from '@/types/external'
 import { randomUUID } from 'crypto'
 
 const parser = new XMLParser({ ignoreAttributes: false, cdataPropName: '__cdata' })
+
+interface RssFeedRoot {
+  rss?: { channel?: { item?: RssItem | RssItem[] } }
+  feed?: { entry?: RssItem | RssItem[] }
+}
 
 // RSS adapter factory (reused across all RSS grant sources)
 function makeGrantsRssFetcher(
@@ -13,22 +25,20 @@ function makeGrantsRssFetcher(
   sourceName: string,
   filterKeywords?: string[]
 ): () => Promise<Resource[]> {
-  const fn = async function () {
+  const fn = async function (): Promise<Resource[]> {
     const res = await fetchWithTimeout(url, { headers: { 'User-Agent': 'stemspark/1.0' } })
     const xml = await res.text()
-    const parsed = parser.parse(xml)
-    const channel = parsed?.rss?.channel ?? parsed?.feed
-    const items: unknown[] = channel?.item ?? channel?.entry ?? []
-    const arr = Array.isArray(items) ? items : [items]
-    return arr
+    const parsed = parser.parse(xml) as RssFeedRoot
+    const raw = parsed?.rss?.channel?.item ?? parsed?.feed?.entry
+    const items: RssItem[] = raw == null ? [] : Array.isArray(raw) ? raw : [raw]
+    return items
       .filter(Boolean)
-      .map((item: unknown) => {
-        const i = item as Record<string, unknown>
-        const title = String(i.title ?? (i['title'] as unknown as Record<string, unknown>)?.['__cdata'] ?? '').trim()
-        const url = String(i.link ?? i.guid ?? '').trim()
-        const desc = String(i.description ?? i.summary ?? '').replace(/<[^>]+>/g, '').trim()
-        const date = String(i.pubDate ?? i.updated ?? '').trim()
-        if (!title || !url) return null
+      .map((i): Resource | null => {
+        const title = readXmlText(i.title).trim()
+        const link = readXmlText(i.link).trim() || readXmlText(i.guid).trim()
+        const desc = readXmlText(i.description ?? i.summary).replace(/<[^>]+>/g, '').trim()
+        const date = readXmlText(i.pubDate).trim() || readXmlText(i.updated).trim()
+        if (!title || !link) return null
         if (filterKeywords) {
           const text = (title + ' ' + desc).toLowerCase()
           if (!filterKeywords.some((kw) => text.includes(kw))) return null
@@ -39,12 +49,12 @@ function makeGrantsRssFetcher(
           category: 'grants' as const,
           lat: 0, lng: 0,
           location: 'Global',
-          url,
+          url: link,
           description: desc.slice(0, 200),
           date: date || undefined,
           tags: ['grant'],
           sourceName,
-        } as Resource
+        }
       })
       .filter((r): r is Resource => r !== null)
   }
@@ -55,14 +65,15 @@ function makeGrantsRssFetcher(
 async function fetchNSF(): Promise<Resource[]> {
   const url = 'https://api.nsf.gov/services/v1/awards.json?keyword=women+STEM&printFields=id,title,abstractText,startDate,expDate,awardeeName,fundProgramName'
   const res = await fetchWithTimeout(url)
-  const json = await res.json()
-  return (json.response?.award ?? []).map((a: Record<string, string>) => ({
+  const json: NSFResponse = await res.json()
+  const awards = json.response?.award ?? []
+  return awards.map((a) => ({
     id: randomUUID(),
     name: a.title ?? 'NSF Award',
     category: 'grants' as const,
     lat: 37.09, lng: -95.71,
     location: a.awardeeName ? `${a.awardeeName}, USA` : 'USA',
-    url: `https://www.nsf.gov/awardsearch/showAward?AWD_ID=${a.id}`,
+    url: `https://www.nsf.gov/awardsearch/showAward?AWD_ID=${a.id ?? ''}`,
     description: (a.abstractText ?? '').slice(0, 200),
     date: a.expDate,
     tags: ['NSF', 'federal'],
@@ -76,14 +87,15 @@ async function fetchGrantsGov(): Promise<Resource[]> {
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ keyword: 'women STEM', oppStatuses: 'forecasted,posted' }),
   })
-  const json = await res.json()
-  return (json.opportunities ?? []).map((o: Record<string, string>) => ({
+  const json: GrantsGovResponse = await res.json()
+  const opps = json.opportunities ?? []
+  return opps.map((o) => ({
     id: randomUUID(),
     name: o.opportunityTitle ?? 'Grants.gov Opportunity',
     category: 'grants' as const,
     lat: 37.09, lng: -95.71,
     location: 'USA',
-    url: `https://www.grants.gov/web/grants/view-opportunity.html?oppId=${o.id}`,
+    url: `https://www.grants.gov/web/grants/view-opportunity.html?oppId=${o.id ?? ''}`,
     description: (o.synopsis ?? '').slice(0, 200),
     date: o.closeDate,
     tags: ['federal', 'grants.gov'],
@@ -102,14 +114,15 @@ async function fetchNIH(): Promise<Resource[]> {
       limit: 25,
     }),
   })
-  const json = await res.json()
-  return (json.results ?? []).map((p: Record<string, string>) => ({
+  const json: NIHResponse = await res.json()
+  const projects = json.results ?? []
+  return projects.map((p) => ({
     id: randomUUID(),
     name: p.project_title ?? 'NIH Project',
     category: 'grants' as const,
     lat: 39.00, lng: -77.10,
     location: 'Bethesda, USA',
-    url: `https://reporter.nih.gov/project-details/${p.appl_id}`,
+    url: `https://reporter.nih.gov/project-details/${p.appl_id ?? ''}`,
     description: (p.abstract_text ?? '').slice(0, 200),
     date: p.project_end_date,
     sourceName: 'NIH',
