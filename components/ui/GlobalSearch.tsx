@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useEffect, useMemo } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Search, X } from 'lucide-react';
 import {
   scholarships,
@@ -164,7 +165,7 @@ export default function GlobalSearch() {
           setOpen(true);
           setTimeout(() => inputRef.current?.focus(), 50);
         }}
-        className="flex items-center gap-2 text-sm text-text-muted hover:text-text-heading transition-colors px-4 py-2.5 rounded-xl hover:bg-accent-secondary/5"
+        className="flex items-center gap-2 text-sm text-text-muted hover:text-text-heading active:scale-[0.96] [transition:color_0.2s,background-color_0.2s,transform_0.15s] px-4 py-2.5 rounded-xl hover:bg-accent-secondary/5"
         aria-label="Search"
       >
         <Search size={16} />
@@ -195,9 +196,21 @@ export default function GlobalSearch() {
               {query && (
                 <button
                   onClick={() => setQuery('')}
-                  className="text-text-muted hover:text-text-heading transition-colors"
+                  className="text-text-muted hover:text-text-heading active:scale-[0.96] [transition:color_0.2s,transform_0.15s]"
+                  aria-label="Clear search"
                 >
-                  <X size={16} />
+                  <AnimatePresence mode="wait" initial={false}>
+                    <motion.span
+                      key="clear"
+                      initial={{ opacity: 0, scale: 0.25, filter: 'blur(4px)' }}
+                      animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+                      exit={{ opacity: 0, scale: 0.25, filter: 'blur(4px)' }}
+                      transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
+                      className="block"
+                    >
+                      <X size={16} />
+                    </motion.span>
+                  </AnimatePresence>
                 </button>
               )}
               <kbd className="text-xs bg-accent-secondary/10 text-text-muted px-2 py-0.5 rounded flex-shrink-0">
@@ -210,7 +223,7 @@ export default function GlobalSearch() {
               {query.length < 2 && (
                 <div className="px-5 py-8 text-center">
                   <p className="text-sm text-text-muted">
-                    Start typing to search {index.length} resources
+                    Start typing to search <span className="tabular-nums">{index.length}</span> resources
                   </p>
                 </div>
               )}
@@ -270,7 +283,7 @@ export default function GlobalSearch() {
 
             {allMatches.length > 12 && (
               <div className="px-5 py-2 text-center border-t border-accent-primary/5">
-                <span className="text-xs text-text-muted">
+                <span className="text-xs text-text-muted tabular-nums">
                   Showing 12 of {allMatches.length} results. Try a more specific search.
                 </span>
               </div>
@@ -279,7 +292,7 @@ export default function GlobalSearch() {
             {/* Footer */}
             {results.length > 0 && (
               <div className="px-5 py-3 border-t border-accent-primary/5 flex justify-between items-center">
-                <span className="text-xs text-text-muted">
+                <span className="text-xs text-text-muted tabular-nums">
                   {results.length} result{results.length !== 1 ? 's' : ''}
                 </span>
                 <span className="text-xs text-text-muted">

@@ -23,7 +23,7 @@ export default function StatCard({
       style={{ transform: `rotate(${rotation}deg)` }}
     >
       <div
-        className={`font-display text-stat ${
+        className={`font-display text-stat tabular-nums ${
           isDark ? 'text-surface-dark-text' : 'text-accent-primary'
         }`}
       >

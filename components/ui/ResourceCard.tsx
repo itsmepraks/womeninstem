@@ -53,7 +53,7 @@ export default function ResourceCard({
         </p>
       </div>
       {hasDeadline && (
-        <span className={`text-xs font-medium flex-shrink-0 px-3 py-1 rounded-pill ${badgeClass}`}>
+        <span className={`text-xs font-medium flex-shrink-0 px-3 py-1 rounded-pill tabular-nums ${badgeClass}`}>
           {badgeText}
         </span>
       )}

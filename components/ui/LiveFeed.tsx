@@ -75,7 +75,7 @@ export default function LiveFeed({
           </div>
         </div>
         {updatedAt && (
-          <span className="text-xs text-text-muted">
+          <span className="text-xs text-text-muted tabular-nums">
             Updated {timeSince(updatedAt)}
           </span>
         )}
@@ -165,7 +165,7 @@ export default function LiveFeed({
                     <span className="text-xs text-text-muted">{item.location}</span>
                   )}
                   {item.date && !isNaN(new Date(item.date).getTime()) && (
-                    <span className="text-xs text-text-muted">
+                    <span className="text-xs text-text-muted tabular-nums">
                       {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                     </span>
                   )}

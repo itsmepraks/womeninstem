@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { NAV_ITEMS } from '@/data/navigation';
 import { SITE_NAME } from '@/lib/constants';
@@ -44,11 +45,22 @@ export default function Nav() {
       <div className="flex items-center gap-2 md:hidden">
         <GlobalSearch />
         <button
-          className="md:hidden p-2 text-text-heading focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-lg"
+          className="md:hidden p-2 text-text-heading focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-lg active:scale-[0.96] [transition:transform_0.15s]"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
         >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={mobileOpen ? 'close' : 'open'}
+              initial={{ opacity: 0, scale: 0.25, filter: 'blur(4px)' }}
+              animate={{ opacity: 1, scale: 1, filter: 'blur(0px)' }}
+              exit={{ opacity: 0, scale: 0.25, filter: 'blur(4px)' }}
+              transition={{ type: 'spring', duration: 0.3, bounce: 0 }}
+              className="block"
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </motion.span>
+          </AnimatePresence>
         </button>
       </div>
 

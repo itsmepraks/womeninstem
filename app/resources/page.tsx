@@ -223,7 +223,7 @@ export default function ResourcesPage() {
             <button
               key={cat.value}
               onClick={() => setActiveCategory(cat.value)}
-              className={`text-xs px-3.5 py-1.5 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
+              className={`text-xs px-3.5 py-1.5 rounded-pill active:scale-[0.96] [transition:background-color_0.2s,color_0.2s,transform_0.15s] focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
                 activeCategory === cat.value
                   ? 'bg-accent-secondary/10 text-accent-primary font-medium'
                   : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
@@ -241,7 +241,7 @@ export default function ResourcesPage() {
               <button
                 key={opt.value}
                 onClick={() => setActiveCost(opt.value)}
-                className={`text-xs px-3 py-1 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
+                className={`text-xs px-3 py-1 rounded-pill active:scale-[0.96] [transition:background-color_0.2s,color_0.2s,transform_0.15s] focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
                   activeCost === opt.value
                     ? 'bg-accent-secondary/10 text-accent-primary font-medium'
                     : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
@@ -257,7 +257,7 @@ export default function ResourcesPage() {
               <button
                 key={reg.value}
                 onClick={() => setActiveRegion(reg.value)}
-                className={`text-xs px-3 py-1 rounded-pill transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
+                className={`text-xs px-3 py-1 rounded-pill active:scale-[0.96] [transition:background-color_0.2s,color_0.2s,transform_0.15s] focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none ${
                   activeRegion === reg.value
                     ? 'bg-accent-secondary/10 text-accent-primary font-medium'
                     : 'bg-transparent text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'
@@ -560,7 +560,7 @@ export default function ResourcesPage() {
                 setActiveRegion('all');
                 setSearchQuery('');
               }}
-              className="mt-3 inline-block text-sm px-4 py-2.5 rounded-pill bg-accent-secondary/10 text-accent-primary hover:bg-accent-secondary/20 transition-colors"
+              className="mt-3 inline-block text-sm px-4 py-2.5 rounded-pill bg-accent-secondary/10 text-accent-primary hover:bg-accent-secondary/20 active:scale-[0.96] [transition:background-color_0.2s,transform_0.15s]"
             >
               Clear all filters
             </button>

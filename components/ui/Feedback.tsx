@@ -19,7 +19,7 @@ export default function Feedback() {
       <div className="flex justify-center gap-3">
         <button
           onClick={() => setSubmitted(true)}
-          className="text-sm px-4 py-2 rounded-pill bg-accent-secondary/10 text-accent-primary hover:bg-accent-secondary/20 transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none"
+          className="text-sm px-4 py-2 rounded-pill bg-accent-secondary/10 text-accent-primary hover:bg-accent-secondary/20 active:scale-[0.96] [transition:background-color_0.2s,transform_0.15s] focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none"
         >
           Yes
         </button>
@@ -27,7 +27,7 @@ export default function Feedback() {
           href="https://github.com/itsmepraks/womeninstem/issues/new?title=Feedback&labels=feedback"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm px-4 py-2 rounded-pill bg-transparent text-text-muted hover:bg-accent-secondary/5 transition-colors focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none"
+          className="text-sm px-4 py-2 rounded-pill bg-transparent text-text-muted hover:bg-accent-secondary/5 active:scale-[0.96] [transition:background-color_0.2s,transform_0.15s] focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 focus:outline-none"
         >
           Could be better
         </a>

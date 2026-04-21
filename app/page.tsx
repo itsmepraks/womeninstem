@@ -1,9 +1,22 @@
+'use client';
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import StatCard from '@/components/ui/StatCard';
 import LiveFeed from '@/components/ui/LiveFeed';
 import PageTransition from '@/components/ui/PageTransition';
 import { heroStats, heroHighlight } from '@/data/stats';
 import { courses } from '@/data/courses';
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.35, ease: 'easeOut' } },
+};
 
 export default function HomePage() {
   const stat1 = heroStats[0]!;
@@ -12,9 +25,9 @@ export default function HomePage() {
 
   return (
     <PageTransition>
-    <div className="max-w-[880px] mx-auto px-6 md:px-10">
+    <motion.div variants={stagger} initial="hidden" animate="show" className="max-w-[880px] mx-auto px-6 md:px-10">
       {/* ─── HERO ─── */}
-      <section className="pt-16 md:pt-24 pb-10 max-w-[640px]">
+      <motion.section variants={fadeUp} className="pt-16 md:pt-24 pb-10 max-w-[640px]">
         <p className="text-label text-accent-primary font-semibold mb-3.5 tracking-[0.19em]">
           Women in STEM
         </p>
@@ -36,11 +49,11 @@ export default function HomePage() {
             How it works
           </Link>
         </div>
-      </section>
+      </motion.section>
 
       {/* ─── FLOATING STAT CARDS ─── */}
       {/* Mobile: stacked cards. Desktop: floating positioned */}
-      <section className="mb-5">
+      <motion.section variants={fadeUp} className="mb-5">
         {/* Mobile layout */}
         <div className="flex flex-col gap-3 md:hidden">
           <StatCard value={stat1.value} label={stat1.label} detail={stat1.source} />
@@ -71,20 +84,20 @@ export default function HomePage() {
             </p>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ─── WHAT YOU'LL FIND HERE ─── */}
-      <section className="pt-12 pb-2">
+      <motion.section variants={fadeUp} className="pt-12 pb-2">
         <h2 className="font-display text-display text-text-heading mb-1.5">
           What you&apos;ll find here
         </h2>
         <p className="text-body-lg text-text-secondary">
           Here&apos;s what&apos;s inside.
         </p>
-      </section>
+      </motion.section>
 
       {/* Feature blocks — varied layout, NOT a grid */}
-      <section className="space-y-4 py-6">
+      <motion.section variants={fadeUp} className="space-y-4 py-6">
         {/* Full-width: Learning Hub */}
         <div className="card-white p-8 flex items-center gap-8">
           <div className="flex-1">
@@ -102,7 +115,7 @@ export default function HomePage() {
             </Link>
           </div>
           <div className="w-24 h-24 rounded-[50%_50%_50%_20%] bg-gradient-to-br from-accent-secondary/10 to-accent-gold/15 flex-shrink-0 flex items-center justify-center">
-            <span className="font-display text-4xl text-accent-primary font-light">
+            <span className="font-display text-4xl text-accent-primary font-light tabular-nums">
               {courseCount}
             </span>
           </div>
@@ -153,10 +166,10 @@ export default function HomePage() {
             </div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* ─── LIVE PREVIEW ─── */}
-      <section className="py-8">
+      <motion.section variants={fadeUp} className="py-8">
         <LiveFeed
           endpoint="/api/resources/jobs"
           title="What's new"
@@ -169,10 +182,10 @@ export default function HomePage() {
         >
           See everything →
         </Link>
-      </section>
+      </motion.section>
 
       {/* ─── FOOTER CTA ─── */}
-      <section className="py-14 text-center relative">
+      <motion.section variants={fadeUp} className="py-14 text-center relative">
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-accent-secondary/[0.03] rounded-3xl" />
         <div className="relative z-[1]">
           <h2 className="font-display text-[2.25rem] text-text-heading font-light mb-3">
@@ -185,8 +198,8 @@ export default function HomePage() {
             Browse resources
           </Link>
         </div>
-      </section>
-    </div>
+      </motion.section>
+    </motion.div>
     </PageTransition>
   );
 }

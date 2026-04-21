@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 function ImpactStat({ stat }: { stat: Stat }) {
   return (
     <div className="card-white p-5 md:p-6">
-      <div className="font-display text-2xl md:text-3xl text-accent-primary font-bold leading-tight">
+      <div className="font-display text-2xl md:text-3xl text-accent-primary font-bold leading-tight tabular-nums">
         {stat.value}
       </div>
       <p className="text-sm text-text-body mt-1.5 leading-snug">{stat.label}</p>
@@ -49,7 +49,7 @@ export default function ImpactPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {heroStats.map((stat) => (
             <div key={stat.label} className="card-dark p-8">
-              <div className="font-display text-4xl md:text-5xl text-surface-dark-text font-bold">
+              <div className="font-display text-4xl md:text-5xl text-surface-dark-text font-bold tabular-nums">
                 {stat.value}
               </div>
               <p className="text-body text-surface-dark-text/70 mt-2">{stat.label}</p>
@@ -105,7 +105,7 @@ export default function ImpactPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {retentionStats.map((stat) => (
             <div key={stat.label} className="card-white p-6 border-l-[3px] border-l-accent-primary">
-              <div className="font-display text-3xl text-accent-primary font-bold">
+              <div className="font-display text-3xl text-accent-primary font-bold tabular-nums">
                 {stat.value}
               </div>
               <p className="text-sm text-text-body mt-1.5 leading-snug">{stat.label}</p>
