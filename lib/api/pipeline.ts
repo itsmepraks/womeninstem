@@ -70,7 +70,7 @@ export async function aggregateSources<T>(
   }
 }
 
-export function fingerprintUrl(url: string): string {
+function fingerprintUrl(url: string): string {
   try {
     const u = new URL(url)
     const TRACKING_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref', 'source']
@@ -83,7 +83,7 @@ export function fingerprintUrl(url: string): string {
   }
 }
 
-export function mergeResources(a: Resource, b: Resource): Resource {
+function mergeResources(a: Resource, b: Resource): Resource {
   return {
     ...a,
     description: a.description || b.description,

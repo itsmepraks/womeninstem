@@ -33,11 +33,7 @@ export function getNextAnnualOccurrence(month: number, monthEnd?: number): NextO
   };
 }
 
-/**
- * Compute days until a given ISO date string (YYYY-MM-DD).
- * Returns negative number if expired.
- */
-export function daysUntil(isoDate: string): number {
+function daysUntil(isoDate: string): number {
   const target = new Date(isoDate);
   const now = new Date();
   const diffMs = target.getTime() - now.getTime();
