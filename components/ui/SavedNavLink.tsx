@@ -14,7 +14,7 @@ export default function SavedNavLink() {
   return (
     <Link
       href="/saved"
-      aria-label={`Saved${count > 0 ? ` — ${count} items` : ''}`}
+      aria-label={`Saved${count > 0 ? ` — ${count} ${count === 1 ? 'item' : 'items'}` : ''}`}
       className={`relative flex items-center gap-1.5 text-sm px-4 py-2.5 rounded-xl active:scale-[0.96] [transition:color_0.2s,background-color_0.2s,transform_0.15s] ${
         isActive
           ? 'bg-accent-secondary/10 text-accent-primary'
