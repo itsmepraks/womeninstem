@@ -1,5 +1,5 @@
 import { XMLParser } from 'fast-xml-parser'
-import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
+import { fetchWithTimeout, buildResponse, parseRssItem } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
@@ -22,32 +22,19 @@ function makeRssFetcher(
     const items: unknown[] = channel?.item ?? channel?.entry ?? []
     const arr = Array.isArray(items) ? items : [items]
     return arr
-      .filter(Boolean)
-      .map((item: unknown) => {
-        const i = item as Record<string, unknown>
-        const title = String(
-          i.title ?? (i['title'] as unknown as Record<string, unknown>)?.['__cdata'] ?? ''
-        ).trim()
-        const link = String(i.link ?? i.guid ?? '').trim()
-        const rawDesc = i.description ?? i.summary ?? ''
-        const descStr = typeof rawDesc === 'object' && rawDesc !== null
-          ? (rawDesc as Record<string, unknown>)['__cdata'] ?? JSON.stringify(rawDesc)
-          : rawDesc
-        const description = String(descStr)
-          .replace(/<[^>]+>/g, '')
-          .trim()
-        const date = String(i.pubDate ?? i.updated ?? '').trim()
-        if (!title || !link) return null
+      .map((item) => {
+        const fields = parseRssItem(item)
+        if (!fields) return null
         return {
           id: randomUUID(),
-          name: title,
+          name: fields.title,
           category,
           lat: 0,
           lng: 0,
           location: defaultLocation,
-          url: link,
-          description: description.slice(0, 200),
-          date: date || undefined,
+          url: fields.url,
+          description: fields.description.slice(0, 200),
+          date: fields.date || undefined,
           sourceName,
         } as Resource
       })

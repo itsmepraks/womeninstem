@@ -1,5 +1,5 @@
 import { XMLParser } from 'fast-xml-parser'
-import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
+import { fetchWithTimeout, buildResponse, parseRssItem } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
@@ -21,27 +21,22 @@ function makeGrantsRssFetcher(
     const items: unknown[] = channel?.item ?? channel?.entry ?? []
     const arr = Array.isArray(items) ? items : [items]
     return arr
-      .filter(Boolean)
-      .map((item: unknown) => {
-        const i = item as Record<string, unknown>
-        const title = String(i.title ?? (i['title'] as unknown as Record<string, unknown>)?.['__cdata'] ?? '').trim()
-        const url = String(i.link ?? i.guid ?? '').trim()
-        const desc = String(i.description ?? i.summary ?? '').replace(/<[^>]+>/g, '').trim()
-        const date = String(i.pubDate ?? i.updated ?? '').trim()
-        if (!title || !url) return null
+      .map((item) => {
+        const fields = parseRssItem(item)
+        if (!fields) return null
         if (filterKeywords) {
-          const text = (title + ' ' + desc).toLowerCase()
+          const text = (fields.title + ' ' + fields.description).toLowerCase()
           if (!filterKeywords.some((kw) => text.includes(kw))) return null
         }
         return {
           id: randomUUID(),
-          name: title,
+          name: fields.title,
           category: 'grants' as const,
           lat: 0, lng: 0,
           location: 'Global',
-          url,
-          description: desc.slice(0, 200),
-          date: date || undefined,
+          url: fields.url,
+          description: fields.description.slice(0, 200),
+          date: fields.date || undefined,
           tags: ['grant'],
           sourceName,
         } as Resource
