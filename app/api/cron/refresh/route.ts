@@ -1,69 +1,73 @@
 import { NextResponse } from 'next/server'
-import { FEED_CONFIG } from '@/lib/api/feeds'
+import { revalidateTag } from 'next/cache'
+import { FEED_CONFIG, feedTag } from '@/lib/api/feeds'
 
 export const dynamic = 'force-dynamic'
+export const maxDuration = 300 // 5 min — fetchers can be slow
 
-const FEEDS = FEED_CONFIG.map((f) => f.name)
+interface FeedResult {
+  feed: string
+  ok: boolean
+  items: number
+  durationMs: number
+  sourcesAttempted?: number
+  sourcesSucceeded?: number
+  error?: string
+}
 
 export async function GET(request: Request) {
-  // Verify cron secret to prevent unauthorized calls
   const authHeader = request.headers.get('authorization')
   const secret = process.env.CRON_SECRET
   if (!secret) {
-    console.error('[cron] CRON_SECRET env var is not set. Cron will not work.')
+    console.error('[cron] CRON_SECRET is not set.')
     return NextResponse.json({ error: 'CRON_SECRET not configured' }, { status: 500 })
   }
   if (authHeader !== `Bearer ${secret}`) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'http://localhost:3000'
-
-  const results: Record<string, { status: string; items?: number; error?: string }> = {}
-
-  // Hit each feed endpoint to trigger ISR revalidation
-  await Promise.allSettled(
-    FEEDS.map(async (feed) => {
+  const runStart = Date.now()
+  const results: FeedResult[] = await Promise.all(
+    FEED_CONFIG.map(async ({ name, fetch: fetchFeed }) => {
+      const t0 = Date.now()
       try {
-        const res = await fetch(`${baseUrl}/api/resources/${feed}`, {
-          headers: { 'Cache-Control': 'no-cache' },
-        })
-        if (res.ok) {
-          const json = await res.json()
-          results[feed] = {
-            status: 'ok',
-            items: json.data?.length ?? 0,
-          }
-        } else {
-          results[feed] = {
-            status: 'error',
-            error: `HTTP ${res.status}`,
-          }
+        const data = await fetchFeed()
+        revalidateTag(feedTag(name))
+        const result: FeedResult = {
+          feed: name,
+          ok: true,
+          items: data.data.length,
+          durationMs: Date.now() - t0,
+          sourcesAttempted: data.sourcesAttempted,
+          sourcesSucceeded: data.sourcesSucceeded,
         }
+        console.log(`[cron] ${name} ok: ${result.items} items, ${result.sourcesSucceeded}/${result.sourcesAttempted} sources, ${result.durationMs}ms`)
+        return result
       } catch (err) {
-        results[feed] = {
-          status: 'error',
-          error: err instanceof Error ? err.message : 'Unknown error',
+        const error = err instanceof Error ? err.message : String(err)
+        console.error(`[cron] ${name} FAILED after ${Date.now() - t0}ms: ${error}`)
+        return {
+          feed: name,
+          ok: false,
+          items: 0,
+          durationMs: Date.now() - t0,
+          error,
         }
       }
     })
   )
 
-  const totalItems = Object.values(results).reduce(
-    (sum, r) => sum + (r.items ?? 0),
-    0
-  )
-  const failedFeeds = Object.entries(results)
-    .filter(([, r]) => r.status === 'error')
-    .map(([name]) => name)
+  const totalItems = results.reduce((sum, r) => sum + r.items, 0)
+  const failed = results.filter((r) => !r.ok).map((r) => r.feed)
+  const totalMs = Date.now() - runStart
+
+  console.log(`[cron] run complete in ${totalMs}ms — ${totalItems} items across ${results.length - failed.length}/${results.length} feeds`)
 
   return NextResponse.json({
     refreshedAt: new Date().toISOString(),
     totalItems,
-    feedCount: FEEDS.length,
-    failedFeeds,
-    feeds: results,
+    totalMs,
+    failedFeeds: failed,
+    results,
   })
 }
