@@ -13,7 +13,6 @@ import { scholarships, programs } from '@/data/resources';
 import { getCoursesByField } from '@/data/courses';
 
 export default function LearningPage() {
-  // Get bootcamp programs to feature
   const bootcamps = programs.filter((p) => p.category === 'bootcamp').slice(0, 3);
   const coursesByField = getCoursesByField();
 

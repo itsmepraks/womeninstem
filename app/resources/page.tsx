@@ -66,7 +66,6 @@ function matchesSearch(query: string, ...fields: (string | undefined)[]): boolea
 function matchesCost(costFilter: CostFilter, cost: string | undefined): boolean {
   if (costFilter === 'all') return true;
   if (costFilter === 'free') return isFree(cost);
-  // paid = not free
   return !isFree(cost);
 }
 
@@ -107,12 +106,10 @@ export default function ResourcesPage() {
 
   const showSection = (section: Category) => activeCategory === 'all' || activeCategory === section;
 
-  // Filtered data
   const filteredScholarships = useMemo(() => {
-    // Scholarships don't have a cost field in the same way, treat them as free
+    // Scholarships are inherently free — any "paid" cost filter hides them entirely.
     return scholarships.filter((s) => {
       if (!matchesSearch(searchQuery, s.name, s.description)) return false;
-      // Scholarships are inherently free (they give money), so if cost filter is "paid", hide them
       if (activeCost === 'paid') return false;
       if (!matchesRegion(activeRegion, s.region)) return false;
       return true;
@@ -203,7 +200,6 @@ export default function ResourcesPage() {
         </p>
       </section>
 
-      {/* ─── FILTER BAR (simplified) ─── */}
       <section className="sticky top-0 z-30 -mx-6 md:-mx-10 px-6 md:px-10 py-4 mb-8 bg-bg-primary/90 backdrop-blur-md border-b border-accent-primary/5">
         {/* Search */}
         <label htmlFor="resources-search-input" className="sr-only">Search resources</label>
@@ -292,7 +288,6 @@ export default function ResourcesPage() {
         </motion.section>
       )}
 
-      {/* ─── LIVE FEEDS — only show when All categories selected ─── */}
       {activeCategory === 'all' && <motion.section variants={fadeUp} id="live" className="pb-10">
         <SectionHeading title="Live Feeds" accent="From public sources. Refreshed throughout the day." />
         <div className="space-y-6">
@@ -303,7 +298,6 @@ export default function ResourcesPage() {
         </div>
       </motion.section>}
 
-      {/* ─── SCHOLARSHIPS ─── */}
       {showSection('scholarships') && filteredScholarships.length > 0 && (
         <motion.section variants={fadeUp} id="scholarships" className="pb-12">
           <SectionHeading title="Scholarships & Funding" accent={`${filteredScholarships.length} opportunities`} />
@@ -349,7 +343,6 @@ export default function ResourcesPage() {
         </motion.section>
       )}
 
-      {/* ─── ORGANIZATIONS ─── */}
       {showSection('organizations') && filteredOrganizations.length > 0 && (
         <motion.section variants={fadeUp} id="organizations" className="pb-12">
           <SectionHeading title="Organizations" accent={`${filteredOrganizations.length} listed`} />
@@ -370,7 +363,6 @@ export default function ResourcesPage() {
         </motion.section>
       )}
 
-      {/* ─── PROGRAMS ─── */}
       {showSection('programs') && filteredPrograms.length > 0 && (
         <motion.section variants={fadeUp} id="programs" className="pb-12">
           <SectionHeading title="Educational Programs" accent={`${filteredPrograms.length} listed`} />
@@ -410,7 +402,6 @@ export default function ResourcesPage() {
         </motion.section>
       )}
 
-      {/* ─── CONFERENCES ─── */}
       {showSection('conferences') && filteredConferences.length > 0 && (
         <motion.section variants={fadeUp} id="conferences" className="pb-12">
           <SectionHeading title="Conferences & Events" accent={`${filteredConferences.length} listed`} />
@@ -449,7 +440,6 @@ export default function ResourcesPage() {
         </motion.section>
       )}
 
-      {/* ─── MENTORSHIP ─── */}
       {showSection('mentorship') && filteredMentorship.length > 0 && (
         <motion.section variants={fadeUp} id="mentorship" className="pb-12">
           <SectionHeading title="Mentorship Platforms" accent="External platforms" />
@@ -481,7 +471,6 @@ export default function ResourcesPage() {
         </motion.section>
       )}
 
-      {/* ─── JOB BOARDS ─── */}
       {showSection('jobs') && filteredJobBoards.length > 0 && (
         <motion.section variants={fadeUp} id="jobs" className="pb-12">
           <SectionHeading title="Job Boards & Career" accent="External job sites" />
@@ -513,7 +502,6 @@ export default function ResourcesPage() {
         </motion.section>
       )}
 
-      {/* ─── COMMUNITIES ─── */}
       {showSection('communities') && filteredCommunities.length > 0 && (
         <motion.section variants={fadeUp} id="communities" className="pb-12">
           <SectionHeading title="Communities" accent="Slack, Discord, newsletters" />
