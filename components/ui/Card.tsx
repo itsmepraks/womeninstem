@@ -10,7 +10,6 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 }
 
-// Variant styles with sophisticated design
 const variantClasses: Record<string, string> = {
   default: 'glass shadow-card',
   elegant: 'bg-white/5 backdrop-blur-md border border-white/10 shadow-elegant',
@@ -20,7 +19,6 @@ const variantClasses: Record<string, string> = {
   flat: 'bg-white/5',
 };
 
-// Hover effect styles
 const hoverClasses: Record<string, string> = {
   default: 'hover:shadow-card-hover hover:-translate-y-1',
   elegant: 'hover:shadow-elegant-lg hover:-translate-y-1 hover:border-white/20',
@@ -30,7 +28,6 @@ const hoverClasses: Record<string, string> = {
   flat: 'hover:bg-white/10',
 };
 
-// Padding options
 const paddingClasses: Record<string, string> = {
   none: 'p-0',
   sm: 'p-4',
@@ -39,21 +36,6 @@ const paddingClasses: Record<string, string> = {
   xl: 'p-10',
 };
 
-/**
- * Sophisticated Card component with premium styling and variants
- * 
- * @example
- * ```tsx
- * <Card variant="elegant" hover>
- *   <h3>Card Title</h3>
- *   <p>Card content</p>
- * </Card>
- * 
- * <Card variant="premium" padding="lg">
- *   Premium content
- * </Card>
- * ```
- */
 export default function Card({
   variant = 'default',
   hover = false,
@@ -80,9 +62,6 @@ export default function Card({
   );
 }
 
-/**
- * Card Header - For card titles and actions
- */
 export function CardHeader({
   className,
   children,
@@ -101,9 +80,6 @@ export function CardHeader({
   );
 }
 
-/**
- * Card Title - Styled heading for cards
- */
 export function CardTitle({
   className,
   children,
@@ -123,9 +99,6 @@ export function CardTitle({
   );
 }
 
-/**
- * Card Description - Styled description text
- */
 export function CardDescription({
   className,
   children,
@@ -144,9 +117,6 @@ export function CardDescription({
   );
 }
 
-/**
- * Card Content - Main content area
- */
 export function CardContent({
   className,
   children,
@@ -162,9 +132,6 @@ export function CardContent({
   );
 }
 
-/**
- * Card Footer - For actions and metadata
- */
 export function CardFooter({
   className,
   children,
@@ -183,9 +150,6 @@ export function CardFooter({
   );
 }
 
-/**
- * Feature Card - Pre-styled card for features/services
- */
 export function FeatureCard({
   icon,
   title,
@@ -219,9 +183,6 @@ export function FeatureCard({
   );
 }
 
-/**
- * Stat Card - For displaying statistics
- */
 export function StatCard({
   value,
   label,
@@ -270,9 +231,6 @@ export function StatCard({
   );
 }
 
-/**
- * Image Card - Card with image header
- */
 export function ImageCard({
   image,
   imageAlt = '',
@@ -320,9 +278,6 @@ export function ImageCard({
   );
 }
 
-/**
- * Highlight Card - Card with accent border
- */
 export function HighlightCard({
   accentColor = 'nebula',
   children,
@@ -353,9 +308,6 @@ export function HighlightCard({
   );
 }
 
-/**
- * Info Card - Card with icon and information
- */
 export function InfoCard({
   icon,
   title,
@@ -398,9 +350,6 @@ export function InfoCard({
   );
 }
 
-/**
- * Card Grid - Responsive grid layout for cards
- */
 export function CardGrid({
   columns = 3,
   gap = 6,

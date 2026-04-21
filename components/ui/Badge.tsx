@@ -23,18 +23,13 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   onRemove?: () => void;
 }
 
-// Sophisticated variant class mappings with solid colors
 const variantClasses: Record<BadgeVariant, string> = {
   default: 'glass text-white hover:bg-white/10',
-  
-  // Solid color variants with refined styling
   nebula: 'bg-nebula-500/20 text-nebula-300 border border-nebula-500/30 hover:bg-nebula-500/30 hover:border-nebula-500/40',
   aurora: 'bg-aurora-500/20 text-aurora-300 border border-aurora-500/30 hover:bg-aurora-500/30 hover:border-aurora-500/40',
   stardust: 'bg-stardust-500/20 text-stardust-300 border border-stardust-500/30 hover:bg-stardust-500/30 hover:border-stardust-500/40',
   cosmic: 'bg-cosmic-blue-500/20 text-cosmic-blue-300 border border-cosmic-blue-500/30 hover:bg-cosmic-blue-500/30 hover:border-cosmic-blue-500/40',
   supernova: 'bg-supernova-500/20 text-supernova-300 border border-supernova-500/30 hover:bg-supernova-500/30 hover:border-supernova-500/40',
-  
-  // Premium variants
   elegant: 'bg-platinum-800/40 text-platinum-200 border border-platinum-700/50 hover:bg-platinum-800/60 hover:border-platinum-600/50',
   premium: 'bg-white/10 text-white border border-white/20 hover:bg-white/15 hover:border-white/30 shadow-elegant',
   outline: 'bg-transparent text-gray-300 border border-white/20 hover:bg-white/5 hover:border-white/30 hover:text-white',
@@ -58,18 +53,6 @@ const dotClasses: Record<BadgeVariant, string> = {
   outline: 'bg-gray-400',
 };
 
-/**
- * Sophisticated Badge component for labels, tags, and status indicators
- * 
- * @example
- * ```tsx
- * <Badge variant="nebula">Beginner</Badge>
- * <Badge variant="aurora" dot>Active</Badge>
- * <Badge variant="premium" pulse>Live</Badge>
- * <Badge variant="outline" size="sm">Tag</Badge>
- * <Badge removable onRemove={() => console.log('removed')}>Filter</Badge>
- * ```
- */
 export default function Badge({
   variant = 'default',
   size = 'md',
@@ -156,9 +139,6 @@ export default function Badge({
   );
 }
 
-/**
- * Badge Group - For displaying multiple badges together
- */
 export function BadgeGroup({
   className,
   children,
@@ -178,9 +158,6 @@ export function BadgeGroup({
   );
 }
 
-/**
- * Status Badge - Pre-configured badges for common status indicators
- */
 export function StatusBadge({
   status,
   className,
@@ -216,9 +193,6 @@ export function StatusBadge({
   );
 }
 
-/**
- * Level Badge - For skill/difficulty levels
- */
 export function LevelBadge({
   level,
   className,
@@ -247,9 +221,6 @@ export function LevelBadge({
   );
 }
 
-/**
- * Count Badge - For displaying counts (like notifications)
- */
 export function CountBadge({
   count,
   max = 99,
@@ -276,9 +247,6 @@ export function CountBadge({
   );
 }
 
-/**
- * Icon Badge - Badge with icon support
- */
 export function IconBadge({
   icon,
   children,

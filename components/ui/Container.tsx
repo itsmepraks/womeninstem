@@ -6,16 +6,6 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   as?: 'div' | 'section' | 'article' | 'main';
 }
 
-/**
- * Container component for consistent max-width and padding
- * 
- * @example
- * ```tsx
- * <Container size="lg">
- *   <h1>Content goes here</h1>
- * </Container>
- * ```
- */
 export default function Container({
   size = 'lg',
   as: Component = 'div',

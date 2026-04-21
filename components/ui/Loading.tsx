@@ -7,15 +7,6 @@ export interface LoadingProps {
   className?: string;
 }
 
-/**
- * Loading component with multiple variants
- * 
- * @example
- * ```tsx
- * <Loading size="md" variant="spinner" />
- * <Loading size="lg" variant="dots" />
- * ```
- */
 export default function Loading({ size = 'md', variant = 'spinner', className }: LoadingProps) {
   const sizeClasses = {
     sm: 'w-4 h-4',
@@ -93,9 +84,6 @@ export default function Loading({ size = 'md', variant = 'spinner', className }:
   return null;
 }
 
-/**
- * Full page loading component
- */
 export function LoadingPage() {
   return (
     <div className="min-h-screen flex items-center justify-center">
@@ -107,9 +95,6 @@ export function LoadingPage() {
   );
 }
 
-/**
- * Skeleton loader component
- */
 export function Skeleton({ className }: { className?: string }) {
   return (
     <div
