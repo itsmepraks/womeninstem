@@ -285,6 +285,7 @@ export default function ResourcesPage() {
                 url={s.url}
                 daysLeft={info.daysLeft}
                 deadlineLabel={info.label}
+                bookmark={{ key: `scholarship:${s.id}`, type: 'scholarship' }}
               />
             ))}
           </div>
@@ -313,7 +314,7 @@ export default function ResourcesPage() {
               <div className="space-y-2.5">
                 {sliced(undergradScholarships, 'scholarships-undergrad').map((s) => {
                   const dl = s.nextDeadline ? formatDeadlineDisplay(s.nextDeadline) : null;
-                  return <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} daysLeft={dl?.daysLeft} deadlineLabel={dl?.label} />;
+                  return <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} daysLeft={dl?.daysLeft} deadlineLabel={dl?.label} bookmark={{ key: `scholarship:${s.id}`, type: 'scholarship' }} />;
                 })}
               </div>
               <ShowMoreButton sectionKey="scholarships-undergrad" total={undergradScholarships.length} />
@@ -326,7 +327,7 @@ export default function ResourcesPage() {
               <div className="space-y-2.5">
                 {sliced(gradScholarships, 'scholarships-grad').map((s) => {
                   const dl = s.nextDeadline ? formatDeadlineDisplay(s.nextDeadline) : null;
-                  return <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} daysLeft={dl?.daysLeft} deadlineLabel={dl?.label} />;
+                  return <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} daysLeft={dl?.daysLeft} deadlineLabel={dl?.label} bookmark={{ key: `scholarship:${s.id}`, type: 'scholarship' }} />;
                 })}
               </div>
               <ShowMoreButton sectionKey="scholarships-grad" total={gradScholarships.length} />
@@ -339,7 +340,7 @@ export default function ResourcesPage() {
               <div className="space-y-2.5">
                 {sliced(postdocScholarships, 'scholarships-postdoc').map((s) => {
                   const dl = s.nextDeadline ? formatDeadlineDisplay(s.nextDeadline) : null;
-                  return <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} daysLeft={dl?.daysLeft} deadlineLabel={dl?.label} />;
+                  return <ResourceCard key={s.id} title={s.name} description={s.description} amount={s.amount} url={s.url} daysLeft={dl?.daysLeft} deadlineLabel={dl?.label} bookmark={{ key: `scholarship:${s.id}`, type: 'scholarship' }} />;
                 })}
               </div>
               <ShowMoreButton sectionKey="scholarships-postdoc" total={postdocScholarships.length} />

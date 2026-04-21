@@ -96,6 +96,7 @@ export default function LearningPage() {
               description={s.description}
               amount={s.amount}
               url={s.url}
+              bookmark={{ key: `scholarship:${s.id}`, type: 'scholarship' }}
             />
           ))}
         </div>

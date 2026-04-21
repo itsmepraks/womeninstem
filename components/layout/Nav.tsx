@@ -8,6 +8,7 @@ import { Menu, X } from 'lucide-react';
 import { NAV_ITEMS } from '@/data/navigation';
 import { SITE_NAME } from '@/lib/constants';
 import GlobalSearch from '@/components/ui/GlobalSearch';
+import SavedNavLink from '@/components/ui/SavedNavLink';
 
 export default function Nav() {
   const pathname = usePathname();
@@ -38,11 +39,13 @@ export default function Nav() {
             </Link>
           );
         })}
+        <SavedNavLink />
         <GlobalSearch />
       </div>
 
       {/* Mobile toggle */}
       <div className="flex items-center gap-2 md:hidden">
+        <SavedNavLink />
         <GlobalSearch />
         <button
           className="md:hidden p-2 text-text-heading focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 rounded-lg active:scale-[0.96] [transition:transform_0.15s]"
