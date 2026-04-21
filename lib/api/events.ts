@@ -3,9 +3,16 @@ import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
+import type { RssItem } from '@/types/external'
+import { readXmlText } from '@/types/external'
 import { randomUUID } from 'crypto'
 
 const parser = new XMLParser({ ignoreAttributes: false, cdataPropName: '__cdata' })
+
+interface RssFeedRoot {
+  rss?: { channel?: { item?: RssItem | RssItem[] } }
+  feed?: { entry?: RssItem | RssItem[] }
+}
 
 // RSS adapter factory
 function makeRssFetcher(
@@ -14,29 +21,22 @@ function makeRssFetcher(
   defaultLocation: string,
   category: Resource['category'] = 'events'
 ): () => Promise<Resource[]> {
-  const fn = async function () {
+  const fn = async function (): Promise<Resource[]> {
     const res = await fetchWithTimeout(url, { headers: { 'User-Agent': 'stemspark/1.0' } })
     const xml = await res.text()
-    const parsed = parser.parse(xml)
-    const channel = parsed?.rss?.channel ?? parsed?.feed
-    const items: unknown[] = channel?.item ?? channel?.entry ?? []
-    const arr = Array.isArray(items) ? items : [items]
-    return arr
+    const parsed = parser.parse(xml) as RssFeedRoot
+    const raw = parsed?.rss?.channel?.item ?? parsed?.feed?.entry
+    const items: RssItem[] = raw == null ? [] : Array.isArray(raw) ? raw : [raw]
+    return items
       .filter(Boolean)
-      .map((item: unknown) => {
-        const i = item as Record<string, unknown>
-        const title = String(
-          i.title ?? (i['title'] as unknown as Record<string, unknown>)?.['__cdata'] ?? ''
-        ).trim()
-        const link = String(i.link ?? i.guid ?? '').trim()
-        const rawDesc = i.description ?? i.summary ?? ''
-        const descStr = typeof rawDesc === 'object' && rawDesc !== null
-          ? (rawDesc as Record<string, unknown>)['__cdata'] ?? JSON.stringify(rawDesc)
-          : rawDesc
-        const description = String(descStr)
+      .map((i): Resource | null => {
+        const title = readXmlText(i.title).trim()
+        const link = (readXmlText(i.link).trim() || readXmlText(i.guid).trim())
+        const rawDesc = i.description ?? i.summary
+        const description = readXmlText(rawDesc)
           .replace(/<[^>]+>/g, '')
           .trim()
-        const date = String(i.pubDate ?? i.updated ?? '').trim()
+        const date = (readXmlText(i.pubDate).trim() || readXmlText(i.updated).trim())
         if (!title || !link) return null
         return {
           id: randomUUID(),
@@ -49,7 +49,7 @@ function makeRssFetcher(
           description: description.slice(0, 200),
           date: date || undefined,
           sourceName,
-        } as Resource
+        }
       })
       .filter((r): r is Resource => r !== null)
   }

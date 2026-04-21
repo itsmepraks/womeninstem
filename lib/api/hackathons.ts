@@ -2,6 +2,7 @@ import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
+import type { DevpostResponse } from '@/types/external'
 import { randomUUID } from 'crypto'
 
 function makeDevpostFetcher(page: number): () => Promise<Resource[]> {
@@ -11,26 +12,25 @@ function makeDevpostFetcher(page: number): () => Promise<Resource[]> {
     const res = await fetchWithTimeout(url, {
       headers: { 'User-Agent': 'stemspark/1.0' },
     })
-    const json = await res.json()
-    const hackathons: Array<Record<string, unknown>> = json.hackathons ?? []
+    const json: DevpostResponse = await res.json()
+    const hackathons = json.hackathons ?? []
     return hackathons
-      .map((h) => {
+      .map((h): Resource | null => {
         const title = String(h.title ?? '').trim()
         const hackUrl = String(h.url ?? '').trim()
         if (!title || !hackUrl) return null
 
-        const displayedLocation = h.displayed_location as Record<string, unknown> | undefined
-        const location = String(displayedLocation?.location ?? 'Online').trim()
+        const location = String(h.displayed_location?.location ?? 'Online').trim()
 
         const timeLeft = String(h.time_left_to_submission ?? '').trim()
         const orgName = String(h.organization_name ?? '').trim()
         const regCount = h.registrations_count ?? 0
         const description = [timeLeft, orgName, `${regCount} registered`]
           .filter(Boolean)
-          .join(' \u00b7 ')
+          .join(' · ')
 
         const themes = Array.isArray(h.themes)
-          ? (h.themes as Array<{ name?: string }>).map((t) => t.name ?? '').filter(Boolean)
+          ? h.themes.map((t) => t.name ?? '').filter((n): n is string => Boolean(n))
           : []
 
         const prizeRaw = String(h.prize_amount ?? '').replace(/<[^>]+>/g, '').trim() || undefined
@@ -47,7 +47,7 @@ function makeDevpostFetcher(page: number): () => Promise<Resource[]> {
           tags: themes,
           amount: prizeRaw,
           sourceName: label,
-        } as Resource
+        }
       })
       .filter((r): r is Resource => r !== null)
   }

@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { FEED_CONFIG } from '@/lib/api/feeds'
+import type { ResourcesResponse } from '@/types/resource'
 
 export const dynamic = 'force-dynamic'
 
@@ -26,7 +27,7 @@ export async function GET() {
             error: `HTTP ${res.status}`,
           }
         }
-        const json = await res.json()
+        const json: Partial<ResourcesResponse> = await res.json()
         const items = json.data?.length ?? 0
         const updatedAt = json.updatedAt ?? null
         const stale = updatedAt

@@ -1,6 +1,7 @@
 import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import type { Resource, ResourcesResponse } from '@/types/resource'
+import type { OpenLibrarySearchResponse } from '@/types/external'
 import { randomUUID } from 'crypto'
 
 const SEARCH_QUERIES = [
@@ -19,24 +20,24 @@ function makeBookFetcher(query: string): () => Promise<Resource[]> {
     })
     const text = await res.text()
     if (!text.startsWith('{')) throw new Error('Non-JSON response from Open Library')
-    const json = JSON.parse(text)
-    const docs: Array<Record<string, unknown>> = json.docs ?? []
+    const json: OpenLibrarySearchResponse = JSON.parse(text)
+    const docs = json.docs ?? []
     return docs
-      .map((doc) => {
+      .map((doc): Resource | null => {
         const title = String(doc.title ?? '').trim()
         const key = String(doc.key ?? '').trim()
         if (!title || !key) return null
 
         const authors = Array.isArray(doc.author_name)
-          ? (doc.author_name as string[]).join(', ')
+          ? doc.author_name.join(', ')
           : ''
         const firstSentence = Array.isArray(doc.first_sentence)
-          ? String((doc.first_sentence as string[])[0] ?? '')
+          ? String(doc.first_sentence[0] ?? '')
           : typeof doc.first_sentence === 'string'
             ? doc.first_sentence
             : ''
         const subjects = Array.isArray(doc.subject)
-          ? (doc.subject as string[]).slice(0, 3)
+          ? doc.subject.slice(0, 3)
           : []
         const publishYear = doc.first_publish_year
           ? String(doc.first_publish_year)
@@ -54,7 +55,7 @@ function makeBookFetcher(query: string): () => Promise<Resource[]> {
           tags: subjects,
           date: publishYear,
           sourceName: label,
-        } as Resource
+        }
       })
       .filter((r): r is Resource => r !== null)
   }

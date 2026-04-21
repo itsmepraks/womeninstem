@@ -2,6 +2,14 @@ import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
+import type {
+  WikipediaCategoryResponse,
+  WikipediaSummary,
+  WikidataSparqlResponse,
+  GitHubSearchUsersResponse,
+  GitHubOrgProfile,
+  GitHubRepoSearchResponse,
+} from '@/types/external'
 import { randomUUID } from 'crypto'
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN
@@ -12,19 +20,19 @@ const githubHeaders: Record<string, string> = {
   ...(GITHUB_TOKEN ? { Authorization: `Bearer ${GITHUB_TOKEN}` } : {}),
 }
 
-async function fetchWikipediaWomenSTEM(): Promise<Resource[]> {
-  const url = 'https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Women_in_STEM&cmlimit=50&format=json&origin=*'
-  const res = await fetchWithTimeout(url, { headers: { 'User-Agent': 'stemspark/1.0' } })
-  const json = await res.json()
-  const pages: Array<{ title: string }> = json.query?.categorymembers ?? []
+async function fetchWikipediaFromCategory(categoryUrl: string): Promise<Resource[]> {
+  const res = await fetchWithTimeout(categoryUrl, { headers: { 'User-Agent': 'stemspark/1.0' } })
+  const json: WikipediaCategoryResponse = await res.json()
+  const pages = json.query?.categorymembers ?? []
 
   const resources: Resource[] = []
   for (const page of pages.slice(0, 20)) {
     try {
       const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(page.title)}`
       const summaryRes = await fetchWithTimeout(summaryUrl, { headers: { 'User-Agent': 'stemspark/1.0' } })
-      const summary = await summaryRes.json()
-      if (!summary.content_urls?.desktop?.page) continue
+      const summary: WikipediaSummary = await summaryRes.json()
+      const pageUrl = summary.content_urls?.desktop?.page
+      if (!pageUrl) continue
       resources.push({
         id: randomUUID(),
         name: summary.title ?? page.title,
@@ -32,7 +40,7 @@ async function fetchWikipediaWomenSTEM(): Promise<Resource[]> {
         lat: summary.coordinates?.lat ?? 0,
         lng: summary.coordinates?.lon ?? 0,
         location: summary.description ?? 'Global',
-        url: summary.content_urls.desktop.page,
+        url: pageUrl,
         description: (summary.extract ?? '').slice(0, 200),
         tags: ['organization', 'wikipedia'],
         sourceName: 'Wikipedia',
@@ -44,36 +52,16 @@ async function fetchWikipediaWomenSTEM(): Promise<Resource[]> {
   return resources
 }
 
-async function fetchWikipediaWomenOrgs(): Promise<Resource[]> {
-  const url = 'https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Organizations_for_women_in_science&cmlimit=50&format=json&origin=*'
-  const res = await fetchWithTimeout(url, { headers: { 'User-Agent': 'stemspark/1.0' } })
-  const json = await res.json()
-  const pages: Array<{ title: string }> = json.query?.categorymembers ?? []
+async function fetchWikipediaWomenSTEM(): Promise<Resource[]> {
+  return fetchWikipediaFromCategory(
+    'https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Women_in_STEM&cmlimit=50&format=json&origin=*'
+  )
+}
 
-  const resources: Resource[] = []
-  for (const page of pages.slice(0, 20)) {
-    try {
-      const summaryUrl = `https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(page.title)}`
-      const summaryRes = await fetchWithTimeout(summaryUrl, { headers: { 'User-Agent': 'stemspark/1.0' } })
-      const summary = await summaryRes.json()
-      if (!summary.content_urls?.desktop?.page) continue
-      resources.push({
-        id: randomUUID(),
-        name: summary.title ?? page.title,
-        category: 'orgs' as const,
-        lat: summary.coordinates?.lat ?? 0,
-        lng: summary.coordinates?.lon ?? 0,
-        location: summary.description ?? 'Global',
-        url: summary.content_urls.desktop.page,
-        description: (summary.extract ?? '').slice(0, 200),
-        tags: ['organization', 'wikipedia'],
-        sourceName: 'Wikipedia',
-      })
-    } catch {
-      // skip
-    }
-  }
-  return resources
+async function fetchWikipediaWomenOrgs(): Promise<Resource[]> {
+  return fetchWikipediaFromCategory(
+    'https://en.wikipedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Organizations_for_women_in_science&cmlimit=50&format=json&origin=*'
+  )
 }
 
 async function fetchWikidata(): Promise<Resource[]> {
@@ -89,8 +77,9 @@ async function fetchWikidata(): Promise<Resource[]> {
     } LIMIT 50`
   const url = `https://query.wikidata.org/sparql?query=${encodeURIComponent(sparql)}&format=json`
   const res = await fetchWithTimeout(url, { headers: { 'User-Agent': 'stemspark/1.0', Accept: 'application/sparql-results+json' } })
-  const json = await res.json()
-  return (json.results?.bindings ?? []).map((b: Record<string, { value: string }>) => {
+  const json: WikidataSparqlResponse = await res.json()
+  const bindings = json.results?.bindings ?? []
+  return bindings.map((b): Resource => {
     const coords = b.coords?.value
     let lat = 0, lng = 0
     if (coords) {
@@ -108,7 +97,7 @@ async function fetchWikidata(): Promise<Resource[]> {
       tags: ['organization', 'wikidata'],
       sourceName: 'Wikidata',
     }
-  }).filter((r: Resource) => r.url)
+  }).filter((r) => r.url)
 }
 
 async function fetchGitHubOrgs(): Promise<Resource[]> {
@@ -116,13 +105,13 @@ async function fetchGitHubOrgs(): Promise<Resource[]> {
     'https://api.github.com/search/users?q=women+tech+type:org+in:bio&per_page=30',
     { headers: githubHeaders }
   )
-  const json = await res.json()
-  const orgs: Array<{ login: string; html_url: string; description: string }> = json.items ?? []
+  const json: GitHubSearchUsersResponse = await res.json()
+  const orgs = json.items ?? []
   const resources: Resource[] = []
   for (const org of orgs.slice(0, 15)) {
     try {
       const profileRes = await fetchWithTimeout(`https://api.github.com/orgs/${org.login}`, { headers: githubHeaders })
-      const profile = await profileRes.json()
+      const profile: GitHubOrgProfile = await profileRes.json()
       if (!profile.html_url) continue
       resources.push({
         id: randomUUID(),
@@ -147,8 +136,8 @@ async function fetchGitHubRepos(): Promise<Resource[]> {
     'https://api.github.com/search/repositories?q=women+STEM+org:*&type=org&per_page=20',
     { headers: githubHeaders }
   )
-  const json = await res.json()
-  const repos: Array<{ full_name: string; html_url: string; description: string; owner: { login: string; html_url: string } }> = json.items ?? []
+  const json: GitHubRepoSearchResponse = await res.json()
+  const repos = json.items ?? []
   return repos.filter((r) => r.description).map((r) => ({
     id: randomUUID(),
     name: r.full_name,

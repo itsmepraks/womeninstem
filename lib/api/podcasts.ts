@@ -1,6 +1,7 @@
 import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import type { Resource, ResourcesResponse } from '@/types/resource'
+import type { ItunesSearchResponse } from '@/types/external'
 import { randomUUID } from 'crypto'
 
 const SEARCH_TERMS = [
@@ -16,10 +17,10 @@ function makePodcastFetcher(term: string): () => Promise<Resource[]> {
     const res = await fetchWithTimeout(url, {
       headers: { 'User-Agent': 'stemspark/1.0' },
     })
-    const json = await res.json()
-    const results: Array<Record<string, unknown>> = json.results ?? []
+    const json: ItunesSearchResponse = await res.json()
+    const results = json.results ?? []
     return results
-      .map((item) => {
+      .map((item): Resource | null => {
         const trackName = String(item.trackName ?? '').trim()
         const trackUrl = String(
           item.trackViewUrl ?? item.collectionViewUrl ?? ''
@@ -31,9 +32,7 @@ function makePodcastFetcher(term: string): () => Promise<Resource[]> {
           .replace(/<[^>]+>/g, '')
           .trim()
           .slice(0, 200)
-        const genres = Array.isArray(item.genres)
-          ? (item.genres as string[])
-          : []
+        const genres = Array.isArray(item.genres) ? item.genres : []
 
         return {
           id: randomUUID(),
@@ -46,7 +45,7 @@ function makePodcastFetcher(term: string): () => Promise<Resource[]> {
           location: artistName,
           tags: genres,
           sourceName: `iTunes:${term}`,
-        } as Resource
+        }
       })
       .filter((r): r is Resource => r !== null)
   }

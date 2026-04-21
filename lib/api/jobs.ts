@@ -1,6 +1,14 @@
 import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import type { Resource, ResourcesResponse } from '@/types/resource'
+import type {
+  ArbeitnowResponse,
+  RemotiveResponse,
+  JobicyResponse,
+  HimalayasResponse,
+  RssItem,
+} from '@/types/external'
+import { readXmlText } from '@/types/external'
 import { randomUUID } from 'crypto'
 
 async function fetchArbeitnow(): Promise<Resource[]> {
@@ -8,8 +16,8 @@ async function fetchArbeitnow(): Promise<Resource[]> {
     'https://www.arbeitnow.com/api/job-board-api',
     { headers: { 'User-Agent': 'stemspark/1.0' } }
   )
-  const json = await res.json()
-  const jobs: Array<Record<string, unknown>> = json.data ?? []
+  const json: ArbeitnowResponse = await res.json()
+  const jobs = json.data ?? []
   return jobs.map((j) => ({
     id: randomUUID(),
     name: String(j.title ?? '').trim(),
@@ -20,7 +28,7 @@ async function fetchArbeitnow(): Promise<Resource[]> {
     url: String(j.url ?? '').trim(),
     description: String(j.description ?? '').replace(/<[^>]+>/g, '').trim().slice(0, 200),
     date: String(j.created_at ?? '').trim(),
-    tags: Array.isArray(j.tags) ? (j.tags as string[]) : [],
+    tags: Array.isArray(j.tags) ? j.tags : [],
     company: typeof j.company_name === 'string' ? j.company_name : undefined,
     sourceName: 'Arbeitnow',
   })).filter((r) => r.name && r.url)
@@ -31,8 +39,8 @@ async function fetchRemotive(): Promise<Resource[]> {
     'https://remotive.com/api/remote-jobs?category=software-dev&limit=50',
     { headers: { 'User-Agent': 'stemspark/1.0' } }
   )
-  const json = await res.json()
-  const jobs: Array<Record<string, unknown>> = json.jobs ?? []
+  const json: RemotiveResponse = await res.json()
+  const jobs = json.jobs ?? []
   return jobs.map((j) => ({
     id: randomUUID(),
     name: String(j.title ?? '').trim(),
@@ -53,8 +61,8 @@ async function fetchJobicy(): Promise<Resource[]> {
     'https://jobicy.com/api/v2/remote-jobs?count=50&tag=developer',
     { headers: { 'User-Agent': 'stemspark/1.0' } }
   )
-  const json = await res.json()
-  const jobs: Array<Record<string, unknown>> = json.jobs ?? []
+  const json: JobicyResponse = await res.json()
+  const jobs = json.jobs ?? []
   return jobs.map((j) => ({
     id: randomUUID(),
     name: String(j.jobTitle ?? '').trim(),
@@ -75,8 +83,8 @@ async function fetchHimalayas(): Promise<Resource[]> {
     'https://himalayas.app/jobs/api?limit=50',
     { headers: { 'User-Agent': 'stemspark/1.0' } }
   )
-  const json = await res.json()
-  const jobs: Array<Record<string, unknown>> = json.jobs ?? []
+  const json: HimalayasResponse = await res.json()
+  const jobs = json.jobs ?? []
   return jobs.map((j) => ({
     id: randomUUID(),
     name: String(j.title ?? '').trim(),
@@ -92,6 +100,10 @@ async function fetchHimalayas(): Promise<Resource[]> {
   })).filter((r) => r.name && r.url)
 }
 
+interface WwrRssRoot {
+  rss?: { channel?: { item?: RssItem | RssItem[] } }
+}
+
 async function fetchWWR(): Promise<Resource[]> {
   const res = await fetchWithTimeout(
     'https://weworkremotely.com/remote-jobs.rss',
@@ -101,24 +113,27 @@ async function fetchWWR(): Promise<Resource[]> {
   const { XMLParser } = await import('fast-xml-parser')
   const rssParser = new XMLParser({ ignoreAttributes: false, cdataPropName: '__cdata' })
   const xml = await res.text()
-  const parsed = rssParser.parse(xml)
-  const items: unknown[] = parsed?.rss?.channel?.item ?? []
-  const arr = Array.isArray(items) ? items : [items]
-  return arr.filter(Boolean).map((item: unknown) => {
-    const i = item as Record<string, unknown>
+  const parsed = rssParser.parse(xml) as WwrRssRoot
+  const raw = parsed?.rss?.channel?.item
+  const items: RssItem[] = raw == null ? [] : Array.isArray(raw) ? raw : [raw]
+  return items.filter(Boolean).map((i) => {
+    const title = readXmlText(i.title).trim()
+    const url = readXmlText(i.link).trim() || readXmlText(i.guid).trim()
+    const description = readXmlText(i.description).replace(/<[^>]+>/g, '').trim().slice(0, 200)
+    const date = readXmlText(i.pubDate).trim()
     return {
       id: randomUUID(),
-      name: String(i.title ?? '').trim(),
+      name: title,
       category: 'jobs' as const,
       lat: 0,
       lng: 0,
       location: 'Remote',
-      url: String(i.link ?? '').trim(),
-      description: String(i.description ?? '').replace(/<[^>]+>/g, '').trim().slice(0, 200),
-      date: String(i.pubDate ?? '').trim(),
+      url,
+      description,
+      date,
       sourceName: 'WWR',
-    }
-  }).filter((r: Resource) => r.name && r.url)
+    } satisfies Resource
+  }).filter((r) => r.name && r.url)
 }
 
 export async function fetchJobs(): Promise<ResourcesResponse> {
