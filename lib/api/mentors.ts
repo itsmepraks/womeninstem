@@ -2,6 +2,10 @@ import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
+import type {
+  GitHubSearchUsersResponse,
+  GitHubUserProfile,
+} from '@/types/external'
 import { randomUUID } from 'crypto'
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN
@@ -27,12 +31,12 @@ function makeGithubMentorFetcher(query: string, label: string): () => Promise<Re
       `https://api.github.com/search/users?q=${encodeURIComponent(query)}&per_page=50`,
       { headers: githubHeaders }
     )
-    const json = await res.json()
-    const users: Array<{ login: string }> = json.items ?? []
+    const json: GitHubSearchUsersResponse = await res.json()
+    const users = json.items ?? []
     const profileResults = await Promise.allSettled(
-      users.slice(0, 20).map(async (user) => {
+      users.slice(0, 20).map(async (user): Promise<GitHubUserProfile> => {
         const profileRes = await fetchWithTimeout(`https://api.github.com/users/${user.login}`, { headers: githubHeaders })
-        return profileRes.json()
+        return profileRes.json() as Promise<GitHubUserProfile>
       })
     )
     const resources: Resource[] = []
@@ -43,7 +47,7 @@ function makeGithubMentorFetcher(query: string, label: string): () => Promise<Re
       if (!p.bio || !hasMentorSignal(p.bio)) continue
       resources.push({
         id: randomUUID(),
-        name: p.name ?? p.login,
+        name: p.name ?? p.login ?? 'Unknown',
         category: 'mentors' as const,
         lat: 0, lng: 0,
         location: p.location ?? 'Global',
