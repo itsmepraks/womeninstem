@@ -192,7 +192,7 @@ export default function HomePage() {
             That&apos;s what we&apos;ve got
           </h2>
           <p className="text-body-lg text-text-secondary mb-7">
-            Scholarships, courses, jobs, events. One site.
+            No logins, no ads. Just a directory that works.
           </p>
           <Link href="/resources" className="btn-primary text-base">
             Browse resources
