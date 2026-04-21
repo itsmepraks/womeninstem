@@ -1,3 +1,5 @@
+import type { Region } from '@/types/region';
+
 // ─── Interfaces ───────────────────────────────────────────────────────────────
 
 export interface Scholarship {
@@ -8,7 +10,7 @@ export interface Scholarship {
   level: 'undergraduate' | 'graduate' | 'postdoctoral' | 'all';
   url: string;
   nextDeadline?: string; // ISO date YYYY-MM-DD for next application deadline
-  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
+  region?: Region;
 }
 
 export interface Organization {
@@ -26,7 +28,7 @@ export interface Organization {
     | 'intersectional';
   cost?: string;
   url?: string;
-  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
+  region?: Region;
 }
 
 export interface Program {
@@ -37,7 +39,7 @@ export interface Program {
   cost: string;
   audience?: string;
   url: string;
-  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
+  region?: Region;
 }
 
 export interface Conference {
@@ -50,7 +52,7 @@ export interface Conference {
   url?: string;
   month?: number; // 1-12, the month it usually happens
   monthEnd?: number; // For events spanning 2 months
-  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
+  region?: Region;
 }
 
 export interface MentorshipPlatform {
@@ -59,7 +61,7 @@ export interface MentorshipPlatform {
   description: string;
   cost: string;
   url?: string;
-  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
+  region?: Region;
 }
 
 export interface JobBoard {
@@ -68,7 +70,7 @@ export interface JobBoard {
   description: string;
   cost: string;
   url: string;
-  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
+  region?: Region;
 }
 
 // ─── Scholarships ─────────────────────────────────────────────────────────────

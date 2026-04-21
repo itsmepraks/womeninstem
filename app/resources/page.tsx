@@ -19,10 +19,11 @@ import {
 } from '@/data/resources';
 import { communities } from '@/data/communities';
 import { getNextAnnualOccurrence, formatDeadlineDisplay } from '@/lib/dateHelpers';
+import type { Region } from '@/types/region';
 
 type Category = 'all' | 'scholarships' | 'organizations' | 'programs' | 'conferences' | 'mentorship' | 'jobs' | 'communities';
 type CostFilter = 'all' | 'free' | 'paid';
-type RegionFilter = 'all' | 'Global' | 'US' | 'Europe' | 'Americas' | 'Asia' | 'Africa' | 'Oceania';
+type RegionFilter = 'all' | Region;
 
 const CATEGORIES: { value: Category; label: string }[] = [
   { value: 'all', label: 'All' },

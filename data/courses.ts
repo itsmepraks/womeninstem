@@ -1,9 +1,11 @@
+import type { Region } from '@/types/region';
+
 export interface Course {
   title: string;
   cost: string;
   url: string;
   field: string;
-  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
+  region?: Region;
 }
 
 export const courses: Course[] = [
