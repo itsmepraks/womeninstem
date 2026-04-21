@@ -125,8 +125,9 @@ async function geocodeAddressInternal(
       const data = await res.json()
       if (!Array.isArray(data) || data.length === 0) return null
       return { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) }
-    } catch {
+    } catch (err) {
       callCountRef.lastCallMs = Date.now()
+      console.warn(`[geocoding:nominatim] failed for "${address}":`, err instanceof Error ? err.message : String(err))
       return null
     }
   } finally {
@@ -175,7 +176,8 @@ export async function geocodeAddress(
 
     cache.set(address, geocodingResult)
     return geocodingResult
-  } catch {
+  } catch (err) {
+    console.warn(`[geocoding] failed for "${address}":`, err instanceof Error ? err.message : String(err))
     return null
   }
 }
