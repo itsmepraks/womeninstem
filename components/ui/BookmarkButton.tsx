@@ -1,7 +1,8 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
 import { Bookmark } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useBookmarks, type BookmarkItem } from '@/lib/useBookmarks';
 
 interface BookmarkButtonProps {
@@ -9,9 +10,29 @@ interface BookmarkButtonProps {
   size?: number;
 }
 
+function prefersReducedMotion(): boolean {
+  if (typeof window === 'undefined') return false;
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
 export default function BookmarkButton({ item, size = 16 }: BookmarkButtonProps) {
   const { has, toggle, hydrated } = useBookmarks();
   const saved = hydrated && has(item.key);
+  const [flightId, setFlightId] = useState(0);
+  const prevSaved = useRef(saved);
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    setReduced(prefersReducedMotion());
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    if (!prevSaved.current && saved && !reduced) {
+      setFlightId((id) => id + 1);
+    }
+    prevSaved.current = saved;
+  }, [saved, hydrated, reduced]);
 
   return (
     <button
@@ -39,6 +60,24 @@ export default function BookmarkButton({ item, size = 16 }: BookmarkButtonProps)
           strokeWidth={saved ? 1.75 : 2}
         />
       </motion.span>
+
+      <AnimatePresence>
+        {flightId > 0 && (
+          <motion.span
+            key={flightId}
+            aria-hidden
+            initial={{ opacity: 0, y: 0, scale: 0.6 }}
+            animate={{ opacity: [0, 1, 1, 0], y: -28, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.9, ease: [0.2, 0, 0, 1], times: [0, 0.15, 0.7, 1] }}
+            onAnimationComplete={() => setFlightId(0)}
+            className="pointer-events-none absolute text-accent-primary"
+            style={{ willChange: 'transform, opacity' }}
+          >
+            <Bookmark size={size} fill="currentColor" strokeWidth={1.75} />
+          </motion.span>
+        )}
+      </AnimatePresence>
     </button>
   );
 }
