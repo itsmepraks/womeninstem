@@ -4,6 +4,7 @@ import Nav from '@/components/layout/Nav';
 import Footer from '@/components/layout/Footer';
 import BackToTop from '@/components/ui/BackToTop';
 import BackgroundBlobs from '@/components/layout/BackgroundBlobs';
+import BookmarkCelebration from '@/components/ui/BookmarkCelebration';
 import 'leaflet/dist/leaflet.css';
 import './globals.css';
 
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Nav />
         <main id="main-content" className="relative z-10">{children}</main>
         <BackToTop />
+        <BookmarkCelebration />
         <Footer />
       </body>
     </html>
