@@ -43,8 +43,13 @@ export function useLiveData(endpoint: string): UseLiveDataResult {
         setError(false);
         setLoading(false);
         lastFetchedAt.current = Date.now();
-      } catch {
+      } catch (err) {
         if (cancelled) return;
+        // AbortError on unmount is expected — not worth logging
+        const isAbort = err instanceof Error && err.name === 'AbortError';
+        if (!isAbort) {
+          console.error(`[useLiveData] fetch failed for ${endpoint} (silent=${silent}):`, err);
+        }
         if (!silent) {
           setError(true);
           setLoading(false);
