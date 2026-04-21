@@ -47,7 +47,7 @@ export default function LiveFeed({
   endpoint,
   title,
   limit = 5,
-  emptyMessage = 'No items right now. New data fetches automatically every few hours.',
+  emptyMessage = 'Nothing new right now. Check back later.',
   regionFilter = 'all',
 }: LiveFeedProps) {
   const { data, loading, error, updatedAt } = useLiveData(endpoint);
@@ -133,7 +133,7 @@ export default function LiveFeed({
           ))}
           {slowLoading && (
             <p className="text-sm text-text-muted text-center mt-3">
-              Still fetching... external APIs can be slow on first load.
+              Still loading — first fetch can take a moment.
             </p>
           )}
         </div>
@@ -142,7 +142,7 @@ export default function LiveFeed({
       {error && (
         <div className="card-white p-5">
           <p className="text-sm text-text-muted mb-3">
-            Loading is slow right now. Try these directly:
+            We couldn&apos;t reach these sources. You can try them directly:
           </p>
           <div className="flex flex-wrap gap-2">
             {endpoint.includes('jobs') && (
