@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useLiveData } from '@/lib/useLiveData';
 
-// Map region filter values to location keywords for client-side filtering
 const REGION_KEYWORDS: Record<string, string[]> = {
   US: ['usa', 'united states', 'us', 'new york', 'san francisco', 'california', 'texas', 'boston', 'seattle', 'chicago', 'austin', 'remote (us)', 'north america'],
   Europe: ['uk', 'germany', 'france', 'london', 'berlin', 'paris', 'amsterdam', 'europe', 'eu', 'deutschland', 'españa', 'italia', 'remote (eu)'],
@@ -41,6 +41,8 @@ function timeSince(isoDate: string): string {
   return `${days}d ago`;
 }
 
+const NEW_PILL_MS = 10_000;
+
 export default function LiveFeed({
   endpoint,
   title,
@@ -54,6 +56,9 @@ export default function LiveFeed({
     : data.filter((item) => matchesRegionFilter(regionFilter, item.location || ''));
   const items = filtered.slice(0, limit);
   const [slowLoading, setSlowLoading] = useState(false);
+  const [newIds, setNewIds] = useState<Set<string>>(new Set());
+  const seenIdsRef = useRef<Set<string>>(new Set());
+  const initialisedRef = useRef(false);
 
   useEffect(() => {
     if (!loading) {
@@ -63,6 +68,43 @@ export default function LiveFeed({
     const id = setTimeout(() => setSlowLoading(true), 5000);
     return () => clearTimeout(id);
   }, [loading]);
+
+  useEffect(() => {
+    if (data.length === 0) return;
+    const currentIds = data.map((d) => d.id);
+
+    if (!initialisedRef.current) {
+      initialisedRef.current = true;
+      seenIdsRef.current = new Set(currentIds);
+      return;
+    }
+
+    const arrivals: string[] = [];
+    for (const id of currentIds) {
+      if (!seenIdsRef.current.has(id)) {
+        arrivals.push(id);
+        seenIdsRef.current.add(id);
+      }
+    }
+
+    if (arrivals.length === 0) return;
+
+    setNewIds((prev) => {
+      const next = new Set(prev);
+      for (const id of arrivals) next.add(id);
+      return next;
+    });
+
+    const timer = setTimeout(() => {
+      setNewIds((prev) => {
+        const next = new Set(prev);
+        for (const id of arrivals) next.delete(id);
+        return next;
+      });
+    }, NEW_PILL_MS);
+
+    return () => clearTimeout(timer);
+  }, [data]);
 
   return (
     <div>
@@ -140,53 +182,73 @@ export default function LiveFeed({
 
       {!loading && !error && items.length > 0 && (
         <div className="space-y-2.5">
-          {items.map((item) => (
-            <a
-              key={item.id}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="card-white p-5 flex items-start justify-between gap-4 group hover:shadow-card-hover transition-shadow"
-            >
-              <div className="flex-1 min-w-0">
-                <h3 className="text-body text-text-heading font-medium truncate">
-                  {item.name}
-                </h3>
-                {item.description && typeof item.description === 'string' && (
-                  <p className="text-xs text-text-secondary mt-1 line-clamp-2">
-                    {item.description}
-                  </p>
-                )}
-                <div className="flex items-center gap-2 mt-2 flex-wrap">
-                  {item.company && (
-                    <span className="text-xs text-text-muted">{item.company}</span>
+          {items.map((item) => {
+            const isNew = newIds.has(item.id);
+            return (
+              <a
+                key={item.id}
+                href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="card-white p-5 flex items-start justify-between gap-4 group hover:shadow-card-hover transition-shadow relative"
+              >
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <h3 className="text-body text-text-heading font-medium truncate">
+                      {item.name}
+                    </h3>
+                    <AnimatePresence>
+                      {isNew && (
+                        <motion.span
+                          initial={{ opacity: 0, scale: 0.7, y: -2 }}
+                          animate={{ opacity: 1, scale: 1, y: 0 }}
+                          exit={{ opacity: 0, scale: 0.9 }}
+                          transition={{ duration: 0.4, ease: [0.2, 0, 0, 1] }}
+                          className="text-[0.6875rem] font-semibold tracking-wide uppercase bg-accent-primary/10 text-accent-primary px-2 py-0.5 rounded-pill flex items-center gap-1"
+                          aria-label="Recently added"
+                        >
+                          <span className="w-1 h-1 rounded-full bg-accent-primary animate-pulse" />
+                          New
+                        </motion.span>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  {item.description && typeof item.description === 'string' && (
+                    <p className="text-xs text-text-secondary mt-1 line-clamp-2">
+                      {item.description}
+                    </p>
                   )}
-                  {item.location && item.location !== 'Unknown' && (
-                    <span className="text-xs text-text-muted">{item.location}</span>
-                  )}
-                  {item.date && !isNaN(new Date(item.date).getTime()) && (
-                    <span className="text-xs text-text-muted tabular-nums">
-                      {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                    </span>
-                  )}
-                  {item.amount && (
-                    <span className="text-xs text-accent-primary font-medium">{item.amount}</span>
-                  )}
-                  {item.tags && item.tags.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs bg-accent-secondary/10 text-accent-primary px-2 py-1 rounded-pill"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+                  <div className="flex items-center gap-2 mt-2 flex-wrap">
+                    {item.company && (
+                      <span className="text-xs text-text-muted">{item.company}</span>
+                    )}
+                    {item.location && item.location !== 'Unknown' && (
+                      <span className="text-xs text-text-muted">{item.location}</span>
+                    )}
+                    {item.date && !isNaN(new Date(item.date).getTime()) && (
+                      <span className="text-xs text-text-muted tabular-nums">
+                        {new Date(item.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                      </span>
+                    )}
+                    {item.amount && (
+                      <span className="text-xs text-accent-primary font-medium">{item.amount}</span>
+                    )}
+                    {item.tags && item.tags.slice(0, 3).map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs bg-accent-secondary/10 text-accent-primary px-2 py-1 rounded-pill"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <span className="text-xs text-accent-primary font-medium flex-shrink-0 group-hover:text-accent-secondary transition-colors mt-1">
-                View →
-              </span>
-            </a>
-          ))}
+                <span className="text-xs text-accent-primary font-medium flex-shrink-0 group-hover:text-accent-secondary transition-colors mt-1">
+                  View →
+                </span>
+              </a>
+            );
+          })}
         </div>
       )}
     </div>
