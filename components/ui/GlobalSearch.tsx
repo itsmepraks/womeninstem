@@ -117,7 +117,6 @@ export default function GlobalSearch() {
 
   const results = useMemo(() => allMatches.slice(0, 12), [allMatches]);
 
-  // Group results by category
   const grouped = useMemo(() => {
     const map = new Map<string, SearchResult[]>();
     for (const r of results) {
@@ -128,7 +127,6 @@ export default function GlobalSearch() {
     return map;
   }, [results]);
 
-  // Keyboard shortcut: Cmd+K or Ctrl+K
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -145,7 +143,6 @@ export default function GlobalSearch() {
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // Click outside to close
   useEffect(() => {
     function handleClick(e: MouseEvent) {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {

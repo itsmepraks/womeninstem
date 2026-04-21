@@ -1,7 +1,5 @@
 import type { Region } from '@/types/region';
 
-// ─── Interfaces ───────────────────────────────────────────────────────────────
-
 export interface Scholarship {
   id: string;
   name: string;
@@ -72,8 +70,6 @@ export interface JobBoard {
   url: string;
   region?: Region;
 }
-
-// ─── Scholarships ─────────────────────────────────────────────────────────────
 
 export const scholarships: Scholarship[] = [
   // Undergraduate Scholarships
@@ -419,8 +415,6 @@ export const scholarships: Scholarship[] = [
     region: 'US',
   },
 ];
-
-// ─── Organizations ────────────────────────────────────────────────────────────
 
 export const organizations: Organization[] = [
   // General Women in STEM
@@ -810,8 +804,6 @@ export const organizations: Organization[] = [
   },
 ];
 
-// ─── Programs ─────────────────────────────────────────────────────────────────
-
 export const programs: Program[] = [
   // K-12 Programs
   {
@@ -1149,8 +1141,6 @@ export const programs: Program[] = [
   },
 ];
 
-// ─── Conferences ──────────────────────────────────────────────────────────────
-
 export const conferences: Conference[] = [
   {
     id: 'ghc',
@@ -1303,8 +1293,6 @@ export const conferences: Conference[] = [
   },
 ];
 
-// ─── Mentorship Platforms ─────────────────────────────────────────────────────
-
 export const mentorshipPlatforms: MentorshipPlatform[] = [
   {
     id: 'mentornet',
@@ -1343,8 +1331,6 @@ export const mentorshipPlatforms: MentorshipPlatform[] = [
     region: 'US',
   },
 ];
-
-// ─── Job Boards ───────────────────────────────────────────────────────────────
 
 export const jobBoards: JobBoard[] = [
   {

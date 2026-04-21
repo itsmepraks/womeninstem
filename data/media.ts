@@ -23,8 +23,6 @@ export interface YouTubeChannel {
   description: string;
 }
 
-// ─── Books ───
-
 export const books: Book[] = [
   // Understanding the Challenges — Bias and Discrimination
   {
@@ -195,8 +193,6 @@ export const books: Book[] = [
   },
 ];
 
-// ─── Podcasts ───
-
 export const podcasts: Podcast[] = [
   // General Women in STEM
   {
@@ -288,8 +284,6 @@ export const podcasts: Podcast[] = [
   },
 ];
 
-// ─── Documentaries ───
-
 export const documentaries: Documentary[] = [
   // Women in STEM
   {
@@ -333,8 +327,6 @@ export const documentaries: Documentary[] = [
     description: 'Documentary on mathematician Maryam Mirzakhani',
   },
 ];
-
-// ─── YouTube Channels ───
 
 export const youtubeChannels: YouTubeChannel[] = [
   {
