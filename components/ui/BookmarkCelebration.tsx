@@ -12,11 +12,11 @@ interface ToastState {
 }
 
 const MILESTONE_COPY: Record<number, { title: string; body: string }> = {
-  5: { title: 'Five saved', body: 'A collection is forming.' },
-  10: { title: 'Ten saved', body: "You're curating something." },
-  25: { title: 'Twenty-five', body: 'A serious shortlist.' },
-  50: { title: 'Fifty resources', body: 'Enough to get anywhere.' },
-  100: { title: 'One hundred', body: 'Building a roadmap.' },
+  5: { title: 'Five saved', body: 'Keep going.' },
+  10: { title: 'Ten saved', body: 'Double digits.' },
+  25: { title: 'Twenty-five saved', body: 'Solid shortlist.' },
+  50: { title: 'Fifty saved', body: 'Nice library.' },
+  100: { title: 'One hundred saved', body: "That's a lot." },
 };
 
 function prefersReducedMotion(): boolean {

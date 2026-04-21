@@ -76,9 +76,10 @@ export default function AboutPage() {
           <div className="card-white p-6">
             <h3 className="text-base font-semibold text-text-heading mb-1">Automatically updated</h3>
             <p className="text-body text-text-body">
-              Live data (jobs, events, hackathons, grants) is pulled automatically
-              from public sources every few hours. Static resources (scholarships,
-              organizations, programs) are manually curated and updated regularly.
+              Eight live feeds (jobs, events, hackathons, grants, mentors, orgs,
+              books, podcasts) refresh daily from public sources via scheduled
+              jobs. Static resources (scholarships, organizations, programs)
+              are manually curated.
             </p>
           </div>
           <div className="card-white p-6">
@@ -126,7 +127,7 @@ export default function AboutPage() {
             { label: 'Organizations', count: organizations.length },
             { label: 'Educational programs', count: programs.length },
             { label: 'Conferences & events', count: conferences.length },
-            { label: 'Live data feeds', count: 6, suffix: 'Jobs, events, hackathons, grants, mentors, orgs' },
+            { label: 'Live data feeds', count: 8, suffix: 'Jobs, events, hackathons, grants, mentors, orgs, books, podcasts' },
           ].map((item) => (
             <div key={item.label} className="card-white p-5">
               <div className="font-display text-2xl text-accent-primary font-bold">

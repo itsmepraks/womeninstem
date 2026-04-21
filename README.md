@@ -10,7 +10,7 @@ A curated directory of scholarships, courses, organizations, and opportunities f
 
 ## What it is
 
-A static-first directory site. No accounts, no tracking, no paywalls — every link goes to a real external organization, scholarship, or program. Built because opportunities for women in STEM *exist*, they're just scattered across 47 tabs.
+A static-first directory site. No accounts, no tracking, no paywalls — every link goes to a real external organization, scholarship, or program. Built because opportunities for women in STEM exist, they're just scattered across too many sites.
 
 **Hand-curated (kept current manually):**
 - 31 scholarships & fellowships with deadline tracking

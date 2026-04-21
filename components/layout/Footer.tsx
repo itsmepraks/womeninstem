@@ -11,7 +11,7 @@ export default function Footer() {
               {SITE_NAME}
             </span>
             <p className="text-sm text-text-secondary mt-2 max-w-xs">
-              Scholarships, orgs, courses, and more for women in STEM. All in one place.
+              Scholarships, courses, orgs, and more for women in STEM.
             </p>
           </div>
           <div className="flex gap-12">

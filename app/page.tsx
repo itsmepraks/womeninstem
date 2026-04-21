@@ -39,7 +39,7 @@ export default function HomePage() {
         </h1>
         <div className="accent-underline mt-4 mb-5" />
         <p className="text-body-lg text-text-body max-w-[460px] mb-8">
-          Scholarships, courses, mentors, organizations. All in one place. All free to browse.
+          Scholarships, courses, mentors, orgs. Free to browse, no sign-up.
         </p>
         <div className="flex items-center gap-3.5">
           <Link href="/resources" className="btn-primary">
@@ -91,9 +91,6 @@ export default function HomePage() {
         <h2 className="font-display text-display text-text-heading mb-1.5">
           What you&apos;ll find here
         </h2>
-        <p className="text-body-lg text-text-secondary">
-          Here&apos;s what&apos;s inside.
-        </p>
       </motion.section>
 
       {/* Feature blocks — varied layout, NOT a grid */}

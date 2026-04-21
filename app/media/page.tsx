@@ -167,8 +167,8 @@ export default function MediaPage() {
       <section className="pb-10">
         <div className="p-5 bg-accent-gold/[0.04] rounded-organic border border-accent-gold/[0.08]">
           <p className="text-sm text-text-muted">
-            Live feeds (podcasts, books) pull from iTunes and Google Books APIs automatically every 24 hours.
-            Curated lists, documentaries, and YouTube channels are hand-picked and updated less frequently.
+            Podcasts refresh daily from iTunes. Books refresh daily from Open Library.
+            Curated lists, documentaries, and YouTube channels are hand-picked; they change when we find something worth adding.
             <a href="https://github.com/itsmepraks/womeninstem/issues/new?title=Suggest+media&labels=resource-suggestion" target="_blank" rel="noopener noreferrer" className="text-accent-primary ml-1 underline underline-offset-2 hover:text-accent-secondary transition-colors">
               Suggest something we missed.
             </a>

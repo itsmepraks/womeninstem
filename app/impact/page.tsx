@@ -100,7 +100,7 @@ export default function ImpactPage() {
         </h2>
         <p className="text-body text-text-body mb-5">
           Even when women enter STEM, more than half leave mid-career. The
-          attrition rate dwarfs every other professional field.
+          attrition rate is higher than in any other professional field.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {retentionStats.map((stat) => (
@@ -123,8 +123,7 @@ export default function ImpactPage() {
           Economic impact
         </h2>
         <p className="text-body text-text-body mb-5">
-          Gender parity in STEM is not just a fairness issue. It is an economic
-          imperative worth trillions.
+          The numbers below estimate how much closing the gap would add to GDP.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
           {economicStats.map((stat) => (
@@ -139,8 +138,8 @@ export default function ImpactPage() {
           The 8 key challenges
         </h2>
         <p className="text-body text-text-body mb-5">
-          Research identifies eight systemic barriers that drive women out of STEM
-          at every stage, from childhood through senior leadership.
+          Eight barriers keep showing up in the research. They reach every career
+          stage, starting in school.
         </p>
         <div className="space-y-3">
           {challenges.map((challenge) => (
