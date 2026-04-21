@@ -38,7 +38,7 @@ async function fetchWikipediaWomenSTEM(): Promise<Resource[]> {
         sourceName: 'Wikipedia',
       })
     } catch {
-      // skip individual page failures
+      // Swallow per-page fetch errors so one bad page doesn't drop the batch.
     }
   }
   return resources
@@ -70,7 +70,7 @@ async function fetchWikipediaWomenOrgs(): Promise<Resource[]> {
         sourceName: 'Wikipedia',
       })
     } catch {
-      // skip
+      // Swallow per-page fetch errors so one bad page doesn't drop the batch.
     }
   }
   return resources
@@ -136,7 +136,7 @@ async function fetchGitHubOrgs(): Promise<Resource[]> {
         sourceName: 'GitHub',
       })
     } catch {
-      // skip
+      // Swallow per-org profile fetch errors.
     }
   }
   return resources

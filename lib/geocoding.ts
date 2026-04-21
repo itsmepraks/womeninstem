@@ -78,37 +78,32 @@ export interface GeocodingResult {
 const cache = new Map<string, GeocodingResult>()
 
 function getCentroidFallback(location: string): { lat: number; lng: number } | null {
-  // Try exact match
   if (COUNTRY_CENTROIDS[location]) return COUNTRY_CENTROIDS[location]
-  // Try to find country name in the location string (e.g. "Berlin, Germany")
+  // Match country suffix (e.g. "Berlin, Germany")
   for (const [country, coords] of Object.entries(COUNTRY_CENTROIDS)) {
     if (location.includes(country)) return coords
   }
   return null
 }
 
-// Internal geocoder with rate limiting
-// Uses a shared state object that also holds a serial queue (promise chain)
-// so concurrent callers are serialized and the maxPerRun cap is respected.
+// Serializes concurrent callers through a shared promise chain so the Nominatim
+// 1 req/sec limit holds under Promise.all. `maxPerRun` caps total calls per batch.
 async function geocodeAddressInternal(
   address: string,
   callCountRef: { count: number; lastCallMs: number; queue: Promise<void> },
   maxPerRun: number
 ): Promise<{ lat: number; lng: number } | null> {
-  // Reserve a slot before entering the queue
   if (callCountRef.count >= maxPerRun) return null
   callCountRef.count++
 
-  // Serialize calls through the queue so rate limiting works under Promise.all
   let resolveSlot!: () => void
   const prevQueue = callCountRef.queue
   callCountRef.queue = new Promise<void>((res) => { resolveSlot = res })
 
-  // Wait for the previous queued call to finish
   await prevQueue
 
   try {
-    // Enforce 1100ms gap measured from END of previous fetch
+    // 1100ms gap measured from END of previous fetch (Nominatim policy)
     const elapsed = Date.now() - callCountRef.lastCallMs
     if (callCountRef.lastCallMs > 0 && elapsed < 1100) {
       await new Promise((r) => setTimeout(r, 1100 - elapsed))
@@ -135,19 +130,13 @@ async function geocodeAddressInternal(
 }
 
 /**
- * Geocodes an address string to lat/lng using Nominatim (OpenStreetMap).
- * Caches results in-memory to avoid repeated calls for the same address.
- * Returns null if the address cannot be geocoded.
- *
- * Rate limit: Nominatim requires max 1 req/sec. This function does NOT throttle —
- * callers should avoid bulk calls.
- *
- * User-Agent header must be set to "stemspark/1.0" per Nominatim usage policy.
+ * Geocodes via Nominatim (OpenStreetMap). Results cached in-memory.
+ * Does NOT throttle — bulk callers must use `geocodeAll` to respect
+ * Nominatim's 1 req/sec policy. User-Agent required per their terms.
  */
 export async function geocodeAddress(
   address: string
 ): Promise<GeocodingResult | null> {
-  // Check cache first
   if (cache.has(address)) {
     return cache.get(address)!
   }
@@ -180,29 +169,25 @@ export async function geocodeAddress(
   }
 }
 
-/**
- * Clears the in-memory geocoding cache. Useful for testing.
- */
+/** Clears the in-memory geocoding cache. Exposed for tests. */
 export function clearGeocodingCache(): void {
   cache.clear()
 }
 
-// Batch geocoder for pipeline use
+// Rate-limited batch geocoder. Falls back to country centroid when
+// Nominatim can't resolve.
 export async function geocodeAll(resources: Resource[], maxPerRun = 15): Promise<Resource[]> {
   const callCountRef = { count: 0, lastCallMs: 0, queue: Promise.resolve() }
 
   return Promise.all(
     resources.map(async (resource) => {
-      // Skip if already geocoded
       if (resource.lat !== 0 || resource.lng !== 0) return resource
 
-      // Try Nominatim (rate-limited)
       const coords = await geocodeAddressInternal(resource.location, callCountRef, maxPerRun)
       if (coords) {
         return { ...resource, lat: coords.lat, lng: coords.lng }
       }
 
-      // Fallback: country centroid
       const centroid = getCentroidFallback(resource.location)
       if (centroid) {
         return { ...resource, lat: centroid.lat, lng: centroid.lng }

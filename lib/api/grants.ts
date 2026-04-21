@@ -7,7 +7,6 @@ import { randomUUID } from 'crypto'
 
 const parser = new XMLParser({ ignoreAttributes: false, cdataPropName: '__cdata' })
 
-// RSS adapter factory (reused across all RSS grant sources)
 function makeGrantsRssFetcher(
   url: string,
   sourceName: string,
@@ -116,7 +115,6 @@ async function fetchNIH(): Promise<Resource[]> {
   }))
 }
 
-// 13 RSS grant sources
 const GRANTS_RSS_SOURCES = [
   { url: 'https://www.aauw.org/feed/',                                  name: 'AAUW',            filter: ['fellowship', 'grant', 'scholarship'] },
   { url: 'https://ec.europa.eu/research/mariecurieactions/feed',        name: 'Marie Curie',     filter: undefined },

@@ -7,7 +7,6 @@ import { randomUUID } from 'crypto'
 
 const parser = new XMLParser({ ignoreAttributes: false, cdataPropName: '__cdata' })
 
-// RSS adapter factory
 function makeRssFetcher(
   url: string,
   sourceName: string,
@@ -57,7 +56,6 @@ function makeRssFetcher(
   return fn
 }
 
-// 18 RSS event sources
 const EVENT_SOURCES = [
   { url: 'https://www.womenwhocode.com/blog/feed',                                  name: 'WWCode',        location: 'Global' },
   { url: 'https://swe.org/feed/',                                                   name: 'SWE',           location: 'USA' },

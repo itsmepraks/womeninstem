@@ -22,7 +22,6 @@ async function runWithRetry<T>(
       ])
     } catch (err) {
       if (attempt < retries) {
-        // Wait 1s before retry
         await new Promise((r) => setTimeout(r, 1000))
         continue
       }
@@ -74,10 +73,8 @@ export async function aggregateSources<T>(
 export function fingerprintUrl(url: string): string {
   try {
     const u = new URL(url)
-    // Strip tracking params
     const TRACKING_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'ref', 'source']
     TRACKING_PARAMS.forEach((p) => u.searchParams.delete(p))
-    // Rebuild: strip www, strip trailing slash
     const host = u.hostname.replace(/^www\./, '')
     const path = (u.pathname + u.search).replace(/\/$/, '').toLowerCase()
     return (host + path).toLowerCase()
