@@ -2,25 +2,27 @@
   "name": "stem-spark",
   "version": "0.1.0",
   "private": true,
-  "description": "Interactive book-themed STEM resource hub empowering girls and women in STEM fields",
+  "description": "A curated directory of scholarships, courses, organizations, and opportunities for women in STEM — all in one place, all free to browse.",
   "author": "Prakriti Bista <hello@praks.me>",
   "license": "MIT",
   "keywords": [
-    "next.js",
+    "nextjs",
     "typescript",
     "stem",
+    "women-in-stem",
     "women-in-tech",
-    "education",
-    "book-themed"
+    "scholarships",
+    "directory",
+    "education"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/itsmepraks/womeninstem.git"
+    "url": "git+https://github.com/itsmepraks/womeninstem.git"
   },
   "bugs": {
     "url": "https://github.com/itsmepraks/womeninstem/issues"
   },
-  "homepage": "https://github.com/itsmepraks/womeninstem#readme",
+  "homepage": "https://wis.praks.me",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -58,6 +60,7 @@
   },
   "engines": {
     "node": ">=18.17.0",
-    "npm": ">=9.0.0"
-  }
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@10.33.0"
 }

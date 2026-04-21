@@ -1,217 +1,131 @@
-# 🌟 STEM•SPARK
+# stem·spark
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue.svg)](https://www.typescriptlang.org/)
-[![Next.js](https://img.shields.io/badge/Next.js-14.2-black.svg)](https://nextjs.org/)
+A curated directory of scholarships, courses, organizations, and opportunities for women in STEM — in one place, all free to browse.
 
-> Igniting curiosity, one spark at a time.
+**Live:** [wis.praks.me](https://wis.praks.me)
 
-## About the Project
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Next.js](https://img.shields.io/badge/Next.js-14-black.svg)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue.svg)](https://www.typescriptlang.org/)
 
-STEM•SPARK is an interactive, space-themed web platform designed to inspire and empower girls and women in STEM fields. Our mission is to create an engaging digital experience that makes STEM education accessible, exciting, and relatable through gamification, mentorship, and community-driven content.
+## What it is
 
-## ✨ Features
+A static-first directory site. No accounts, no tracking, no paywalls — every link goes to a real external organization, scholarship, or program. Built because opportunities for women in STEM *exist*, they're just scattered across 47 tabs.
 
-### 🎯 Core Features
-- **Interactive Learning Paths**: Gamified STEM learning journeys with progress tracking
-- **Mentorship Platform**: Connect with STEM professionals and role models
-- **Resource Library**: Curated collection of articles, tutorials, and educational content
-- **Community Forum**: Safe space for discussions, questions, and peer support
-- **Achievement System**: Badges and rewards for learning milestones
-- **Career Explorer**: Discover diverse STEM career paths and opportunities
+**Hand-curated (kept current manually):**
+- 31 scholarships & fellowships with deadline tracking
+- 37 organizations
+- 30 programs (K-12, bootcamps, online platforms)
+- 14 conferences with annual timing
+- 24 free online courses across 8 fields
+- 8 communities (Slack, Discord, newsletters)
+- Plus mentorship platforms and job boards
 
-### 🎨 Design Philosophy
-- **Space-themed UI**: Galaxy-inspired color palette with cosmic animations
-- **Responsive Design**: Seamless experience across all devices
-- **Accessibility First**: WCAG 2.1 AA compliant
-- **Performance Optimized**: Fast load times and smooth interactions
+**Live feeds (refreshed daily at 06:00 UTC via Vercel cron):**
+- Jobs & internships — Arbeitnow, Remotive, Jobicy, Himalayas, WWR
+- Events — 18 RSS feeds (WWCode, SWE, IEEE-WIE, AAUW, etc.)
+- Hackathons — Devpost, MLH
+- Grants — NSF, Grants.gov, NIH, plus 13 international RSS sources
+- Mentors, orgs, books (iTunes/Open Library), podcasts
 
-## 🛠️ Tech Stack
+## Tech
 
-- **Framework**: Next.js 14+ (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **Animations**: Framer Motion
-- **UI Components**: Custom component library
-- **State Management**: Zustand
-- **Form Handling**: React Hook Form + Zod
-- **Package Manager**: pnpm
+- **Next.js 14** (App Router, static + ISR)
+- **TypeScript** (strict mode with `noUncheckedIndexedAccess`)
+- **Tailwind CSS** (custom design tokens — warm organic palette)
+- **Framer Motion** for animations
+- **Vercel** for hosting + cron jobs
+- `unstable_cache` + `revalidateTag` for tag-based cache invalidation
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-Before you begin, ensure you have the following installed:
-- **Node.js**: Version 18.17.0 or higher
-- **pnpm**: Version 9.0.0 or higher (recommended package manager)
-  - Install pnpm globally: `npm install -g pnpm`
-- **Git**: For cloning the repository
-
-### Installation
+## Getting started
 
 ```bash
-# Clone the repository
 git clone https://github.com/itsmepraks/womeninstem.git
 cd womeninstem
-
-# Install dependencies using pnpm
 pnpm install
-
-# Run the development server
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to view the application.
+Open [http://localhost:3000](http://localhost:3000).
 
-### Available Scripts
+### Environment variables
 
-```bash
-# Development
-pnpm dev          # Start development server on localhost:3000
-
-# Building
-pnpm build        # Create production build
-pnpm start        # Start production server
-
-# Code Quality
-pnpm lint         # Run ESLint to check code quality
-pnpm type-check   # Run TypeScript compiler checks without emitting files
-```
-
-## 🔧 Environment Variables
-
-Create a `.env.local` file in the root directory for local development:
+Only required for running the cron locally — the site works without them.
 
 ```env
-# API Configuration
-NEXT_PUBLIC_API_URL=http://localhost:3000/api
+# Required for /api/cron/refresh (Vercel cron auth)
+CRON_SECRET=<random-string>
 
-# Site Configuration
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-
-# Optional: Analytics
-# NEXT_PUBLIC_GA_ID=your-google-analytics-id
-
-# Optional: Feature Flags
-# NEXT_PUBLIC_ENABLE_BETA_FEATURES=false
+# Optional — higher rate limits on GitHub-based fetchers (orgs, mentors)
+GITHUB_TOKEN=<gh-pat>
 ```
 
-**Note:** Environment variables prefixed with `NEXT_PUBLIC_` are exposed to the browser.
+Pull from Vercel with `vercel env pull .env.local`.
 
-## 📁 Project Structure
+### Scripts
 
-```
-womeninstem/
-├── app/                    # Next.js App Router pages
-│   ├── layout.tsx         # Root layout
-│   ├── page.tsx           # Homepage
-│   └── (routes)/          # App routes
-├── components/            # React components
-│   ├── ui/               # UI primitives
-│   ├── features/         # Feature-specific components
-│   └── layout/           # Layout components
-├── content/              # Content management
-│   ├── articles/         # Article content
-│   ├── tutorials/        # Tutorial content
-│   └── resources/        # Resource files
-├── lib/                  # Utility functions and helpers
-│   ├── utils.ts          # General utilities
-│   └── constants.ts      # App constants
-├── public/               # Static assets
-│   ├── images/          # Image files
-│   └── icons/           # Icon files
-└── styles/              # Global styles
-```
-
-## 🎨 Design System
-
-### Color Palette (Space Theme)
-- **Deep Space**: `#0a0e27` - Primary background
-- **Nebula Purple**: `#6366f1` - Primary accent
-- **Cosmic Blue**: `#3b82f6` - Secondary accent
-- **Stardust**: `#fbbf24` - Highlights and achievements
-- **Aurora Green**: `#10b981` - Success states
-- **Supernova Pink**: `#ec4899` - Call-to-action
-
-## 🤝 Contributing
-
-We welcome contributions from the community! Please read our [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
-
-## 📝 Development Roadmap
-
-- [x] Project initialization and setup
-- [x] Core configuration and tooling
-- [x] Interactive book system implementation
-- [ ] Core UI component library
-- [ ] Homepage and landing design
-- [ ] Learning paths system
-- [ ] Mentorship platform
-- [ ] User authentication
-- [ ] Content management system
-- [ ] Community forum
-- [ ] Achievement and gamification system
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-**Issue: Module not found errors after installation**
 ```bash
-# Solution: Clear cache and reinstall dependencies
-rm -rf node_modules .next
-pnpm install
+pnpm dev          # Dev server on :3000
+pnpm build        # Production build
+pnpm start        # Production server
+pnpm lint         # Next.js ESLint
+pnpm type-check   # tsc --noEmit
+pnpm check-links  # Verify all external URLs resolve
 ```
 
-**Issue: Port 3000 already in use**
-```bash
-# Solution: Run on a different port
-pnpm dev -- -p 3001
+## Project structure
+
+```
+app/
+  api/
+    cron/refresh/      # Daily fetcher runner — hits all 8 feeds, revalidates tags
+    resources/[feed]/  # 8 feed endpoints: jobs, events, hackathons, grants,
+                       # mentors, orgs, books, podcasts — each wrapped in
+                       # unstable_cache with a matching tag
+  page.tsx             # Home
+  resources/           # Main directory with category/cost/region filters
+  learning/            # Courses + scholarships
+  impact/              # Stats & research
+  media/               # Books, podcasts, documentaries
+  saved/               # localStorage bookmarks
+  about/
+
+components/
+  ui/                  # Design system pieces (ResourceCard, LiveFeed,
+                       # GlobalSearch, BookmarkButton, etc.)
+  layout/
+
+data/                  # Hand-curated static data (scholarships, orgs, courses, ...)
+lib/
+  api/                 # 8 fetchers, pipeline.ts (aggregateSources, dedup),
+                       # feeds.ts (central FeedConfig), createFeedRoute.ts
+  useBookmarks.ts      # localStorage hook w/ cross-tab sync + celebrate events
+  useLiveData.ts       # Client fetcher w/ tab-focus refresh
+types/                 # Shared types (resource, region, external API shapes)
 ```
 
-**Issue: TypeScript errors in IDE**
-```bash
-# Solution: Restart TypeScript server in your IDE or run type-check
-pnpm type-check
-```
+## How data stays current
 
-**Issue: pnpm not found**
-```bash
-# Solution: Install pnpm globally
-npm install -g pnpm
-# Or use corepack (Node.js 16.13+)
-corepack enable
-corepack prepare pnpm@latest --activate
-```
+1. **Vercel cron** fires `/api/cron/refresh` daily at 06:00 UTC.
+2. The handler imports the 8 fetchers directly (no self-HTTP), runs them in parallel, and calls `revalidateTag('resources:<feed>')` on success.
+3. Each `/api/resources/<feed>` route wraps its fetcher in `unstable_cache` with the matching tag, so client requests hit warm cache.
+4. The `LiveFeed` component refetches silently on tab-focus (> 60s stale).
+5. Per-source failures are logged with context but don't kill the batch.
 
-**Issue: Styles not applying correctly**
-```bash
-# Solution: Clear Next.js cache and rebuild
-rm -rf .next
-pnpm dev
-```
+See `lib/api/feeds.ts` for the feed registry and `app/api/cron/refresh/route.ts` for the runner.
 
-### Getting Help
+## Contributing
 
-If you encounter issues not covered here:
-1. Check existing [GitHub Issues](https://github.com/itsmepraks/womeninstem/issues)
-2. Review the [CONTRIBUTING.md](CONTRIBUTING.md) guide
-3. Open a new issue with detailed information about the problem
+See [CONTRIBUTING.md](CONTRIBUTING.md). The fastest way to contribute right now is:
 
-## 📄 License
+- **Suggest a resource** (scholarship, org, program, etc.) — open an issue with a link
+- **Report a broken link** — open an issue
+- **Fix a bug** — PRs welcome
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## License
 
-## 💫 Acknowledgments
+MIT — see [LICENSE](LICENSE).
 
-- Built with passion to inspire the next generation of women in STEM
-- Dedicated to all the trailblazing women who paved the way in science, technology, engineering, and mathematics
+## Credits
 
-## 📧 Contact
-
-**Prakriti Bista**
-- GitHub: [@itsmepraks](https://github.com/itsmepraks)
-- Website: [praks.me](https://praks.me)
-
----
-
-⭐ Star this repository if you believe in empowering women in STEM!
+Built by [Prakriti Bista](https://praks.me).
