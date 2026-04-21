@@ -8,7 +8,6 @@ import { join } from 'path';
 
 const files = [
   'data/resources.ts',
-  'data/pioneers.ts',
   'data/communities.ts',
   'data/courses.ts',
 ];
