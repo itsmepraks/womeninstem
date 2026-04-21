@@ -23,7 +23,6 @@
       "@/components/*": ["./components/*"],
       "@/app/*": ["./app/*"],
       "@/lib/*": ["./lib/*"],
-      "@/content/*": ["./content/*"],
       "@/public/*": ["./public/*"]
     },
     "forceConsistentCasingInFileNames": true,
