@@ -1,25 +1,17 @@
 import { XMLParser } from 'fast-xml-parser'
-import { fetchWithTimeout, buildResponse } from '@/lib/api/helpers'
+import { fetchWithTimeout, buildResponse, parseRssItem } from '@/lib/api/helpers'
 import { aggregateSources, deduplicateResources } from '@/lib/api/pipeline'
 import { filterExpired } from '@/lib/api/filterExpired'
 import type { Resource, ResourcesResponse } from '@/types/resource'
 import type {
-  RssItem,
   NSFResponse,
   GrantsGovResponse,
   NIHResponse,
 } from '@/types/external'
-import { readXmlText } from '@/types/external'
 import { randomUUID } from 'crypto'
 
 const parser = new XMLParser({ ignoreAttributes: false, cdataPropName: '__cdata' })
 
-interface RssFeedRoot {
-  rss?: { channel?: { item?: RssItem | RssItem[] } }
-  feed?: { entry?: RssItem | RssItem[] }
-}
-
-// RSS adapter factory (reused across all RSS grant sources)
 function makeGrantsRssFetcher(
   url: string,
   sourceName: string,
@@ -28,30 +20,27 @@ function makeGrantsRssFetcher(
   const fn = async function (): Promise<Resource[]> {
     const res = await fetchWithTimeout(url, { headers: { 'User-Agent': 'stemspark/1.0' } })
     const xml = await res.text()
-    const parsed = parser.parse(xml) as RssFeedRoot
-    const raw = parsed?.rss?.channel?.item ?? parsed?.feed?.entry
-    const items: RssItem[] = raw == null ? [] : Array.isArray(raw) ? raw : [raw]
-    return items
-      .filter(Boolean)
-      .map((i): Resource | null => {
-        const title = readXmlText(i.title).trim()
-        const link = readXmlText(i.link).trim() || readXmlText(i.guid).trim()
-        const desc = readXmlText(i.description ?? i.summary).replace(/<[^>]+>/g, '').trim()
-        const date = readXmlText(i.pubDate).trim() || readXmlText(i.updated).trim()
-        if (!title || !link) return null
+    const parsed = parser.parse(xml)
+    const channel = parsed?.rss?.channel ?? parsed?.feed
+    const items: unknown[] = channel?.item ?? channel?.entry ?? []
+    const arr = Array.isArray(items) ? items : [items]
+    return arr
+      .map((item): Resource | null => {
+        const fields = parseRssItem(item)
+        if (!fields) return null
         if (filterKeywords) {
-          const text = (title + ' ' + desc).toLowerCase()
+          const text = (fields.title + ' ' + fields.description).toLowerCase()
           if (!filterKeywords.some((kw) => text.includes(kw))) return null
         }
         return {
           id: randomUUID(),
-          name: title,
+          name: fields.title,
           category: 'grants' as const,
           lat: 0, lng: 0,
           location: 'Global',
-          url: link,
-          description: desc.slice(0, 200),
-          date: date || undefined,
+          url: fields.url,
+          description: fields.description.slice(0, 200),
+          date: fields.date || undefined,
           tags: ['grant'],
           sourceName,
         }
@@ -129,7 +118,6 @@ async function fetchNIH(): Promise<Resource[]> {
   }))
 }
 
-// 13 RSS grant sources
 const GRANTS_RSS_SOURCES = [
   { url: 'https://www.aauw.org/feed/',                                  name: 'AAUW',            filter: ['fellowship', 'grant', 'scholarship'] },
   { url: 'https://ec.europa.eu/research/mariecurieactions/feed',        name: 'Marie Curie',     filter: undefined },

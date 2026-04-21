@@ -1,5 +1,51 @@
 import type { Resource, ResourceCategory, ResourcesResponse } from '@/types/resource'
 
+/**
+ * Extracts { title, url, description, date } from a single parsed RSS/Atom item.
+ *
+ * Handles the three upstream-quirk edge cases that RSS feeds hit in practice:
+ *  - `title` arriving either as a plain string or as `{ __cdata: ... }`
+ *    (thanks to `cdataPropName: '__cdata'` in the XMLParser config)
+ *  - `description` arriving either as a plain string, a `{ __cdata: ... }`
+ *    object, or an arbitrary nested object (some feeds publish MediaRSS
+ *    content shapes under the description tag)
+ *  - Atom feeds using `summary` + `updated` instead of `description` + `pubDate`
+ *
+ * Returns null when title or url are missing, so callers can drop invalid
+ * entries with a single filter.
+ */
+export interface RssItemFields {
+  title: string
+  url: string
+  description: string
+  date: string
+}
+
+export function parseRssItem(item: unknown): RssItemFields | null {
+  if (!item || typeof item !== 'object') return null
+  const i = item as Record<string, unknown>
+
+  const title = String(
+    i.title ??
+      (i['title'] as unknown as Record<string, unknown>)?.['__cdata'] ??
+      ''
+  ).trim()
+  const url = String(i.link ?? i.guid ?? '').trim()
+  if (!title || !url) return null
+
+  const rawDesc = i.description ?? i.summary ?? ''
+  const descStr =
+    typeof rawDesc === 'object' && rawDesc !== null
+      ? ((rawDesc as Record<string, unknown>)['__cdata'] ??
+          JSON.stringify(rawDesc))
+      : rawDesc
+  const description = String(descStr).replace(/<[^>]+>/g, '').trim()
+
+  const date = String(i.pubDate ?? i.updated ?? '').trim()
+
+  return { title, url, description, date }
+}
+
 interface BuildResponseMeta {
   revalidateSeconds?: number
   sources?: string[]
