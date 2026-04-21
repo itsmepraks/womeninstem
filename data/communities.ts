@@ -1,3 +1,5 @@
+import type { Region } from '@/types/region';
+
 export interface Community {
   id: string;
   name: string;
@@ -5,7 +7,7 @@ export interface Community {
   platform: 'slack' | 'discord' | 'forum' | 'newsletter';
   members?: string;
   url: string;
-  region?: 'Global' | 'US' | 'Europe' | 'Asia' | 'Africa' | 'Americas' | 'Oceania';
+  region?: Region;
 }
 
 export const communities: Community[] = [
