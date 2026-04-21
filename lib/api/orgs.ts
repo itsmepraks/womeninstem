@@ -45,8 +45,8 @@ async function fetchWikipediaFromCategory(categoryUrl: string): Promise<Resource
         tags: ['organization', 'wikipedia'],
         sourceName: 'Wikipedia',
       })
-    } catch {
-      // skip individual page failures
+    } catch (err) {
+      console.warn(`[orgs:wikipedia-stem] skipping "${page.title}":`, err instanceof Error ? err.message : String(err))
     }
   }
   return resources
@@ -124,8 +124,8 @@ async function fetchGitHubOrgs(): Promise<Resource[]> {
         tags: ['tech', 'github', 'organization'],
         sourceName: 'GitHub',
       })
-    } catch {
-      // skip
+    } catch (err) {
+      console.warn(`[orgs:github] skipping "${org.login}":`, err instanceof Error ? err.message : String(err))
     }
   }
   return resources
