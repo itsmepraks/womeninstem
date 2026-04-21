@@ -120,7 +120,7 @@ export default function SavedPage() {
               </span>
               <button
                 onClick={() => {
-                  if (confirm('Remove all saved resources?')) clear();
+                  if (confirm("Clear your whole collection? This can't be undone.")) clear();
                 }}
                 className="inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-accent-primary active:scale-[0.96] [transition:color_0.2s,transform_0.15s]"
               >
