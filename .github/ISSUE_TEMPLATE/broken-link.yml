@@ -1,0 +1,26 @@
+name: Broken link
+description: Report a resource whose link is dead, wrong, or goes to the wrong page
+title: "Broken link: "
+labels: [broken-link]
+body:
+  - type: input
+    id: url
+    attributes:
+      label: The URL that's broken
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: input
+    id: where
+    attributes:
+      label: Where on the site did you find it?
+      placeholder: /resources#scholarships, /learning, /media, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: What happens when you click it — 404, redirects somewhere unrelated, parked domain, etc.

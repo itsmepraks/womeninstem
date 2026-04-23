@@ -1,0 +1,91 @@
+name: Suggest a resource
+description: Propose a scholarship, organization, program, conference, course, or community
+title: "Suggest: "
+labels: [resource-suggestion]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting something. Fill in as much as you can — the more specific, the faster it can be reviewed and added.
+
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      placeholder: Full name of the resource
+    validations:
+      required: true
+
+  - type: input
+    id: url
+    attributes:
+      label: URL
+      description: Direct link to the resource (not a news article about it)
+      placeholder: https://...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      options:
+        - Scholarship or fellowship
+        - Organization
+        - Program (K-12, bootcamp, online)
+        - Conference
+        - Mentorship platform
+        - Job board
+        - Community (Slack, Discord, newsletter)
+        - Course
+    validations:
+      required: true
+
+  - type: dropdown
+    id: region
+    attributes:
+      label: Region
+      options:
+        - Global
+        - US
+        - Europe
+        - Americas
+        - Asia
+        - Africa
+        - Oceania
+    validations:
+      required: true
+
+  - type: input
+    id: cost
+    attributes:
+      label: Cost
+      placeholder: Free, $X/month, varies, etc.
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: One-sentence description
+      placeholder: What does this resource offer?
+    validations:
+      required: true
+
+  - type: textarea
+    id: why
+    attributes:
+      label: Why it belongs here
+      description: What makes it specifically useful for women in STEM?
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: verified
+    attributes:
+      label: Confirmations
+      options:
+        - label: I clicked the link and it works
+          required: true
+        - label: This is a real resource, not a referral or affiliate scheme
+          required: true
