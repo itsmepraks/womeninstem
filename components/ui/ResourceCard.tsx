@@ -45,23 +45,23 @@ export default function ResourceCard({
   }
 
   return (
-    <div className="card-white p-6 md:p-5 flex items-center gap-4 md:gap-5 group hover:shadow-card-hover transition-shadow relative">
+    <div className="card-white group relative flex items-center gap-4 p-6 transition-shadow hover:shadow-card-hover md:gap-5 md:p-5">
       {url && (
         <a
           href={url}
           target="_blank"
           rel="noopener noreferrer"
-          className="absolute inset-0 rounded-organic z-[1] focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
+          className="absolute inset-0 z-[1] rounded-organic focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2"
           aria-label={`${title} — open`}
         />
       )}
-      <div className="w-12 h-12 rounded-[0.875rem] bg-gradient-to-br from-accent-secondary/10 to-accent-gold/10 flex-shrink-0 flex items-center justify-center">
-        <span className="font-display text-xl text-accent-primary w-full text-center">$</span>
+      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[0.875rem] bg-gradient-to-br from-accent-secondary/10 to-accent-gold/10">
+        <span className="w-full text-center font-display text-xl text-accent-primary">$</span>
       </div>
-      <div className="flex-1 min-w-0">
-        <h3 className="text-card-title text-text-heading mb-0.5">{title}</h3>
-        <p className="text-sm text-text-secondary leading-relaxed">
-          {amount && <span className="text-accent-primary font-medium">{amount}</span>}
+      <div className="min-w-0 flex-1">
+        <h3 className="mb-0.5 text-card-title text-text-heading">{title}</h3>
+        <p className="text-sm leading-relaxed text-text-secondary">
+          {amount && <span className="font-medium text-accent-primary">{amount}</span>}
           {amount && ' · '}
           {description}
         </p>
@@ -80,12 +80,14 @@ export default function ResourceCard({
         />
       </div>
       {hasDeadline && (
-        <span className={`text-xs font-medium flex-shrink-0 px-3 py-1 rounded-pill tabular-nums ${badgeClass}`}>
+        <span
+          className={`flex-shrink-0 rounded-pill px-3 py-1 text-xs font-medium tabular-nums ${badgeClass}`}
+        >
           {badgeText}
         </span>
       )}
       {url && !hasDeadline && (
-        <span className="text-xs text-accent-primary font-medium flex-shrink-0 group-hover:text-accent-secondary transition-colors">
+        <span className="flex-shrink-0 text-xs font-medium text-accent-primary transition-colors group-hover:text-accent-secondary">
           Apply →
         </span>
       )}

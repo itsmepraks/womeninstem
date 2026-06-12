@@ -25,22 +25,20 @@ export default function CompanyCard({
   region,
 }: CompanyCardProps) {
   const Wrapper = url ? 'a' : 'div';
-  const linkProps = url
-    ? { href: url, target: '_blank' as const, rel: 'noopener noreferrer' }
-    : {};
+  const linkProps = url ? { href: url, target: '_blank' as const, rel: 'noopener noreferrer' } : {};
 
   return (
     <Wrapper
       {...linkProps}
-      className="card-white p-6 group hover:shadow-card-hover transition-shadow"
+      className="card-white group p-6 transition-shadow hover:shadow-card-hover"
     >
-      <div className="flex items-center gap-2.5 mb-3">
-        <div className="w-9 h-9 rounded-[0.625rem] flex items-center justify-center text-sm font-bold text-white bg-accent-primary">
+      <div className="mb-3 flex items-center gap-2.5">
+        <div className="flex h-9 w-9 items-center justify-center rounded-[0.625rem] bg-accent-primary text-sm font-bold text-white">
           {initial}
         </div>
         <h3 className="text-base font-semibold text-text-heading">{name}</h3>
       </div>
-      <p className="text-sm text-text-secondary leading-relaxed">{description}</p>
+      <p className="text-sm leading-relaxed text-text-secondary">{description}</p>
       <TrustBadges
         freshness={freshness}
         qualityInput={{
@@ -53,16 +51,12 @@ export default function CompanyCard({
         }}
         className="mt-3"
       />
-      <div className="flex items-center gap-2 mt-2.5 flex-wrap">
-        {members && (
-          <span className="text-xs text-accent-primary font-medium">{members}</span>
-        )}
-        {cost && (
-          <span className="text-xs text-text-muted">{cost}</span>
-        )}
+      <div className="mt-2.5 flex flex-wrap items-center gap-2">
+        {members && <span className="text-xs font-medium text-accent-primary">{members}</span>}
+        {cost && <span className="text-xs text-text-muted">{cost}</span>}
       </div>
       {url && (
-        <span className="inline-block mt-2 text-xs text-accent-primary font-medium group-hover:text-accent-secondary transition-colors">
+        <span className="mt-2 inline-block text-xs font-medium text-accent-primary transition-colors group-hover:text-accent-secondary">
           Visit website →
         </span>
       )}
