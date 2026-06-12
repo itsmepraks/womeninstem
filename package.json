@@ -33,7 +33,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "clean": "rm -rf .next && rm -rf node_modules/.cache",
-    "check-links": "node scripts/check-links.mjs"
+    "check-links": "node scripts/check-links.mjs",
+    "freshness:update": "node scripts/update-freshness.mjs"
   },
   "dependencies": {
     "fast-xml-parser": "^5.5.9",
