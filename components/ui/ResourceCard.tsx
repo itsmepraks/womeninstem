@@ -1,5 +1,7 @@
 import BookmarkButton from './BookmarkButton';
+import TrustBadges from './TrustBadges';
 import type { BookmarkType } from '@/lib/useBookmarks';
+import type { FreshnessRecord, ResourceMetadata } from '@/types/freshness';
 
 interface ResourceCardProps {
   title: string;
@@ -9,6 +11,9 @@ interface ResourceCardProps {
   daysLeft?: number;
   deadlineLabel?: string;
   bookmark?: { key: string; type: BookmarkType };
+  freshness?: FreshnessRecord;
+  metadata?: ResourceMetadata;
+  region?: string;
 }
 
 export default function ResourceCard({
@@ -19,6 +24,9 @@ export default function ResourceCard({
   daysLeft,
   deadlineLabel,
   bookmark,
+  freshness,
+  metadata,
+  region,
 }: ResourceCardProps) {
   const hasDeadline = typeof daysLeft === 'number' && deadlineLabel;
   let badgeText = '';
@@ -57,6 +65,19 @@ export default function ResourceCard({
           {amount && ' · '}
           {description}
         </p>
+        <TrustBadges
+          freshness={freshness}
+          qualityInput={{
+            id: bookmark?.key ?? title,
+            url,
+            description,
+            amount,
+            region,
+            deadline: deadlineLabel,
+            metadata,
+          }}
+          className="mt-2"
+        />
       </div>
       {hasDeadline && (
         <span className={`text-xs font-medium flex-shrink-0 px-3 py-1 rounded-pill tabular-nums ${badgeClass}`}>

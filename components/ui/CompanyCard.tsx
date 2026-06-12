@@ -1,3 +1,6 @@
+import TrustBadges from './TrustBadges';
+import type { FreshnessRecord, ResourceMetadata } from '@/types/freshness';
+
 interface CompanyCardProps {
   name: string;
   initial: string;
@@ -5,6 +8,9 @@ interface CompanyCardProps {
   members?: string;
   cost?: string;
   url?: string;
+  freshness?: FreshnessRecord;
+  metadata?: ResourceMetadata;
+  region?: string;
 }
 
 export default function CompanyCard({
@@ -14,6 +20,9 @@ export default function CompanyCard({
   members,
   cost,
   url,
+  freshness,
+  metadata,
+  region,
 }: CompanyCardProps) {
   const Wrapper = url ? 'a' : 'div';
   const linkProps = url
@@ -32,6 +41,18 @@ export default function CompanyCard({
         <h3 className="text-base font-semibold text-text-heading">{name}</h3>
       </div>
       <p className="text-sm text-text-secondary leading-relaxed">{description}</p>
+      <TrustBadges
+        freshness={freshness}
+        qualityInput={{
+          id: name,
+          url,
+          description,
+          cost,
+          region,
+          metadata,
+        }}
+        className="mt-3"
+      />
       <div className="flex items-center gap-2 mt-2.5 flex-wrap">
         {members && (
           <span className="text-xs text-accent-primary font-medium">{members}</span>

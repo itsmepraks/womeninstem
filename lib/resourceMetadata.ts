@@ -21,6 +21,14 @@ export function inferCostTag(cost?: string): ResourceMetadata['cost'] {
   return 'unknown';
 }
 
+export function slugifyResourceId(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-|-$/g, '')
+    .slice(0, 80);
+}
+
 export function scoreResourceQuality(input: QualityInput): QualityScore {
   let score = 0;
   const reasons: string[] = [];
