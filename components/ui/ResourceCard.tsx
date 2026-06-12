@@ -43,9 +43,10 @@ export default function ResourceCard({
       badgeClass = 'text-text-muted';
     }
   }
+  const hasActions = hasDeadline || url || bookmark;
 
   return (
-    <div className="card-white group relative flex items-center gap-4 p-6 transition-shadow hover:shadow-card-hover md:gap-5 md:p-5">
+    <div className="card-white group relative flex flex-col gap-4 p-6 transition-shadow hover:shadow-card-hover md:flex-row md:items-center md:gap-5 md:p-5">
       {url && (
         <a
           href={url}
@@ -55,53 +56,59 @@ export default function ResourceCard({
           aria-label={`${title} — open`}
         />
       )}
-      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[0.875rem] bg-gradient-to-br from-accent-secondary/10 to-accent-gold/10">
-        <span className="w-full text-center font-display text-xl text-accent-primary">$</span>
+      <div className="flex w-full items-start gap-4 md:min-w-0 md:flex-1 md:items-center">
+        <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-[0.875rem] bg-gradient-to-br from-accent-secondary/10 to-accent-gold/10">
+          <span className="w-full text-center font-display text-xl text-accent-primary">$</span>
+        </div>
+        <div className="min-w-0 flex-1">
+          <h3 className="mb-0.5 text-card-title text-text-heading">{title}</h3>
+          <p className="text-sm leading-relaxed text-text-secondary">
+            {amount && <span className="font-medium text-accent-primary">{amount}</span>}
+            {amount && ' · '}
+            {description}
+          </p>
+          <TrustBadges
+            freshness={freshness}
+            qualityInput={{
+              id: bookmark?.key ?? title,
+              url,
+              description,
+              amount,
+              region,
+              deadline: deadlineLabel,
+              metadata,
+            }}
+            className="mt-2"
+          />
+        </div>
       </div>
-      <div className="min-w-0 flex-1">
-        <h3 className="mb-0.5 text-card-title text-text-heading">{title}</h3>
-        <p className="text-sm leading-relaxed text-text-secondary">
-          {amount && <span className="font-medium text-accent-primary">{amount}</span>}
-          {amount && ' · '}
-          {description}
-        </p>
-        <TrustBadges
-          freshness={freshness}
-          qualityInput={{
-            id: bookmark?.key ?? title,
-            url,
-            description,
-            amount,
-            region,
-            deadline: deadlineLabel,
-            metadata,
-          }}
-          className="mt-2"
-        />
-      </div>
-      {hasDeadline && (
-        <span
-          className={`flex-shrink-0 rounded-pill px-3 py-1 text-xs font-medium tabular-nums ${badgeClass}`}
-        >
-          {badgeText}
-        </span>
-      )}
-      {url && !hasDeadline && (
-        <span className="flex-shrink-0 text-xs font-medium text-accent-primary transition-colors group-hover:text-accent-secondary">
-          Apply →
-        </span>
-      )}
-      {bookmark && url && (
-        <BookmarkButton
-          item={{
-            key: bookmark.key,
-            type: bookmark.type,
-            title,
-            subtitle: amount ? `${amount} · ${description}` : description,
-            amount,
-            url,
-          }}
-        />
+      {hasActions && (
+        <div className="flex w-full items-center justify-between gap-3 md:w-auto md:flex-shrink-0 md:justify-end">
+          {hasDeadline && (
+            <span
+              className={`rounded-pill px-3 py-1 text-xs font-medium tabular-nums ${badgeClass}`}
+            >
+              {badgeText}
+            </span>
+          )}
+          {url && !hasDeadline && (
+            <span className="text-xs font-medium text-accent-primary transition-colors group-hover:text-accent-secondary">
+              Apply →
+            </span>
+          )}
+          {bookmark && url && (
+            <BookmarkButton
+              item={{
+                key: bookmark.key,
+                type: bookmark.type,
+                title,
+                subtitle: amount ? `${amount} · ${description}` : description,
+                amount,
+                url,
+              }}
+            />
+          )}
+        </div>
       )}
     </div>
   );

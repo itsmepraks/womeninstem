@@ -16,9 +16,7 @@ export function formatFreshnessBadge(record: FreshnessRecord | undefined): {
   if (record.status === 'active' || record.status === 'redirected') {
     const days = daysSince(record.lastActiveAt ?? record.checkedAt);
     const label =
-      days === 0
-        ? 'Verified today'
-        : `Verified ${days} day${days === 1 ? '' : 's'} ago`;
+      days === 0 ? 'Verified today' : `Verified ${days} day${days === 1 ? '' : 's'} ago`;
     return { label, tone: record.status === 'redirected' ? 'warn' : 'good' };
   }
 
