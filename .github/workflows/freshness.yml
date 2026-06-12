@@ -1,0 +1,56 @@
+name: Freshness
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 8 * * 1'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: freshness-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  update:
+    name: Update freshness data
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    env:
+      FRESHNESS_CONCURRENCY: 8
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Update freshness data
+        run: pnpm freshness:update
+
+      - name: Commit freshness data
+        run: |
+          if git diff --quiet -- data/generated/freshness.json; then
+            echo "No freshness changes to commit."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/generated/freshness.json
+          git commit -m "chore: update resource freshness"
+          git push
