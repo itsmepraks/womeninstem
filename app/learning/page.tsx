@@ -3,14 +3,19 @@ import Link from 'next/link';
 import SectionHeading from '@/components/ui/SectionHeading';
 import PageTransition from '@/components/ui/PageTransition';
 import Feedback from '@/components/ui/Feedback';
-
-export const metadata: Metadata = {
-  title: 'Learning · stem·spark',
-  description: 'Free courses and bootcamps for women in STEM, sorted by field.',
-};
 import ResourceCard from '@/components/ui/ResourceCard';
+import { pageMetadata } from '@/lib/seo';
 import { scholarships, programs } from '@/data/resources';
 import { getCoursesByField } from '@/data/courses';
+
+export const metadata: Metadata = {
+  ...pageMetadata({
+    title: 'Free STEM Courses and Bootcamps | stem·spark',
+    description:
+      'Browse free online courses, coding bootcamps, scholarships, and learning programs for women in STEM, grouped by field and career stage.',
+    path: '/learning',
+  }),
+};
 
 export default function LearningPage() {
   const bootcamps = programs.filter((p) => p.category === 'bootcamp').slice(0, 3);

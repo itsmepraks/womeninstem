@@ -1,8 +1,13 @@
 import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Resources · stem·spark',
-  description: 'Scholarships, organizations, programs, conferences, and job boards for women in STEM.',
+  ...pageMetadata({
+    title: 'Women in STEM Scholarships and Resources | stem·spark',
+    description:
+      'Search scholarships, organizations, programs, conferences, mentorship platforms, job boards, and communities for women in STEM.',
+    path: '/resources',
+  }),
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

@@ -1,11 +1,16 @@
 import type { Metadata } from 'next';
 import PageTransition from '@/components/ui/PageTransition';
 import { SOCIAL_LINKS } from '@/lib/constants';
+import { pageMetadata } from '@/lib/seo';
 import { scholarships, organizations, programs, conferences } from '@/data/resources';
 
 export const metadata: Metadata = {
-  title: 'About · stem·spark',
-  description: 'Why this site exists. Built by a student who couldn\'t find what she needed.',
+  ...pageMetadata({
+    title: 'About stem·spark | Women in STEM Directory',
+    description:
+      'Learn why stem·spark exists, how resources are curated, and how the site helps students find women in STEM scholarships, programs, and communities.',
+    path: '/about',
+  }),
 };
 
 export default function AboutPage() {

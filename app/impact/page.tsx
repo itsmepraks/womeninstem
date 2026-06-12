@@ -9,10 +9,15 @@ import {
   challenges,
 } from '@/data/stats';
 import type { Stat } from '@/data/stats';
+import { pageMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Impact · stem·spark',
-  description: 'Real statistics about women in STEM from published research.',
+  ...pageMetadata({
+    title: 'Women in STEM Statistics and Impact | stem·spark',
+    description:
+      'Review sourced statistics about women in STEM participation, education, retention, economic impact, and systemic barriers.',
+    path: '/impact',
+  }),
 };
 
 function ImpactStat({ stat }: { stat: Stat }) {

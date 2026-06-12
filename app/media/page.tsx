@@ -3,11 +3,16 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import LiveFeed from '@/components/ui/LiveFeed';
 import PageTransition from '@/components/ui/PageTransition';
 import Feedback from '@/components/ui/Feedback';
+import { pageMetadata } from '@/lib/seo';
 import { books, podcasts, documentaries, youtubeChannels } from '@/data/media';
 
 export const metadata: Metadata = {
-  title: 'Media · stem·spark',
-  description: 'Books, podcasts, and documentaries about women in STEM.',
+  ...pageMetadata({
+    title: 'Books, Podcasts, and Films About Women in STEM',
+    description:
+      'Explore books, podcasts, documentaries, YouTube channels, and live media feeds focused on women in STEM, science, technology, and engineering.',
+    path: '/media',
+  }),
 };
 
 const bookCategoryLabels: Record<string, string> = {
