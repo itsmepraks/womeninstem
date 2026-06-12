@@ -1,0 +1,23 @@
+# stem·spark
+
+stem·spark is a free directory for women in STEM. It curates scholarships, courses,
+mentorship platforms, organizations, conferences, job boards, communities, books,
+podcasts, documentaries, and impact statistics.
+
+Primary URLs:
+
+- https://wis.praks.me/
+- https://wis.praks.me/resources
+- https://wis.praks.me/learning
+- https://wis.praks.me/impact
+- https://wis.praks.me/media
+- https://wis.praks.me/about
+
+Source code:
+
+- https://github.com/itsmepraks/womeninstem
+
+Owner:
+
+- Prakriti Bista
+- https://praks.me

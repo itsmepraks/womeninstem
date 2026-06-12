@@ -5,6 +5,8 @@ import Footer from '@/components/layout/Footer';
 import BackToTop from '@/components/ui/BackToTop';
 import BackgroundBlobs from '@/components/layout/BackgroundBlobs';
 import BookmarkCelebration from '@/components/ui/BookmarkCelebration';
+import { SITE_DESCRIPTION, SITE_NAME } from '@/lib/constants';
+import { metadataBase, pageMetadata, siteJsonLd } from '@/lib/seo';
 import './globals.css';
 
 const fraunces = Fraunces({
@@ -20,31 +22,35 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'stem·spark · Scholarships, orgs, and courses for women in STEM',
-  description:
-    'Scholarships, courses, mentors, organizations for women in STEM. All in one place. All free to browse.',
+  ...pageMetadata({
+    title: 'stem·spark | Women in STEM Resources',
+    description: SITE_DESCRIPTION,
+  }),
+  metadataBase,
+  applicationName: SITE_NAME,
+  category: 'education',
   keywords: ['STEM', 'women in STEM', 'scholarships', 'organizations', 'courses', 'women in tech'],
   authors: [{ name: 'Prakriti Bista', url: 'https://praks.me' }],
-  openGraph: {
-    title: 'stem·spark',
-    description: 'Scholarships, orgs, and courses for women in STEM. One site.',
-    url: 'https://stemspark.dev',
-    siteName: 'stem·spark',
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary',
-    title: 'stem·spark',
-    description: 'Scholarships, orgs, and courses for women in STEM. One site.',
-    creator: '@its_me_praks',
-  },
+  creator: 'Prakriti Bista',
+  publisher: SITE_NAME,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const jsonLd = siteJsonLd();
+
   return (
     <html lang="en" className={`${fraunces.variable} ${dmSans.variable}`}>
+      <head>
+        <link rel="llms" href="/llms.txt" />
+      </head>
       <body className="font-body antialiased min-h-screen">
+        {jsonLd.map((schema) => (
+          <script
+            key={schema['@type']}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema).replace(/</g, '\\u003c') }}
+          />
+        ))}
         <a href="#main-content" className="skip-to-content">Skip to content</a>
         <BackgroundBlobs />
         <Nav />
