@@ -42,7 +42,10 @@ export default function HomePage() {
           Scholarships, courses, mentors, orgs. Free to browse, no sign-up.
         </p>
         <div className="flex items-center gap-3.5">
-          <Link href="/resources" className="btn-primary">
+          <Link href="/pathfinder" className="btn-primary">
+            Start Pathfinder
+          </Link>
+          <Link href="/resources" className="btn-secondary">
             Explore resources
           </Link>
           <Link href="/about" className="btn-secondary">
@@ -95,6 +98,36 @@ export default function HomePage() {
 
       {/* Feature blocks — varied layout, NOT a grid */}
       <motion.section variants={fadeUp} className="space-y-4 py-6">
+        <div className="card-white p-8">
+          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+            <div className="max-w-[560px]">
+              <h3 className="font-display text-heading text-text-heading mb-2">
+                Pathfinder
+              </h3>
+              <p className="text-body text-text-body leading-relaxed">
+                Answer five private questions and get matched with scholarships,
+                courses, communities, events, and career resources.
+              </p>
+              <Link
+                href="/pathfinder"
+                className="inline-block mt-3 text-sm text-accent-primary font-semibold hover:text-accent-secondary transition-colors"
+              >
+                Build your roadmap →
+              </Link>
+            </div>
+            <div className="flex flex-wrap gap-1.5 md:max-w-[220px] md:justify-end">
+              {['No login', 'Local only', 'Freshness checked', 'Roadmap'].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-md bg-accent-secondary/[0.06] px-3 py-1 text-xs text-text-muted"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Full-width: Learning Hub */}
         <div className="card-white p-8 flex items-center gap-8">
           <div className="flex-1">
