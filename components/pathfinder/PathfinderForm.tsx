@@ -42,7 +42,7 @@ function SegmentedControl<TValue extends string>({
               key={option.value}
               type="button"
               onClick={() => onChange(option.value)}
-              className={`rounded-pill px-3.5 py-2 text-xs transition-colors active:scale-[0.96] focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 ${
+              className={`rounded-pill px-3.5 py-2 text-xs transition-colors focus:outline-none focus:ring-2 focus:ring-accent-primary focus:ring-offset-2 active:scale-[0.96] ${
                 active
                   ? 'bg-accent-secondary/10 font-medium text-accent-primary'
                   : 'text-text-muted hover:bg-accent-secondary/5 hover:text-text-body'

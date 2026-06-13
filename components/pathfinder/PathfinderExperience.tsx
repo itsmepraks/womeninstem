@@ -72,8 +72,8 @@ export default function PathfinderExperience() {
               STEM Pathfinder
             </h1>
             <p className="mt-3 max-w-[560px] text-body text-text-body">
-              Answer five quick filters and get a local-only shortlist of scholarships,
-              courses, communities, events, and career resources.
+              Answer five quick filters and get a local-only shortlist of scholarships, courses,
+              communities, events, and career resources.
             </p>
           </div>
           <PathfinderForm filters={filters} onChange={setFilters} />

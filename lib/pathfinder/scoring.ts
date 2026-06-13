@@ -130,9 +130,7 @@ function matchesStage(item: PathfinderItem, stage: PathfinderStage): boolean {
 
 function matchesField(item: PathfinderItem, field: PathfinderField): boolean {
   return (
-    field === 'general-stem' ||
-    item.fields.includes('general-stem') ||
-    item.fields.includes(field)
+    field === 'general-stem' || item.fields.includes('general-stem') || item.fields.includes(field)
   );
 }
 
@@ -153,18 +151,27 @@ export function scorePathfinderItem(
 
   const goalBoost = GOAL_TYPE_WEIGHTS[filters.goal][item.type] ?? 8;
   score += goalBoost;
-  if (goalBoost >= 30) reasons.push(`fits your ${GOAL_OPTIONS.find((g) => g.value === filters.goal)?.label.toLowerCase() ?? 'goal'} goal`);
+  if (goalBoost >= 30)
+    reasons.push(
+      `fits your ${GOAL_OPTIONS.find((g) => g.value === filters.goal)?.label.toLowerCase() ?? 'goal'} goal`
+    );
 
   if (matchesStage(item, filters.stage)) {
     score += filters.stage === 'all' ? 6 : 20;
-    if (filters.stage !== 'all') reasons.push(`useful for ${STAGE_OPTIONS.find((s) => s.value === filters.stage)?.label.toLowerCase()}`);
+    if (filters.stage !== 'all')
+      reasons.push(
+        `useful for ${STAGE_OPTIONS.find((s) => s.value === filters.stage)?.label.toLowerCase()}`
+      );
   } else {
     score -= 14;
   }
 
   if (matchesField(item, filters.field)) {
     score += filters.field === 'general-stem' ? 8 : 16;
-    if (filters.field !== 'general-stem') reasons.push(`connects to ${FIELD_OPTIONS.find((f) => f.value === filters.field)?.label.toLowerCase()}`);
+    if (filters.field !== 'general-stem')
+      reasons.push(
+        `connects to ${FIELD_OPTIONS.find((f) => f.value === filters.field)?.label.toLowerCase()}`
+      );
   } else {
     score -= 8;
   }

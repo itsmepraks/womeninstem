@@ -9,11 +9,7 @@ import {
   scholarships,
 } from '@/data/resources';
 import { getFreshness } from '@/lib/freshness';
-import {
-  inferCostTag,
-  scoreResourceQuality,
-  slugifyResourceId,
-} from '@/lib/resourceMetadata';
+import { inferCostTag, scoreResourceQuality, slugifyResourceId } from '@/lib/resourceMetadata';
 import type { AudienceTag, FieldTag, ResourceMetadata } from '@/types/freshness';
 import type { PathfinderItem } from './types';
 

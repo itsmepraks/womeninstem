@@ -100,12 +100,7 @@ export default function RoadmapPanel({ roadmap, onMove, onRemove }: RoadmapPanel
             </div>
             <div className="space-y-2">
               {roadmap[bucket.id].map((item) => (
-                <RoadmapCard
-                  key={item.id}
-                  item={item}
-                  onMove={onMove}
-                  onRemove={onRemove}
-                />
+                <RoadmapCard key={item.id} item={item} onMove={onMove} onRemove={onRemove} />
               ))}
             </div>
           </section>

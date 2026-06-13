@@ -44,7 +44,10 @@ export default function MatchResults({ groups, savedIds, onAdd }: MatchResultsPr
       {groups.map((group) => (
         <section key={group.id} aria-labelledby={`pathfinder-${group.id}`}>
           <div className="mb-3 flex items-end justify-between gap-3">
-            <h2 id={`pathfinder-${group.id}`} className="font-display text-heading text-text-heading">
+            <h2
+              id={`pathfinder-${group.id}`}
+              className="font-display text-heading text-text-heading"
+            >
               {group.title}
             </h2>
             <span className="text-xs text-text-muted">{group.matches.length} matches</span>
