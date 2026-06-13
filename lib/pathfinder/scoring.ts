@@ -65,6 +65,13 @@ export const COST_OPTIONS: PathfinderOption<PathfinderCostPreference>[] = [
   { value: 'all', label: 'Include paid' },
 ];
 
+export function labelForFilter<TValue extends string>(
+  options: PathfinderOption<TValue>[],
+  value: TValue
+): string {
+  return options.find((option) => option.value === value)?.label ?? value;
+}
+
 export const MATCH_GROUPS = [
   {
     id: 'best',
@@ -124,18 +131,38 @@ function isFree(item: PathfinderItem): boolean {
   return item.metadata.cost === 'free' || item.cost?.toLowerCase().includes('free') === true;
 }
 
-function matchesStage(item: PathfinderItem, stage: PathfinderStage): boolean {
-  return stage === 'all' || item.audience.includes('all') || item.audience.includes(stage);
+function stageFit(
+  item: PathfinderItem,
+  stage: PathfinderStage
+): 'any' | 'exact' | 'open' | 'mismatch' {
+  if (stage === 'all') return 'any';
+  if (item.audience.includes(stage)) return 'exact';
+  if (item.audience.includes('all')) return 'open';
+  return 'mismatch';
 }
 
-function matchesField(item: PathfinderItem, field: PathfinderField): boolean {
-  return (
-    field === 'general-stem' || item.fields.includes('general-stem') || item.fields.includes(field)
-  );
+function fieldFit(
+  item: PathfinderItem,
+  field: PathfinderField
+): 'any' | 'exact' | 'related' | 'broad' | 'mismatch' {
+  if (field === 'general-stem') return 'any';
+  if (item.fields.includes(field)) return 'exact';
+  if (item.fields.includes('general-stem')) return 'broad';
+  if (field === 'data-science' && item.fields.includes('computer-science')) return 'related';
+  if (field === 'biology' && item.fields.includes('science')) return 'related';
+  if (field === 'science' && item.fields.some((value) => value === 'biology')) return 'related';
+  return 'mismatch';
 }
 
-function matchesRegion(item: PathfinderItem, region: PathfinderRegion): boolean {
-  return region === 'all' || !item.region || item.region === 'Global' || item.region === region;
+function regionFit(
+  item: PathfinderItem,
+  region: PathfinderRegion
+): 'any' | 'exact' | 'global' | 'unknown' | 'mismatch' {
+  if (region === 'all') return 'any';
+  if (!item.region) return 'unknown';
+  if (item.region === region) return 'exact';
+  if (item.region === 'Global') return 'global';
+  return 'mismatch';
 }
 
 function uniqueReasons(reasons: string[]): string[] {
@@ -149,38 +176,62 @@ export function scorePathfinderItem(
   let score = 20;
   const reasons: string[] = [];
 
-  const goalBoost = GOAL_TYPE_WEIGHTS[filters.goal][item.type] ?? 8;
+  const goalBoost =
+    filters.goal === 'all' ? 8 : (GOAL_TYPE_WEIGHTS[filters.goal][item.type] ?? -10);
   score += goalBoost;
   if (goalBoost >= 30)
     reasons.push(
       `fits your ${GOAL_OPTIONS.find((g) => g.value === filters.goal)?.label.toLowerCase() ?? 'goal'} goal`
     );
 
-  if (matchesStage(item, filters.stage)) {
-    score += filters.stage === 'all' ? 6 : 20;
-    if (filters.stage !== 'all')
+  const stageMatch = stageFit(item, filters.stage);
+  if (stageMatch === 'any') {
+    score += 6;
+  } else if (stageMatch === 'exact') {
+    score += 28;
+    reasons.push(
+      `useful for ${STAGE_OPTIONS.find((s) => s.value === filters.stage)?.label.toLowerCase()}`
+    );
+  } else if (stageMatch === 'open') {
+    score += 8;
+    if (filters.goal === 'all')
       reasons.push(
-        `useful for ${STAGE_OPTIONS.find((s) => s.value === filters.stage)?.label.toLowerCase()}`
+        `open to ${STAGE_OPTIONS.find((s) => s.value === filters.stage)?.label.toLowerCase()}`
       );
   } else {
-    score -= 14;
+    score -= 30;
   }
 
-  if (matchesField(item, filters.field)) {
-    score += filters.field === 'general-stem' ? 8 : 16;
-    if (filters.field !== 'general-stem')
-      reasons.push(
-        `connects to ${FIELD_OPTIONS.find((f) => f.value === filters.field)?.label.toLowerCase()}`
-      );
+  const fieldMatch = fieldFit(item, filters.field);
+  if (fieldMatch === 'any') {
+    score += 8;
+  } else if (fieldMatch === 'exact') {
+    score += 30;
+    reasons.push(
+      `connects to ${FIELD_OPTIONS.find((f) => f.value === filters.field)?.label.toLowerCase()}`
+    );
+  } else if (fieldMatch === 'related') {
+    score += 16;
+    reasons.push('related field fit');
+  } else if (fieldMatch === 'broad') {
+    score += 2;
   } else {
-    score -= 8;
+    score -= 22;
   }
 
-  if (matchesRegion(item, filters.region)) {
-    score += filters.region === 'all' ? 5 : 18;
-    if (filters.region !== 'all') reasons.push('matches your region');
+  const regionMatch = regionFit(item, filters.region);
+  if (regionMatch === 'any') {
+    score += 5;
+  } else if (regionMatch === 'exact') {
+    score += 24;
+    reasons.push('matches your region');
+  } else if (regionMatch === 'global') {
+    score += 10;
+    reasons.push('available globally');
+  } else if (regionMatch === 'unknown') {
+    score += 1;
   } else {
-    score -= 24;
+    score -= 36;
   }
 
   if (filters.cost === 'free') {
@@ -188,7 +239,7 @@ export function scorePathfinderItem(
       score += 18;
       reasons.push('free');
     } else {
-      score -= 28;
+      score -= 60;
     }
   } else if (isFree(item)) {
     score += 6;
@@ -223,8 +274,9 @@ export function getPathfinderMatches(
   limit = 60
 ): PathfinderMatch[] {
   return items
+    .filter((item) => filters.cost !== 'free' || isFree(item))
     .map((item) => scorePathfinderItem(item, filters))
-    .filter((match) => match.score > 0)
+    .filter((match) => match.score > 15)
     .sort((a, b) => b.score - a.score || a.title.localeCompare(b.title))
     .slice(0, limit);
 }

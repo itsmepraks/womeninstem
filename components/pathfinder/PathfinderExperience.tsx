@@ -7,8 +7,14 @@ import RoadmapPanel from '@/components/pathfinder/RoadmapPanel';
 import { getPathfinderCatalog } from '@/lib/pathfinder/catalog';
 import {
   DEFAULT_PATHFINDER_FILTERS,
+  COST_OPTIONS,
+  FIELD_OPTIONS,
+  GOAL_OPTIONS,
+  REGION_OPTIONS,
+  STAGE_OPTIONS,
   getPathfinderMatches,
   groupPathfinderMatches,
+  labelForFilter,
 } from '@/lib/pathfinder/scoring';
 import {
   addRoadmapItem,
@@ -35,6 +41,16 @@ export default function PathfinderExperience() {
   const catalog = useMemo(() => getPathfinderCatalog(), []);
   const matches = useMemo(() => getPathfinderMatches(catalog, filters), [catalog, filters]);
   const groups = useMemo(() => groupPathfinderMatches(matches), [matches]);
+  const activeSummary = useMemo(
+    () => [
+      labelForFilter(STAGE_OPTIONS, filters.stage),
+      labelForFilter(FIELD_OPTIONS, filters.field),
+      labelForFilter(REGION_OPTIONS, filters.region),
+      labelForFilter(GOAL_OPTIONS, filters.goal),
+      labelForFilter(COST_OPTIONS, filters.cost),
+    ],
+    [filters]
+  );
   const savedIds = useMemo(() => {
     return new Set([...roadmap.now, ...roadmap.month, ...roadmap.later].map((item) => item.id));
   }, [roadmap]);
@@ -75,6 +91,16 @@ export default function PathfinderExperience() {
               Answer five quick filters and get a local-only shortlist of scholarships, courses,
               communities, events, and career resources.
             </p>
+            <div className="mt-4 flex flex-wrap gap-1.5" aria-label="Current Pathfinder choices">
+              {activeSummary.map((label) => (
+                <span
+                  key={label}
+                  className="rounded-pill bg-accent-secondary/[0.08] px-3 py-1.5 text-xs font-medium text-accent-primary"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
           </div>
           <PathfinderForm filters={filters} onChange={setFilters} />
         </section>
@@ -88,9 +114,14 @@ export default function PathfinderExperience() {
               </h2>
             </div>
             <p className="text-sm text-text-muted">
-              Suggestions only. Always verify eligibility on the official site.
+              {matches[0]
+                ? `Top match: ${matches[0].title}`
+                : 'Try broadening your filters for more matches.'}
             </p>
           </div>
+          <p className="mb-5 text-sm text-text-muted">
+            Suggestions only. Always verify eligibility on the official site.
+          </p>
           <MatchResults groups={groups} savedIds={savedIds} onAdd={addMatch} />
         </section>
       </div>

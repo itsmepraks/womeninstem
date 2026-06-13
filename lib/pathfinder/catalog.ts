@@ -103,6 +103,33 @@ function courseFields(field: string): FieldTag[] {
   return ['general-stem'];
 }
 
+function inferredFields(...values: (string | undefined)[]): FieldTag[] {
+  const text = values.filter(Boolean).join(' ').toLowerCase();
+  const fields = new Set<FieldTag>();
+
+  if (/\b(computer|computing|software|coding|programming|technology|tech|cyber|web)\b/.test(text)) {
+    fields.add('computer-science');
+  }
+  if (/\b(data|machine learning|artificial intelligence|\bai\b|analytics)\b/.test(text)) {
+    fields.add('data-science');
+  }
+  if (/\b(engineering|engineer|aerospace|robotics|mechanical|electrical)\b/.test(text)) {
+    fields.add('engineering');
+  }
+  if (/\b(biology|bio|biotech|life sciences|genomic|biochemistry|medical)\b/.test(text)) {
+    fields.add('biology');
+    fields.add('science');
+  }
+  if (/\b(math|mathematics|calculus|algebra|statistics)\b/.test(text)) {
+    fields.add('mathematics');
+  }
+  if (/\b(science|research|physics|environmental|climate|chemistry|astronomy)\b/.test(text)) {
+    fields.add('science');
+  }
+
+  return fields.size > 0 ? Array.from(fields) : ['general-stem'];
+}
+
 function organizationFields(category: string): FieldTag[] {
   if (category === 'technology') return ['computer-science'];
   if (category === 'engineering') return ['engineering'];
@@ -132,7 +159,7 @@ export function getPathfinderCatalog(): PathfinderItem[] {
         cost: 'Free',
         region: scholarship.region,
         audience: [scholarship.level],
-        fields: ['general-stem'],
+        fields: inferredFields(scholarship.name, scholarship.description),
         deadline: scholarship.nextDeadline,
         deadlineType: scholarship.nextDeadline ? 'fixed' : 'unknown',
       })
@@ -161,7 +188,7 @@ export function getPathfinderCatalog(): PathfinderItem[] {
         cost: program.cost,
         region: program.region,
         audience: programAudience(program.category, program.audience),
-        fields: ['general-stem'],
+        fields: inferredFields(program.name, program.description, program.category),
         deadlineType: 'rolling',
       })
     ),
@@ -188,7 +215,7 @@ export function getPathfinderCatalog(): PathfinderItem[] {
         cost: conference.cost,
         region: conference.region,
         audience: ['professional', 'graduate'],
-        fields: ['general-stem'],
+        fields: inferredFields(conference.name, conference.description),
         deadline: conference.timing,
         deadlineType: conference.month ? 'annual' : 'unknown',
       })
@@ -203,7 +230,7 @@ export function getPathfinderCatalog(): PathfinderItem[] {
         cost: platform.cost,
         region: platform.region,
         audience: ['all'],
-        fields: ['general-stem'],
+        fields: inferredFields(platform.name, platform.description),
       })
     ),
     ...jobBoards.map((board) =>
@@ -216,7 +243,7 @@ export function getPathfinderCatalog(): PathfinderItem[] {
         cost: board.cost,
         region: board.region,
         audience: ['professional', 'career-switcher', 'graduate'],
-        fields: ['general-stem'],
+        fields: inferredFields(board.name, board.description),
       })
     ),
     ...communities.map((community) =>
@@ -229,7 +256,7 @@ export function getPathfinderCatalog(): PathfinderItem[] {
         cost: 'Free',
         region: community.region,
         audience: ['all'],
-        fields: ['general-stem'],
+        fields: inferredFields(community.name, community.description),
       })
     ),
   ];
